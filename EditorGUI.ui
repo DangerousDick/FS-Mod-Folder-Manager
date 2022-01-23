@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>631</width>
+    <height>465</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>FS Mods Path Editor</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon/icon_16x16.gif</normaloff>icon/icon_16x16.gif</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QFrame" name="fmeModFolders">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="lblModFolders">
+         <property name="text">
+          <string>Mod Folders Path:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtModFolders">
+         <property name="text">
+          <string>path to mod folders</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBrowseModPath">
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="fmeGamePath">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>43</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="lblGamePath">
+         <property name="text">
+          <string>Game Folder Path:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtGamePath">
+         <property name="text">
+          <string>path to game installtion folder</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBrowseGamePath">
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="fmeLists">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QGroupBox" name="grpModFolders">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>Mod Folders</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QListWidget" name="lstModFolders">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+             </font>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::CustomContextMenu</enum>
+            </property>
+            <property name="acceptDrops">
+             <bool>false</bool>
+            </property>
+            <property name="dragEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="grpModsList">
+         <property name="title">
+          <string>Mods List</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QListWidget" name="lstModsList">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+             </font>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::CustomContextMenu</enum>
+            </property>
+            <property name="acceptDrops">
+             <bool>false</bool>
+            </property>
+            <property name="dragEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>631</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="mnFileExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="mnuHelpHelp"/>
+    <addaction name="separator"/>
+    <addaction name="mnuHelpAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuMods">
+    <property name="title">
+     <string>Mods</string>
+    </property>
+    <addaction name="mnuModsAddFolder"/>
+    <addaction name="mnuModsRemoveFolder"/>
+    <addaction name="separator"/>
+    <addaction name="mnuModsAddItem"/>
+    <addaction name="mnuModsRemoveItem"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuMods"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="mnuFileOpen">
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+   <property name="toolTip">
+    <string>Open a check list file</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+  </action>
+  <action name="mnuFileSave">
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save current check list file</string>
+   </property>
+  </action>
+  <action name="mnFileExit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit check list editor</string>
+   </property>
+  </action>
+  <action name="mnuHelpAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="toolTip">
+    <string>About the check list editor</string>
+   </property>
+  </action>
+  <action name="mnuFileSaveAs">
+   <property name="text">
+    <string>Save &amp;As...</string>
+   </property>
+   <property name="toolTip">
+    <string>Save current file as...</string>
+   </property>
+  </action>
+  <action name="mnuFileNew">
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new check list file</string>
+   </property>
+  </action>
+  <action name="mnuListReverseChecklist">
+   <property name="text">
+    <string>&amp;Reverse Check List</string>
+   </property>
+   <property name="iconText">
+    <string>&amp;Reverse Check List</string>
+   </property>
+   <property name="toolTip">
+    <string>Reverse the currently selected check list</string>
+   </property>
+  </action>
+  <action name="mnuHelpHelp">
+   <property name="text">
+    <string>&amp;Help</string>
+   </property>
+  </action>
+  <action name="mnuListRenumberChecklist">
+   <property name="text">
+    <string>Renu&amp;mber Check List</string>
+   </property>
+   <property name="toolTip">
+    <string>Renumber the selected check list</string>
+   </property>
+  </action>
+  <action name="mnuListReverseHeadings">
+   <property name="text">
+    <string>Reverse &amp;Headings list</string>
+   </property>
+   <property name="toolTip">
+    <string>Reverse the list of headings</string>
+   </property>
+  </action>
+  <action name="mnuFileAddFolder">
+   <property name="text">
+    <string>Add Mod Folder</string>
+   </property>
+  </action>
+  <action name="mnuFIleDeleteFolder">
+   <property name="text">
+    <string>Delete Mod Folder</string>
+   </property>
+  </action>
+  <action name="mnuModsAddFolder">
+   <property name="text">
+    <string>&amp;Add Folder To List</string>
+   </property>
+  </action>
+  <action name="mnuModsRemoveFolder">
+   <property name="text">
+    <string>&amp;Remove Selected Folder</string>
+   </property>
+  </action>
+  <action name="mnuModsAddItem">
+   <property name="text">
+    <string>Add Mod To List</string>
+   </property>
+  </action>
+  <action name="mnuModsRemoveItem">
+   <property name="text">
+    <string>Remove Selected Mod</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>mnFileExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>300</x>
+     <y>236</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
