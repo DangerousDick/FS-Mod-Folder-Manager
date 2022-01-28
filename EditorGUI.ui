@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>631</width>
-    <height>465</height>
+    <width>590</width>
+    <height>555</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -175,6 +175,35 @@
       </layout>
      </widget>
     </item>
+    <item>
+     <widget class="QFrame" name="fmeLauncher">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QPushButton" name="btnLaunchFS22">
+         <property name="text">
+          <string>Launch FS22</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSetModPath">
+         <property name="text">
+          <string>Set Mod Path in Game Settings</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -182,7 +211,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>631</width>
+     <width>590</width>
      <height>21</height>
     </rect>
    </property>

@@ -142,6 +142,8 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         # button widgets
         self.__APP_GUI.btnBrowseModPath.clicked.connect(self.mod_folder_browse_clicked)
         self.__APP_GUI.btnBrowseGamePath.clicked.connect(self.game_folder_browse_clicked)
+        self.__APP_GUI.btnLaunchFS22.clicked.connect(self.launch_game_button_clicked)
+        self.__APP_GUI.btnSetModPath.clicked.connect(self.set_mod_folder_button_clicked)
 
     ############################################################################
     # EVENT OVERRIDES
@@ -185,7 +187,8 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             if self.__APP_GUI.lstModFolders.count() != 0:
                 self.__APP_GUI.lstModFolders.clear()
             for d in os.listdir(self.__APP_GUI.txtModFolders.text()):
-                self.__APP_GUI.lstModFolders.addItem(QtWidgets.QListWidgetItem(d))
+                if os.path.isdir(os_join(self.__APP_GUI.txtModFolders.text(), d)):
+                    self.__APP_GUI.lstModFolders.addItem(QtWidgets.QListWidgetItem(d))
         return
 
     def populate_mods_list(self):
@@ -452,19 +455,40 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         if folder_path:
             print(folder_path)
             self.__APP_GUI.txtModFolders.setText(folder_path)
-        return True
 
     def game_folder_browse_clicked(self):
         """
-                ModsPathEditor.game_folder_browse_clicked()
-                Description:
-                    Open file dialog to browse for path
+        ModsPathEditor.game_folder_browse_clicked()
+        Description:
+            Open file dialog to browse for path
 
-                :return:
-                """
-        # TODO: ADD GAME FOLDER BROWSE FUNCTIONALITY
-        self.Logger.debug("TODO: Game folder browse event")
-        return True
+        :return:
+        """
+        folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder',
+                                                                  self.__APP_GUI.txtGamePath.text()))
+        if folder_path:
+            self.Logger.debug("Game folder set to %s", folder_path)
+            self.__APP_GUI.txtGamePath.setText(folder_path)
+
+    def launch_game_button_clicked(self):
+        """
+        ModsPathEditor.game_folder_browse_clicked()
+        Description:
+            Open file dialog to browse for path
+
+        :return:
+        """
+        self.Logger.debug("TODO: Launching game - %s", self.__APP_CONFIG["GAME_EXE"])
+
+    def set_mod_folder_button_clicked(self):
+        """
+        ModsPathEditor.game_folder_browse_clicked()
+        Description:
+            Open file dialog to browse for path
+
+        :return:
+        """
+        self.Logger.debug("TODO: updating file - %s\\game_settings.xml", self.__APP_CONFIG["GAME_INSTALLATION_PATH"])
 
     def __ask_user(self, question):
         """
