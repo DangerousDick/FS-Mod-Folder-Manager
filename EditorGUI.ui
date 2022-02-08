@@ -201,6 +201,25 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QCheckBox" name="chkOverrideActive">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string extracomment="Set mod path override active value"/>
+         </property>
+         <property name="text">
+          <string>Set Mod Override Active Value</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>

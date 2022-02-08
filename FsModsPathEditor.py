@@ -6,6 +6,10 @@ import logging
 import webbrowser
 import configparser
 import os
+import pathlib
+from shutil import rmtree as remove_directory
+from shutil import copy as copy_file
+from subprocess import run as launch_game
 from PyQt5 import QtCore, QtWidgets
 from EditorGUI import Ui_MainWindow
 from os.path import join as os_join
@@ -14,6 +18,7 @@ from os.path import dirname as os_dirname
 from os.path import exists as os_exists
 from os import remove as os_remove
 from platform import system as os_name
+from xml.dom import minidom
 
 
 class ModsPathEditor(QtWidgets.QMainWindow):
@@ -71,43 +76,67 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
         # end of workaround
         #####################################
-        # set default paths
+        # get configuration options
         self.__APP_CONFIG = self.__read_config_file()
-        for key in self.__APP_CONFIG:
-            self.Logger.debug("%s = %s", key, self.__APP_CONFIG[key])
-            if self.__APP_CONFIG['MOD_FOLDER_PATH']:
-                self.__APP_GUI.txtModFolders.setText(self.__APP_CONFIG['MOD_FOLDER_PATH'])
-            if self.__APP_CONFIG['GAME_INSTALLATION_PATH']:
-                self.__APP_GUI.txtGamePath.setText(self.__APP_CONFIG['GAME_INSTALLATION_PATH'])
-        # set selected folder as top of list
+        # set game settings xml file path
+        override_values = None
+        if self.__APP_CONFIG['GAME_SETTINGS_FILE']:
+            # if path does not exist check under the user directory
+            if not os.path.isdir(str(pathlib.PurePath(self.__APP_CONFIG['GAME_SETTINGS_FILE']).parent)):
+                user_path = os_abspath(os_join(pathlib.Path.home(), self.__APP_CONFIG['GAME_SETTINGS_FILE']))
+                if os.path.isdir(str(pathlib.PurePath(user_path).parent)):
+                    self.__APP_CONFIG['GAME_SETTINGS_FILE'] = user_path
+                    self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(user_path).parent))
+                    override_values = self.__get_mod_override_values()
+                else:
+                    self.__APP_GUI.txtGamePath.setText(self.__APP_CONFIG['GAME_SETTINGS_FILE'])
+            else:
+                self.__APP_GUI.txtGamePath.setText(self.__APP_CONFIG['GAME_SETTINGS_FILE'])
+        # set mod folders directory path
+        if override_values:
+            if "true" == override_values['ACTIVE_VALUE'].lower():
+                self.__APP_GUI.chkOverrideActive.setChecked(True)
+            else:
+                self.__APP_GUI.chkOverrideActive.setChecked(False)
+            self.__APP_GUI.txtModFolders.setText(str(pathlib.PurePath(override_values['DIRECTORY_VALUE']).parent))
+        elif self.__APP_CONFIG['MOD_FOLDER_PATH']:
+            self.__APP_GUI.txtModFolders.setText(self.__APP_CONFIG['MOD_FOLDER_PATH'])
+        # set selected folder by row
         if self.__APP_GUI.lstModFolders.count():
-            self.__APP_GUI.lstModFolders.setCurrentRow(0)
+            if override_values:
+                items = self.__APP_GUI.lstModFolders.findItems(
+                    pathlib.PurePath(override_values['DIRECTORY_VALUE']).name, QtCore.Qt.MatchExactly)
+                if len(items) > 0:
+                    self.__APP_GUI.lstModFolders.setCurrentItem(items[0])
+            else:
+                self.__APP_GUI.lstModFolders.setCurrentRow(0)
         self.__APP_GUI.lstModFolders.setFocus()
         self.populate_mods_list()
+        self.__APP_GUI.statusbar.showMessage("")
 
     def __read_config_file(self):
         """
-                ModsPathEditor.__read_config_file()
-                Description:
-                    Read the config file and set values
+        ModsPathEditor.__read_config_file()
+        Description:
+            Read the config file and set values
 
-                :return:
+        :return:
         """
         config = configparser.ConfigParser()
         config.read(os_abspath(os_join(self.__APPLICATION_ROOT, 'config.ini')))
         for section in config.sections():
             self.Logger.debug("Parsing config file - %s" % section)
-            dict1 = {}
+            cfg_opts = {}
             options = config.options(section)
             for option in options:
                 try:
-                    dict1[option.upper()] = config.get(section, option)
-                    if dict1[option.upper()] == -1:
+                    cfg_opts[option.upper()] = config.get(section, option)
+                    if cfg_opts[option.upper()] == -1:
                         print("skip: %s" % option)
                 except:
                     print("exception on %s!" % option)
-                    dict1[option.upper()] = None
-            return dict1
+                    cfg_opts[option.upper()] = None
+            return cfg_opts
 
     def create_event_handlers(self):
         """
@@ -135,15 +164,15 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         self.__APP_GUI.txtModFolders.textChanged.connect(self.txt_mod_folder_path_changed)
         self.__APP_GUI.txtGamePath.textChanged.connect(self.txt_game_folder_path_changed)
         # list widgets
-        self.__APP_GUI.lstModFolders.itemClicked.connect(self.mod_folders_clicked)
-        self.__APP_GUI.lstModFolders.customContextMenuRequested.connect(self.mod_folders_context_menu)
-        self.__APP_GUI.lstModsList.itemDoubleClicked.connect(self.mods_list_double_clicked)
-        self.__APP_GUI.lstModsList.customContextMenuRequested.connect(self.mods_list_context_menus)
+        self.__APP_GUI.lstModFolders.itemClicked.connect(self.lst_mod_folders_clicked)
+        self.__APP_GUI.lstModFolders.customContextMenuRequested.connect(self.lst_mod_folders_context_menu)
+        self.__APP_GUI.lstModsList.itemDoubleClicked.connect(self.lst_mods_list_double_clicked)
+        self.__APP_GUI.lstModsList.customContextMenuRequested.connect(self.lst_mods_list_context_menus)
         # button widgets
-        self.__APP_GUI.btnBrowseModPath.clicked.connect(self.mod_folder_browse_clicked)
-        self.__APP_GUI.btnBrowseGamePath.clicked.connect(self.game_folder_browse_clicked)
-        self.__APP_GUI.btnLaunchFS22.clicked.connect(self.launch_game_button_clicked)
-        self.__APP_GUI.btnSetModPath.clicked.connect(self.set_mod_folder_button_clicked)
+        self.__APP_GUI.btnBrowseModPath.clicked.connect(self.btn_browse_mod_folder_clicked)
+        self.__APP_GUI.btnBrowseGamePath.clicked.connect(self.btn_browse_game_folder_clicked)
+        self.__APP_GUI.btnLaunchFS22.clicked.connect(self.btn_launch_game_clicked)
+        self.__APP_GUI.btnSetModPath.clicked.connect(self.btn_set_mod_folder_clicked)
 
     ############################################################################
     # EVENT OVERRIDES
@@ -151,30 +180,6 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     ############################################################################
     # EVENT HANDLERS
-    def eventFilter(self, source, event):
-        """
-        ModsPathEditor.eventFilter
-        Description:
-            Catches drop events in the list boxes and marks the document as dirty
-        
-        :param source: 
-        :param event: 
-        :return: 
-        """
-        # for the headings QListWidget
-        if event.type() == QtCore.QEvent.Drop and source is self.__APP_GUI.lstModFolders.viewport():
-            self.__APP_GUI.lstModFolders.dropEvent(event)
-            if event.isAccepted():
-                self.mod_folders_drop_item()
-            return True
-        # for the check list QListWidget
-        if event.type() == QtCore.QEvent.Drop and source is self.__APP_GUI.lstModsList.viewport():
-            self.__APP_GUI.lstModsList.dropEvent(event)
-            if event.isAccepted():
-                self.mods_list_drop_item()
-            return True
-        return QtWidgets.QMainWindow.eventFilter(self, source, event)
-
     def populate_mod_folders_list(self):
         """
         ModsPathEditor.populate_mods_list()
@@ -183,13 +188,14 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
         :return:
         """
+        self.Logger.debug("Mod folder path: %s" % self.__APP_GUI.txtModFolders.text())
         if os.path.isdir(self.__APP_GUI.txtModFolders.text()):
             if self.__APP_GUI.lstModFolders.count() != 0:
                 self.__APP_GUI.lstModFolders.clear()
             for d in os.listdir(self.__APP_GUI.txtModFolders.text()):
                 if os.path.isdir(os_join(self.__APP_GUI.txtModFolders.text(), d)):
                     self.__APP_GUI.lstModFolders.addItem(QtWidgets.QListWidgetItem(d))
-        return
+        self.__APP_GUI.statusbar.showMessage("")
 
     def populate_mods_list(self):
         """
@@ -199,54 +205,61 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
         :return:
         """
-        if self.__APP_GUI.lstModsList.count():
-             self.__APP_GUI.lstModsList.clear()
-        selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
-                                          self.__APP_GUI.lstModFolders.currentItem().text()))
-        if os.path.isdir(selected_dir):
-            for d in os.listdir(selected_dir):
-                self.__APP_GUI.lstModsList.addItem(QtWidgets.QListWidgetItem(d))
-        return
+        try:
+            self.Logger.debug("Mod folder path: %s" % os_abspath(
+                os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())))
+            if self.__APP_GUI.lstModsList.count():
+                self.__APP_GUI.lstModsList.clear()
+            selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
+                                              self.__APP_GUI.lstModFolders.currentItem().text()))
+            if os.path.isdir(selected_dir):
+                if os.listdir(selected_dir):
+                    for f in os.listdir(selected_dir):
+                        self.__APP_GUI.lstModsList.addItem(QtWidgets.QListWidgetItem(f))
+            self.__APP_GUI.lstModsList.setCurrentRow(0)
+            self.__APP_GUI.statusbar.showMessage("")
+        except Exception as e:
+            self.Logger.error("Failed to populate mod list")
 
-    def mod_folders_context_menu(self, qpos):
+    def lst_mod_folders_context_menu(self, qpos):
         """
         ModsPathEditor.mod_folders_context_menu()
         Description:
             Displays the popup menu over the headings list widget
-            
-        :param qpos: 
-        :return: 
+
+        :param qpos:
+        :return:
         """
         # create menu
         self.__MOD_FOLDERS_POPUP_MENU = QtWidgets.QMenu()
-        add_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Add Mod Folder")
+        #add_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Add Mod Folder")
         remove_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Remove mod folder")
 
         # show menu
         selected_action = self.__MOD_FOLDERS_POPUP_MENU.exec_(self.__APP_GUI.lstModFolders.mapToGlobal(QtCore.QPoint(0, 0)))
-        if selected_action == add_mod_folder:
-            self.mnu_mods_add_folder()
+        # if selected_action == add_mod_folder:
+        #     self.mnu_mods_add_folder()
         if selected_action == remove_mod_folder:
             self.mnu_mods_remove_folder()
 
-    def mods_list_context_menus(self, qpos):
+    def lst_mods_list_context_menus(self, qpos):
         """
         ModsPathEditor.mods_list_context_menus()
         Description:
             Displays the popup menu over the check list widget
-            
-        :param qpos: 
-        :return: 
+
+        :param qpos:
+        :return:
         """
         # create menu
         self.__MODS_LIST_POPUP_MENU = QtWidgets.QMenu()
-        add_item = self.__MODS_LIST_POPUP_MENU.addAction("Add Item")
+        # add_item = self.__MODS_LIST_POPUP_MENU.addAction("Add Item")
         remove_item = self.__MODS_LIST_POPUP_MENU.addAction("Remove Item")
 
         # show menu
         selected_action = self.__MODS_LIST_POPUP_MENU.exec_(self.__APP_GUI.lstModsList.mapToGlobal(QtCore.QPoint(0, 0)))
-        if selected_action == add_item:
-            self.mnu_mods_add_item()
+        # if selected_action == add_item:
+        #     self.mnu_mods_add_item()
         if selected_action == remove_item:
             self.mnu_mods_remove_item()
 
@@ -258,8 +271,18 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             
         :return: 
         """
-        self.add_mod_folder()
-        return True
+        mod_dir = QtWidgets.QFileDialog.getExistingDirectory(self, 'Create a new Folder',
+                                                             self.__APP_GUI.txtModFolders.text())
+        self.Logger.debug("Created new folder: %s" % mod_dir)
+        if mod_dir:
+            self.populate_mod_folders_list()
+            if self.__APP_GUI.lstModFolders.count():
+                items = self.__APP_GUI.lstModFolders.findItems(pathlib.PurePath(mod_dir).name, QtCore.Qt.MatchExactly)
+                if len(items) > 0:
+                    self.__APP_GUI.lstModFolders.setCurrentItem(items[0])
+            self.populate_mods_list()
+            self.__APP_GUI.lstModFolders.setFocus()
+            self.__APP_GUI.statusbar.showMessage("Added folder %s" % pathlib.PurePath(mod_dir).name)
 
     def mnu_mods_remove_folder(self):
         """
@@ -269,7 +292,40 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
         :return: 
         """
-        self.remove_mod_folder()
+        try:
+            remove_item = os_join(self.__APP_GUI.txtModFolders.text(),
+                                  self.__APP_GUI.lstModFolders.currentItem().text())
+            if self.__APP_GUI.lstModFolders.count() == 1:
+                # This will remove folder and leave list empty
+                if self.__ask_user(
+                        "This will delete the folder and all of it contents. Are you sure you wish to remove %s?" %
+                        pathlib.PurePath(remove_item).name):
+                    self.__APP_GUI.txtModFolders.setText("")
+                    self.__APP_GUI.lstModFolders.clear()
+                    self.__APP_GUI.lstModsList.clear()
+                    try:
+                        remove_directory(remove_item)
+                        self.__APP_GUI.statusbar.showMessage("Removed %s" % pathlib.PurePath(remove_item).name)
+                        self.Logger.debug("Removing folder %s from list" % remove_item)
+                    except Exception as er:
+                        self.Logger.error(er.message)
+            elif self.__APP_GUI.lstModFolders.count() > 1:
+                # this will remove the folder from the list
+                if self.__ask_user(
+                        "This will delete the folder and all of it contents. Are you sure you wish to remove %s?" %
+                        pathlib.PurePath(remove_item).name):
+                    self.__APP_GUI.lstModFolders.takeItem(self.__APP_GUI.lstModFolders.currentRow())
+                    self.populate_mods_list()
+                    try:
+                        remove_directory(remove_item)
+                        self.__APP_GUI.statusbar.showMessage("Removed %s" % pathlib.PurePath(remove_item).name)
+                        self.Logger.debug("Removing folder %s from list" % remove_item)
+                    except Exception as er:
+                        self.Logger.error(er.message)
+        except Exception as e:
+            if self.__APP_GUI.lstModFolders.count() <= 0:
+                # all folders have been removed so clear the list
+                self.__APP_GUI.lstModsList.clear()
         return True
 
     def mnu_mods_add_item(self):
@@ -280,8 +336,24 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
         :return:
         """
-        self.Logger.debug("TODO: Add mnu_mods_add_item functionality")
-        return True
+        try:
+            mod_file = QtWidgets.QFileDialog.getOpenFileName(
+                self, 'Create a new Folder',os_join(self.__APP_GUI.txtModFolders.text(),
+                                                    self.__APP_GUI.lstModFolders.currentItem().text()))[0]
+            dest_dir = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())
+            check_path = os_join(dest_dir, pathlib.PurePath(mod_file).name)
+            if len(mod_file):
+                if os.path.isfile(mod_file) and os.path.isdir(dest_dir):
+                    if os.path.isfile(check_path):
+                        self.statusBar().showMessage("file %s already exists in directory" %
+                                                     pathlib.PurePath(mod_file).name)
+                    else:
+                        copy_file(mod_file, dest_dir)
+                        self.statusBar().showMessage("Added file %s to directory" % pathlib.PurePath(mod_file).name)
+                        self.Logger.debug("Adding new mod zip file %s" % pathlib.PurePath(mod_file, mod_file).name)
+                        self.populate_mods_list()
+        except Exception as e:
+            self.Logger.error(e.message)
 
     def mnu_mods_remove_item(self):
         """
@@ -291,7 +363,18 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
         :return:
         """
-        self.Logger.debug("TODO: Add mnu_mods_remove_item functionality")
+        del_mod = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text(),
+                          self.__APP_GUI.lstModsList.currentItem().text())
+        if self.__ask_user(
+                "This will delete the file. Are you sure you wish to remove %s?" %
+                pathlib.PurePath(del_mod).name):
+            self.Logger.debug("Removing %s from folder" % del_mod)
+            if os.path.exists(del_mod):
+                os.remove(del_mod)
+                self.__APP_GUI.statusbar.showMessage("Deleted file %s" % pathlib.PurePath(del_mod).name)
+                self.populate_mods_list()
+            else:
+                self.__APP_GUI.statusbar.showMessage("The file %s not found" % pathlib.PurePath(del_mod).name)
         return True
 
     def mnu_help_clicked(self):
@@ -306,6 +389,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         tabs = 2  # open in a new tab, if possible
         url = "file://%s" % self.__APPLICATION_HELP_FILE
         webbrowser.open(url, new=tabs)
+        self.__APP_GUI.statusbar.showMessage("")
 
     def mnu_help_about_clicked(self):
         """
@@ -324,6 +408,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         msg.setDetailedText("Email: richard@rasayer.uk\nCopyright Richard Sayer 2022")
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msg.exec_()
+        self.__APP_GUI.statusbar.showMessage("")
 
     def txt_mod_folder_path_changed(self):
         """
@@ -336,8 +421,9 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         self.populate_mod_folders_list()
         if self.__APP_GUI.lstModFolders.count():
             self.__APP_GUI.lstModFolders.setCurrentRow(0)
-        self.__APP_GUI.lstModFolders.setFocus()
-        self.populate_mods_list()
+            self.__APP_GUI.lstModFolders.setFocus()
+            self.populate_mods_list()
+        self.__APP_GUI.statusbar.showMessage("")
         return
 
     def txt_game_folder_path_changed(self):
@@ -348,10 +434,15 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
         :return:
         """
-        self.Logger.debug("TODO: Add txt_game_folder_path_changed functionality")
-        return True
+        try:
+            file_name = pathlib.PurePath(self.__APP_CONFIG['GAME_SETTINGS_FILE']).name
+            self.__APP_CONFIG["GAME_SETTINGS_FILE"] = os_abspath(os_join(self.__APP_GUI.txtGamePath.text(), file_name))
+            self.__APP_GUI.statusbar.showMessage("")
+            self.Logger.debug("Settings file path changed: %s" % self.__APP_CONFIG["GAME_SETTINGS_FILE"])
+        except Exception:
+            return
 
-    def mod_folders_clicked(self):
+    def lst_mod_folders_clicked(self):
         """
         ModsPathEditor.mod_folders_clicked()
         Description:
@@ -360,9 +451,10 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         :return: 
         """
         self.populate_mods_list()
+        self.__APP_GUI.statusbar.showMessage("")
         return
 
-    def mods_list_double_clicked(self):
+    def lst_mods_list_double_clicked(self):
         """
         ModsPathEditor.mods_list_double_clicked()
         Description:
@@ -370,80 +462,16 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             
         :return: 
         """
-        self.show_mod_list_item()
+        file_name = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text(),
+                            self.__APP_GUI.lstModsList.currentItem().text())
+        if os.path.isfile(file_name):
+            try:
+                os.startfile(file_name, 'open')
+            except Exception as e:
+                self.logger.error("Failed to show zip file\n%s" % e.message)
+        self.__APP_GUI.statusbar.showMessage("")
 
-    def add_mod_folder(self):
-        """
-        ModsPathEditor.add_mod_folder()
-        Description:
-            Add a new heading to the document
-
-        :return: 
-        """
-        try:
-            item = self.__get_text_input("Add Folder Name", "Please enter a folder name")
-            if item:
-                self.__APP_GUI.lstModFolders.addItem(("%s" % item).upper())
-                self.__APP_GUI.lstModFolders.setCurrentRow(self.__APP_GUI.lstModFolders.count() - 1)
-                self.Logger.debug("TODO: Create a new folder %s" % item)
-        except Exception as e:
-            self.Logger.error("FAILED TO ADD MOD FOLDER TO LIST: %s" % e.message)
-
-    def remove_mod_folder(self):
-        """
-        ModsPathEditor.remove_mod_folder()
-        Description:
-            Remove the currently selected mod folder
-
-        :return: 
-        """
-        try:
-            # TODO: ADD REMOVE ITEM FUNTIONALITY
-            remove_item = "%s" % self.__APP_GUI.lstModFolders.currentItem().text()
-            if self.__APP_GUI.lstModFolders.count() <= 1:
-                # This will leave folder and list empty
-                if self.__ask_user("This will delete the folder from disk are you sure you wish to continue?"):
-                    # os_remove("%s" % self.CurrentDocument.FileName)
-                    # self.__APP_GUI.txtModFolders.setText("")
-                    # self.__APP_GUI.lstModFolders.clear()
-                    # self.__APP_GUI.lstModsList.clear()
-                    # self.setWindowTitle("Check List Editor")
-                    # self.mnu_file_open_clicked()
-                    self.Logger.debug("TODO: Remove folder %s from list" % remove_item)
-                    return True
-            else:
-                # this will remove the folder from the list
-                if self.__ask_user("Are you sure you want to remove: %s?" % remove_item):
-                    # result = self.CurrentDocument.remove_mod_folder(remove_item)
-                    # if result['RESULT']:
-                    #     self.__APP_GUI.lstModFolders.takeItem(self.__APP_GUI.lstModFolders.currentRow())
-                    #     self.__show_mods_list()
-                    #    self.__APP_GUI.statusbar.showMessage("Removed %s" % remove_item)
-                    #     self.CurrentDocument.isDocumentDirty = True
-                    # else:
-                    #    self.__APP_GUI.statusbar.showMessage(result['MESSAGE'])
-                    self.Logger.debug("TODO: Remove folder %s from list" % remove_item)
-                    return True
-        except Exception as e:
-            if self.__APP_GUI.lstModFolders.count() <= 0:
-                # all folders have been removed so clear the list
-                self.__APP_GUI.lstModsList.clear()
-
-    def show_mod_list_item(self):
-        """
-        ModsPathEditor.show_mod_list_item()
-        Description:
-            Show input box to get new text and update the document
-
-        :return: 
-        """
-        try:
-            # TODO: open mod in default zip application
-            return True
-        except Exception as e:
-            self.Logger.error("FAILED TO SHOW LIST ITEM: %s" % e.message)
-
-    def mod_folder_browse_clicked(self):
+    def btn_browse_mod_folder_clicked(self):
         """
         ModsPathEditor.mod_folder_browse_clicked()
         Description:
@@ -453,10 +481,11 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder',
                                                                   self.__APP_GUI.txtModFolders.text()))
         if folder_path:
-            print(folder_path)
+            self.Logger.debug(folder_path)
             self.__APP_GUI.txtModFolders.setText(folder_path)
+        self.__APP_GUI.statusbar.showMessage("")
 
-    def game_folder_browse_clicked(self):
+    def btn_browse_game_folder_clicked(self):
         """
         ModsPathEditor.game_folder_browse_clicked()
         Description:
@@ -469,8 +498,9 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         if folder_path:
             self.Logger.debug("Game folder set to %s", folder_path)
             self.__APP_GUI.txtGamePath.setText(folder_path)
+        self.__APP_GUI.statusbar.showMessage("")
 
-    def launch_game_button_clicked(self):
+    def btn_launch_game_clicked(self):
         """
         ModsPathEditor.game_folder_browse_clicked()
         Description:
@@ -478,26 +508,79 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
         :return:
         """
-        self.Logger.debug("TODO: Launching game - %s", self.__APP_CONFIG["GAME_EXE"])
+        try:
+            self.Logger.debug("Launching game - %s", self.__APP_CONFIG['GAME_EXE'])
+            launch_game(self.__APP_CONFIG['GAME_EXE'])
+            self.__APP_GUI.statusbar.showMessage("Game started")
+        except Exception as e:
+            raise Exception("ERROR: Message: %s\nstrerror: %s" % (e.message, e.strerror))
 
-    def set_mod_folder_button_clicked(self):
+    def btn_set_mod_folder_clicked(self):
         """
-        ModsPathEditor.game_folder_browse_clicked()
+        ModsPathEditor.set_mod_folder_button_clicked()
         Description:
-            Open file dialog to browse for path
+            Update game settings XML attributes and write it to file
 
         :return:
         """
-        self.Logger.debug("TODO: updating file - %s\\game_settings.xml", self.__APP_CONFIG["GAME_INSTALLATION_PATH"])
+        # current GUI values
+        active_value = str(self.__APP_GUI.chkOverrideActive.isChecked()).lower()
+        directory_value = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
+                                             self.__APP_GUI.lstModFolders.currentItem().text()))
+        # get xml doc and set attributes
+        try:
+            xml_doc = minidom.parse(self.__APP_CONFIG["GAME_SETTINGS_FILE"])
+            collection = xml_doc.documentElement
+            override_values = collection.getElementsByTagName("modsDirectoryOverride")
+            attr = override_values[0].attributes.getNamedItem('active')
+            attr.value = active_value
+            attr = override_values[0].attributes.getNamedItem('directory')
+            attr.value = directory_value
+            # write updated xml to file
+            # new_file = os_abspath(os_join(self.__APP_GUI.txtGamePath.text(), 'gameSettings2.xml'))
+            fout = open(self.__APP_CONFIG["GAME_SETTINGS_FILE"], 'w', encoding='UTF-8')
+            xml_doc.writexml(fout, encoding='UTF-8')
+            fout.close()
+            self.__APP_GUI.statusbar.showMessage("Game settings XML updated")
+        except Exception:
+            self.Logger.error("Failed to update xml %s" % self.__APP_CONFIG["GAME_SETTINGS_FILE"])
+            self.__APP_GUI.statusbar.showMessage("Failed to update XML")
+        self.Logger.debug("Set xml values\n\tactive = %s\n\tdirectory = %s", active_value, directory_value)
+
+    def __get_mod_override_values(self):
+        """
+        ModsPathEditor.__get_mod_override_values()
+        Description:
+            Open game settings xml file and read values
+
+        :return: active_value and directory_path as strings
+        """
+        try:
+            xml_doc = minidom.parse(self.__APP_CONFIG["GAME_SETTINGS_FILE"])
+            override_value = xml_doc.getElementsByTagName("modsDirectoryOverride")
+            # selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
+            #                                   self.__APP_GUI.lstModFolders.currentItem().text()))
+            active_value = None
+            directory_value = None
+            for val in override_value:
+                active_value = val.getAttribute('active')
+                directory_value = val.getAttribute('directory')
+            if active_value and directory_value:
+                self.Logger.debug("Getting xml values\n\tactive = %s\n\tdirectory = %s", active_value, directory_value)
+                return {'ACTIVE_VALUE': active_value,
+                        'DIRECTORY_VALUE': directory_value}
+        except Exception:
+            self.Logger.debug("Failed to get aml values")
+            return False
 
     def __ask_user(self, question):
         """
         ModsPathEditor.__ask_user()
         Description:
             Ask the user a question and get the yes/no response
-        
-        :param question: 
-        :return: 
+
+        :param question:
+        :return:
         """
         if not question:
             question = "No question recieved!!!!"
