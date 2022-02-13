@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'EditorGUI.ui'
+# Form implementation generated from reading ui file '.\EditorGUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.12.3
 #
@@ -166,6 +166,15 @@ class Ui_MainWindow(object):
         self.mnuModsAddItem.setObjectName("mnuModsAddItem")
         self.mnuModsRemoveItem = QtWidgets.QAction(MainWindow)
         self.mnuModsRemoveItem.setObjectName("mnuModsRemoveItem")
+        self.mnuFileClickToLaunch = QtWidgets.QAction(MainWindow)
+        self.mnuFileClickToLaunch.setCheckable(True)
+        self.mnuFileClickToLaunch.setChecked(True)
+        self.mnuFileClickToLaunch.setObjectName("mnuFileClickToLaunch")
+        self.mnuFIleShowOptions = QtWidgets.QAction(MainWindow)
+        self.mnuFIleShowOptions.setObjectName("mnuFIleShowOptions")
+        self.menuFile.addAction(self.mnuFileClickToLaunch)
+        self.menuFile.addAction(self.mnuFIleShowOptions)
+        self.menuFile.addSeparator()
         self.menuFile.addAction(self.mnFileExit)
         self.menuHelp.addAction(self.mnuHelpHelp)
         self.menuHelp.addSeparator()
@@ -175,6 +184,7 @@ class Ui_MainWindow(object):
         self.menuMods.addSeparator()
         self.menuMods.addAction(self.mnuModsAddItem)
         self.menuMods.addAction(self.mnuModsRemoveItem)
+        self.menuMods.addSeparator()
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuMods.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
@@ -222,7 +232,10 @@ class Ui_MainWindow(object):
         self.mnuListReverseHeadings.setToolTip(_translate("MainWindow", "Reverse the list of headings"))
         self.mnuFileAddFolder.setText(_translate("MainWindow", "Add Mod Folder"))
         self.mnuFIleDeleteFolder.setText(_translate("MainWindow", "Delete Mod Folder"))
-        self.mnuModsAddFolder.setText(_translate("MainWindow", "&Add Folder To List"))
+        self.mnuModsAddFolder.setText(_translate("MainWindow", "&Add Folder to List"))
         self.mnuModsRemoveFolder.setText(_translate("MainWindow", "&Remove Selected Folder"))
-        self.mnuModsAddItem.setText(_translate("MainWindow", "Add Mod To List"))
+        self.mnuModsAddItem.setText(_translate("MainWindow", "Add Mod to List"))
         self.mnuModsRemoveItem.setText(_translate("MainWindow", "Remove Selected Mod"))
+        self.mnuFileClickToLaunch.setText(_translate("MainWindow", "Double Click Folder to Launch"))
+        self.mnuFIleShowOptions.setText(_translate("MainWindow", "Show Options"))
+        self.mnuFIleShowOptions.setToolTip(_translate("MainWindow", "Open options file in notepad"))

@@ -78,6 +78,11 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         #####################################
         # get configuration options
         self.__APP_CONFIG = self.__read_config_file()
+        if self.__APP_CONFIG['LAUNCH_ON_DOUBLE_CLICK'].lower() == 'true'\
+                or self.__APP_CONFIG['LAUNCH_ON_DOUBLE_CLICK'].lower() == 'checked':
+            self.__APP_GUI.mnuFileClickToLaunch.setChecked(True)
+        else:
+            self.__APP_GUI.mnuFileClickToLaunch.setChecked(False)
         # set game settings xml file path
         override_values = None
         if self.__APP_CONFIG['GAME_SETTINGS_FILE']:
@@ -147,6 +152,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         :return:
         """
         # menu items
+        self.__APP_GUI.mnuFIleShowOptions.triggered.connect(self.mnu_file_show_options)
         self.__APP_GUI.mnuModsAddFolder.triggered.connect(self.mnu_mods_add_folder)
         self.__APP_GUI.mnuModsRemoveFolder.triggered.connect(self.mnu_mods_remove_folder)
         self.__APP_GUI.mnuModsAddItem.triggered.connect(self.mnu_mods_add_item)
@@ -165,8 +171,9 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         self.__APP_GUI.txtGamePath.textChanged.connect(self.txt_game_folder_path_changed)
         # list widgets
         self.__APP_GUI.lstModFolders.itemClicked.connect(self.lst_mod_folders_clicked)
-        self.__APP_GUI.lstModFolders.customContextMenuRequested.connect(self.lst_mod_folders_context_menu)
+        self.__APP_GUI.lstModFolders.itemDoubleClicked.connect(self.lst_mod_folders_double_clicked)
         self.__APP_GUI.lstModsList.itemDoubleClicked.connect(self.lst_mods_list_double_clicked)
+        self.__APP_GUI.lstModFolders.customContextMenuRequested.connect(self.lst_mod_folders_context_menu)
         self.__APP_GUI.lstModsList.customContextMenuRequested.connect(self.lst_mods_list_context_menus)
         # button widgets
         self.__APP_GUI.btnBrowseModPath.clicked.connect(self.btn_browse_mod_folder_clicked)
@@ -232,7 +239,6 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         """
         # create menu
         self.__MOD_FOLDERS_POPUP_MENU = QtWidgets.QMenu()
-        #add_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Add Mod Folder")
         remove_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Remove mod folder")
 
         # show menu
@@ -241,6 +247,30 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         #     self.mnu_mods_add_folder()
         if selected_action == remove_mod_folder:
             self.mnu_mods_remove_folder()
+
+    def lst_mod_folders_clicked(self):
+        """
+        ModsPathEditor.mod_folders_clicked()
+        Description:
+            Display check list for currently selected heading
+
+        :return:
+        """
+        self.populate_mods_list()
+        self.__APP_GUI.statusbar.showMessage("")
+        return
+
+    def lst_mod_folders_double_clicked(self):
+        """
+        ModsPathEditor.lst_mod_folders_double_clicked()
+        Description:
+            Set selected folder in gameGettings.xml and launch the game
+
+        :return:
+        """
+        if self.__APP_GUI.mnuFileClickToLaunch.isChecked():
+            self.btn_set_mod_folder_clicked()
+            self.btn_launch_game_clicked()
 
     def lst_mods_list_context_menus(self, qpos):
         """
@@ -253,15 +283,52 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         """
         # create menu
         self.__MODS_LIST_POPUP_MENU = QtWidgets.QMenu()
-        # add_item = self.__MODS_LIST_POPUP_MENU.addAction("Add Item")
         remove_item = self.__MODS_LIST_POPUP_MENU.addAction("Remove Item")
 
         # show menu
         selected_action = self.__MODS_LIST_POPUP_MENU.exec_(self.__APP_GUI.lstModsList.mapToGlobal(QtCore.QPoint(0, 0)))
-        # if selected_action == add_item:
-        #     self.mnu_mods_add_item()
         if selected_action == remove_item:
             self.mnu_mods_remove_item()
+
+    def lst_mods_list_double_clicked(self):
+        """
+        ModsPathEditor.mods_list_double_clicked()
+        Description:
+            open mod zip file in its default application
+
+        :return:
+        """
+        file_name = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text(),
+                            self.__APP_GUI.lstModsList.currentItem().text())
+        if os.path.isfile(file_name):
+            try:
+                os.startfile(file_name, 'open')
+            except Exception as e:
+                self.Logger.error("Failed to show zip file\n%s" % e.message)
+        self.__APP_GUI.statusbar.showMessage("")
+
+    def mnu_file_show_options(self):
+        """
+        ModsPathEditor.mnu_file_show_options()
+        Description:
+            open mod zip file in its default application
+
+        :return:
+        """
+        file_name = os_abspath(os_join(self.__APPLICATION_ROOT, 'config.ini'))
+        self.Logger.debug(file_name)
+        if os.path.isfile(file_name):
+            try:
+                os.startfile(file_name, 'open')
+            except Exception as e:
+                self.Logger.error("Failed to show options file\n%s" % e.message)
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.setText("Restart Application")
+        msg.setInformativeText("You must restart the application before any changes take effect")
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        msg.exec_()
+        self.__APP_GUI.statusbar.showMessage("")
 
     def mnu_mods_add_folder(self):
         """
@@ -441,35 +508,6 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             self.Logger.debug("Settings file path changed: %s" % self.__APP_CONFIG["GAME_SETTINGS_FILE"])
         except Exception:
             return
-
-    def lst_mod_folders_clicked(self):
-        """
-        ModsPathEditor.mod_folders_clicked()
-        Description:
-            Display check list for currently selected heading
-            
-        :return: 
-        """
-        self.populate_mods_list()
-        self.__APP_GUI.statusbar.showMessage("")
-        return
-
-    def lst_mods_list_double_clicked(self):
-        """
-        ModsPathEditor.mods_list_double_clicked()
-        Description:
-            open mod zip file in its default application
-            
-        :return: 
-        """
-        file_name = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text(),
-                            self.__APP_GUI.lstModsList.currentItem().text())
-        if os.path.isfile(file_name):
-            try:
-                os.startfile(file_name, 'open')
-            except Exception as e:
-                self.logger.error("Failed to show zip file\n%s" % e.message)
-        self.__APP_GUI.statusbar.showMessage("")
 
     def btn_browse_mod_folder_clicked(self):
         """

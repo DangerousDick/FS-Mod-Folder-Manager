@@ -238,6 +238,9 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="mnuFileClickToLaunch"/>
+    <addaction name="mnuFIleShowOptions"/>
+    <addaction name="separator"/>
     <addaction name="mnFileExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -257,6 +260,7 @@
     <addaction name="separator"/>
     <addaction name="mnuModsAddItem"/>
     <addaction name="mnuModsRemoveItem"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMods"/>
@@ -361,7 +365,7 @@
   </action>
   <action name="mnuModsAddFolder">
    <property name="text">
-    <string>&amp;Add Folder To List</string>
+    <string>&amp;Add Folder to List</string>
    </property>
   </action>
   <action name="mnuModsRemoveFolder">
@@ -371,12 +375,31 @@
   </action>
   <action name="mnuModsAddItem">
    <property name="text">
-    <string>Add Mod To List</string>
+    <string>Add Mod to List</string>
    </property>
   </action>
   <action name="mnuModsRemoveItem">
    <property name="text">
     <string>Remove Selected Mod</string>
+   </property>
+  </action>
+  <action name="mnuFileClickToLaunch">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Double Click Folder to Launch</string>
+   </property>
+  </action>
+  <action name="mnuFIleShowOptions">
+   <property name="text">
+    <string>Show Options</string>
+   </property>
+   <property name="toolTip">
+    <string>Open options file in notepad</string>
    </property>
   </action>
  </widget>
