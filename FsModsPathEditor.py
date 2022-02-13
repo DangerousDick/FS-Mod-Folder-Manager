@@ -32,7 +32,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
     ############################################################################
     # PRIVATE MEMBER VARIABLES
     __APP_CONFIG = None
-    __APP_VERSION = '1.0'
+    __APP_VERSION = '1.1'
     __APPLICATION_ROOT = None
     __APP_GUI = None
     __FILE_OPEN_IN_PROGRESS = None
