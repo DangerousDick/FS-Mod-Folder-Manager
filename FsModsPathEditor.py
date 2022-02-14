@@ -203,6 +203,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             for d in os.listdir(self.__APP_GUI.txtModFolders.text()):
                 if os.path.isdir(os_join(self.__APP_GUI.txtModFolders.text(), d)):
                     self.__APP_GUI.lstModFolders.addItem(QtWidgets.QListWidgetItem(d))
+        self.__APP_GUI.lblModFolderCount.setText("%s Mod Folders" % str(self.__APP_GUI.lstModFolders.count()))
         self.__APP_GUI.statusbar.showMessage("")
 
     def populate_mods_list(self):
@@ -225,6 +226,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
                     for f in os.listdir(selected_dir):
                         self.__APP_GUI.lstModsList.addItem(QtWidgets.QListWidgetItem(f))
             self.__APP_GUI.lstModsList.setCurrentRow(0)
+            self.__APP_GUI.lblModsListCount.setText("%s Mod Files" % str(self.__APP_GUI.lstModsList.count()))
             self.__APP_GUI.statusbar.showMessage("")
         except Exception as e:
             self.Logger.error("Failed to populate mod list")

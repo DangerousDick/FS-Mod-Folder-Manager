@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>icon/icon_16x16.gif</normaloff>icon/icon_16x16.gif</iconset>
+    <normaloff>../../.designer/backup/icon/icon_16x16.gif</normaloff>../../.designer/backup/icon/icon_16x16.gif</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -139,6 +139,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QLabel" name="lblModFolderCount">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -166,6 +173,13 @@
             </property>
             <property name="dragDropMode">
              <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblModsListCount">
+            <property name="text">
+             <string>TextLabel</string>
             </property>
            </widget>
           </item>
