@@ -239,12 +239,13 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         """
         # create menu
         self.__MOD_FOLDERS_POPUP_MENU = QtWidgets.QMenu()
+        add_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Add Mod Folder")
         remove_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Remove mod folder")
 
         # show menu
         selected_action = self.__MOD_FOLDERS_POPUP_MENU.exec_(self.__APP_GUI.lstModFolders.mapToGlobal(QtCore.QPoint(0, 0)))
-        # if selected_action == add_mod_folder:
-        #     self.mnu_mods_add_folder()
+        if selected_action == add_mod_folder:
+            self.mnu_mods_add_folder()
         if selected_action == remove_mod_folder:
             self.mnu_mods_remove_folder()
 
@@ -283,12 +284,15 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         """
         # create menu
         self.__MODS_LIST_POPUP_MENU = QtWidgets.QMenu()
+        add_item = self.__MODS_LIST_POPUP_MENU.addAction("Add Item")
         remove_item = self.__MODS_LIST_POPUP_MENU.addAction("Remove Item")
 
         # show menu
         selected_action = self.__MODS_LIST_POPUP_MENU.exec_(self.__APP_GUI.lstModsList.mapToGlobal(QtCore.QPoint(0, 0)))
         if selected_action == remove_item:
             self.mnu_mods_remove_item()
+        if selected_action == add_item:
+            self.mnu_mods_add_item()
 
     def lst_mods_list_double_clicked(self):
         """
