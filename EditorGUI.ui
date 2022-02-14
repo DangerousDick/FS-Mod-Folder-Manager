@@ -261,6 +261,7 @@
     <addaction name="mnuModsAddItem"/>
     <addaction name="mnuModsRemoveItem"/>
     <addaction name="separator"/>
+    <addaction name="mnuCopyMods"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMods"/>
@@ -400,6 +401,11 @@
    </property>
    <property name="toolTip">
     <string>Open options file in notepad</string>
+   </property>
+  </action>
+  <action name="mnuCopyMods">
+   <property name="text">
+    <string>Copy Mods to Current Folder</string>
    </property>
   </action>
  </widget>

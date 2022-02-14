@@ -157,6 +157,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
         self.__APP_GUI.mnuModsRemoveFolder.triggered.connect(self.mnu_mods_remove_folder)
         self.__APP_GUI.mnuModsAddItem.triggered.connect(self.mnu_mods_add_item)
         self.__APP_GUI.mnuModsRemoveItem.triggered.connect(self.mnu_mods_remove_item)
+        self.__APP_GUI.mnuCopyMods.triggered.connect(self.mnu_mods_copy_folder)
 
         #
         self.__APP_GUI.mnuHelpHelp.triggered.connect(self.mnu_help_clicked)
@@ -447,6 +448,38 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             else:
                 self.__APP_GUI.statusbar.showMessage("The file %s not found" % pathlib.PurePath(del_mod).name)
         return True
+
+    def mnu_mods_copy_folder(self):
+        """
+        ModsPathEditor.mnu_mods_remove_item()
+        Description:
+            Remove an item to the mods list
+
+        :return:
+        """
+        self.Logger.debug("copy mods to folder")
+        try:
+            mod_files = QtWidgets.QFileDialog.getOpenFileNames(
+                self, 'Create a new Folder',os_join(self.__APP_GUI.txtModFolders.text(),
+                                                    self.__APP_GUI.lstModFolders.currentItem().text()))[0]
+            # if mod_files:
+            #     for name in mod_files:
+            #         print(name)
+            dest_dir = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())
+            if len(mod_files):
+                for f in mod_files:
+                    check_path = os_join(dest_dir, pathlib.PurePath(f).name)
+                    if os.path.isfile(f) and os.path.isdir(dest_dir):
+                        if os.path.isfile(check_path):
+                            self.Logger.debug("file %s already exists in directory" % pathlib.PurePath(f).name)
+                        else:
+                            copy_file(f, dest_dir)
+                            self.statusBar().showMessage("Added file %s to directory" % pathlib.PurePath(f).name)
+                            self.Logger.debug("Adding new mod zip file %s" % pathlib.PurePath(f, f).name)
+                            self.populate_mods_list()
+                            self.Logger.debug("Copy %s to %s" % (f, dest_dir))
+        except Exception as e:
+            self.Logger.error(e.message)
 
     def mnu_help_clicked(self):
         """
