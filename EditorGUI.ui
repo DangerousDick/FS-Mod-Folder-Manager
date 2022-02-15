@@ -252,8 +252,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="mnuFileClickToLaunch"/>
-    <addaction name="mnuFIleShowOptions"/>
     <addaction name="separator"/>
     <addaction name="mnFileExit"/>
    </widget>
@@ -277,8 +275,17 @@
     <addaction name="separator"/>
     <addaction name="mnuCopyMods"/>
    </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="mnuFIleShowOptions"/>
+    <addaction name="separator"/>
+    <addaction name="mnuFileClickToLaunch"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMods"/>
+   <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

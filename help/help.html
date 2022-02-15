@@ -69,16 +69,16 @@ color: black;
 p {
 text-indent: 50px;
 }
-</style>
-</head>
-
+</style></head>
 <body>
 <ul>
 <li><a href="#FolderPaths">Folder Paths</a></li>
 <li class="dropdown">
 <a href="javascript:void(0)" class="dropbtn">Menus</a>
-<div class="dropdown-content"><a href="#mnufile">File</a>
+<div class="dropdown-content">
+<a href="#mnufile">File</a>
 <a href="#mnuMods">Mods</a>
+<a href="#mnuOptions">Options</a>
 <a href="#mnuhelp">Help</a>
 </div>
 </li>
@@ -95,9 +95,13 @@ Path Override</a>
 Editor</h1>
 <span style="font-weight: bold;">Manage your mods by using
 seperate directories for different
-maps</span>.<span style="font-weight: normal;">&nbsp;This
+maps</span>.<span style="font-weight: normal;">
+This helps to avoid any conflicts having multple maps and mods you
+don't need for the game you are playing. It is especially useful if you
+have multiplayer games as you can install only the mods required for
+the server.<br><br>This
 application uses the subfolders in the "Mod Folders Path" to store the
-mods you wish to use for the map you are playing. I updates the
+mods you wish to use for the map you are playing. It updates the
 attributes in the&nbsp;</span><span style="color: rgb(153, 0, 0);">modsDirectoryOverride </span><span style="font-weight: normal;">tag in the gameSettings.xml
 file &nbsp;to use the selected foler when the game is launched.</span><span style="color: rgb(153, 0, 0);"></span>
 <p><img src="images/application.png"></p>
@@ -133,7 +137,19 @@ dialog to locate and select the mod file</p>
 the highlighted mod file in the "Mods List" list&nbsp; (<span style="color: red;">and all of its contents</span>)
 from the mod folders path. Right clicking a mod file&nbsp; in the
 list will show the remove context menu</p>
-<a href="#">Top</a>
+<h4>Copy Mods to Current Folder</h4>
+<p>This will launch the "Open FIles" dialog so you can select the
+file(s) you wish to copy to the selected directory</p>
+<a href="#">Top</a><br>
+<h3 id="mnuOptions">The Options Menu</h3>
+<h4>Show Options</h4>
+<p>Opens the options file (config.ini) in a text editor. For
+Windows it will be Notepad.</p>
+<h4>Double CLick Folder to Launch</h4>
+<p>Checks/Unchecks the menu item. If checked then double clicking
+a mod folder will set the path in the gameSettings.xml file and lauch
+FS22</p>
+<a href="help.html#">Top</a>
 <h3 id="mnuhelp">The Help Menu</h3>
 <h4>Help</h4>
 <p>Opens this help file in a browser</p>
@@ -142,7 +158,7 @@ list will show the remove context menu</p>
 <a href="#">Top</a>
 <h3>Menu Shortcuts</h3>
 <blockquote> <b>File menu</b><br>
-CTRL + x = Exit application<br>
+CTRL + X = Exit application<br>
 </blockquote>
 <a href="#">Top</a><br>
 <h3>Buttons</h3>
