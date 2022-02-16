@@ -10,7 +10,7 @@ import pathlib
 from shutil import rmtree as remove_directory
 from shutil import copy as copy_file
 from subprocess import run as launch_game
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtGui
 from ModsManagerGUI import Ui_MainWindow
 from os.path import join as os_join
 from os.path import abspath as os_abspath
@@ -31,11 +31,10 @@ class ModsManager(QtWidgets.QMainWindow):
     """
     ############################################################################
     # PRIVATE MEMBER VARIABLES
-    __APP_CONFIG = None
+    __APP_CONFIG = {}
     __APP_VERSION = '1.2.1'
     __APPLICATION_ROOT = None
     __APP_GUI = None
-    __FILE_OPEN_IN_PROGRESS = None
     __APPLICATION_HELP_FILE = None
 
     ############################################################################
@@ -67,45 +66,36 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.lstModFolders.viewport().installEventFilter(self)
         self.__APP_GUI.lstModsList.viewport().installEventFilter(self)
         self.create_event_handlers()
-        self.__FILE_OPEN_IN_PROGRESS = False
-        #####################################
-        # app icon workaround for Win7 #####
-        if 'windows' == os_name().lower():
-            import ctypes
-            my_app_id = u'InitEditApp'  # arbitrary string
-            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
-        # end of workaround
-        #####################################
-        # get configuration options
-        self.__APP_CONFIG = self.__read_config_file()
-        if self.__APP_CONFIG['LAUNCH_ON_DOUBLE_CLICK'].lower() == 'true'\
-                or self.__APP_CONFIG['LAUNCH_ON_DOUBLE_CLICK'].lower() == 'checked':
-            self.__APP_GUI.mnuFileClickToLaunch.setChecked(True)
-        else:
-            self.__APP_GUI.mnuFileClickToLaunch.setChecked(False)
-        # set game settings xml file path
+        # set app icon
+        self.setWindowIcon(QtGui.QIcon('icon\\icon_16x16.gif'))
+        # read and set application options
+        self.___set_options_on_init()
+        # override application options from gameSettings.xml
         override_values = None
-        if self.__APP_CONFIG['GAME_SETTINGS_FILE']:
+        if self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']:
             # if path does not exist check under the user directory
-            if not os.path.isdir(str(pathlib.PurePath(self.__APP_CONFIG['GAME_SETTINGS_FILE']).parent)):
-                user_path = os_abspath(os_join(pathlib.Path.home(), self.__APP_CONFIG['GAME_SETTINGS_FILE']))
+            if not os.path.isdir(str(pathlib.PurePath(self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent)):
+                user_path = os_abspath(os_join(pathlib.Path.home(), str(pathlib.PurePath(
+                    self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent)))
                 if os.path.isdir(str(pathlib.PurePath(user_path).parent)):
-                    self.__APP_CONFIG['GAME_SETTINGS_FILE'] = user_path
+                    self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE'] = user_path
                     self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(user_path).parent))
                     override_values = self.__get_mod_override_values()
                 else:
-                    self.__APP_GUI.txtGamePath.setText(self.__APP_CONFIG['GAME_SETTINGS_FILE'])
+                    self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(
+                        self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
             else:
-                self.__APP_GUI.txtGamePath.setText(self.__APP_CONFIG['GAME_SETTINGS_FILE'])
+                self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(
+                        self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
         # set mod folders directory path
         if override_values:
             if "true" == override_values['ACTIVE_VALUE'].lower():
-                self.__APP_GUI.chkOverrideActive.setChecked(True)
+                self.__APP_GUI.mnuOptOverrideActive.setChecked(True)
             else:
-                self.__APP_GUI.chkOverrideActive.setChecked(False)
+                self.__APP_GUI.mnuOptOverrideActive.setChecked(False)
             self.__APP_GUI.txtModFolders.setText(str(pathlib.PurePath(override_values['DIRECTORY_VALUE']).parent))
-        elif self.__APP_CONFIG['MOD_FOLDER_PATH']:
-            self.__APP_GUI.txtModFolders.setText(self.__APP_CONFIG['MOD_FOLDER_PATH'])
+        elif self.__APP_CONFIG['PATHS']['MOD_FOLDER_PATH']:
+            self.__APP_GUI.txtModFolders.setText(self.__APP_CONFIG['PATHS']['MOD_FOLDER_PATH'])
         # set selected folder by row
         if self.__APP_GUI.lstModFolders.count():
             if override_values:
@@ -119,6 +109,33 @@ class ModsManager(QtWidgets.QMainWindow):
         self.populate_mods_list()
         self.__APP_GUI.statusbar.showMessage("")
 
+    def ___set_options_on_init(self):
+        """
+        ModsManager.___set_options()
+        Description:
+            Sets the options to values read from the config.ini file.
+            Called on start up by self.__init__()
+
+        :return:
+        """
+        self.__APP_CONFIG = self.__read_config_file()
+        # set the menu options
+        if 'true'== self.__APP_CONFIG['OPTIONS']['LAUNCH_ON_DOUBLE_CLICK'].lower() or \
+                'checked' == self.__APP_CONFIG['OPTIONS']['LAUNCH_ON_DOUBLE_CLICK'].lower():
+            self.__APP_GUI.mnuOptClickToLaunch.setChecked(True)
+        else:
+            self.__APP_GUI.mnuOptClickToLaunch.setChecked(False)
+        if 'true' == self.__APP_CONFIG['OPTIONS']['OVERRIDE_ACTIVE_VALUE'].lower() or \
+                'checked' == self.__APP_CONFIG['OPTIONS']['OVERRIDE_ACTIVE_VALUE'].lower():
+            self.__APP_GUI.mnuOptOverrideActive.setChecked(True)
+        else:
+            self.__APP_GUI.mnuOptOverrideActive.setChecked(False)
+        if 'true' == self.__APP_CONFIG['OPTIONS']['ASK_BEFORE_UPDATING_XML'].lower() or \
+                'checked' == self.__APP_CONFIG['OPTIONS']['ASK_BEFORE_UPDATING_XML'].lower():
+            self.__APP_GUI.mnuOptAskBeforeUpdate.setChecked(True)
+        else:
+            self.__APP_GUI.mnuOptAskBeforeUpdate.setChecked(False)
+
     def __read_config_file(self):
         """
         ModsManager.__read_config_file()
@@ -129,19 +146,20 @@ class ModsManager(QtWidgets.QMainWindow):
         """
         config = configparser.ConfigParser()
         config.read(os_abspath(os_join(self.__APPLICATION_ROOT, 'config.ini')))
+        cfg_opts = {}
         for section in config.sections():
             self.Logger.debug("Parsing config file - %s" % section)
-            cfg_opts = {}
+            cfg_opts[section] = {}
             options = config.options(section)
             for option in options:
                 try:
-                    cfg_opts[option.upper()] = config.get(section, option)
-                    if cfg_opts[option.upper()] == -1:
+                    cfg_opts[section][option.upper()] = config.get(section, option)
+                    if cfg_opts[section][option.upper()] == -1:
                         print("skip: %s" % option)
                 except:
                     print("exception on %s!" % option)
-                    cfg_opts[option.upper()] = None
-            return cfg_opts
+                    cfg_opts[section][option.upper()] = None
+        return cfg_opts
 
     def create_event_handlers(self):
         """
@@ -152,7 +170,10 @@ class ModsManager(QtWidgets.QMainWindow):
         :return:
         """
         # menu items
-        self.__APP_GUI.mnuFIleShowOptions.triggered.connect(self.mnu_file_show_options)
+        self.__APP_GUI.mnuOptShowOptions.triggered.connect(self.mnu_opt_show_options)
+        self.__APP_GUI.mnuOptClickToLaunch.triggered.connect(self.mnu_opt_click_to_launch_clicked)
+        self.__APP_GUI.mnuOptOverrideActive.triggered.connect(self.mnu_opt_override_active_clicked)
+        self.__APP_GUI.mnuOptAskBeforeUpdate.triggered.connect(self.mnu_opt_ask_before_update_clicked)
         self.__APP_GUI.mnuModsAddFolder.triggered.connect(self.mnu_mods_add_folder)
         self.__APP_GUI.mnuModsRemoveFolder.triggered.connect(self.mnu_mods_remove_folder)
         self.__APP_GUI.mnuModsAddItem.triggered.connect(self.mnu_mods_add_item)
@@ -183,53 +204,7 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.btnSetModPath.clicked.connect(self.btn_set_mod_folder_clicked)
 
     ############################################################################
-    # EVENT OVERRIDES
-    
-
-    ############################################################################
     # EVENT HANDLERS
-    def populate_mod_folders_list(self):
-        """
-        ModsManager.populate_mods_list()
-        Description:
-            Populate the mod folders list form the path in the mod folders text box
-
-        :return:
-        """
-        self.Logger.debug("Mod folder path: %s" % self.__APP_GUI.txtModFolders.text())
-        if os.path.isdir(self.__APP_GUI.txtModFolders.text()):
-            if self.__APP_GUI.lstModFolders.count() != 0:
-                self.__APP_GUI.lstModFolders.clear()
-            for d in os.listdir(self.__APP_GUI.txtModFolders.text()):
-                if os.path.isdir(os_join(self.__APP_GUI.txtModFolders.text(), d)):
-                    self.__APP_GUI.lstModFolders.addItem(QtWidgets.QListWidgetItem(d))
-        self.__APP_GUI.lblModFolderCount.setText("%s Mod Folders" % str(self.__APP_GUI.lstModFolders.count()))
-        self.__APP_GUI.statusbar.showMessage("")
-
-    def populate_mods_list(self):
-        """
-        ModsManager.populate_mods_list()
-        Description:
-            Populate the mod folders list from the selected mod folder
-
-        :return:
-        """
-        try:
-            self.Logger.debug("Mod folder path: %s" % os_abspath(
-                os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())))
-            if self.__APP_GUI.lstModsList.count():
-                self.__APP_GUI.lstModsList.clear()
-            selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
-                                              self.__APP_GUI.lstModFolders.currentItem().text()))
-            if os.path.isdir(selected_dir):
-                if os.listdir(selected_dir):
-                    for f in os.listdir(selected_dir):
-                        self.__APP_GUI.lstModsList.addItem(QtWidgets.QListWidgetItem(f))
-            self.__APP_GUI.lstModsList.setCurrentRow(0)
-            self.__APP_GUI.lblModsListCount.setText("%s Mod Files" % str(self.__APP_GUI.lstModsList.count()))
-            self.__APP_GUI.statusbar.showMessage("")
-        except Exception as e:
-            self.Logger.error("Failed to populate mod list")
 
     def lst_mod_folders_context_menu(self, qpos):
         """
@@ -272,9 +247,11 @@ class ModsManager(QtWidgets.QMainWindow):
 
         :return:
         """
-        if self.__APP_GUI.mnuFileClickToLaunch.isChecked():
-            self.btn_set_mod_folder_clicked()
-            self.btn_launch_game_clicked()
+        if self.__APP_GUI.mnuOptClickToLaunch.isChecked():
+            if True == self.btn_set_mod_folder_clicked():
+                self.btn_launch_game_clicked()
+            else:
+                self.__APP_GUI.statusbar.showMessage("GameSettings.xml NOT updated")
 
     def lst_mods_list_context_menus(self, qpos):
         """
@@ -314,7 +291,7 @@ class ModsManager(QtWidgets.QMainWindow):
                 self.Logger.error("Failed to show zip file\n%s" % e.message)
         self.__APP_GUI.statusbar.showMessage("")
 
-    def mnu_file_show_options(self):
+    def mnu_opt_show_options(self):
         """
         ModsManager.mnu_file_show_options()
         Description:
@@ -329,13 +306,26 @@ class ModsManager(QtWidgets.QMainWindow):
                 os.startfile(file_name, 'open')
             except Exception as e:
                 self.Logger.error("Failed to show options file\n%s" % e.message)
-        msg = QtWidgets.QMessageBox()
+        msg = QtWidgets.QMessageBox(self)
         msg.setIcon(QtWidgets.QMessageBox.Information)
         msg.setText("Restart Application")
-        msg.setInformativeText("You must restart the application before any changes take effect")
+        msg.setInformativeText(
+            "You must restart the application before any changes to the config.ini file will take effect")
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msg.exec_()
         self.__APP_GUI.statusbar.showMessage("")
+
+    def mnu_opt_click_to_launch_clicked(self):
+        self.__APP_CONFIG['OPTIONS']['LAUNCH_ON_DOUBLE_CLICK'] = str(self.__APP_GUI.mnuOptClickToLaunch.isChecked())
+        self.__update_config_ini()
+
+    def mnu_opt_override_active_clicked(self):
+        self.__APP_CONFIG['OPTIONS']['OVERRIDE_ACTIVE_VALUE'] = str(self.__APP_GUI.mnuOptOverrideActive.isChecked())
+        self.__update_config_ini()
+
+    def mnu_opt_ask_before_update_clicked(self):
+        self.__APP_CONFIG['OPTIONS']['ASK_BEFORE_UPDATING_XML'] = str(self.__APP_GUI.mnuOptAskBeforeUpdate.isChecked())
+        self.__update_config_ini()
 
     def mnu_mods_add_folder(self):
         """
@@ -509,9 +499,9 @@ class ModsManager(QtWidgets.QMainWindow):
         msg.setIcon(QtWidgets.QMessageBox.Information)
 
         msg.setText("Mods Folder Editor V%s" % self.__APP_VERSION)
-        msg.setInformativeText("Application to manage farming simulator mod folder location")
-        msg.setWindowTitle("About Mods Path Editor")
-        msg.setDetailedText("Email: richard@rasayer.uk\nCopyright Richard Sayer 2022")
+        msg.setInformativeText("Application to manage farming simulator mod folders")
+        msg.setWindowTitle("About Mods Manager")
+        msg.setDetailedText("Copyright rasayer.uk 2022\n\nFarming Simulator 22 Mods Folder Manager.\nCreates, deletes and managers content of game/map specific mod folders to avoid mod confilcts and simplify multiplayer mod content.\n\nThis application will change the Farming Simulator 2022 file gameSettings.xml to override the mod folder location.\n\nWritten for python3 and QT5.")
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msg.exec_()
         self.__APP_GUI.statusbar.showMessage("")
@@ -541,10 +531,12 @@ class ModsManager(QtWidgets.QMainWindow):
         :return:
         """
         try:
-            file_name = pathlib.PurePath(self.__APP_CONFIG['GAME_SETTINGS_FILE']).name
-            self.__APP_CONFIG["GAME_SETTINGS_FILE"] = os_abspath(os_join(self.__APP_GUI.txtGamePath.text(), file_name))
+            file_name = pathlib.PurePath(self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).name
+            self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"] = os_abspath(os_join(self.__APP_GUI.txtGamePath.text(),
+                                                                                  file_name))
+            self.__update_config_ini()
             self.__APP_GUI.statusbar.showMessage("")
-            self.Logger.debug("Settings file path changed: %s" % self.__APP_CONFIG["GAME_SETTINGS_FILE"])
+            self.Logger.debug("Settings file path changed: %s" % self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
         except Exception:
             return
 
@@ -557,9 +549,13 @@ class ModsManager(QtWidgets.QMainWindow):
         """
         folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder',
                                                                   self.__APP_GUI.txtModFolders.text()))
+        if 'windows' == os_name().lower():
+            folder_path = folder_path.replace('/', '\\')
         if folder_path:
             self.Logger.debug(folder_path)
             self.__APP_GUI.txtModFolders.setText(folder_path)
+            self.__APP_CONFIG['PATHS']['MOD_FOLDER_PATH'] = folder_path
+            self.__update_config_ini()
         self.__APP_GUI.statusbar.showMessage("")
 
     def btn_browse_game_folder_clicked(self):
@@ -572,9 +568,12 @@ class ModsManager(QtWidgets.QMainWindow):
         """
         folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder',
                                                                   self.__APP_GUI.txtGamePath.text()))
+        if 'windows' == os_name().lower():
+            folder_path = folder_path.replace('/', '\\')
         if folder_path:
             self.Logger.debug("Game folder set to %s", folder_path)
             self.__APP_GUI.txtGamePath.setText(folder_path)
+            self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE'] = os_abspath(os_join(folder_path, 'gameSettings.xml'))
         self.__APP_GUI.statusbar.showMessage("")
 
     def btn_launch_game_clicked(self):
@@ -586,8 +585,8 @@ class ModsManager(QtWidgets.QMainWindow):
         :return:
         """
         try:
-            self.Logger.debug("Launching game - %s", self.__APP_CONFIG['GAME_EXE'])
-            launch_game(self.__APP_CONFIG['GAME_EXE'])
+            self.Logger.debug("Launching game - %s", self.__APP_CONFIG['PATHS']['GAME_EXE'])
+            launch_game(self.__APP_CONFIG['PATHS']['GAME_EXE'])
             self.__APP_GUI.statusbar.showMessage("Game started")
         except Exception as e:
             raise Exception("ERROR: Message: %s\nstrerror: %s" % (e.message, e.strerror))
@@ -600,29 +599,114 @@ class ModsManager(QtWidgets.QMainWindow):
 
         :return:
         """
-        # current GUI values
-        active_value = str(self.__APP_GUI.chkOverrideActive.isChecked()).lower()
-        directory_value = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
-                                             self.__APP_GUI.lstModFolders.currentItem().text()))
+        # check ask flag
+        update_file = False
+        if self.__APP_GUI.mnuOptAskBeforeUpdate.isChecked():
+            if self.__ask_user(
+                    "This will overwrite the gameSettings.xml file.\nAre you sure you wish to continue"):
+                update_file = True
+            else:
+                return False
+        else:
+            update_file = True
         # get xml doc and set attributes
+        if True == update_file:
+            # current GUI values
+            active_value = str(self.__APP_GUI.mnuOptOverrideActive.isChecked()).lower()
+            directory_value = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
+                                                 self.__APP_GUI.lstModFolders.currentItem().text()))
+            try:
+                xml_doc = minidom.parse(self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
+                collection = xml_doc.documentElement
+                override_values = collection.getElementsByTagName("modsDirectoryOverride")
+                attr = override_values[0].attributes.getNamedItem('active')
+                attr.value = active_value
+                attr = override_values[0].attributes.getNamedItem('directory')
+                attr.value = directory_value
+                # write updated xml to file
+                # new_file = os_abspath(os_join(self.__APP_GUI.txtGamePath.text(), 'gameSettings2.xml')) # for testing
+                fout = open(self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"], 'w', encoding='UTF-8')
+                xml_doc.writexml(fout, encoding='UTF-8')
+                fout.close()
+                self.__APP_GUI.statusbar.showMessage("Game settings XML updated")
+            except Exception:
+                self.Logger.error("Failed to update xml %s" % self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
+                self.__APP_GUI.statusbar.showMessage("Failed to update XML")
+            self.Logger.debug("Set xml values\n\tactive = %s\n\tdirectory = %s", active_value, directory_value)
+            return True
+
+    ############################################################################
+    # PUBLIC METHODS
+
+    def populate_mod_folders_list(self):
+        """
+        ModsManager.populate_mods_list()
+        Description:
+            Populate the mod folders list form the path in the mod folders text box
+
+        :return:
+        """
+        self.Logger.debug("Mod folder path: %s" % self.__APP_GUI.txtModFolders.text())
+        if os.path.isdir(self.__APP_GUI.txtModFolders.text()):
+            if self.__APP_GUI.lstModFolders.count() != 0:
+                self.__APP_GUI.lstModFolders.clear()
+            for d in os.listdir(self.__APP_GUI.txtModFolders.text()):
+                if os.path.isdir(os_join(self.__APP_GUI.txtModFolders.text(), d)):
+                    self.__APP_GUI.lstModFolders.addItem(QtWidgets.QListWidgetItem(d))
+        self.__APP_GUI.lblModFolderCount.setText("%s Mod Folders" % str(self.__APP_GUI.lstModFolders.count()))
+        self.__APP_GUI.statusbar.showMessage("")
+
+    def populate_mods_list(self):
+        """
+        ModsManager.populate_mods_list()
+        Description:
+            Populate the mod folders list from the selected mod folder
+
+        :return:
+        """
         try:
-            xml_doc = minidom.parse(self.__APP_CONFIG["GAME_SETTINGS_FILE"])
-            collection = xml_doc.documentElement
-            override_values = collection.getElementsByTagName("modsDirectoryOverride")
-            attr = override_values[0].attributes.getNamedItem('active')
-            attr.value = active_value
-            attr = override_values[0].attributes.getNamedItem('directory')
-            attr.value = directory_value
-            # write updated xml to file
-            # new_file = os_abspath(os_join(self.__APP_GUI.txtGamePath.text(), 'gameSettings2.xml'))
-            fout = open(self.__APP_CONFIG["GAME_SETTINGS_FILE"], 'w', encoding='UTF-8')
-            xml_doc.writexml(fout, encoding='UTF-8')
-            fout.close()
-            self.__APP_GUI.statusbar.showMessage("Game settings XML updated")
-        except Exception:
-            self.Logger.error("Failed to update xml %s" % self.__APP_CONFIG["GAME_SETTINGS_FILE"])
-            self.__APP_GUI.statusbar.showMessage("Failed to update XML")
-        self.Logger.debug("Set xml values\n\tactive = %s\n\tdirectory = %s", active_value, directory_value)
+            self.Logger.debug("Mod folder path: %s" % os_abspath(
+                os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())))
+            if self.__APP_GUI.lstModsList.count():
+                self.__APP_GUI.lstModsList.clear()
+            selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
+                                              self.__APP_GUI.lstModFolders.currentItem().text()))
+            if os.path.isdir(selected_dir):
+                if os.listdir(selected_dir):
+                    for f in os.listdir(selected_dir):
+                        self.__APP_GUI.lstModsList.addItem(QtWidgets.QListWidgetItem(f))
+            self.__APP_GUI.lstModsList.setCurrentRow(0)
+            self.__APP_GUI.lblModsListCount.setText("%s Mod Files" % str(self.__APP_GUI.lstModsList.count()))
+            self.__APP_GUI.statusbar.showMessage("")
+        except Exception as e:
+            self.Logger.error("Failed to populate mod list")
+
+    ############################################################################
+    # PRIVATE METHODS
+
+    def __update_config_ini(self):
+        """
+        ModsManager.__update_config_ini_option()
+        Description:
+            writes the current application options to the config.ini file
+
+        :return:
+        """
+        # create configparser data structure
+        config = configparser.ConfigParser()
+        for section in self.__APP_CONFIG:
+            config[str(section).upper()] = {}
+            for option in self.__APP_CONFIG[section]:
+                config[section][str(option).upper()] = self.__APP_CONFIG[section][option]
+                self.Logger.debug("[%s]%s=%s" %(section, option, self.__APP_CONFIG[section][option]))
+        self.Logger.debug("Writing option to config.ini file")
+        try:
+            with open(os_abspath(os_join(self.__APPLICATION_ROOT, 'config.ini')), 'w') as configfile:
+                config.write(configfile)
+        except Exception as e:
+            self.Logger.debug(e.message)
+            return False
+        return True
 
     def __get_mod_override_values(self):
         """
@@ -633,7 +717,7 @@ class ModsManager(QtWidgets.QMainWindow):
         :return: active_value and directory_path as strings
         """
         try:
-            xml_doc = minidom.parse(self.__APP_CONFIG["GAME_SETTINGS_FILE"])
+            xml_doc = minidom.parse(self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
             override_value = xml_doc.getElementsByTagName("modsDirectoryOverride")
             # selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
             #                                   self.__APP_GUI.lstModFolders.currentItem().text()))
