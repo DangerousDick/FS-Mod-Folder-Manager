@@ -11,7 +11,7 @@ from shutil import rmtree as remove_directory
 from shutil import copy as copy_file
 from subprocess import run as launch_game
 from PyQt5 import QtCore, QtWidgets
-from EditorGUI import Ui_MainWindow
+from ModsManagerGUI import Ui_MainWindow
 from os.path import join as os_join
 from os.path import abspath as os_abspath
 from os.path import dirname as os_dirname
@@ -21,13 +21,13 @@ from platform import system as os_name
 from xml.dom import minidom
 
 
-class ModsPathEditor(QtWidgets.QMainWindow):
+class ModsManager(QtWidgets.QMainWindow):
     """
-    Class ModsPathEditor
+    Class ModsManager
     Descrition:
         GUI application to manage farming simulator mods folders.
-        * EditorGUI.py is created from EditorGUI.ui which was created using PyQT5
-        * ModsPathEditor (this class) shows and handles events for EditorGUI
+        * ModsManagerGUI.py is created from ModsManagerGUI.ui which was created using PyQT5
+        * ModsManager (this class) shows and handles events for ModsManagerGUI
     """
     ############################################################################
     # PRIVATE MEMBER VARIABLES
@@ -52,7 +52,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
     # APPLICATION INITIALISATION
     def __init__(self, parent=None, verbose=False):
         """
-        ModsPathEditor.__init__()
+        ModsManager.__init__()
         Description:
             GUI initialisation
             
@@ -121,7 +121,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def __read_config_file(self):
         """
-        ModsPathEditor.__read_config_file()
+        ModsManager.__read_config_file()
         Description:
             Read the config file and set values
 
@@ -145,7 +145,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def create_event_handlers(self):
         """
-        ModsPathEditor.create_event_handlers()
+        ModsManager.create_event_handlers()
         Description:
             Creates the event handlers for interaction with the application UI
 
@@ -190,7 +190,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
     # EVENT HANDLERS
     def populate_mod_folders_list(self):
         """
-        ModsPathEditor.populate_mods_list()
+        ModsManager.populate_mods_list()
         Description:
             Populate the mod folders list form the path in the mod folders text box
 
@@ -208,7 +208,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def populate_mods_list(self):
         """
-        ModsPathEditor.populate_mods_list()
+        ModsManager.populate_mods_list()
         Description:
             Populate the mod folders list from the selected mod folder
 
@@ -233,7 +233,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def lst_mod_folders_context_menu(self, qpos):
         """
-        ModsPathEditor.mod_folders_context_menu()
+        ModsManager.mod_folders_context_menu()
         Description:
             Displays the popup menu over the headings list widget
 
@@ -254,7 +254,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def lst_mod_folders_clicked(self):
         """
-        ModsPathEditor.mod_folders_clicked()
+        ModsManager.mod_folders_clicked()
         Description:
             Display check list for currently selected heading
 
@@ -266,7 +266,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def lst_mod_folders_double_clicked(self):
         """
-        ModsPathEditor.lst_mod_folders_double_clicked()
+        ModsManager.lst_mod_folders_double_clicked()
         Description:
             Set selected folder in gameGettings.xml and launch the game
 
@@ -278,7 +278,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def lst_mods_list_context_menus(self, qpos):
         """
-        ModsPathEditor.mods_list_context_menus()
+        ModsManager.mods_list_context_menus()
         Description:
             Displays the popup menu over the check list widget
 
@@ -299,7 +299,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def lst_mods_list_double_clicked(self):
         """
-        ModsPathEditor.mods_list_double_clicked()
+        ModsManager.mods_list_double_clicked()
         Description:
             open mod zip file in its default application
 
@@ -316,7 +316,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_file_show_options(self):
         """
-        ModsPathEditor.mnu_file_show_options()
+        ModsManager.mnu_file_show_options()
         Description:
             open mod zip file in its default application
 
@@ -339,7 +339,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_mods_add_folder(self):
         """
-        ModsPathEditor.mnu_mods_add_folder()
+        ModsManager.mnu_mods_add_folder()
         Description:
             Create a new mods folder and add to list
             
@@ -360,7 +360,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_mods_remove_folder(self):
         """
-        ModsPathEditor.mnu_mods_remove_folder()
+        ModsManager.mnu_mods_remove_folder()
         Description:
             Delete selected folder and remove from list
 
@@ -404,7 +404,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_mods_add_item(self):
         """
-        ModsPathEditor.mnu_mods_add_item()
+        ModsManager.mnu_mods_add_item()
         Description:
             Add an item to the mods list
 
@@ -431,7 +431,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_mods_remove_item(self):
         """
-        ModsPathEditor.mnu_mods_remove_item()
+        ModsManager.mnu_mods_remove_item()
         Description:
             Remove an item to the mods list
 
@@ -453,7 +453,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_mods_copy_folder(self):
         """
-        ModsPathEditor.mnu_mods_remove_item()
+        ModsManager.mnu_mods_remove_item()
         Description:
             Remove an item to the mods list
 
@@ -485,7 +485,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_help_clicked(self):
         """
-        ModsPathEditor.mnu_help_clicked()
+        ModsManager.mnu_help_clicked()
         Description:
             Show the application help files
             
@@ -499,7 +499,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def mnu_help_about_clicked(self):
         """
-        ModsPathEditor.mnu_help_about_clicked()
+        ModsManager.mnu_help_about_clicked()
         Description:
             Show application Help/About box
             
@@ -518,7 +518,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def txt_mod_folder_path_changed(self):
         """
-        ModsPathEditor.txt_mod_folder_path_changed()
+        ModsManager.txt_mod_folder_path_changed()
         Description:
             Mod Folders path has changed so update mods list
             
@@ -534,7 +534,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def txt_game_folder_path_changed(self):
         """
-        ModsPathEditor.txt_game_folder_path_changed()
+        ModsManager.txt_game_folder_path_changed()
         Description:
             Game Folder path has changed
 
@@ -550,7 +550,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def btn_browse_mod_folder_clicked(self):
         """
-        ModsPathEditor.mod_folder_browse_clicked()
+        ModsManager.mod_folder_browse_clicked()
         Description:
             Open file dialog to browse for path
         :return:
@@ -564,7 +564,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def btn_browse_game_folder_clicked(self):
         """
-        ModsPathEditor.game_folder_browse_clicked()
+        ModsManager.game_folder_browse_clicked()
         Description:
             Open file dialog to browse for path
 
@@ -579,7 +579,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def btn_launch_game_clicked(self):
         """
-        ModsPathEditor.game_folder_browse_clicked()
+        ModsManager.game_folder_browse_clicked()
         Description:
             Open file dialog to browse for path
 
@@ -594,7 +594,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def btn_set_mod_folder_clicked(self):
         """
-        ModsPathEditor.set_mod_folder_button_clicked()
+        ModsManager.set_mod_folder_button_clicked()
         Description:
             Update game settings XML attributes and write it to file
 
@@ -626,7 +626,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def __get_mod_override_values(self):
         """
-        ModsPathEditor.__get_mod_override_values()
+        ModsManager.__get_mod_override_values()
         Description:
             Open game settings xml file and read values
 
@@ -652,7 +652,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def __ask_user(self, question):
         """
-        ModsPathEditor.__ask_user()
+        ModsManager.__ask_user()
         Description:
             Ask the user a question and get the yes/no response
 
@@ -670,7 +670,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def __get_text_input(self, title, prompt, default_value=""):
         """
-        ModsPathEditor.__get_text_input()
+        ModsManager.__get_text_input()
         Description:
             Use the input box to get text input from the user
             
@@ -686,7 +686,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def __edit_item_text(self, title, prompt, text):
         """
-        ModsPathEditor.__edit_item_text()
+        ModsManager.__edit_item_text()
         Description:
             Edit the text given using the QInputDialog box)
             
@@ -700,12 +700,12 @@ class ModsPathEditor(QtWidgets.QMainWindow):
 
     def __create_logger(self, verbose=False):
         """
-        ModsPathEditor.__create_logger()
+        ModsManager.__create_logger()
         Description:
             Create a logging object for both stdout and a log file
         """
-        logger_name = 'LoggerModsPathEditor'
-        log_file = os_join(self.ApplicationRoot, 'ModsPathEditor.log')
+        logger_name = 'LoggerModsManager'
+        log_file = os_join(self.ApplicationRoot, 'ModsManager.log')
         try:
             # first remove the log file if it already exists otherwise it will append to it
             if os_exists(log_file):
@@ -736,7 +736,7 @@ class ModsPathEditor(QtWidgets.QMainWindow):
             self.__LOGGER.debug('Created log file %s' % log_file)
         except (OSError, IOError) as e:
             raise Exception("ERROR: Logger creation failed\nMessage: %s\nstrerror: %s" % (e.message, e.strerror))
-# End of class ModsPathEditor
+# End of class ModsManager
 
 
 if __name__ == "__main__":
@@ -748,6 +748,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     app = QtWidgets.QApplication(sys.argv)
-    myapp = ModsPathEditor(verbose=args.verbose)
+    myapp = ModsManager(verbose=args.verbose)
     myapp.show()
     sys.exit(app.exec_())

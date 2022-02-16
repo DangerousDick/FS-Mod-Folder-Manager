@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\EditorGUI.ui'
+# Form implementation generated from reading ui file '.\ModsManagerGUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.12.3
 #
@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "FS Mods Path Editor"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "FS Mods Folder Manager"))
         self.lblModFolders.setText(_translate("MainWindow", "Mod Folders Path:"))
         self.txtModFolders.setText(_translate("MainWindow", "path to mod folders"))
         self.btnBrowseModPath.setText(_translate("MainWindow", "Browse"))

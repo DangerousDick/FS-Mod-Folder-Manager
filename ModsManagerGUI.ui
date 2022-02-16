@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>FS Mods Path Editor</string>
+   <string>FS Mods Folder Manager</string>
   </property>
   <property name="windowIcon">
    <iconset>
