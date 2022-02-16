@@ -1,10 +1,10 @@
 # fs22-mod-manager
 Farming Simulator 22 Mods Folder Manager.
-Creates, deletes and managers content of game/map specific mod folders to avoid mod confilcts and simplify multiplayer mod content.
+Creates, deletes and managers folders for game/map specific mods to avoid confilcts and simplify loading the mods required by multiplayer servers.
 
-This application will change the Farming Simulator 2022 file gameSettings.xml to override the mod folder location.
+NOTE: This application will change the Farming Simulator 2022 file gameSettings.xml to override the default mod folder location.
 
-Written for python3 and QT5.
+Written using python3 and QT5.
 
 Aimed at windows but may work under linux. This HAS NOT BEEN TESTED and may cause issues.
 
