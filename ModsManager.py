@@ -66,8 +66,6 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.lstModFolders.viewport().installEventFilter(self)
         self.__APP_GUI.lstModsList.viewport().installEventFilter(self)
         self.create_event_handlers()
-        # set app icon
-        self.setWindowIcon(QtGui.QIcon('icon\\icon_16x16.gif'))
         # read and set application options
         self.___set_options_on_init()
         # override application options from gameSettings.xml

@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../.designer/backup/icon/icon_16x16.gif</normaloff>../../.designer/backup/icon/icon_16x16.gif</iconset>
+    <normaloff>icon/icon_16x16.gif</normaloff>icon/icon_16x16.gif</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
