@@ -65,6 +65,8 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.setupUi(self)
         self.__APP_GUI.lstModFolders.viewport().installEventFilter(self)
         self.__APP_GUI.lstModsList.viewport().installEventFilter(self)
+        # set app icon
+        self.setWindowIcon(QtGui.QIcon(os_abspath(os_join(self.__APPLICATION_ROOT, 'icon\\tractor16x16.ico'))))
         self.create_event_handlers()
         # read and set application options
         self.___set_options_on_init()
