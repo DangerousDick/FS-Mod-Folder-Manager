@@ -77,17 +77,18 @@ class ModsManager(QtWidgets.QMainWindow):
             if not os.path.isdir(str(pathlib.PurePath(self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent)):
                 user_path = os_abspath(os_join(pathlib.Path.home(), str(pathlib.PurePath(
                     self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent)))
-                if os.path.isdir(str(pathlib.PurePath(user_path).parent)):
-                    self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE'] = user_path
-                    self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(user_path).parent))
-                    override_values = self.__get_mod_override_values()
+                if os.path.isdir(user_path):
+                    self.__APP_GUI.txtGamePath.setText(user_path)
+                    self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE'] = os_abspath(os_join(user_path,
+                                                                                          'gameSettings.xml'))
                 else:
                     self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(
                         self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
             else:
                 self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(
                         self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
-        # set mod folders directory path
+        # get override vales from gameSettings.xml
+        override_values = self.__get_mod_override_values()
         if override_values:
             if "true" == override_values['ACTIVE_VALUE'].lower():
                 self.__APP_GUI.mnuOptOverrideActive.setChecked(True)
@@ -703,8 +704,8 @@ class ModsManager(QtWidgets.QMainWindow):
         try:
             with open(os_abspath(os_join(self.__APPLICATION_ROOT, 'config.ini')), 'w') as configfile:
                 config.write(configfile)
-        except Exception as e:
-            self.Logger.debug(e.message)
+        except OSError as e:
+            self.Logger.error("Error writing to: %s" % e.filename)
             return False
         return True
 
@@ -719,8 +720,6 @@ class ModsManager(QtWidgets.QMainWindow):
         try:
             xml_doc = minidom.parse(self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
             override_value = xml_doc.getElementsByTagName("modsDirectoryOverride")
-            # selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),
-            #                                   self.__APP_GUI.lstModFolders.currentItem().text()))
             active_value = None
             directory_value = None
             for val in override_value:
@@ -730,8 +729,8 @@ class ModsManager(QtWidgets.QMainWindow):
                 self.Logger.debug("Getting xml values\n\tactive = %s\n\tdirectory = %s", active_value, directory_value)
                 return {'ACTIVE_VALUE': active_value,
                         'DIRECTORY_VALUE': directory_value}
-        except Exception:
-            self.Logger.debug("Failed to get aml values")
+        except OSError as e:
+            self.Logger.error("Unable to read %s" % e.filename)
             return False
 
     def __ask_user(self, question):
