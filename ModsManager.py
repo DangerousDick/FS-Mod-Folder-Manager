@@ -171,6 +171,7 @@ class ModsManager(QtWidgets.QMainWindow):
         :return:
         """
         # menu items
+        self.__APP_GUI.mnuOpenFsDirectory.triggered.connect(self.mnu_file_open_fs_directory)
         self.__APP_GUI.mnuOptShowOptions.triggered.connect(self.mnu_opt_show_options)
         self.__APP_GUI.mnuOptClickToLaunch.triggered.connect(self.mnu_opt_click_to_launch_clicked)
         self.__APP_GUI.mnuOptOverrideActive.triggered.connect(self.mnu_opt_override_active_clicked)
@@ -180,6 +181,7 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.mnuModsAddItem.triggered.connect(self.mnu_mods_add_item)
         self.__APP_GUI.mnuModsRemoveItem.triggered.connect(self.mnu_mods_remove_item)
         self.__APP_GUI.mnuCopyMods.triggered.connect(self.mnu_mods_copy_folder)
+        self.__APP_GUI.mnuModsOpenModDirectory.triggered.connect(self.mnu_mods_open_mods_folder)
 
         #
         self.__APP_GUI.mnuHelpHelp.triggered.connect(self.mnu_help_clicked)
@@ -291,6 +293,22 @@ class ModsManager(QtWidgets.QMainWindow):
             except Exception as e:
                 self.Logger.error("Failed to show zip file\n%s" % e.message)
         self.__APP_GUI.statusbar.showMessage("")
+
+    def mnu_file_open_fs_directory(self):
+        """
+        ModsManager.mnu_file_open_fs_directory()
+        Description:
+            Open the farming simulator installation directory
+
+        :return:
+        """
+        try:
+            if len(self.__APP_GUI.txtGamePath.text()):
+                if os.path.isdir(self.__APP_GUI.txtGamePath.text()):
+                    self.Logger.debug("Opening mods folder")
+                    os.startfile(self.__APP_GUI.txtGamePath.text(), 'open')
+        except OSError as e:
+            self.Logger.error("Failed to open Mod directory\n\t%s" % e.filename)
 
     def mnu_opt_show_options(self):
         """
@@ -473,6 +491,22 @@ class ModsManager(QtWidgets.QMainWindow):
                             self.Logger.debug("Copy %s to %s" % (f, dest_dir))
         except Exception as e:
             self.Logger.error(e.message)
+
+    def mnu_mods_open_mods_folder(self):
+        """
+        ModsManager.mnu_mods_open_mods_folder()
+        Description:
+            Open the mods folder
+
+        :return:
+        """
+        try:
+            if len(self.__APP_GUI.txtModFolders.text()):
+                if os.path.isdir(self.__APP_GUI.txtModFolders.text()):
+                    self.Logger.debug("Opening mods folder")
+                    os.startfile(self.__APP_GUI.txtModFolders.text(), 'open')
+        except OSError as e:
+            self.Logger.error("Failed to open Mod directory\n\t%s" % e.filename)
 
     def mnu_help_clicked(self):
         """

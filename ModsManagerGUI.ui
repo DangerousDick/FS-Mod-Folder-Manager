@@ -233,6 +233,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="mnuOpenFsDirectory"/>
     <addaction name="separator"/>
     <addaction name="mnFileExit"/>
    </widget>
@@ -255,6 +256,7 @@
     <addaction name="mnuModsRemoveItem"/>
     <addaction name="separator"/>
     <addaction name="mnuCopyMods"/>
+    <addaction name="mnuModsOpenModDirectory"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -429,6 +431,16 @@
    </property>
    <property name="text">
     <string>Ask Before Updating XML</string>
+   </property>
+  </action>
+  <action name="mnuOpenFsDirectory">
+   <property name="text">
+    <string>Open FS Directory</string>
+   </property>
+  </action>
+  <action name="mnuModsOpenModDirectory">
+   <property name="text">
+    <string>Open Mods Directory</string>
    </property>
   </action>
  </widget>
