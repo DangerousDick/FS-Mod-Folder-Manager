@@ -1,1 +1,1 @@
-pyinstaller --onefile --windowed --noconsole ModsManager.spec 1> build.log 2>&1
+pyinstaller --onefile --windowed --noconsole --clean ModsManager.spec 1> build.log 2>&1
