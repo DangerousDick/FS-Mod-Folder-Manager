@@ -90,83 +90,97 @@ Path</a> <a href="#btnLaunch">Launch Game</a>
 </ul>
 <h1 id="#overview">Farming Sumulator Mods Folder Manager</h1>
 <span style="font-weight: bold;">Manage your mods by using
-seperate directories for different maps</span>
+seperate directories for different maps</span><br>
 This helps to avoid having any conflicts from having multple
 maps in your mod folder or mods you don't need for the game you are
-playing. It is especially useful if you
-have multiplayer games as you can install only the mods required for
+playing.<br>
+It is especially useful if you play multiplayer games as you can
+install only the mods required for
 the server.<br>
 <br>
-This application uses the subfolders in the "Mod Folders Path" to store
+This application uses the subfolders in the "<span style="font-weight: bold;">Mod Folders Path</span>" to
+store
 the mods you wish to use for the map you are playing.<br>
-<br>
 It updates the attributes in the <span style="color: rgb(153, 0, 0);">modsDirectoryOverride</span>
-tag in the gameSettings.xml file, located in the "Game Folder Path", to
+tag in the gameSettings.xml file, located in the "<span style="font-weight: bold;">Game Folder Path</span>",
+to
 use the selected folder when the game is launched.
 <p><img src="images/application.png"></p>
 <h2 id="FolderPaths">File Locations</h2>
 <h3>Mod Folders Path</h3>
 The location of the folder containing the seperate mod folders. These
-are the items that appear in the "Mod Folders" list. Use the browse
+are the items that appear in the "Mod Folders" list.<br>
+Use the <span style="font-weight: bold;">Browse</span>
 button to set this value
 <h3>Game Folder Path</h3>
 This is the location of the game config data. This is usually in your
 user directory, for example, "C:\Users\your_user_name\Documents\My
-Games\FarmingSimyulator2022". Use the browse button to set this value<br>
+Games\FarmingSimyulator2022".<br>
+Use the <span style="font-weight: bold;">Browse</span>
+button to set this value
+<br>
+<br>
 <a href="#">Top</a>
 <h2>Menus</h2>
 <h3 id="mnufile">The File Menu</h3>
 <h4>Exit</h4>
-Closes the mod folder manager application.
+Closes the Mods Manager application.
+<h4>Open FS Directory</h4>
+This will open the Farming Simulator installation folder in the default
+file manager e.g. 'Windows Explorer'
+<br>
+<br>
+<a href="#">Top</a><br>
 <h3 id="mnuMods">The Mods Menu</h3>
-The "Mods" menu allows you to carry actions to the mods and there
-containg folders.
+The "Mods" menu allows you to carry actions on the mods folders.
 <h4>Add Folder to List</h4>
-Adds an empty folder to the mod folders path&nbsp;using the file
+Adds an new folder to the mod folders path&nbsp;using the file
 open
 dialog
-box which will allow you to navigate to and create a new folder. The
+box which will allow you to navigate to and create a new folder.<br>
+The
 list is updated and if a new folder is created it will be selected in
 the list.
 <h4>Remove Selected Folder</h4>
-Removes (<span style="color: red;">deletes</span>)
-the highlighted folder in the "Mod Folders" list (<span style="color: red;">and all of its contents</span>)
-from the mod folders path. This can also be done by right clicking a
+Removes&nbsp;the highlighted folder&nbsp;(<span style="color: red;">deletes the folder and all of its contents</span>) in the "Mod Folders" list
+from the mod folders path.<br>This can also be done by right clicking a
 folder in the list.
 <h4>Add Mod to List</h4>
-Adds a mod zip file to the "Mods List" using the file open dialog to
+Adds a mod zip file to the "Mods List" using the file open dialog box to
 locate and select the mod file. If a file is selected it will be copied
 to the folder, added to the "Mods List" and selected.
 <h4>Remove Selected Mod</h4>
 Removes (<span style="color: red;">deletes</span>)
 the
 highlighted mod file from the folder an removes it from the "Mods
-List".&nbsp;his can also be done by right clicking a mod file in
+List".<br>This can also be done by right clicking a mod file in
 the
 list.
-<h4>Copy Mods to Current Folder</h4>
-This will launch the "Open FIles" dialog so you can select the file(s)
-you wish to copy to the selected directory
+<h4>Copy Mods to Selected Folder</h4>
+This will launch the "Open Files" dialog so you can select the file(s)
+you wish to copy to the currently selected folder
+<h4>Open Mods Folder</h4>
+Opens the currently selected folder in the default file manager e.g.
+'Windows Explorer'
 <br>
 <br>
 <a href="#">Top</a><br>
 <h3 id="mnuOptions">The Options Menu</h3>
 The "Options" menu is where the option settings can be found .
 <h4>Double CLick Folder to Launch</h4>
-Checkable menu item. If checked then double clicking a mod
+Checkable menu item.<br>If checked then double clicking a mod
 folder will set the path in the gameSettings.xml file and lauch FS22<br>
 <h4>Mod Folder Override Active </h4>
-Checkable menu item.Sets the value for the gameSettings.xml file to
+Checkable menu item<br>Sets the value for the gameSettings.xml file to
 True if checked. If you want to override the games defuault mod folder
 the option must be checked.<br>
 <h4>Ask Before Updating XML </h4>
-Checkable menu item. This option is there to prevent you from updating
+Checkable menu item.<br>This option is there to prevent you from updating
 the file when you do not want to. If checked a message box asking if
 you want to update the gameSettings.xml file before the application
 makes any changes.
 <h4>Show Options</h4>
-Opens the options file (config.ini) in a text editor. For Windows it
-will be Notepad.<br>
+Opens the options file&nbsp;in a text editor. For Windows this is usually Notepad.<br>
 <br>
 <a href="help.html#">Top</a>
 <h3 id="mnuhelp">The Help Menu</h3>

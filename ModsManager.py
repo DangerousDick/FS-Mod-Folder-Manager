@@ -32,7 +32,7 @@ class ModsManager(QtWidgets.QMainWindow):
     ############################################################################
     # PRIVATE MEMBER VARIABLES
     __APP_CONFIG = {}
-    __APP_VERSION = '1.2.1'
+    __APP_VERSION = '1.3'
     __APPLICATION_ROOT = None
     __APP_GUI = None
     __APPLICATION_HELP_FILE = None
@@ -534,10 +534,15 @@ class ModsManager(QtWidgets.QMainWindow):
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Information)
 
-        msg.setText("Mods Folder Editor V%s" % self.__APP_VERSION)
+        msg.setText("Mods Folder Manager V%s" % self.__APP_VERSION)
         msg.setInformativeText("Application to manage farming simulator mod folders")
         msg.setWindowTitle("About Mods Manager")
-        msg.setDetailedText("Copyright rasayer.uk 2022\n\nFarming Simulator 22 Mods Folder Manager.\nCreates, deletes and managers content of game/map specific mod folders to avoid mod confilcts and simplify multiplayer mod content.\n\nThis application will change the Farming Simulator 2022 file gameSettings.xml to override the mod folder location.\n\nWritten for python3 and QT5.")
+        msg.setDetailedText("""Copyright Richard Sayer 2022
+Farming Simulator 22 Mods Folder Manager.
+Creates, deletes and managers content of game/map specific mod folders to avoid mod confilcts and simplify multiplayer mod content.
+This application will change the Farming Simulator 2022 file gameSettings.xml to override the mod folder location.
+
+Written with python3 and QT5.""")
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msg.exec_()
         self.__APP_GUI.statusbar.showMessage("")
