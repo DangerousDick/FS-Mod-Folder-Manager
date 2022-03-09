@@ -1,0 +1,3 @@
+[submodule "FsModsManager"]
+	path = FsModsManager
+	url = git@github.com:DangerousDick/FsModsManager.git
