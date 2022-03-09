@@ -198,7 +198,8 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.mnuModsRemoveFolder.triggered.connect(self.mnu_mods_remove_folder)
         self.__APP_GUI.mnuModsAddItem.triggered.connect(self.mnu_mods_add_item)
         self.__APP_GUI.mnuModsRemoveItem.triggered.connect(self.mnu_mods_remove_item)
-        self.__APP_GUI.mnuCopyMods.triggered.connect(self.mnu_mods_copy_to_folder)
+        self.__APP_GUI.mnuModsCopyMods.triggered.connect(self.mnu_mods_copy_to_folder)
+        self.__APP_GUI.mnuModsCopyToAll.triggered.connect(self.mnu_mods_copy_to_all)
         self.__APP_GUI.mnuModsOpenModDirectory.triggered.connect(self.mnu_mods_open_mods_folder)
         self.__APP_GUI.mnuHelpHelp.triggered.connect(self.mnu_help_clicked)
         self.__APP_GUI.mnuHelpAbout.triggered.connect(self.mnu_help_about_clicked)
@@ -483,7 +484,7 @@ class ModsManager(QtWidgets.QMainWindow):
         """
         ModsManager.mnu_mods_copy_to_folder()
         Description:
-            Remove an item to the mods list
+            Copy mods to the selected folder
 
         :return:
         """
@@ -522,6 +523,44 @@ class ModsManager(QtWidgets.QMainWindow):
                     os.startfile(self.__APP_GUI.txtModFolders.text(), 'open')
         except OSError as e:
             self.Logger.error("Failed to open Mod directory\n\t%s" % e.filename)
+
+    def mnu_mods_copy_to_all(self):
+        """
+        ModsManager.mnu_mods_copy_to_all()
+        Description:
+            Copy mod(s) to ALL folders
+
+        :return:
+        """
+        self.Logger.debug("Copy mod to ALL folders")
+        try:
+            mod_files = QtWidgets.QFileDialog.getOpenFileNames(
+                self, 'Select mod file(s) to copy', os_join(self.__APP_GUI.txtModFolders.text(),
+                                                            self.__APP_GUI.lstModFolders.currentItem().text()))[0]
+            overwrite_file = False
+            if self.__ask_user("Would you like to overwrite existing files?"):
+                if self.__ask_user("Are you sure?"):
+                    overwrite_file = True
+            mod_dirs = [self.__APP_GUI.lstModFolders.item(x).text() for x in range(self.__APP_GUI.lstModFolders.count())]
+            if len(mod_files):
+                for f in mod_files:
+                    if len(mod_dirs):
+                        for d in mod_dirs:
+                            mod_dir = str(os_abspath(os_join(self.__APP_GUI.txtModFolders.text(), d)))
+                            check_file = os_join(mod_dir, pathlib.PurePath(f).name)
+                            if os.path.isfile(f) and os.path.isdir(mod_dir):
+                                if os.path.isfile(check_file) and not overwrite_file:
+                                    # if mod file exists in mod directory DO NOT overwrite
+                                    self.Logger.debug("file %s already exists in directory %s" % (pathlib.PurePath(f).name, d))
+                                else:
+                                    if str(pathlib.PurePath(f).parent) == mod_dir:
+                                        self.Logger.debug("Ignoring copying to source directory")
+                                    else:
+                                        self.Logger.debug("Copying %s to %s" % (f, mod_dir))
+                                        copy_file(f, mod_dir)
+                                        self.populate_mods_list()
+        except Exception as e:
+            self.Logger.error(e.message)
 
     def mnu_help_clicked(self):
         """
@@ -678,8 +717,6 @@ Written with python3 and QT5.""")
                 attr.value = active_value
                 attr = override_values[0].attributes.getNamedItem('directory')
                 attr.value = directory_value
-                # write updated xml to file
-                # new_file = os_abspath(os_join(self.__APP_GUI.txtGamePath.text(), 'gameSettings2.xml')) # for testing
                 fout = open(self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"], 'w', encoding='UTF-8')
                 xml_doc.writexml(fout, encoding='UTF-8')
                 fout.close()
@@ -702,7 +739,7 @@ Written with python3 and QT5.""")
 
         :return:
         """
-        self.Logger.debug("Mod folder path: %s" % self.__APP_GUI.txtModFolders.text())
+        # self.Logger.debug("Mod folder path: %s" % self.__APP_GUI.txtModFolders.text())
         if os.path.isdir(self.__APP_GUI.txtModFolders.text()):
             if self.__APP_GUI.lstModFolders.count() != 0:
                 self.__APP_GUI.lstModFolders.clear()
@@ -721,8 +758,8 @@ Written with python3 and QT5.""")
         :return:
         """
         try:
-            self.Logger.debug("Mod folder path: %s" % os_abspath(
-                os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())))
+            # self.Logger.debug("Mod folder path: %s" % os_abspath(
+            #     os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())))
             if self.__APP_GUI.lstModsList.count():
                 self.__APP_GUI.lstModsList.clear()
             selected_dir = os_abspath(os_join(self.__APP_GUI.txtModFolders.text(),

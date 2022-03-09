@@ -276,7 +276,9 @@
     <addaction name="mnuModsAddItem"/>
     <addaction name="mnuModsRemoveItem"/>
     <addaction name="separator"/>
-    <addaction name="mnuCopyMods"/>
+    <addaction name="mnuModsCopyMods"/>
+    <addaction name="mnuModsCopyToAll"/>
+    <addaction name="separator"/>
     <addaction name="mnuModsOpenModDirectory"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
@@ -430,7 +432,7 @@
     <string>Open options file in notepad</string>
    </property>
   </action>
-  <action name="mnuCopyMods">
+  <action name="mnuModsCopyMods">
    <property name="text">
     <string>Copy Mods to Selected Folder</string>
    </property>
@@ -462,6 +464,11 @@
   <action name="mnuModsOpenModDirectory">
    <property name="text">
     <string>Open Mods Directory</string>
+   </property>
+  </action>
+  <action name="mnuModsCopyToAll">
+   <property name="text">
+    <string>Copy Mod to All Folders</string>
    </property>
   </action>
  </widget>
