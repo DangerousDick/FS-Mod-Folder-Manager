@@ -440,7 +440,7 @@ class ModsManager(QtWidgets.QMainWindow):
         """
         try:
             mod_file = QtWidgets.QFileDialog.getOpenFileName(
-                self, 'Create a new Folder',os_join(self.__APP_GUI.txtModFolders.text(),
+                self, 'Select mod file(s) to add',os_join(self.__APP_GUI.txtModFolders.text(),
                                                     self.__APP_GUI.lstModFolders.currentItem().text()))[0]
             dest_dir = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())
             check_path = os_join(dest_dir, pathlib.PurePath(mod_file).name)
@@ -490,7 +490,7 @@ class ModsManager(QtWidgets.QMainWindow):
         self.Logger.debug("copy mods to folder")
         try:
             mod_files = QtWidgets.QFileDialog.getOpenFileNames(
-                self, 'Create a new Folder', os_join(self.__APP_GUI.txtModFolders.text(),
+                self, 'Select mod file(s) to copy', os_join(self.__APP_GUI.txtModFolders.text(),
                                                      self.__APP_GUI.lstModFolders.currentItem().text()))[0]
             dest_dir = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())
             if len(mod_files):
@@ -602,7 +602,7 @@ Written with python3 and QT5.""")
             Open file dialog to browse for path
         :return:
         """
-        folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder',
+        folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select mod folder',
                                                                   self.__APP_GUI.txtModFolders.text()))
         if 'windows' == os_name().lower():
             folder_path = folder_path.replace('/', '\\')
@@ -621,7 +621,7 @@ Written with python3 and QT5.""")
 
         :return:
         """
-        folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder',
+        folder_path = (QtWidgets.QFileDialog.getExistingDirectory(self, 'Select game installation folder',
                                                                   self.__APP_GUI.txtGamePath.text()))
         if 'windows' == os_name().lower():
             folder_path = folder_path.replace('/', '\\')
