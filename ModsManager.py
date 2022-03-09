@@ -109,6 +109,7 @@ class ModsManager(QtWidgets.QMainWindow):
                 self.__APP_GUI.lstModFolders.setCurrentRow(0)
         self.__APP_GUI.lstModFolders.setFocus()
         self.populate_mods_list()
+        self.__set_override_status_label()
         self.__APP_GUI.statusbar.showMessage("")
 
     def ___set_options_on_init(self):
@@ -162,6 +163,22 @@ class ModsManager(QtWidgets.QMainWindow):
                     print("exception on %s!" % option)
                     cfg_opts[section][option.upper()] = None
         return cfg_opts
+
+    def __set_override_status_label(self):
+        """
+        ModsManager.__set_override_status_lable()
+        Description:
+            Writes the current override status to lblOverrideStatus
+
+        :return:
+        """
+        or_active = 'OFF'
+        override_values = self.__get_mod_override_values()
+        if 'true' == override_values['ACTIVE_VALUE'].lower():
+            or_active = 'ON'
+        self.Logger.debug("override active: %s - %s" % (or_active, override_values['DIRECTORY_VALUE']))
+        self.__APP_GUI.lblOverrideStatus.setText("Override Status: %s - %s" % (or_active,
+                                                                               override_values['DIRECTORY_VALUE']))
 
     def create_event_handlers(self):
         """
@@ -342,6 +359,7 @@ class ModsManager(QtWidgets.QMainWindow):
     def mnu_opt_override_active_clicked(self):
         self.__APP_CONFIG['OPTIONS']['OVERRIDE_ACTIVE_VALUE'] = str(self.__APP_GUI.mnuOptOverrideActive.isChecked())
         self.__update_config_ini()
+        self.__set_active_override_option()
 
     def mnu_opt_ask_before_update_clicked(self):
         self.__APP_CONFIG['OPTIONS']['ASK_BEFORE_UPDATING_XML'] = str(self.__APP_GUI.mnuOptAskBeforeUpdate.isChecked())
@@ -674,6 +692,7 @@ Written with python3 and QT5.""")
                 self.Logger.error("Failed to update xml %s" % self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
                 self.__APP_GUI.statusbar.showMessage("Failed to update XML")
             self.Logger.debug("Set xml values\n\tactive = %s\n\tdirectory = %s", active_value, directory_value)
+            self.__set_override_status_label()
             return True
 
     ############################################################################
@@ -724,6 +743,46 @@ Written with python3 and QT5.""")
 
     ############################################################################
     # PRIVATE METHODS
+
+    def __set_active_override_option(self):
+        """
+        ModsManager.__set_active_override_option()
+        Description:
+            Update game settings XML attribute modsDirectoryOverride
+
+        :return:
+        """
+        # check ask flag
+        update_file = False
+        if self.__APP_GUI.mnuOptAskBeforeUpdate.isChecked():
+            if self.__ask_user(
+                    "This will overwrite the gameSettings.xml file.\nAre you sure you wish to continue"):
+                update_file = True
+            else:
+                return False
+        else:
+            update_file = True
+        # get xml doc and set attributes
+        if True == update_file:
+            # current GUI values
+            active_value = str(self.__APP_GUI.mnuOptOverrideActive.isChecked()).lower()
+            try:
+                xml_doc = minidom.parse(self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
+                collection = xml_doc.documentElement
+                override_values = collection.getElementsByTagName("modsDirectoryOverride")
+                attr = override_values[0].attributes.getNamedItem('active')
+                attr.value = active_value
+                # write updated xml to file
+                fout = open(self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"], 'w', encoding='UTF-8')
+                xml_doc.writexml(fout, encoding='UTF-8')
+                fout.close()
+                self.__APP_GUI.statusbar.showMessage("Game settings XML updated")
+            except Exception:
+                self.Logger.error("Failed to update xml")
+                self.__APP_GUI.statusbar.showMessage("Failed to update XML")
+            self.Logger.debug("Set xml values\n\tactive = %s", active_value)
+            self.__set_override_status_label()
+            return True
 
     def __update_config_ini(self):
         """
