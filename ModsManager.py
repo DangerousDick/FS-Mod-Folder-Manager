@@ -109,7 +109,7 @@ class ModsManager(QtWidgets.QMainWindow):
                 self.__APP_GUI.lstModFolders.setCurrentRow(0)
         self.__APP_GUI.lstModFolders.setFocus()
         self.populate_mods_list()
-        self.__set_override_status_label()
+        self.set_override_status_label()
         self.__APP_GUI.statusbar.showMessage("")
 
     def ___set_options_on_init(self):
@@ -164,9 +164,9 @@ class ModsManager(QtWidgets.QMainWindow):
                     cfg_opts[section][option.upper()] = None
         return cfg_opts
 
-    def __set_override_status_label(self):
+    def set_override_status_label(self):
         """
-        ModsManager.__set_override_status_lable()
+        ModsManager.set_override_status_label()
         Description:
             Writes the current override status to lblOverrideStatus
 
@@ -198,13 +198,10 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.mnuModsRemoveFolder.triggered.connect(self.mnu_mods_remove_folder)
         self.__APP_GUI.mnuModsAddItem.triggered.connect(self.mnu_mods_add_item)
         self.__APP_GUI.mnuModsRemoveItem.triggered.connect(self.mnu_mods_remove_item)
-        self.__APP_GUI.mnuCopyMods.triggered.connect(self.mnu_mods_copy_folder)
+        self.__APP_GUI.mnuCopyMods.triggered.connect(self.mnu_mods_copy_to_folder)
         self.__APP_GUI.mnuModsOpenModDirectory.triggered.connect(self.mnu_mods_open_mods_folder)
-
-        #
         self.__APP_GUI.mnuHelpHelp.triggered.connect(self.mnu_help_clicked)
         self.__APP_GUI.mnuHelpAbout.triggered.connect(self.mnu_help_about_clicked)
-
         # menu shortcut keys
         self.__APP_GUI.mnFileExit.setShortcut('Ctrl+X')
         self.__APP_GUI.mnuHelpHelp.setShortcut('F1')
@@ -240,6 +237,7 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__MOD_FOLDERS_POPUP_MENU = QtWidgets.QMenu()
         add_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Add Mod Folder")
         remove_mod_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Remove mod folder")
+        copy_mod_to_folder = self.__MOD_FOLDERS_POPUP_MENU.addAction("Copy Mod to Selected Folder")
 
         # show menu
         selected_action = self.__MOD_FOLDERS_POPUP_MENU.exec_(self.__APP_GUI.lstModFolders.mapToGlobal(QtCore.QPoint(0, 0)))
@@ -247,6 +245,8 @@ class ModsManager(QtWidgets.QMainWindow):
             self.mnu_mods_add_folder()
         if selected_action == remove_mod_folder:
             self.mnu_mods_remove_folder()
+        if selected_action == copy_mod_to_folder:
+            self.mnu_mods_copy_to_folder()
 
     def lst_mod_folders_clicked(self):
         """
@@ -479,9 +479,9 @@ class ModsManager(QtWidgets.QMainWindow):
                 self.__APP_GUI.statusbar.showMessage("The file %s not found" % pathlib.PurePath(del_mod).name)
         return True
 
-    def mnu_mods_copy_folder(self):
+    def mnu_mods_copy_to_folder(self):
         """
-        ModsManager.mnu_mods_remove_item()
+        ModsManager.mnu_mods_copy_to_folder()
         Description:
             Remove an item to the mods list
 
@@ -490,11 +490,8 @@ class ModsManager(QtWidgets.QMainWindow):
         self.Logger.debug("copy mods to folder")
         try:
             mod_files = QtWidgets.QFileDialog.getOpenFileNames(
-                self, 'Create a new Folder',os_join(self.__APP_GUI.txtModFolders.text(),
-                                                    self.__APP_GUI.lstModFolders.currentItem().text()))[0]
-            # if mod_files:
-            #     for name in mod_files:
-            #         print(name)
+                self, 'Create a new Folder', os_join(self.__APP_GUI.txtModFolders.text(),
+                                                     self.__APP_GUI.lstModFolders.currentItem().text()))[0]
             dest_dir = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())
             if len(mod_files):
                 for f in mod_files:
@@ -504,8 +501,7 @@ class ModsManager(QtWidgets.QMainWindow):
                             self.Logger.debug("file %s already exists in directory" % pathlib.PurePath(f).name)
                         else:
                             copy_file(f, dest_dir)
-                            self.statusBar().showMessage("Added file %s to directory" % pathlib.PurePath(f).name)
-                            self.Logger.debug("Adding new mod zip file %s" % pathlib.PurePath(f, f).name)
+                            self.statusBar().showMessage("Added files to directory")
                             self.populate_mods_list()
                             self.Logger.debug("Copy %s to %s" % (f, dest_dir))
         except Exception as e:
@@ -692,7 +688,7 @@ Written with python3 and QT5.""")
                 self.Logger.error("Failed to update xml %s" % self.__APP_CONFIG['PATHS']["GAME_SETTINGS_FILE"])
                 self.__APP_GUI.statusbar.showMessage("Failed to update XML")
             self.Logger.debug("Set xml values\n\tactive = %s\n\tdirectory = %s", active_value, directory_value)
-            self.__set_override_status_label()
+            self.set_override_status_label()
             return True
 
     ############################################################################
@@ -781,7 +777,7 @@ Written with python3 and QT5.""")
                 self.Logger.error("Failed to update xml")
                 self.__APP_GUI.statusbar.showMessage("Failed to update XML")
             self.Logger.debug("Set xml values\n\tactive = %s", active_value)
-            self.__set_override_status_label()
+            self.set_override_status_label()
             return True
 
     def __update_config_ini(self):
