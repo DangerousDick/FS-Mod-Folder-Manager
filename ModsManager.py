@@ -32,7 +32,7 @@ class ModsManager(QtWidgets.QMainWindow):
     ############################################################################
     # PRIVATE MEMBER VARIABLES
     __APP_CONFIG = {}
-    __APP_VERSION = '1.3'
+    __APP_VERSION = '1.3.1'
     __APPLICATION_ROOT = None
     __APP_GUI = None
     __APPLICATION_HELP_FILE = None
