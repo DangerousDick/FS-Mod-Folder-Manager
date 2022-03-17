@@ -105,6 +105,8 @@ class ModsManager(QtWidgets.QMainWindow):
             else:
                 self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(
                     self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
+        if self.__APP_CONFIG['PATHS']['GAME_EXE']:
+            self.__APP_GUI.txtGameExePath.setText(self.__APP_CONFIG['PATHS']['GAME_EXE'])
         # get override vales from gameSettings.xml
         override_values = self.__get_mod_override_values()
         if override_values:
@@ -216,8 +218,8 @@ class ModsManager(QtWidgets.QMainWindow):
         if 'true' == override_values['ACTIVE_VALUE'].lower():
             or_active = 'ON'
         self.Logger.debug("override active: %s - %s" % (or_active, override_values['DIRECTORY_VALUE']))
-        self.__APP_GUI.lblOverrideStatus.setText("Override Status: %s - %s" % (or_active,
-                                                                               override_values['DIRECTORY_VALUE']))
+        self.__APP_GUI.lblOverrideStatus.setText("Mod Folder Override is %s - %s" % (
+            or_active, override_values['DIRECTORY_VALUE']))
 
     def create_event_handlers(self):
         """
@@ -229,7 +231,6 @@ class ModsManager(QtWidgets.QMainWindow):
         """
         # menu items
         self.__APP_GUI.mnuOpenGameFolder.triggered.connect(self.mnu_file_open_fs_directory)
-        self.__APP_GUI.mnuOptShowOptions.triggered.connect(self.mnu_opt_show_options)
         self.__APP_GUI.mnuOptClickToLaunch.triggered.connect(self.mnu_opt_click_to_launch_clicked)
         self.__APP_GUI.mnuOptOverrideActive.triggered.connect(self.mnu_opt_override_active_clicked)
         self.__APP_GUI.mnuOptAskBeforeUpdate.triggered.connect(self.mnu_opt_ask_before_update_clicked)
@@ -251,6 +252,7 @@ class ModsManager(QtWidgets.QMainWindow):
         # text widget
         self.__APP_GUI.txtModFolders.textChanged.connect(self.txt_mod_folder_path_changed)
         self.__APP_GUI.txtGamePath.textChanged.connect(self.txt_game_folder_path_changed)
+        self.__APP_GUI.txtGameExePath.textChanged.connect(self.txt_game_exe_path_changed)
         # list widgets
         self.__APP_GUI.lstModFolders.itemClicked.connect(self.lst_mod_folders_clicked)
         self.__APP_GUI.lstModFolders.itemDoubleClicked.connect(self.lst_mod_folders_double_clicked)
@@ -260,6 +262,7 @@ class ModsManager(QtWidgets.QMainWindow):
         # button widgets
         self.__APP_GUI.btnBrowseModPath.clicked.connect(self.btn_browse_mod_folder_clicked)
         self.__APP_GUI.btnBrowseGamePath.clicked.connect(self.btn_browse_game_folder_clicked)
+        self.__APP_GUI.btnBrowseGameExe.clicked.connect(self.btn_browse_game_exe_clicked)
         self.__APP_GUI.btnLaunchFS22.clicked.connect(self.btn_launch_game_clicked)
         self.__APP_GUI.btnSetModPath.clicked.connect(self.btn_set_mod_folder_clicked)
 
@@ -369,30 +372,6 @@ class ModsManager(QtWidgets.QMainWindow):
                     os.startfile(self.__APP_GUI.txtGamePath.text(), 'open')
         except OSError as e:
             self.Logger.error("Failed to open Mod directory\n\t%s" % e.filename)
-
-    def mnu_opt_show_options(self):
-        """
-        ModsManager.mnu_file_show_options()
-        Description:
-            open mod zip file in its default application
-
-        :return:
-        """
-        file_name = os_abspath(os_join(self.__APPLICATION_ROOT, 'config.ini'))
-        self.Logger.debug(file_name)
-        if os.path.isfile(file_name):
-            try:
-                os.startfile(file_name, 'open')
-            except Exception as e:
-                self.Logger.error("Failed to show options file\n%s" % e.message)
-        msg = QtWidgets.QMessageBox(self)
-        msg.setIcon(QtWidgets.QMessageBox.Information)
-        msg.setText("Restart Application")
-        msg.setInformativeText(
-            "You must restart the application before any changes to the config.ini file will take effect")
-        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msg.exec_()
-        self.__APP_GUI.statusbar.showMessage("")
 
     def mnu_opt_click_to_launch_clicked(self):
         """
@@ -526,8 +505,8 @@ class ModsManager(QtWidgets.QMainWindow):
         """
         try:
             mod_file = QtWidgets.QFileDialog.getOpenFileName(
-                self, 'Select mod file(s) to add',os_join(self.__APP_GUI.txtModFolders.text(),
-                                                    self.__APP_GUI.lstModFolders.currentItem().text()))[0]
+                self, 'Select mod file(s) to add', os_join(self.__APP_GUI.txtModFolders.text(),
+                                                           self.__APP_GUI.lstModFolders.currentItem().text()))[0]
             dest_dir = os_join(self.__APP_GUI.txtModFolders.text(), self.__APP_GUI.lstModFolders.currentItem().text())
             check_path = os_join(dest_dir, pathlib.PurePath(mod_file).name)
             if len(mod_file):
@@ -719,6 +698,22 @@ Written with python3 and QT5.""")
         except Exception:
             return
 
+    def txt_game_exe_path_changed(self):
+        """
+        ModsManager.txt_game_exe_path_changed()
+        Description:
+            Game exe file path has changed
+
+        :return:
+        """
+        try:
+            self.__APP_CONFIG['PATHS']["GAME_EXE"] = self.__APP_GUI.txtGameExePath.text()
+            self.__update_config_ini()
+            self.__APP_GUI.statusbar.showMessage("")
+            self.Logger.debug("Game exe file path changed: %s" % self.__APP_CONFIG['PATHS']["GAME_EXE"])
+        except Exception:
+            return
+
     def btn_browse_mod_folder_clicked(self):
         """
         ModsManager.mod_folder_browse_clicked()
@@ -753,6 +748,24 @@ Written with python3 and QT5.""")
             self.Logger.debug("Game folder set to %s", folder_path)
             self.__APP_GUI.txtGamePath.setText(folder_path)
             self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE'] = os_abspath(os_join(folder_path, 'gameSettings.xml'))
+        self.__APP_GUI.statusbar.showMessage("")
+
+    def btn_browse_game_exe_clicked(self):
+        """
+        ModsManager.btn_browse_game_exe_clicked()
+        Description:
+            Open file dialog to browse for game exe file
+
+        :return:
+        """
+        exe_path = str(pathlib.PurePath(self.__APP_CONFIG['PATHS']['GAME_EXE']).parent)
+        game_exe_file = (QtWidgets.QFileDialog.getOpenFileName(self, 'Select game exe file to launch', exe_path))[0]
+        if 'windows' == os_name().lower():
+            game_exe_file = game_exe_file.replace('/', '\\')
+        if game_exe_file:
+            self.Logger.debug("Game exe set to %s", game_exe_file)
+            self.__APP_GUI.txtGameExePath.setText(game_exe_file)
+            self.__APP_CONFIG['PATHS']['GAME_EXE'] = os_abspath(os_join(game_exe_file, 'gameSettings.xml'))
         self.__APP_GUI.statusbar.showMessage("")
 
     def btn_launch_game_clicked(self):

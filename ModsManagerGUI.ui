@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>590</width>
-    <height>578</height>
+    <height>636</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,84 +15,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QFrame" name="fmeModFolders">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLabel" name="lblModFolders">
-         <property name="text">
-          <string>Mod Folders Path:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtModFolders">
-         <property name="text">
-          <string>path to mod folders</string>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnBrowseModPath">
-         <property name="text">
-          <string>Browse</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QFrame" name="fmeGamePath">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>43</height>
-       </size>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLabel" name="lblGamePath">
-         <property name="text">
-          <string>Game Folder Path:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtGamePath">
-         <property name="text">
-          <string>path to game installtion folder</string>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnBrowseGamePath">
-         <property name="text">
-          <string>Browse</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item>
      <widget class="QFrame" name="fmeLists">
       <property name="frameShape">
@@ -186,24 +108,96 @@
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="fmeOverrideStatus">
+     <widget class="QLabel" name="lblOverrideStatus">
+      <property name="text">
+       <string>Override Status</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="fmePaths">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QLabel" name="lblOverrideStatus">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblModFolders">
          <property name="text">
-          <string>Override Status</string>
+          <string>Mod Folders Path:</string>
          </property>
-         <property name="textFormat">
-          <enum>Qt::AutoText</enum>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btnBrowseModPath">
+         <property name="text">
+          <string>Browse</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="txtGamePath">
+         <property name="text">
+          <string>path to game installtion folder</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblGameDataPath">
+         <property name="text">
+          <string>Game Data path:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="txtModFolders">
+         <property name="text">
+          <string>path to mod folders</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="btnBrowseGamePath">
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblGameExe">
+         <property name="text">
+          <string>Game EXE File:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="txtGameExePath">
+         <property name="text">
+          <string>C:\Program Files (x86)\Farming Simulator 2022\FarmingSimulator2022.exe</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="btnBrowseGameExe">
+         <property name="text">
+          <string>Browse</string>
          </property>
         </widget>
        </item>
@@ -311,8 +305,6 @@
     </widget>
     <addaction name="menOptMods"/>
     <addaction name="mnuOptLaunch"/>
-    <addaction name="separator"/>
-    <addaction name="mnuOptShowOptions"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMods"/>
