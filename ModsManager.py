@@ -9,7 +9,7 @@ import os
 import pathlib
 from shutil import rmtree as remove_directory
 from shutil import copy as copy_file
-from subprocess import run as launch_game
+from subprocess import run
 from PyQt5 import QtCore, QtWidgets, QtGui
 from ModsManagerGUI import Ui_MainWindow
 from os.path import join as os_join
@@ -70,8 +70,25 @@ class ModsManager(QtWidgets.QMainWindow):
         # create event handlers
         self.create_event_handlers()
         # read and set application options
-        self.___set_options_on_init()
+        self.__set_options_on_init()
         # override application options from gameSettings.xml
+        self.__set_override_values()
+        # populate lists
+        self.__APP_GUI.lstModFolders.setFocus()
+        self.populate_mods_list()
+        self.set_override_status_label()
+        self.__update_config_ini()
+        self.__APP_GUI.statusbar.showMessage("")
+
+    def __set_override_values(self):
+        """
+        ModsManager.__set_override_values()
+        Description:
+            Sets the options to values read from the config.ini file.
+            Called on start up by self.__init__()
+
+        :return
+        """
         override_values = None
         if self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']:
             # if path does not exist check under the user directory
@@ -87,7 +104,7 @@ class ModsManager(QtWidgets.QMainWindow):
                         self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
             else:
                 self.__APP_GUI.txtGamePath.setText(str(pathlib.PurePath(
-                        self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
+                    self.__APP_CONFIG['PATHS']['GAME_SETTINGS_FILE']).parent))
         # get override vales from gameSettings.xml
         override_values = self.__get_mod_override_values()
         if override_values:
@@ -98,7 +115,6 @@ class ModsManager(QtWidgets.QMainWindow):
             self.__APP_GUI.txtModFolders.setText(str(pathlib.PurePath(override_values['DIRECTORY_VALUE']).parent))
         elif self.__APP_CONFIG['PATHS']['MOD_FOLDER_PATH']:
             self.__APP_GUI.txtModFolders.setText(self.__APP_CONFIG['PATHS']['MOD_FOLDER_PATH'])
-        # set selected folder by row
         if self.__APP_GUI.lstModFolders.count():
             if override_values:
                 items = self.__APP_GUI.lstModFolders.findItems(
@@ -107,12 +123,25 @@ class ModsManager(QtWidgets.QMainWindow):
                     self.__APP_GUI.lstModFolders.setCurrentItem(items[0])
             else:
                 self.__APP_GUI.lstModFolders.setCurrentRow(0)
-        self.__APP_GUI.lstModFolders.setFocus()
-        self.populate_mods_list()
-        self.set_override_status_label()
-        self.__APP_GUI.statusbar.showMessage("")
+        # get override values from game.xml
+        self.Logger.debug("Reading game.xml for <controls> value")
+        game_xml = os_abspath(os_join(
+            self.__APP_GUI.txtGamePath.text(),
+            'game.xml'))
+        try:
+            xml_doc = minidom.parse(game_xml)
+            collection = xml_doc.documentElement
+            ctrl_node = collection.getElementsByTagName("controls")
+            if 'true' == ("%s" % ctrl_node[0].firstChild.nodeValue).lower():
+                self.__APP_GUI.mnuOptInGameConsole.setChecked(True)
+            else:
+                self.__APP_GUI.mnuOptInGameConsole.setChecked(False)
+            self.__APP_CONFIG['OPTIONS']['IN_GAME_CONSOLE'] = str(self.__APP_GUI.mnuOptInGameConsole.isChecked())
+        except Exception:
+            self.Logger.error("Failed to read game.xml")
+            self.__APP_GUI.statusbar.showMessage("Failed to read game.xml")
 
-    def ___set_options_on_init(self):
+    def __set_options_on_init(self):
         """
         ModsManager.___set_options()
         Description:
@@ -138,6 +167,16 @@ class ModsManager(QtWidgets.QMainWindow):
             self.__APP_GUI.mnuOptAskBeforeUpdate.setChecked(True)
         else:
             self.__APP_GUI.mnuOptAskBeforeUpdate.setChecked(False)
+        if 'true' == self.__APP_CONFIG['OPTIONS']['IN_GAME_CONSOLE'].lower() or \
+                'checked' == self.__APP_CONFIG['OPTIONS']['IN_GAME_CONSOLE'].lower():
+            self.__APP_GUI.mnuOptInGameConsole.setChecked(True)
+        else:
+            self.__APP_GUI.mnuOptInGameConsole.setChecked(False)
+        if 'true' == self.__APP_CONFIG['OPTIONS']['LAUNCH_WITH_CHEATS'].lower() or \
+                'checked' == self.__APP_CONFIG['OPTIONS']['LAUNCH_WITH_CHEATS'].lower():
+            self.__APP_GUI.mnuOptLaunchWithCheats.setChecked(True)
+        else:
+            self.__APP_GUI.mnuOptLaunchWithCheats.setChecked(False)
 
     def __read_config_file(self):
         """
@@ -189,11 +228,13 @@ class ModsManager(QtWidgets.QMainWindow):
         :return:
         """
         # menu items
-        self.__APP_GUI.mnuOpenFsDirectory.triggered.connect(self.mnu_file_open_fs_directory)
+        self.__APP_GUI.mnuOpenGameFolder.triggered.connect(self.mnu_file_open_fs_directory)
         self.__APP_GUI.mnuOptShowOptions.triggered.connect(self.mnu_opt_show_options)
         self.__APP_GUI.mnuOptClickToLaunch.triggered.connect(self.mnu_opt_click_to_launch_clicked)
         self.__APP_GUI.mnuOptOverrideActive.triggered.connect(self.mnu_opt_override_active_clicked)
         self.__APP_GUI.mnuOptAskBeforeUpdate.triggered.connect(self.mnu_opt_ask_before_update_clicked)
+        self.__APP_GUI.mnuOptInGameConsole.triggered.connect(self.mnu_opt_ingame_console_clicked)
+        self.__APP_GUI.mnuOptLaunchWithCheats.triggered.connect(self.mnu_opt_launch_with_cheats_clicked)
         self.__APP_GUI.mnuModsAddFolder.triggered.connect(self.mnu_mods_add_folder)
         self.__APP_GUI.mnuModsRemoveFolder.triggered.connect(self.mnu_mods_remove_folder)
         self.__APP_GUI.mnuModsAddItem.triggered.connect(self.mnu_mods_add_item)
@@ -354,16 +395,60 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.statusbar.showMessage("")
 
     def mnu_opt_click_to_launch_clicked(self):
+        """
+        ModsManager.mnu_opt_click_to_launch_clicked()
+        Description:
+            Set option value
+
+        :return:
+        """
         self.__APP_CONFIG['OPTIONS']['LAUNCH_ON_DOUBLE_CLICK'] = str(self.__APP_GUI.mnuOptClickToLaunch.isChecked())
         self.__update_config_ini()
 
     def mnu_opt_override_active_clicked(self):
+        """
+        ModsManager.mnu_opt_override_active_clicked()
+        Description:
+            Set option value
+
+        :return:
+        """
         self.__APP_CONFIG['OPTIONS']['OVERRIDE_ACTIVE_VALUE'] = str(self.__APP_GUI.mnuOptOverrideActive.isChecked())
         self.__update_config_ini()
         self.__set_active_override_option()
 
     def mnu_opt_ask_before_update_clicked(self):
+        """
+        ModsManager.mnu_opt_ask_before_update_clicked()
+        Description:
+            Set option value
+
+        :return:
+        """
         self.__APP_CONFIG['OPTIONS']['ASK_BEFORE_UPDATING_XML'] = str(self.__APP_GUI.mnuOptAskBeforeUpdate.isChecked())
+        self.__update_config_ini()
+
+    def mnu_opt_ingame_console_clicked(self):
+        """
+        ModsManager.mnu_opt_ingame_console_clicked()
+        Description:
+            Set option value
+
+        :return:
+        """
+        self.__APP_CONFIG['OPTIONS']['IN_GAME_CONSOLE'] = str(self.__APP_GUI.mnuOptInGameConsole.isChecked())
+        self.__update_config_ini()
+        self.set_launch_with_console_in_xml()
+
+    def mnu_opt_launch_with_cheats_clicked(self):
+        """
+        ModsManager.mnu_opt_launch_with_cheats_clicked()
+        Description:
+            Set option value
+
+        :return:
+        """
+        self.__APP_CONFIG['OPTIONS']['LAUNCH_WITH_CHEATS'] = str(self.__APP_GUI.mnuOptLaunchWithCheats.isChecked())
         self.__update_config_ini()
 
     def mnu_mods_add_folder(self):
@@ -672,15 +757,27 @@ Written with python3 and QT5.""")
 
     def btn_launch_game_clicked(self):
         """
-        ModsManager.game_folder_browse_clicked()
+        ModsManager.btn_launch_game_clicked()
         Description:
-            Open file dialog to browse for path
+            Uses the subprocess run method to launch the game.
+
+            There is a true/false value in the FS22 game.xml file that will enable the in game console.
+            <development>
+                <controls>false</controls>
+                <openDevConsole onWarnings="false" onErrors="false"/>
+            </development>
+            You can also add the -cheats switch to the launch command enable the cheats in the in game console.
 
         :return:
         """
+        launch_command = self.__APP_CONFIG['PATHS']['GAME_EXE']
         try:
-            self.Logger.debug("Launching game - %s", self.__APP_CONFIG['PATHS']['GAME_EXE'])
-            launch_game(self.__APP_CONFIG['PATHS']['GAME_EXE'])
+            if self.__APP_GUI.mnuOptLaunchWithCheats.isChecked():
+                run("%s -cheats" % launch_command)
+                self.Logger.debug("Launching game without cheats")
+            else:
+                run(launch_command)
+                self.Logger.debug("Launching game with cheats")
             self.__APP_GUI.statusbar.showMessage("Game started")
         except Exception as e:
             raise Exception("ERROR: Message: %s\nstrerror: %s" % (e.message, e.strerror))
@@ -730,6 +827,33 @@ Written with python3 and QT5.""")
 
     ############################################################################
     # PUBLIC METHODS
+
+    def set_launch_with_console_in_xml(self):
+        """
+        ModsManager.set_launch_with_console_in_xml()
+        Description:
+            Updates the game.xml file <control> attribute
+
+        :return:
+        """
+        game_xml = os_abspath(os_join(
+            self.__APP_GUI.txtGamePath.text(),
+            'game.xml'))
+        control_node_value = str(self.__APP_GUI.mnuOptInGameConsole.isChecked()).lower()
+        try:
+            xml_doc = minidom.parse(game_xml)
+            collection = xml_doc.documentElement
+            ctrl_node = collection.getElementsByTagName("controls")
+            ctrl_node[0].firstChild.replaceWholeText(control_node_value)
+            self.Logger.debug("Updating %s\n\t <control>%s</control>" % (game_xml, ctrl_node[0].firstChild.nodeValue))
+            fout = open(game_xml, 'w', encoding='UTF-8')
+            xml_doc.writexml(fout, encoding='UTF-8')
+            fout.close()
+            self.__APP_GUI.statusbar.showMessage("game.xml updated")
+        except Exception:
+            self.Logger.error("Failed to update game.xml")
+            self.__APP_GUI.statusbar.showMessage("Failed to update game.xml")
+        return True
 
     def populate_mod_folders_list(self):
         """

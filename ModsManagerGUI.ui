@@ -254,7 +254,7 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="mnuOpenFsDirectory"/>
+    <addaction name="mnuOpenGameFolder"/>
     <addaction name="separator"/>
     <addaction name="mnFileExit"/>
    </widget>
@@ -270,24 +270,47 @@
     <property name="title">
      <string>Mods</string>
     </property>
-    <addaction name="mnuModsAddFolder"/>
-    <addaction name="mnuModsRemoveFolder"/>
-    <addaction name="separator"/>
-    <addaction name="mnuModsAddItem"/>
-    <addaction name="mnuModsRemoveItem"/>
-    <addaction name="separator"/>
-    <addaction name="mnuModsCopyMods"/>
-    <addaction name="mnuModsCopyToAll"/>
-    <addaction name="separator"/>
-    <addaction name="mnuModsOpenModDirectory"/>
+    <widget class="QMenu" name="mnuModsFolder">
+     <property name="title">
+      <string>Mod Folders</string>
+     </property>
+     <addaction name="mnuModsAddFolder"/>
+     <addaction name="mnuModsRemoveFolder"/>
+     <addaction name="mnuModsOpenModDirectory"/>
+    </widget>
+    <widget class="QMenu" name="menuModFiles">
+     <property name="title">
+      <string>Mod Files</string>
+     </property>
+     <addaction name="mnuModsAddItem"/>
+     <addaction name="mnuModsRemoveItem"/>
+     <addaction name="mnuModsCopyMods"/>
+     <addaction name="mnuModsCopyToAll"/>
+    </widget>
+    <addaction name="mnuModsFolder"/>
+    <addaction name="menuModFiles"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
      <string>Options</string>
     </property>
-    <addaction name="mnuOptClickToLaunch"/>
-    <addaction name="mnuOptOverrideActive"/>
-    <addaction name="mnuOptAskBeforeUpdate"/>
+    <widget class="QMenu" name="menOptMods">
+     <property name="title">
+      <string>Mod Options</string>
+     </property>
+     <addaction name="mnuOptClickToLaunch"/>
+     <addaction name="mnuOptOverrideActive"/>
+     <addaction name="mnuOptAskBeforeUpdate"/>
+    </widget>
+    <widget class="QMenu" name="mnuOptLaunch">
+     <property name="title">
+      <string>Launch Options</string>
+     </property>
+     <addaction name="mnuOptInGameConsole"/>
+     <addaction name="mnuOptLaunchWithCheats"/>
+    </widget>
+    <addaction name="menOptMods"/>
+    <addaction name="mnuOptLaunch"/>
     <addaction name="separator"/>
     <addaction name="mnuOptShowOptions"/>
    </widget>
@@ -456,9 +479,9 @@
     <string>Ask Before Updating XML</string>
    </property>
   </action>
-  <action name="mnuOpenFsDirectory">
+  <action name="mnuOpenGameFolder">
    <property name="text">
-    <string>Open FS Directory</string>
+    <string>Open Game Folder</string>
    </property>
   </action>
   <action name="mnuModsOpenModDirectory">
@@ -469,6 +492,22 @@
   <action name="mnuModsCopyToAll">
    <property name="text">
     <string>Copy Mod to All Folders</string>
+   </property>
+  </action>
+  <action name="mnuOptInGameConsole">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Launch With In-Game Console</string>
+   </property>
+  </action>
+  <action name="mnuOptLaunchWithCheats">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Launch with Cheats</string>
    </property>
   </action>
  </widget>
