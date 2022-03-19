@@ -302,6 +302,7 @@
      </property>
      <addaction name="mnuOptInGameConsole"/>
      <addaction name="mnuOptLaunchWithCheats"/>
+     <addaction name="mnuOptLaunchWithRestart"/>
     </widget>
     <addaction name="menOptMods"/>
     <addaction name="mnuOptLaunch"/>
@@ -500,6 +501,14 @@
    </property>
    <property name="text">
     <string>Launch with Cheats</string>
+   </property>
+  </action>
+  <action name="mnuOptLaunchWithRestart">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Launch with Restart</string>
    </property>
   </action>
  </widget>

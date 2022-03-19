@@ -179,6 +179,11 @@ class ModsManager(QtWidgets.QMainWindow):
             self.__APP_GUI.mnuOptLaunchWithCheats.setChecked(True)
         else:
             self.__APP_GUI.mnuOptLaunchWithCheats.setChecked(False)
+        if 'true' == self.__APP_CONFIG['OPTIONS']['LAUNCH_WITH_RESTART'].lower() or \
+                'checked' == self.__APP_CONFIG['OPTIONS']['LAUNCH_WITH_RESTART'].lower():
+            self.__APP_GUI.mnuOptLaunchWithRestart.setChecked(True)
+        else:
+            self.__APP_GUI.mnuOptLaunchWithRestart.setChecked(False)
 
     def __read_config_file(self):
         """
@@ -235,6 +240,7 @@ class ModsManager(QtWidgets.QMainWindow):
         self.__APP_GUI.mnuOptOverrideActive.triggered.connect(self.mnu_opt_override_active_clicked)
         self.__APP_GUI.mnuOptAskBeforeUpdate.triggered.connect(self.mnu_opt_ask_before_update_clicked)
         self.__APP_GUI.mnuOptInGameConsole.triggered.connect(self.mnu_opt_ingame_console_clicked)
+        self.__APP_GUI.mnuOptLaunchWithRestart.triggered.connect(self.mnu_opt_launch_with_restart_clicked)
         self.__APP_GUI.mnuOptLaunchWithCheats.triggered.connect(self.mnu_opt_launch_with_cheats_clicked)
         self.__APP_GUI.mnuModsAddFolder.triggered.connect(self.mnu_mods_add_folder)
         self.__APP_GUI.mnuModsRemoveFolder.triggered.connect(self.mnu_mods_remove_folder)
@@ -428,6 +434,17 @@ class ModsManager(QtWidgets.QMainWindow):
         :return:
         """
         self.__APP_CONFIG['OPTIONS']['LAUNCH_WITH_CHEATS'] = str(self.__APP_GUI.mnuOptLaunchWithCheats.isChecked())
+        self.__update_config_ini()
+
+    def mnu_opt_launch_with_restart_clicked(self):
+        """
+        ModsManager.mnu_opt_launch_with_cheats_clicked()
+        Description:
+            Set option value
+
+        :return:
+        """
+        self.__APP_CONFIG['OPTIONS']['LAUNCH_WITH_RESTART'] = str(self.__APP_GUI.mnuOptLaunchWithRestart.isChecked())
         self.__update_config_ini()
 
     def mnu_mods_add_folder(self):
@@ -786,11 +803,13 @@ Written with python3 and QT5.""")
         launch_command = self.__APP_CONFIG['PATHS']['GAME_EXE']
         try:
             if self.__APP_GUI.mnuOptLaunchWithCheats.isChecked():
-                run("%s -cheats" % launch_command)
-                self.Logger.debug("Launching game without cheats")
-            else:
-                run(launch_command)
+                launch_command = "%s -cheats" % launch_command
                 self.Logger.debug("Launching game with cheats")
+            if self.__APP_GUI.mnuOptLaunchWithRestart.isChecked():
+                launch_command = "%s -restart" % launch_command
+                self.Logger.debug("Launching game with restart")
+            run(launch_command)
+            self.Logger.debug("Launching game")
             self.__APP_GUI.statusbar.showMessage("Game started")
         except Exception as e:
             raise Exception("ERROR: Message: %s\nstrerror: %s" % (e.message, e.strerror))
