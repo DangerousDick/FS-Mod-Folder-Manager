@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FS22_Mod_Manager" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UserDataPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Documents\My Games\FarmingSimulator2022</Value>
+    </Setting>
+    <Setting Name="GameExePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Farming Simulator 2022\FarmingSimulator2022.exe</Value>
+    </Setting>
+    <Setting Name="ModFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\fs22mods</Value>
+    </Setting>
+    <Setting Name="AllowDoubleClick" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ModFodlerOverride" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LaunchWithConsole" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LaunchWithCheats" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LaunchAsRestart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
