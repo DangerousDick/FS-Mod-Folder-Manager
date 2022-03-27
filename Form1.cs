@@ -5,7 +5,7 @@ namespace FS22_Mod_Manager
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V0.1";
+        const string version = "V1.4";
         // private variables to be set on form load
         private string gameSettingsXmlFile = "";
         private string gameXmlFile = "";
