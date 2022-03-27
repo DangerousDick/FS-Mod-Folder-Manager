@@ -23,7 +23,10 @@ namespace FS22_Mod_Manager
              */
             // if log file exists in directory delete it and create new log
             string log = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\log.txt";
-            if (File.Exists(log)) { File.Delete(log); }
+            if (File.Exists(log)) 
+            { 
+                File.Delete(log);
+            }
             logger = new Logger(log);
             logger.LogWrite("Application started", true);
             // get user settings and set xml paths
