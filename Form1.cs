@@ -1,11 +1,12 @@
 namespace FS22_Mod_Manager
 {
-    using System.Diagnostics; // for Process class
+    using System.Diagnostics;       // for Process class
+    using Microsoft.VisualBasic;    // for input box
 
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V1.4";
+        const string version = "V1.4.1";
         // private variables to be set on form load
         private string gameSettingsXmlFile = "";
         private string gameXmlFile = "";
@@ -135,7 +136,7 @@ namespace FS22_Mod_Manager
             if (lstModFolders.Items.Count > 0)
             {
                 // remove folder
-                string message = "Are you sure you want to remove folder" + lstModFolders.Text + "?";
+                string message = "Are you sure you want to remove folder " + lstModFolders.Text + "?";
                 string caption = "Deleteing folder from disk";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 
@@ -148,6 +149,31 @@ namespace FS22_Mod_Manager
                     populate_folder_list();
                     populate_file_list();
                 }
+            }
+        }
+
+        private void mnuModFolderCopyAsNewFolder_Click(object sender, EventArgs e)
+        {
+            /*
+            *  Create a new folder and copy contents of an existing folder.
+            *  e.g. Create new map folder and copy your favourite mods.
+            */
+            string new_folder = Path.Join(txtModFolderPath.Text, Interaction.InputBox("New folder name?", "New Folder"));
+            string existing_folder = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
+            logger.LogWrite(new_folder);
+            logger.LogWrite(existing_folder);
+            Directory.CreateDirectory(new_folder);
+            if (Directory.Exists(new_folder) && Directory.Exists(existing_folder))
+            {
+                // Get the files in the source directory and copy to the destination directory
+                var copy_from = new DirectoryInfo(existing_folder);
+                foreach (FileInfo file in copy_from.GetFiles())
+                {
+                    string targetFilePath = Path.Combine(new_folder, file.Name);
+                    file.CopyTo(targetFilePath);
+                    logger.LogWrite(file.FullName + " --> " + targetFilePath);
+                }
+                lstModFolders.Items.Add(Path.GetFileName(new_folder));
             }
         }
 
