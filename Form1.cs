@@ -21,6 +21,8 @@ namespace FS22_Mod_Manager
             /*
              * actions to carry out at application start
              */
+            // Window location
+            this.Location = Settings.Default.MainWindowLocation;
             // if log file exists in directory delete it and create new log
             string log = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\log.txt";
             if (File.Exists(log)) 
@@ -585,16 +587,18 @@ namespace FS22_Mod_Manager
              * Write the application user settings to file
              */
             logger.LogWrite("Saving default user settings");
-            // save textbox values
+            // textbox values
             Settings.Default.ModFolderPath = txtModFolderPath.Text;
             Settings.Default.UserDataPath = txtUserDataPath.Text;
             Settings.Default.GameExePath = txtGameExeFile.Text;
-            // save options menu settings
+            // options menu settings
             Settings.Default.AllowDoubleClick = mnuOptModDoubleClick.Checked;
             Settings.Default.ModFodlerOverride = mnuOptModOverride.Checked;
             Settings.Default.LaunchWithConsole = mnuOptLaunchConsole.Checked;
             Settings.Default.LaunchWithCheats = mnuOptLaunchLaunchCheats.Checked;
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
+            // Window location
+            Settings.Default.MainWindowLocation = this.Location;
             Settings.Default.Save();
         }
 
