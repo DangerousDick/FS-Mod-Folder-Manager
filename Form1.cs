@@ -319,6 +319,16 @@ namespace FS22_Mod_Manager
             }
         }
 
+        private void mnuContextFolderRefresh_Click(object sender, EventArgs e)
+        {
+            string selected_folder = lstModFolders.Text;
+            string selected_file = lstModFiles.Text;
+            populate_folder_list();
+            populate_file_list();
+            lstModFolders.FindString(selected_folder);
+            lstModFiles.FindString(selected_file);
+        }
+
         /*
          * BUTTON EVENT HANDLERS
          */
@@ -780,11 +790,6 @@ namespace FS22_Mod_Manager
             {
                 logger.LogWrite(ex.Message, true);
             }
-        }
-
-        private void lblModFolderCount_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
