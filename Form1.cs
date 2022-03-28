@@ -781,5 +781,10 @@ namespace FS22_Mod_Manager
                 logger.LogWrite(ex.Message, true);
             }
         }
+
+        private void lblModFolderCount_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

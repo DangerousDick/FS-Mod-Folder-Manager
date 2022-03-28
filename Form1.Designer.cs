@@ -83,13 +83,13 @@
             this.txtModFolderPath = new System.Windows.Forms.TextBox();
             this.lblModFolderPath = new System.Windows.Forms.Label();
             this.mnuContextFolderList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuContextFolderAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFolderRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFileList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuContexstFileRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFileSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuContextModCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextModCopyToAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextFolderAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuApplicationMain.SuspendLayout();
             this.stsStatusBar.SuspendLayout();
             this.pnlLists.SuspendLayout();
@@ -107,7 +107,7 @@
             this.mnuHelp});
             this.mnuApplicationMain.Location = new System.Drawing.Point(0, 0);
             this.mnuApplicationMain.Name = "mnuApplicationMain";
-            this.mnuApplicationMain.Size = new System.Drawing.Size(670, 24);
+            this.mnuApplicationMain.Size = new System.Drawing.Size(530, 24);
             this.mnuApplicationMain.TabIndex = 0;
             this.mnuApplicationMain.Text = "menuStrip1";
             // 
@@ -172,7 +172,7 @@
             this.mnuModFolderRemove,
             this.mnuModFolderOpen});
             this.mnuModsFolder.Name = "mnuModsFolder";
-            this.mnuModsFolder.Size = new System.Drawing.Size(180, 22);
+            this.mnuModsFolder.Size = new System.Drawing.Size(178, 22);
             this.mnuModsFolder.Text = "Mod Folder Actions";
             // 
             // mnuModFolderAdd
@@ -203,7 +203,7 @@
             this.mnuModFileCopyToSelected,
             this.mnuModFileCopyToAll});
             this.MnuModsFile.Name = "MnuModsFile";
-            this.MnuModsFile.Size = new System.Drawing.Size(180, 22);
+            this.MnuModsFile.Size = new System.Drawing.Size(178, 22);
             this.MnuModsFile.Text = "Mod File Actions";
             // 
             // mnuModFileRemove
@@ -242,7 +242,7 @@
             this.mnuOptModDoubleClick,
             this.mnuOptModOverride});
             this.mnuOptMod.Name = "mnuOptMod";
-            this.mnuOptMod.Size = new System.Drawing.Size(180, 22);
+            this.mnuOptMod.Size = new System.Drawing.Size(158, 22);
             this.mnuOptMod.Text = "Mod Options";
             // 
             // mnuOptModDoubleClick
@@ -266,7 +266,7 @@
             this.mnuOptLaunchLaunchCheats,
             this.mnuOptLaunchRestart});
             this.mnuModLaunch.Name = "mnuModLaunch";
-            this.mnuModLaunch.Size = new System.Drawing.Size(180, 22);
+            this.mnuModLaunch.Size = new System.Drawing.Size(158, 22);
             this.mnuModLaunch.Text = "Launch Options";
             // 
             // mnuOptLaunchConsole
@@ -306,19 +306,19 @@
             // mnuHelpOpen
             // 
             this.mnuHelpOpen.Name = "mnuHelpOpen";
-            this.mnuHelpOpen.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpOpen.Size = new System.Drawing.Size(107, 22);
             this.mnuHelpOpen.Text = "Help";
             this.mnuHelpOpen.Click += new System.EventHandler(this.mnuHelpOpen_Click);
             // 
             // mnuHelpSeparator
             // 
             this.mnuHelpSeparator.Name = "mnuHelpSeparator";
-            this.mnuHelpSeparator.Size = new System.Drawing.Size(177, 6);
+            this.mnuHelpSeparator.Size = new System.Drawing.Size(104, 6);
             // 
             // mnuHelpAbout
             // 
             this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpAbout.Size = new System.Drawing.Size(107, 22);
             this.mnuHelpAbout.Text = "About";
             this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
@@ -326,9 +326,9 @@
             // 
             this.stsStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stsStatusLabel});
-            this.stsStatusBar.Location = new System.Drawing.Point(0, 688);
+            this.stsStatusBar.Location = new System.Drawing.Point(0, 549);
             this.stsStatusBar.Name = "stsStatusBar";
-            this.stsStatusBar.Size = new System.Drawing.Size(670, 22);
+            this.stsStatusBar.Size = new System.Drawing.Size(530, 22);
             this.stsStatusBar.TabIndex = 1;
             // 
             // stsStatusLabel
@@ -347,13 +347,13 @@
             this.pnlLists.Controls.Add(this.lblModFolders);
             this.pnlLists.Location = new System.Drawing.Point(0, 27);
             this.pnlLists.Name = "pnlLists";
-            this.pnlLists.Size = new System.Drawing.Size(670, 479);
+            this.pnlLists.Size = new System.Drawing.Size(518, 345);
             this.pnlLists.TabIndex = 4;
             // 
             // lblModFileCount
             // 
             this.lblModFileCount.AutoSize = true;
-            this.lblModFileCount.Location = new System.Drawing.Point(338, 459);
+            this.lblModFileCount.Location = new System.Drawing.Point(246, 324);
             this.lblModFileCount.Name = "lblModFileCount";
             this.lblModFileCount.Size = new System.Drawing.Size(61, 15);
             this.lblModFileCount.TabIndex = 5;
@@ -363,16 +363,16 @@
             // 
             this.lstModFiles.FormattingEnabled = true;
             this.lstModFiles.ItemHeight = 15;
-            this.lstModFiles.Location = new System.Drawing.Point(338, 28);
+            this.lstModFiles.Location = new System.Drawing.Point(246, 28);
             this.lstModFiles.Name = "lstModFiles";
-            this.lstModFiles.Size = new System.Drawing.Size(320, 424);
+            this.lstModFiles.Size = new System.Drawing.Size(261, 289);
             this.lstModFiles.TabIndex = 4;
             this.lstModFiles.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstModFiles_MouseUp);
             // 
             // lblModFiles
             // 
             this.lblModFiles.AutoSize = true;
-            this.lblModFiles.Location = new System.Drawing.Point(338, 11);
+            this.lblModFiles.Location = new System.Drawing.Point(246, 11);
             this.lblModFiles.Name = "lblModFiles";
             this.lblModFiles.Size = new System.Drawing.Size(58, 15);
             this.lblModFiles.TabIndex = 3;
@@ -381,11 +381,12 @@
             // lblModFolderCount
             // 
             this.lblModFolderCount.AutoSize = true;
-            this.lblModFolderCount.Location = new System.Drawing.Point(12, 459);
+            this.lblModFolderCount.Location = new System.Drawing.Point(12, 324);
             this.lblModFolderCount.Name = "lblModFolderCount";
             this.lblModFolderCount.Size = new System.Drawing.Size(76, 15);
             this.lblModFolderCount.TabIndex = 2;
             this.lblModFolderCount.Text = "Folder Count";
+            this.lblModFolderCount.Click += new System.EventHandler(this.lblModFolderCount_Click);
             // 
             // lstModFolders
             // 
@@ -393,7 +394,7 @@
             this.lstModFolders.ItemHeight = 15;
             this.lstModFolders.Location = new System.Drawing.Point(12, 28);
             this.lstModFolders.Name = "lstModFolders";
-            this.lstModFolders.Size = new System.Drawing.Size(309, 424);
+            this.lstModFolders.Size = new System.Drawing.Size(220, 289);
             this.lstModFolders.TabIndex = 1;
             this.lstModFolders.SelectedIndexChanged += new System.EventHandler(this.lstModFolders_SelectedIndexChanged);
             this.lstModFolders.DoubleClick += new System.EventHandler(this.lstModFolders_DoubleClick);
@@ -424,14 +425,14 @@
             this.panel1.Controls.Add(this.btnModFolderPath);
             this.panel1.Controls.Add(this.txtModFolderPath);
             this.panel1.Controls.Add(this.lblModFolderPath);
-            this.panel1.Location = new System.Drawing.Point(0, 512);
+            this.panel1.Location = new System.Drawing.Point(0, 378);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(670, 167);
+            this.panel1.Size = new System.Drawing.Size(518, 167);
             this.panel1.TabIndex = 5;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(579, 136);
+            this.btnExit.Location = new System.Drawing.Point(432, 136);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 13;
@@ -453,7 +454,7 @@
             this.txtModOverrideValues.Location = new System.Drawing.Point(104, 7);
             this.txtModOverrideValues.Name = "txtModOverrideValues";
             this.txtModOverrideValues.ReadOnly = true;
-            this.txtModOverrideValues.Size = new System.Drawing.Size(469, 23);
+            this.txtModOverrideValues.Size = new System.Drawing.Size(323, 23);
             this.txtModOverrideValues.TabIndex = 11;
             this.txtModOverrideValues.Text = "Mod Override Values";
             // 
@@ -479,7 +480,7 @@
             // 
             // btnGameExeFile
             // 
-            this.btnGameExeFile.Location = new System.Drawing.Point(579, 92);
+            this.btnGameExeFile.Location = new System.Drawing.Point(432, 91);
             this.btnGameExeFile.Name = "btnGameExeFile";
             this.btnGameExeFile.Size = new System.Drawing.Size(75, 23);
             this.btnGameExeFile.TabIndex = 8;
@@ -489,10 +490,10 @@
             // 
             // txtGameExeFile
             // 
-            this.txtGameExeFile.Location = new System.Drawing.Point(105, 92);
+            this.txtGameExeFile.Location = new System.Drawing.Point(104, 92);
             this.txtGameExeFile.Name = "txtGameExeFile";
             this.txtGameExeFile.ReadOnly = true;
-            this.txtGameExeFile.Size = new System.Drawing.Size(468, 23);
+            this.txtGameExeFile.Size = new System.Drawing.Size(322, 23);
             this.txtGameExeFile.TabIndex = 7;
             this.txtGameExeFile.Text = "C:\\path\\to\\fs22.exe";
             // 
@@ -507,7 +508,7 @@
             // 
             // btnUserDataPath
             // 
-            this.btnUserDataPath.Location = new System.Drawing.Point(579, 63);
+            this.btnUserDataPath.Location = new System.Drawing.Point(432, 62);
             this.btnUserDataPath.Name = "btnUserDataPath";
             this.btnUserDataPath.Size = new System.Drawing.Size(75, 23);
             this.btnUserDataPath.TabIndex = 5;
@@ -520,9 +521,10 @@
             this.txtUserDataPath.Location = new System.Drawing.Point(105, 63);
             this.txtUserDataPath.Name = "txtUserDataPath";
             this.txtUserDataPath.ReadOnly = true;
-            this.txtUserDataPath.Size = new System.Drawing.Size(468, 23);
+            this.txtUserDataPath.Size = new System.Drawing.Size(322, 23);
             this.txtUserDataPath.TabIndex = 4;
             this.txtUserDataPath.Text = "C:\\User\\data\\path";
+            this.txtUserDataPath.WordWrap = false;
             // 
             // lblUserDataPath
             // 
@@ -535,7 +537,7 @@
             // 
             // btnModFolderPath
             // 
-            this.btnModFolderPath.Location = new System.Drawing.Point(579, 34);
+            this.btnModFolderPath.Location = new System.Drawing.Point(432, 33);
             this.btnModFolderPath.Name = "btnModFolderPath";
             this.btnModFolderPath.Size = new System.Drawing.Size(75, 23);
             this.btnModFolderPath.TabIndex = 2;
@@ -548,7 +550,7 @@
             this.txtModFolderPath.Location = new System.Drawing.Point(105, 34);
             this.txtModFolderPath.Name = "txtModFolderPath";
             this.txtModFolderPath.ReadOnly = true;
-            this.txtModFolderPath.Size = new System.Drawing.Size(468, 23);
+            this.txtModFolderPath.Size = new System.Drawing.Size(322, 23);
             this.txtModFolderPath.TabIndex = 1;
             this.txtModFolderPath.Text = "C:\\path\\to\\mods\\folder";
             // 
@@ -567,19 +569,19 @@
             this.mnuContextFolderAdd,
             this.mnuContextFolderRemove});
             this.mnuContextFolderList.Name = "mnuContextFolderList";
-            this.mnuContextFolderList.Size = new System.Drawing.Size(181, 70);
+            this.mnuContextFolderList.Size = new System.Drawing.Size(160, 48);
             // 
             // mnuContextFolderAdd
             // 
             this.mnuContextFolderAdd.Name = "mnuContextFolderAdd";
-            this.mnuContextFolderAdd.Size = new System.Drawing.Size(180, 22);
+            this.mnuContextFolderAdd.Size = new System.Drawing.Size(159, 22);
             this.mnuContextFolderAdd.Text = "Add New Folder";
             this.mnuContextFolderAdd.Click += new System.EventHandler(this.mnuModFolderAdd_Click);
             // 
             // mnuContextFolderRemove
             // 
             this.mnuContextFolderRemove.Name = "mnuContextFolderRemove";
-            this.mnuContextFolderRemove.Size = new System.Drawing.Size(180, 22);
+            this.mnuContextFolderRemove.Size = new System.Drawing.Size(159, 22);
             this.mnuContextFolderRemove.Text = "Remover Folder";
             this.mnuContextFolderRemove.Click += new System.EventHandler(this.mnuModFolderRemove_Click);
             // 
@@ -623,7 +625,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 710);
+            this.ClientSize = new System.Drawing.Size(530, 571);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlLists);
             this.Controls.Add(this.stsStatusBar);
