@@ -112,15 +112,13 @@ namespace FS22_Mod_Manager
             /*
              * Creates a new mod folder and adds it to the list
              */
-            string new_folder = create_new_directory(txtModFolderPath.Text);
+            string new_folder = create_new_mod_folder();
             if ("" != new_folder)
             {
                 logger.LogWrite("Created new folder: " + new_folder);
-
                 if (Directory.Exists(new_folder))
                 {
                     populate_folder_list();
-                    logger.LogWrite("new folder name:" + Path.GetFileName(new_folder));
                     lstModFolders.SelectedIndex = lstModFolders.FindString(Path.GetFileName(new_folder));
                     populate_file_list();
                 }
@@ -158,11 +156,10 @@ namespace FS22_Mod_Manager
             *  Create a new folder and copy contents of an existing folder.
             *  e.g. Create new map folder and copy your favourite mods.
             */
-            string new_folder = Path.Join(txtModFolderPath.Text, Interaction.InputBox("New folder name?", "New Folder"));
+            string new_folder = create_new_mod_folder();
+            //Path.Join(txtModFolderPath.Text, Interaction.InputBox("New folder name?", "New Folder"));
             string existing_folder = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
-            logger.LogWrite(new_folder);
-            logger.LogWrite(existing_folder);
-            Directory.CreateDirectory(new_folder);
+            logger.LogWrite("Creating " + new_folder + " From " + existing_folder);
             if (Directory.Exists(new_folder) && Directory.Exists(existing_folder))
             {
                 // Get the files in the source directory and copy to the destination directory
@@ -389,13 +386,17 @@ namespace FS22_Mod_Manager
         private void btnUserDataPath_Click(object sender, EventArgs e)
         {
             /*
-             * User data path browse button clicked to so launch 
-             * file dialog to select folder
+             * User data path browse button clicked so launch file dialog to select folder
              */
-            string new_dir = create_new_directory(txtUserDataPath.Text);
-            if ("" != new_dir)
+            using (FolderBrowserDialog ofd = new FolderBrowserDialog())
             {
-                txtUserDataPath.Text = new_dir;
+                ofd.InitialDirectory = txtUserDataPath.Text;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    //Show in textbox
+                    txtUserDataPath.Text = ofd.SelectedPath;
+                }
             }
         }
 
@@ -545,26 +546,27 @@ namespace FS22_Mod_Manager
             return file_list.ToArray();
         }
 
-        private string create_new_directory(string init_dir = "c:\\")
+        public string create_new_mod_folder()
         {
-            /*
-             * Use the file dialog to create and get a new directory
-             */
-            using (FolderBrowserDialog ofd = new FolderBrowserDialog())
+            // get new folder name
+            string new_folder = Interaction.InputBox("New folder name?", "New Folder");
+            if (new_folder != null)
             {
-                if (!Directory.Exists(init_dir))
+                new_folder = Path.Join(txtModFolderPath.Text, new_folder);
+                // create new folder and update lists
+                logger.LogWrite("Creating new folder");
+                try
                 {
-                    init_dir = "C:\\";
+                    Directory.CreateDirectory(new_folder);
                 }
-                ofd.InitialDirectory = init_dir;
-
-                if (ofd.ShowDialog() == DialogResult.OK)
+                catch (IOException ex)
                 {
-                    //Show in textbox
-                    return ofd.SelectedPath; ;
+                    logger.LogWrite("Folder creation error: " + ex.Message, true);
+                    return "";
                 }
-                return "";
+                return new_folder;
             }
+            return "";
         }
 
         private void read_user_settings()

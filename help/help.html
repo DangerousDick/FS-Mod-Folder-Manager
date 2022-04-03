@@ -29,161 +29,168 @@
         }
     </style>
     </head>
-    <body>
-        <h1>Contents</h1>
-        <ul>
-            <li><a href="#lstBoxes">List Boxes</a></li>
-            <ul>
-                <li><a href="#lstModFolders">Folder List</a></li>
-                <li><a href="#lstModFiles">Mod File List</a></li>
-            </ul>
-            <li><a href="#FolderPaths">Folder Paths</a></li>
-            <ul>
-                <li><a href="#ModFoldersPath">Mod Folders Path</a></li>
-                <li><a href="#GameFolderPath">Game Folder Path</a></li>
-            </ul>
-            <li><a href="#Menus">Menus</a></li>
-            <ul>
-                <li><a href="#mnuModFolders">Mod Folders Menu</a></li>
-                <li><a href="#mnuModFiles">Mod Files Menu</a></li>
-                <li><a href="#mnuOptions">Options Menu</a></li>
-                <ul>
-                    <li><a href="#mnuModOptions">Mod Options</a></li>
-                    <li><a href="#mnuLaunchOptions">Launch Options</a></li>
-                </ul>
-                <li><a href="#mnuhelp">Help Menu</a></li>
-            </ul>
-            <li><a href="#btnSetModPath">Set Mod Path Button</a></li>
-            <li><a href="#btnLaunchGame">Launch Game Button</a></li>
-        </ul>
+                <body>
+                    <h1>Contents</h1>
+                    <ul>
+                        <li><a href="#lstBoxes">List Boxes</a></li>
+                        <ul>
+                            <li><a href="#lstModFolders">Folder List</a></li>
+                            <li><a href="#lstModFiles">Mod File List</a></li>
+                        </ul>
+                        <li><a href="#FolderPaths">Folder Paths</a></li>
+                        <ul>
+                            <li><a href="#ModFoldersPath">Mod Folders Path</a></li>
+                            <li><a href="#GameFolderPath">Game Folder Path</a></li>
+                        </ul>
+                        <li><a href="#Menus">Menus</a></li>
+                        <ul>
+                            <li><a href="#mnuModFolders">Mod Folders Menu</a></li>
+                            <li><a href="#mnuModFiles">Mod Files Menu</a></li>
+                            <li><a href="#mnuOptions">Options Menu</a></li>
+                            <ul>
+                                <li><a href="#mnuModOptions">Mod Options</a></li>
+                                <li><a href="#mnuLaunchOptions">Launch Options</a></li>
+                            </ul>
+                            <li><a href="#mnuhelp">Help Menu</a></li>
+                        </ul>
+                        <li><a href="#btnSetModPath">Set Mod Path Button</a></li>
+                        <li><a href="#btnLaunchGame">Launch Game Button</a></li>
+                    </ul>
 
-        <h1 id="#overview">Farming Sumulator Mods Folder Manager</h1>
-        <span style="font-weight: bold;">Manage your mods by using seperate directories for different maps</span><br>
-        This helps to avoid having any conflicts from having multple maps in your mod folder or mods you don't need for the game you are playing.<br>
-        It is especially useful if you play multiplayer games as you can install only the mods required for the server.<br>
-        <br>
-        This application uses the subfolders in the "<span style="font-weight: bold;">Mod Folders Path</span>" to store the mods you wish to use for the map you are playing.<br>
-        It updates the attributes in the <span style="color: rgb(153, 0, 0);">modsDirectoryOverride</span> tag in the gameSettings.xml file, located in the "<span style="font-weight: bold;">Game Folder Path</span>", to use the selected folder when the game is launched.
-        <p><img title="Application Screenshot" style="width: 587px; height: 606px;" alt="Application Screenshot" src="images/application.png"></p>
-        <br><a href="#">Top</a><br>
+                    <h1 id="#overview">Farming Sumulator Mods Folder Manager</h1>
+                    <span style="font-weight: bold;">Manage your mods by using seperate directories for different maps</span><br>
+                    This helps to avoid having any conflicts from having multple maps in your mod folder or mods you don't need for the game you are playing.<br>
+                    It is especially useful if you play multiplayer games as you can install only the mods required for the server.<br>
+                    <br>
+                    This application uses the subfolders in the "<span style="font-weight: bold;">Mod Folders Path</span>" to store the mods you wish to use for the map you are playing.<br>
+                    It updates the attributes in the <span style="color: rgb(153, 0, 0);">modsDirectoryOverride</span> tag in the gameSettings.xml file, located in the "<span style="font-weight: bold;">Game Folder Path</span>", to use the selected folder when the game is launched.
+                    <p><img title="Application Screenshot" style="width: 587px; height: 606px;" alt="Application Screenshot" src="images/application.png"></p>
+                    <br><a href="#">Top</a><br>
 
-        <h2 id="lstBoxes">The List Boxes</h2>
-        <h4 id="lstModFolders">The "Mod Folders" List Box</h4>
-        The list on the left shows the sub-folders in the "Mod Folders Path" which contain your mods<br>
-        <ul>
-            <li>Select a folder and its contents are shown in the list on the right</li>
-            <li>Right clicking a folder will show a context menu with actions that can be carried out on the selected folder</li>
-            <li>Double clicking a folder will cause the gameSettings.xml file to be updated and the game launched
-                (same as clicking the <a href="#btnSetModPath">Set Mod Path Button</a> then the<a href="#btnLaunchGame">Launch Game Button</a>)<br>
-                This option can be switched on/off under the <a href="#mnuModOptions">Mod Options</a> menu
-            </li>
-        </ul>
-        <br><a href="#">Top</a><br>
-        <h4 id="lstModFiles">The "Mod Files" List Box</h4>
-        This list on the right shows the sub folders in the "Mod Folders Path" which contain your mods<br>
-        <ul>
-            <li>Right clicking a mod file will show a context menu with actions that can be carried out on the selected item</li>
-            <li>Double clicking a mod file will cause it to open in the default file type application, usually Windows file manager</li>
-        </ul>
-        <br><a href="#">Top</a><br>
+                    <h2 id="lstBoxes">The List Boxes</h2>
+                    <h4 id="lstModFolders">The "Mod Folders" List Box</h4>
+                    The list on the left shows the sub-folders in the "Mod Folders Path" which contain your mods<br>
+                    <ul>
+                        <li>Select a folder and its contents are shown in the list on the right</li>
+                        <li>Right clicking a folder will show a context menu with actions that can be carried out on the selected folder</li>
+                        <li>
+                            Double clicking a folder will cause the gameSettings.xml file to be updated and the game launched
+                            (same as clicking the <a href="#btnSetModPath">Set Mod Path Button</a> then the<a href="#btnLaunchGame">Launch Game Button</a>)<br>
+                            This option can be switched on/off under the <a href="#mnuModOptions">Mod Options</a> menu
+                        </li>
+                    </ul>
+                    <br><a href="#">Top</a><br>
+                    <h4 id="lstModFiles">The "Mod Files" List Box</h4>
+                    This list on the right shows the sub folders in the "Mod Folders Path" which contain your mods<br>
+                    <ul>
+                        <li>Right clicking a mod file will show a context menu with actions that can be carried out on the selected item</li>
+                        <li>Double clicking a mod file will cause it to open in the default file type application, usually Windows file manager</li>
+                    </ul>
+                    <br><a href="#">Top</a><br>
 
-        <h2 id="FolderPaths">Folder Paths</h2>
-        <h4 id="ModFoldersPath">Mod Folders Path</h4>
-        The location of the folder containing the sub-folders which hold the mods for a particular map or server (or however you wish to separate your mod files).<br>
-        These sub-folders are the items that appear in the "Mod Folders" list.<br>
-        Use the <span style="font-weight: bold;">Browse</span> button to set this value<br>
-        <p><img style="width: 462px; height: 306px;" alt="Mod Folders Screenshot" title="Mod Folders Screenshot" src="images/explore_mod_folders.png"></p>
-        <h4 id="GameFolderPath">Game Folder Path</h4>
-        This is the location where Farming Simulator installed the game config files.<br>
-        This is usually in your user directory, for example, "C:\Users\your_user_name\Documents\My Games\FarmingSimyulator2022".<br>
-        Use the <span style="font-weight: bold;">Browse</span> button to set this value
-        <br>
-        <p><img style="width: 473px; height: 437px;" alt="Game Folder Screenshot" title="Game Folder Screenshot" src="images/explore_game_folder.png"></p>
-        <br><a href="#">Top</a><br>
+                    <h2 id="FolderPaths">Folder Paths</h2>
+                    <h4 id="ModFoldersPath">Mod Folders Path</h4>
+                    The location of the folder containing the sub-folders which hold the mods for a particular map or server (or however you wish to separate your mod files).<br>
+                    These sub-folders are the items that appear in the "Mod Folders" list.<br>
+                    Use the <span style="font-weight: bold;">Browse</span> button to set this value<br>
+                    <p><img style="width: 462px; height: 306px;" alt="Mod Folders Screenshot" title="Mod Folders Screenshot" src="images/explore_mod_folders.png"></p>
+                    <h4 id="GameFolderPath">Game Folder Path</h4>
+                    This is the location where Farming Simulator installed the game config files.<br>
+                    This is usually in your user directory, for example, "C:\Users\your_user_name\Documents\My Games\FarmingSimyulator2022".<br>
+                    Use the <span style="font-weight: bold;">Browse</span> button to set this value
+                    <br>
+                    <p><img style="width: 473px; height: 437px;" alt="Game Folder Screenshot" title="Game Folder Screenshot" src="images/explore_game_folder.png"></p>
+                    <br><a href="#">Top</a><br>
 
-        <h1 id="Menus">Menus</h1>
-        <h2>The File Menu</h2>
-        <h4>Open Game Folder</h4>
-        This will open the Farming Simulator installation folder in Windows File Manager
-        <h4>Exit</h4>
-        Closes the Mods Manager application.
-        <br><a href="#">Top</a><br>
+                    <h1 id="Menus">Menus</h1>
+                    <h2>The File Menu</h2>
+                    <h4>Open Game Folder</h4>
+                    This will open the Farming Simulator installation folder in Windows File Manager
+                    <h4>Open gameSettings.xml</h4>
+                    This will open the Farming Simulator installation gameSetting.xml file in your dfault XML app
+                    <h4>Open game.xml</h4>
+                    This will open the Farming Simulator installation game.xml file in your dfault XML app
+                    <h4>Exit</h4>
+                    Closes the Mods Manager application.
+                    <br><a href="#">Top</a><br>
 
-        <h2>The Mods Menu</h2>
-        The "Mods" menu allows you to carry actions on the mods and their folders.
-        <h3 id="mnuModFolders">Mods Folders Menu</h3>
-        <h4>Add Folder to List</h4>
-        Adds an new folder to the mod folders path using the file open dialog box which will allow you to navigate to and create a new folder.<br>
-        The list is updated and if a new folder is created it will be selected in the list.
-        <h4>Remove Selected Folder</h4>
-        Removes the highlighted folder in the "Mod Folders" list from the mod folders path.<br>
-        NOTE: <span style="color: red;">This action deletes the folder and all of its contents from your PC</span><br>
-        This can also be done by right clicking a folder in the list.<br>
-        <h4>Open Mods Folder</h4>
-        Opens the currently selected folder in the default file manager e.g. 'Windows File Manager'<br>
+                    <h2>The Mods Menu</h2>
+                    The "Mods" menu allows you to carry actions your mod files and their folders.
+                    <h3 id="mnuModFolders">Mods Folders Menu</h3>
+                    <h4>Add New Folder</h4>
+                    Adds an new folder to the mod folders path, updates the list and selects the new folder.
+                    <h4>Remove Selected Folder</h4>
+                    Removes the highlighted folder in the "Mod Folders" list from the mod folders path.<br>
+                    NOTE: <span style="color: red;">This action deletes the folder and all of its contents from your PC</span><br>
+                    This can also be done by right clicking a folder in the list.<br>
+                    <h4>Copy Selected as New Folder</h4>
+                    Adds an new folder to the mod folders path and copies the files from the currently selected folder into it.
+                    Updates the list and selects the new folder.
+                    <h4>Open Mods Folder</h4>
+                    Opens the currently selected folder in the default file manager e.g. 'Windows File Manager'<br>
 
-        <h3 id="mnuModFiles">Mod Files Menu</h3>
-        <h4>Add Mod to List</h4>
-        Adds a mod zip file to the "Mods List" using the file open dialog box to locate and select the mod file.<br>
-        You can select multiple files to add.
-        <h4>Remove Selected Mod</h4>
-        Removes the highlighted mod file from the folder and removes it from the "Mods List".<br>
-        NOTE: <span style="color: red;">This action deletes the file from your PC</span><br>
-        This can also be done by right clicking a mod file in the list.
-        <h4>Copy Mods to Selected Folder</h4>
-        This will launch the "Open Files" dialog so you can select the file(s) you wish to copy to the currently selected folder<br>
-        You can select multiple files to copy.
-        <h4>Copy Mod to All Folders</h4>
-        This will launch the "Open Files" dialog so you can select the file(s) you wish to copy to <span style="font-weight: bold;">all of your mod folders</span><br>
-        For example, a new mod comes out you want to use in all your games. This will do it for you in a single action.<br>
-        You can select multiple files to copy.
-        <br><a href="#">Top</a><br>
+                    <h3 id="mnuModFiles">Mod Files Menu</h3>
+                    <h4>Add Mod to List</h4>
+                    Adds a mod zip file to the "Mods List" using the file open dialog box to locate and select the mod file.<br>
+                    You can select multiple files to add.
+                    <h4>Remove Selected Mod</h4>
+                    Removes the highlighted mod file from the folder and removes it from the "Mods List".<br>
+                    NOTE: <span style="color: red;">This action deletes the file from your PC</span><br>
+                    This can also be done by right clicking a mod file in the list.
+                    <h4>Copy Mod File(s) to Selected Folder</h4>
+                    This will launch the "Open Files" dialog so you can select the file(s) you wish to copy to the currently selected folder<br>
+                    You can select multiple files to copy.
+                    <h4>Copy Mod File(s) to All Folders</h4>
+                    This will launch the "Open Files" dialog so you can select the file(s) you wish to copy to <span style="font-weight: bold;">all of your mod folders</span><br>
+                    For example, a new mod comes out you want to use in all your games. This will do it for you in a single action.<br>
+                    You can select multiple files to copy.
+                    <br><a href="#">Top</a><br>
 
-        <h2 id="mnuOptions">The Options Menu</h2>
-        This menu allows you to set some options for the application.<br>
-        These are checkable menu items, that is, a tick appears next to the menu item when checked.
-        <p><img style="width: 370px; height: 92px;" alt="Checkable menu items image" src="images/checkable_menu_items.png"></p>
+                    <h2 id="mnuOptions">The Options Menu</h2>
+                    This menu allows you to set some options for the application.<br>
+                    These are checkable menu items, that is, a tick appears next to the menu item when checked.
+                    <p><img style="width: 370px; height: 92px;" alt="Checkable menu items image" src="images/checkable_menu_items.png"></p>
 
-        <h3  id="mnuModOptions">Mod Options</h3>
-        <h4>Double CLick Folder to Launch</h4>
-        Checkable menu item.<br>
-        If checked then double clicking a mod folder to launch the game is allowed<br>
-        <h4>Mod Folder Override Active </h4>
-        Checkable menu item<br>
-        Sets the value for the gameSettings.xml file to True if checked.<br>
-        If you want to override the games default mod folder the option must be checked.<br>
-        <h4>Ask Before Updating XML </h4>
-        Checkable menu item.<br>
-        This option is there to prevent you from updating the file when you do not want to. <span style="color: red;">Unchecked by default</span> as it can be annoying.<br>
-        If checked a message box asking if you want to update the gameSettings.xml file will pop up before the application makes any changes.<br>
+                    <h3 id="mnuModOptions">Mod Options</h3>
+                    <h4>Double CLick Folder to Launch</h4>
+                    Checkable menu item.<br>
+                    If checked then double clicking a mod folder to launch the game is allowed<br>
+                    <h4>Mod Folder Override Active </h4>
+                    Checkable menu item<br>
+                    Sets the value for the gameSettings.xml file to True if checked.<br>
+                    If you want to override the games default mod folder the option must be checked.<br>
+                    <h4>Ask Before Updating XML </h4>
+                    Checkable menu item.<br>
+                    This option is there to prevent you from updating the file when you do not want to. <span style="color: red;">Unchecked by default</span> as it can be annoying.<br>
+                    If checked a message box asking if you want to update the gameSettings.xml file will pop up before the application makes any changes.<br>
 
-        <h3 id="mnuLaunchOptions">Launch Options</h3>
-        These option allow you to start the game with the console enabled. <span style="color: red;">PLEASE MAKE SURE YOU KNOW WHAT THIS MEANS</span> before checking them.<br>
-        Google is your friend here if you don't know.
-        <h4>Launch With In Game Console</h4>
-        Updates the game.xml file element "Controls" to true if checked. This will allow the "back tick" key to open the console in game.<br>
-        <h4>Launch With Cheats</h4>
-        This adds the -cheats switch to the launch command which allows the debug/cheat commands to be used in the console (requires "Launch With In Game Console" to be checked
-        <br><a href="#">Top</a><br>
+                    <h3 id="mnuLaunchOptions">Launch Options</h3>
+                    These option allow you to start the game with the console enabled. <span style="color: red;">PLEASE MAKE SURE YOU KNOW WHAT THIS MEANS</span> before checking them.<br>
+                    Google is your friend here if you don't know.
+                    <h4>Launch With In Game Console</h4>
+                    Updates the game.xml file element "Controls" to true if checked. This will allow the "back tick" key to open the console in game.<br>
+                    <h4>Launch With Cheats</h4>
+                    This adds the -cheats switch to the launch command which allows the debug/cheat commands to be used in the console (requires "Launch With In Game Console" to be checked
+                    <br><a href="#">Top</a><br>
 
-        <h2 id="mnuhelp">The Help Menu</h2>
-        <h4>Help</h4>
-        Opens this help file in a browser
-        <h4>About</h4>
-        Displays the application about box
-        <br><a href="#">Top</a><br>
-        <h2>Buttons</h2>
-        <h4 id="btnSetModPath">Set Mod Path in Game Settings</h4>
-        Use this button if you want to update the gameSettings.xml file <span style="font-weight: bold; font-style: italic;">without</span> launching the game.<br>
-        This will update the gameSettings.xml file in the "Game Folder Path" with the values of "Mod Folder Override Active" under the "Options" menu (True idf checked) and the "Mod Folders Path".
-        If the "Ask Before Updating XML" value under the "Options" menu is not checked it <span style="color: red;">WILL NOT ASK</span> before updating the file.
-        <h4 id="btnLaunchGame">Launch FS22</h4>
-        Use this button if you want to launch the game <span style="font-weight: bold; font-style: italic;">without</span><span style="font-style: italic;"> </span>update the gameSettings.xml file.<br>
-        This button launches the game from the path set in this applications config.ini file. The default value is <span style="font-weight: bold;">GAME_EXE=C:\Program Files (x86)\Farming Simulator 2022\FarmingSimulator2022.exe</span>
-        but if, for example, you isntalled it from <span style="font-weight: bold;">Steam</span> you will need to update this path <span style="font-weight: bold;">C:\Program Files (x86)\Steam\steamapps\common\Farming Simulator 2022\FarmingSimulator2022.exe</span>
-        before you start the application. You can do this with any text editor such as notepad.<br><br>
-        If you want to update the gameSettings.xml file and launch the game both at once make sure the "Double Click Folder to Launch" option under the "Options" menu is checked and simply double click the folder you want
-        to use in the game. If you do not want the "Are you sure..." message box to appear uncheck the "Ask Befor Updating XML" option under the "Options" menu
-        <br><a href="#">Top</a><br>
-    </body>
+                    <h2 id="mnuhelp">The Help Menu</h2>
+                    <h4>Help</h4>
+                    Opens this help file in a browser
+                    <h4>About</h4>
+                    Displays the application about box
+                    <br><a href="#">Top</a><br>
+                    <h2>Buttons</h2>
+                    <h4 id="btnSetModPath">Set Mod Path in Game Settings</h4>
+                    Use this button if you want to update the gameSettings.xml file <span style="font-weight: bold; font-style: italic;">without</span> launching the game.<br>
+                    This will update the gameSettings.xml file in the "Game Folder Path" with the values of "Mod Folder Override Active" under the "Options" menu (True idf checked) and the "Mod Folders Path".
+                    If the "Ask Before Updating XML" value under the "Options" menu is not checked it <span style="color: red;">WILL NOT ASK</span> before updating the file.
+                    <h4 id="btnLaunchGame">Launch FS22</h4>
+                    Use this button if you want to launch the game <span style="font-weight: bold; font-style: italic;">without</span><span style="font-style: italic;"> </span>update the gameSettings.xml file.<br>
+                    This button launches the game from the path set in this applications config.ini file. The default value is <span style="font-weight: bold;">GAME_EXE=C:\Program Files (x86)\Farming Simulator 2022\FarmingSimulator2022.exe</span>
+                    but if, for example, you isntalled it from <span style="font-weight: bold;">Steam</span> you will need to update this path <span style="font-weight: bold;">C:\Program Files (x86)\Steam\steamapps\common\Farming Simulator 2022\FarmingSimulator2022.exe</span>
+                    before you start the application. You can do this with any text editor such as notepad.<br><br>
+                    If you want to update the gameSettings.xml file and launch the game both at once make sure the "Double Click Folder to Launch" option under the "Options" menu is checked and simply double click the folder you want
+                    to use in the game. If you do not want the "Are you sure..." message box to appear uncheck the "Ask Befor Updating XML" option under the "Options" menu
+                    <br><a href="#">Top</a><br>
+                </body>
 </html>
