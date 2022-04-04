@@ -1,0 +1,8 @@
+﻿Before creating release and generating the MSI file...
+* Set applicaiton version in form1.cs file
+* Update help/help.html to reflect changes if required
+* Update Setup project version number (otherwise old version will not be uninstalled)
+* Tag and push all changes to github
+* Generate MSI file
+* Copy MSI file to FsModManager project, tag and push to git hub
+* Create releases for both fs22-mods-manager and FsModManager projects in github
