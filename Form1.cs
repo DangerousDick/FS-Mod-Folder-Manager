@@ -349,9 +349,39 @@ namespace FS22_Mod_Manager
             string selected_folder = lstModFolders.Text;
             string selected_file = lstModFiles.Text;
             populate_folder_list();
+            lstModFolders.SelectedIndex = lstModFolders.FindString(Path.GetFileName(selected_folder));
             populate_file_list();
-            lstModFolders.FindString(selected_folder);
-            lstModFiles.FindString(selected_file);
+            lstModFiles.SelectedIndex = lstModFiles.FindString(Path.GetFileName(selected_file));
+        }
+
+        private void mnuContextFolderRename_Click(object sender, EventArgs e)
+        {
+            /*
+             * Renames the currently selected folder
+             * Gets the new folder name from the InputBox
+             */
+            // get source folder 
+            string src_dir = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
+            // get destination folder
+            string fld_name = Interaction.InputBox("Enter folder name?", "Rename Folder", lstModFolders.Text);
+            if (fld_name != "")
+            {
+                string dest_dir = Path.Join(txtModFolderPath.Text, fld_name);
+                // rename folder
+                if (Directory.Exists(src_dir))
+                {
+                    try
+                    {
+                        logger.LogWrite("Renaming folder " + src_dir + " to " + dest_dir, true);
+                        Directory.Move(src_dir, dest_dir);
+                        populate_folder_list();
+                        lstModFolders.SelectedIndex = lstModFolders.FindString(Path.GetFileName(fld_name));
+                        populate_file_list();
+                    }
+                    catch (IOException ex)
+                    { logger.LogWrite("Failed to rename folder\n" + ex.Message); }
+                }
+            }
         }
 
         /*
@@ -548,6 +578,10 @@ namespace FS22_Mod_Manager
 
         public string create_new_mod_folder()
         {
+            /*
+             * Creates a new folder under the mods folder path
+             * Get new folder name from the InputBox
+             */
             // get new folder name
             string new_folder = Interaction.InputBox("New folder name?", "New Folder");
             if (new_folder != null)
@@ -731,7 +765,6 @@ namespace FS22_Mod_Manager
             /*
              * Populate the mod files list from the mod folder list selected item
              */
-            // populate files list
             logger.LogWrite("Populating mod files list box from " + lstModFolders.Text);
             if (lstModFiles.Items.Count > 0)
             {
@@ -754,7 +787,6 @@ namespace FS22_Mod_Manager
             /*
              * Get the folders from the mod folder path and populate the list box
              */
-            // populate folders list
             logger.LogWrite("Populating mod folders list box from " + txtModFolderPath.Text);
             if (Directory.Exists(txtModFolderPath.Text))
             {
