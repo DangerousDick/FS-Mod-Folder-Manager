@@ -395,6 +395,42 @@ namespace FS22_Mod_Manager
         }
 
         /*
+         * TEXTBOX EVENTS
+         */
+
+        private void txtModOverrideValues_TextChanged(object sender, EventArgs e)
+        {
+            /*
+             *  add scroll to end funtionality so the end of the path is visible 
+             */
+            txtModOverrideValues.Select(txtModOverrideValues.TextLength, 0);
+        }
+
+        private void txtModFolderPath_TextChanged(object sender, EventArgs e)
+        {
+            /*
+             *  add scroll to end funtionality so the end of the path is visible 
+             */
+            txtModFolderPath.Select(txtModFolderPath.TextLength, 0);
+        }
+
+        private void txtUserDataPath_TextChanged(object sender, EventArgs e)
+        {
+            /*
+             *  add scroll to end funtionality so the end of the path is visible 
+             */
+            txtUserDataPath.Select(txtUserDataPath.TextLength, 0);
+        }
+
+        private void txtGameExeFile_TextChanged(object sender, EventArgs e)
+        {
+            /*
+             *  add scroll to end funtionality so the end of the path is visible 
+             */
+            txtGameExeFile.Select(txtGameExeFile.TextLength, 0);
+        }
+
+        /*
          * BUTTON EVENT HANDLERS
          */
 

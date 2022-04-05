@@ -473,12 +473,15 @@
             // 
             // txtModOverrideValues
             // 
+            this.txtModOverrideValues.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtModOverrideValues.Location = new System.Drawing.Point(104, 7);
             this.txtModOverrideValues.Name = "txtModOverrideValues";
             this.txtModOverrideValues.ReadOnly = true;
             this.txtModOverrideValues.Size = new System.Drawing.Size(403, 23);
             this.txtModOverrideValues.TabIndex = 11;
             this.txtModOverrideValues.Text = "Mod Override Values";
+            this.txtModOverrideValues.WordWrap = false;
+            this.txtModOverrideValues.TextChanged += new System.EventHandler(this.txtModOverrideValues_TextChanged);
             // 
             // btnLaunchGame
             // 
@@ -512,12 +515,15 @@
             // 
             // txtGameExeFile
             // 
+            this.txtGameExeFile.BackColor = System.Drawing.SystemColors.Info;
             this.txtGameExeFile.Location = new System.Drawing.Point(104, 92);
             this.txtGameExeFile.Name = "txtGameExeFile";
             this.txtGameExeFile.ReadOnly = true;
             this.txtGameExeFile.Size = new System.Drawing.Size(322, 23);
             this.txtGameExeFile.TabIndex = 7;
             this.txtGameExeFile.Text = "C:\\path\\to\\fs22.exe";
+            this.txtGameExeFile.WordWrap = false;
+            this.txtGameExeFile.TextChanged += new System.EventHandler(this.txtGameExeFile_TextChanged);
             // 
             // lblGameExeFile
             // 
@@ -540,6 +546,7 @@
             // 
             // txtUserDataPath
             // 
+            this.txtUserDataPath.BackColor = System.Drawing.SystemColors.Info;
             this.txtUserDataPath.Location = new System.Drawing.Point(105, 63);
             this.txtUserDataPath.Name = "txtUserDataPath";
             this.txtUserDataPath.ReadOnly = true;
@@ -547,6 +554,7 @@
             this.txtUserDataPath.TabIndex = 4;
             this.txtUserDataPath.Text = "C:\\User\\data\\path";
             this.txtUserDataPath.WordWrap = false;
+            this.txtUserDataPath.TextChanged += new System.EventHandler(this.txtUserDataPath_TextChanged);
             // 
             // lblUserDataPath
             // 
@@ -569,12 +577,15 @@
             // 
             // txtModFolderPath
             // 
+            this.txtModFolderPath.BackColor = System.Drawing.SystemColors.Info;
             this.txtModFolderPath.Location = new System.Drawing.Point(105, 34);
             this.txtModFolderPath.Name = "txtModFolderPath";
             this.txtModFolderPath.ReadOnly = true;
             this.txtModFolderPath.Size = new System.Drawing.Size(322, 23);
             this.txtModFolderPath.TabIndex = 1;
             this.txtModFolderPath.Text = "C:\\path\\to\\mods\\folder";
+            this.txtModFolderPath.WordWrap = false;
+            this.txtModFolderPath.TextChanged += new System.EventHandler(this.txtModFolderPath_TextChanged);
             // 
             // lblModFolderPath
             // 
