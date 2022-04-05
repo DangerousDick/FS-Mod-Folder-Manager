@@ -55,6 +55,7 @@
             this.mnuOptLaunchConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchLaunchCheats = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchRestart = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOptionsOpenOptsDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -95,7 +96,6 @@
             this.mnuContextFileSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuContextModCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextModCopyToAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptionsOpenOptsDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuApplicationMain.SuspendLayout();
             this.stsStatusBar.SuspendLayout();
             this.pnlLists.SuspendLayout();
@@ -308,6 +308,13 @@
             this.mnuOptLaunchRestart.Text = "Launch as Restart";
             this.mnuOptLaunchRestart.Click += new System.EventHandler(this.mnuOptLaunchRestart_Click);
             // 
+            // mnuOptionsOpenOptsDirectory
+            // 
+            this.mnuOptionsOpenOptsDirectory.Name = "mnuOptionsOpenOptsDirectory";
+            this.mnuOptionsOpenOptsDirectory.Size = new System.Drawing.Size(225, 22);
+            this.mnuOptionsOpenOptsDirectory.Text = "Open User Settings Directory";
+            this.mnuOptionsOpenOptsDirectory.Click += new System.EventHandler(this.mnuOptionsOpenOptsDirectory_Click);
+            // 
             // mnuHelp
             // 
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -469,7 +476,7 @@
             this.txtModOverrideValues.Location = new System.Drawing.Point(104, 7);
             this.txtModOverrideValues.Name = "txtModOverrideValues";
             this.txtModOverrideValues.ReadOnly = true;
-            this.txtModOverrideValues.Size = new System.Drawing.Size(323, 23);
+            this.txtModOverrideValues.Size = new System.Drawing.Size(403, 23);
             this.txtModOverrideValues.TabIndex = 11;
             this.txtModOverrideValues.Text = "Mod Override Values";
             // 
@@ -665,13 +672,6 @@
             this.mnuContextModCopyToAll.Size = new System.Drawing.Size(227, 22);
             this.mnuContextModCopyToAll.Text = "Copy Mod to All Folders";
             this.mnuContextModCopyToAll.Click += new System.EventHandler(this.mnuModFileCopyToAll_Click);
-            // 
-            // mnuOptionsOpenOptsDirectory
-            // 
-            this.mnuOptionsOpenOptsDirectory.Name = "mnuOptionsOpenOptsDirectory";
-            this.mnuOptionsOpenOptsDirectory.Size = new System.Drawing.Size(225, 22);
-            this.mnuOptionsOpenOptsDirectory.Text = "Open User Settings Directory";
-            this.mnuOptionsOpenOptsDirectory.Click += new System.EventHandler(this.mnuOptionsOpenOptsDirectory_Click);
             // 
             // frmMain
             // 
