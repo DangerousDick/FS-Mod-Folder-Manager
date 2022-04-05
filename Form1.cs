@@ -8,6 +8,7 @@ namespace FS22_Mod_Manager
         // constant values
         const string version = "V1.4.2";
         // private variables to be set on form load
+        private string setting_temp_directory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData\\Local\\FS22_Mod_Manager");
         private string gameSettingsXmlFile = "";
         private string gameXmlFile = "";
         static private Logger logger;
@@ -262,6 +263,15 @@ namespace FS22_Mod_Manager
                 }
                 populate_file_list();
             }
+        }
+
+        private void mnuOptionsOpenOptsDirectory_Click(object sender, EventArgs e)
+        {
+            /*
+             * Opens the settings temporary directory in Windows default file manager
+             */
+            logger.LogWrite(setting_temp_directory, true);
+            open_with_default_app(setting_temp_directory);
         }
 
         private void mnuOptLaunchConsole_Click(object sender, EventArgs e)
