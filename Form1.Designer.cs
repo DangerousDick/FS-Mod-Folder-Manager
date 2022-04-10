@@ -100,6 +100,7 @@
             this.mnuContextModCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextModCopyToAll = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFilesRefreshLists = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuModsLaunchModhub = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuApplicationMain.SuspendLayout();
             this.stsStatusBar.SuspendLayout();
             this.pnlLists.SuspendLayout();
@@ -173,7 +174,8 @@
             this.MnuModsFile,
             this.mnuModsSeparator,
             this.mnuModsFolderOpen,
-            this.mnuModsRefreshLists});
+            this.mnuModsRefreshLists,
+            this.mnuModsLaunchModhub});
             this.mnuMods.Name = "mnuMods";
             this.mnuMods.Size = new System.Drawing.Size(75, 20);
             this.mnuMods.Text = "Mods Files";
@@ -718,6 +720,13 @@
             this.mnuContextFilesRefreshLists.Text = "Refresh Lists";
             this.mnuContextFilesRefreshLists.Click += new System.EventHandler(this.mnuContextFolderRefresh_Click);
             // 
+            // mnuModsLaunchModhub
+            // 
+            this.mnuModsLaunchModhub.Name = "mnuModsLaunchModhub";
+            this.mnuModsLaunchModhub.Size = new System.Drawing.Size(187, 22);
+            this.mnuModsLaunchModhub.Text = "Launch Mod Hub";
+            this.mnuModsLaunchModhub.Click += new System.EventHandler(this.mnuModsLaunchModhub_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -821,5 +830,6 @@
         private ToolStripSeparator mnuModsSeparator;
         private ToolStripMenuItem mnuModsRefreshLists;
         private ToolStripMenuItem mnuContextFilesRefreshLists;
+        private ToolStripMenuItem mnuModsLaunchModhub;
     }
 }

@@ -265,6 +265,22 @@ namespace FS22_Mod_Manager
             }
         }
 
+        private void mnuModsLaunchModhub_Click(object sender, EventArgs e)
+        {
+            /*
+             * Launches the mod hub web page
+             */
+            try
+            {
+                open_with_default_app("https://www.farming-simulator.com/mods.php");
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.Message);
+            }
+
+        }
+
         private void mnuOptionsOpenOptsDirectory_Click(object sender, EventArgs e)
         {
             /*
