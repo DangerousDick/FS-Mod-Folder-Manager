@@ -8,10 +8,12 @@ namespace FS22_Mod_Manager
         // constant values
         const string version = "V1.4.3";
         // private variables to be set on form load
-        private string setting_temp_directory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData\\Local\\FS22_Mod_Manager");
+        private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData\\Local\\FS22_Mod_Manager");
         private string gameSettingsXmlFile = "";
         private string gameXmlFile = "";
-        static private Logger logger;
+        // static member variable for initialising log file class
+        static private string LogFileName = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\FsModManager.log";
+        static private Logger logger = new Logger(LogFileName, true);
         
         public frmMain()
         {
@@ -25,13 +27,6 @@ namespace FS22_Mod_Manager
              */
             // Window location
             this.Location = Settings.Default.MainWindowLocation;
-            // if log file exists in directory delete it and create new log
-            string log = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\log.txt";
-            if (File.Exists(log)) 
-            { 
-                File.Delete(log);
-            }
-            logger = new Logger(log);
             logger.LogWrite("Application started", true);
             // get user settings and set xml paths
             read_user_settings();
@@ -286,8 +281,8 @@ namespace FS22_Mod_Manager
             /*
              * Opens the settings temporary directory in Windows default file manager
              */
-            logger.LogWrite(setting_temp_directory, true);
-            open_with_default_app(setting_temp_directory);
+            logger.LogWrite(AppTempDirectory, true);
+            open_with_default_app(AppTempDirectory);
         }
 
         private void mnuOptLaunchConsole_Click(object sender, EventArgs e)

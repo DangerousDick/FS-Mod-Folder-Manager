@@ -11,17 +11,19 @@ namespace FS22_Mod_Manager
     internal class Logger
     {
         private string m_exePath = string.Empty;
+        private string heading = "Farmming Simulator Log" + "\n-------------------------------------\n";
         private bool addTimeStamp = false;
 
-        public Logger(string logFileName)
+        public Logger(string logFileName, bool clearLog = false)
         {
             if (logFileName != null)
             {
                 m_exePath = logFileName;
-                string msg = "Farmming Simulator Log" +  "\r\n-------------------------------------";
-                LogWrite(msg);
+                // start with a clear log
+                if (clearLog == true) { File.WriteAllText(m_exePath, ""); }
+                LogWrite(heading);
             }
-        }        
+        }
 
         public void LogWrite(string logMessage, bool addTime = false)
         {
