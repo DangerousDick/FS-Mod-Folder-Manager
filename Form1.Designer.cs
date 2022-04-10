@@ -50,6 +50,7 @@
             this.mnuModsSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuModsFolderOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuModsRefreshLists = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuModsLaunchModhub = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptMod = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptModDoubleClick = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,14 +94,13 @@
             this.mnuContextFolderRename = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFolderSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuContextFolderCopyAsNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuContextCopyToSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFolderRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFileList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuContexstFileRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFileSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuContextModCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextModCopyToAll = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFilesRefreshLists = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModsLaunchModhub = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuApplicationMain.SuspendLayout();
             this.stsStatusBar.SuspendLayout();
             this.pnlLists.SuspendLayout();
@@ -268,6 +268,13 @@
             this.mnuModsRefreshLists.Size = new System.Drawing.Size(187, 22);
             this.mnuModsRefreshLists.Text = "Refresh Lists";
             this.mnuModsRefreshLists.Click += new System.EventHandler(this.mnuContextFolderRefresh_Click);
+            // 
+            // mnuModsLaunchModhub
+            // 
+            this.mnuModsLaunchModhub.Name = "mnuModsLaunchModhub";
+            this.mnuModsLaunchModhub.Size = new System.Drawing.Size(187, 22);
+            this.mnuModsLaunchModhub.Text = "Launch Mod Hub";
+            this.mnuModsLaunchModhub.Click += new System.EventHandler(this.mnuModsLaunchModhub_Click);
             // 
             // mnuOptions
             // 
@@ -632,48 +639,56 @@
             this.mnuContextFolderRename,
             this.mnuContextFolderSeparator,
             this.mnuContextFolderCopyAsNew,
+            this.mnuContextCopyToSelected,
             this.mnuContextFolderRefresh});
             this.mnuContextFolderList.Name = "mnuContextFolderList";
-            this.mnuContextFolderList.Size = new System.Drawing.Size(227, 120);
+            this.mnuContextFolderList.Size = new System.Drawing.Size(241, 142);
             // 
             // mnuContextFolderAdd
             // 
             this.mnuContextFolderAdd.Name = "mnuContextFolderAdd";
-            this.mnuContextFolderAdd.Size = new System.Drawing.Size(226, 22);
+            this.mnuContextFolderAdd.Size = new System.Drawing.Size(240, 22);
             this.mnuContextFolderAdd.Text = "Add New Folder";
             this.mnuContextFolderAdd.Click += new System.EventHandler(this.mnuModFolderAdd_Click);
             // 
             // mnuContextFolderRemove
             // 
             this.mnuContextFolderRemove.Name = "mnuContextFolderRemove";
-            this.mnuContextFolderRemove.Size = new System.Drawing.Size(226, 22);
+            this.mnuContextFolderRemove.Size = new System.Drawing.Size(240, 22);
             this.mnuContextFolderRemove.Text = "Remove Folder";
             this.mnuContextFolderRemove.Click += new System.EventHandler(this.mnuModFolderRemove_Click);
             // 
             // mnuContextFolderRename
             // 
             this.mnuContextFolderRename.Name = "mnuContextFolderRename";
-            this.mnuContextFolderRename.Size = new System.Drawing.Size(226, 22);
+            this.mnuContextFolderRename.Size = new System.Drawing.Size(240, 22);
             this.mnuContextFolderRename.Text = "Rename Folder";
             this.mnuContextFolderRename.Click += new System.EventHandler(this.mnuContextFolderRename_Click);
             // 
             // mnuContextFolderSeparator
             // 
             this.mnuContextFolderSeparator.Name = "mnuContextFolderSeparator";
-            this.mnuContextFolderSeparator.Size = new System.Drawing.Size(223, 6);
+            this.mnuContextFolderSeparator.Size = new System.Drawing.Size(237, 6);
             // 
             // mnuContextFolderCopyAsNew
             // 
             this.mnuContextFolderCopyAsNew.Name = "mnuContextFolderCopyAsNew";
-            this.mnuContextFolderCopyAsNew.Size = new System.Drawing.Size(226, 22);
+            this.mnuContextFolderCopyAsNew.Size = new System.Drawing.Size(240, 22);
             this.mnuContextFolderCopyAsNew.Text = "Copy Selected as New Folder";
             this.mnuContextFolderCopyAsNew.Click += new System.EventHandler(this.mnuModFolderCopyAsNewFolder_Click);
+            // 
+            // mnuContextCopyToSelected
+            // 
+            this.mnuContextCopyToSelected.Name = "mnuContextCopyToSelected";
+            this.mnuContextCopyToSelected.Size = new System.Drawing.Size(240, 22);
+            this.mnuContextCopyToSelected.Text = "Copy Mod(s) to Selected Folder";
+            this.mnuContextCopyToSelected.Click += new System.EventHandler(this.mnuModCopyToSelected_Click);
             // 
             // mnuContextFolderRefresh
             // 
             this.mnuContextFolderRefresh.Name = "mnuContextFolderRefresh";
-            this.mnuContextFolderRefresh.Size = new System.Drawing.Size(226, 22);
-            this.mnuContextFolderRefresh.Text = "Refresh List Boxes";
+            this.mnuContextFolderRefresh.Size = new System.Drawing.Size(240, 22);
+            this.mnuContextFolderRefresh.Text = "Refresh Lists";
             this.mnuContextFolderRefresh.Click += new System.EventHandler(this.mnuContextFolderRefresh_Click);
             // 
             // mnuContextFileList
@@ -681,51 +696,36 @@
             this.mnuContextFileList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuContexstFileRemove,
             this.mnuContextFileSeparator,
-            this.mnuContextModCopy,
             this.mnuContextModCopyToAll,
             this.mnuContextFilesRefreshLists});
             this.mnuContextFileList.Name = "mnuContextFileList";
-            this.mnuContextFileList.Size = new System.Drawing.Size(228, 98);
+            this.mnuContextFileList.Size = new System.Drawing.Size(203, 76);
             // 
             // mnuContexstFileRemove
             // 
             this.mnuContexstFileRemove.Name = "mnuContexstFileRemove";
-            this.mnuContexstFileRemove.Size = new System.Drawing.Size(227, 22);
+            this.mnuContexstFileRemove.Size = new System.Drawing.Size(202, 22);
             this.mnuContexstFileRemove.Text = "Remove Mod File";
             this.mnuContexstFileRemove.Click += new System.EventHandler(this.mnuModFileRemove_Click);
             // 
             // mnuContextFileSeparator
             // 
             this.mnuContextFileSeparator.Name = "mnuContextFileSeparator";
-            this.mnuContextFileSeparator.Size = new System.Drawing.Size(224, 6);
-            // 
-            // mnuContextModCopy
-            // 
-            this.mnuContextModCopy.Name = "mnuContextModCopy";
-            this.mnuContextModCopy.Size = new System.Drawing.Size(227, 22);
-            this.mnuContextModCopy.Text = "Copy Mod to Selected Folder";
-            this.mnuContextModCopy.Click += new System.EventHandler(this.mnuModCopyToSelected_Click);
+            this.mnuContextFileSeparator.Size = new System.Drawing.Size(199, 6);
             // 
             // mnuContextModCopyToAll
             // 
             this.mnuContextModCopyToAll.Name = "mnuContextModCopyToAll";
-            this.mnuContextModCopyToAll.Size = new System.Drawing.Size(227, 22);
+            this.mnuContextModCopyToAll.Size = new System.Drawing.Size(202, 22);
             this.mnuContextModCopyToAll.Text = "Copy Mod to All Folders";
             this.mnuContextModCopyToAll.Click += new System.EventHandler(this.mnuModFileCopyToAll_Click);
             // 
             // mnuContextFilesRefreshLists
             // 
             this.mnuContextFilesRefreshLists.Name = "mnuContextFilesRefreshLists";
-            this.mnuContextFilesRefreshLists.Size = new System.Drawing.Size(227, 22);
+            this.mnuContextFilesRefreshLists.Size = new System.Drawing.Size(202, 22);
             this.mnuContextFilesRefreshLists.Text = "Refresh Lists";
             this.mnuContextFilesRefreshLists.Click += new System.EventHandler(this.mnuContextFolderRefresh_Click);
-            // 
-            // mnuModsLaunchModhub
-            // 
-            this.mnuModsLaunchModhub.Name = "mnuModsLaunchModhub";
-            this.mnuModsLaunchModhub.Size = new System.Drawing.Size(187, 22);
-            this.mnuModsLaunchModhub.Text = "Launch Mod Hub";
-            this.mnuModsLaunchModhub.Click += new System.EventHandler(this.mnuModsLaunchModhub_Click);
             // 
             // frmMain
             // 
@@ -816,7 +816,6 @@
         private ContextMenuStrip mnuContextFileList;
         private ToolStripMenuItem mnuContexstFileRemove;
         private ToolStripSeparator mnuContextFileSeparator;
-        private ToolStripMenuItem mnuContextModCopy;
         private ToolStripMenuItem mnuContextModCopyToAll;
         private ToolStripMenuItem mnuContextFolderAdd;
         private ToolStripSeparator mnuContextFolderSeparator;
@@ -831,5 +830,6 @@
         private ToolStripMenuItem mnuModsRefreshLists;
         private ToolStripMenuItem mnuContextFilesRefreshLists;
         private ToolStripMenuItem mnuModsLaunchModhub;
+        private ToolStripMenuItem mnuContextCopyToSelected;
     }
 }
