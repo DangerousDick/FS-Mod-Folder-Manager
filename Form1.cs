@@ -8,11 +8,13 @@ namespace FS22_Mod_Manager
         // constant values
         const string version = "V1.4.3";
         // private variables to be set on form load
-        private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData\\Local\\FS22_Mod_Manager");
+        private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "AppData\\Local\\FS22_Mod_Manager");
         private string gameSettingsXmlFile = "";
         private string gameXmlFile = "";
         // static member variable for initialising log file class
-        static private string LogFileName = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\FsModManager.log";
+        static private string LogFileName = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "AppData\\Local\\FS22_Mod_Manager\\FsModManager.log");
         static private Logger logger = new Logger(LogFileName, true);
         
         public frmMain()
