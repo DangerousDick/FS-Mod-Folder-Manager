@@ -349,6 +349,10 @@ namespace FS22_Mod_Manager
 
         private void lstModFolders_MouseUp(object sender, MouseEventArgs e)
         {
+            /*
+             * Right click mod folder list event handler
+             * Shows context menu
+             */
             int location = lstModFolders.IndexFromPoint(e.Location);
             if (e.Button == MouseButtons.Right)
             {
@@ -359,6 +363,10 @@ namespace FS22_Mod_Manager
 
         private void lstModFiles_MouseUp(object sender, MouseEventArgs e)
         {
+            /*
+             * Right click mod files list event handler
+             * Shows context menu
+             */
             int location = lstModFiles.IndexFromPoint(e.Location);
             if (e.Button == MouseButtons.Right)
             {
@@ -369,12 +377,19 @@ namespace FS22_Mod_Manager
 
         private void mnuContextFolderRefresh_Click(object sender, EventArgs e)
         {
+            /*
+             *  Refresh folder lists and game file data
+             */
             string selected_folder = lstModFolders.Text;
             string selected_file = lstModFiles.Text;
+            // refresh lists
             populate_folder_list();
             lstModFolders.SelectedIndex = lstModFolders.FindString(Path.GetFileName(selected_folder));
             populate_file_list();
             lstModFiles.SelectedIndex = lstModFiles.FindString(Path.GetFileName(selected_file));
+            // refresh game file data
+            read_mod_override_from_xml();
+            game_xml_controls_element();
         }
 
         private void mnuContextFolderRename_Click(object sender, EventArgs e)

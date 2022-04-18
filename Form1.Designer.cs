@@ -265,8 +265,9 @@
             // mnuModsRefreshLists
             // 
             this.mnuModsRefreshLists.Name = "mnuModsRefreshLists";
+            this.mnuModsRefreshLists.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.mnuModsRefreshLists.Size = new System.Drawing.Size(187, 22);
-            this.mnuModsRefreshLists.Text = "Refresh Lists";
+            this.mnuModsRefreshLists.Text = "Refresh Data";
             this.mnuModsRefreshLists.Click += new System.EventHandler(this.mnuContextFolderRefresh_Click);
             // 
             // mnuModsLaunchModhub
