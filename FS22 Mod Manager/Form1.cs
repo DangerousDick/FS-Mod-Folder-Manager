@@ -97,6 +97,17 @@ namespace FS22_Mod_Manager
             open_with_default_app(txtUserDataPath.Text + "\\game.xml");
         }
 
+        private void mnuFileRefresh_Click(object sender, EventArgs e)
+        {
+            /*
+             *  Refresh folder lists and game file data
+             */
+            populate_folder_list();
+            populate_file_list();
+            read_mod_override_from_xml();
+            game_xml_controls_element();
+        }
+
         private void mnuFileExit_Click(object sender, EventArgs e)
         {
             /*
