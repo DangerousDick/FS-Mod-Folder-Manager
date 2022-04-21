@@ -40,7 +40,8 @@
                         <li><a href="#FolderPaths">Folder Paths</a></li>
                         <ul>
                             <li><a href="#ModFoldersPath">Mod Folders Path</a></li>
-                            <li><a href="#GameFolderPath">Game Folder Path</a></li>
+                            <li><a href="#GameDataPath">Game User Data</a></li>
+                            <li><a href="#GameExePath">Game Exe Path</a></li>
                         </ul>
                         <li><a href="#Menus">Menus</a></li>
                         <ul>
@@ -67,6 +68,9 @@
                     <p><img title="Application Screenshot" style="width: 587px; height: 606px;" alt="Application Screenshot" src="images/application.png"></p>
                     <br><a href="#">Top</a><br>
 
+                    <h2 id="lstBoxes">Current Override</h2>
+                    This is the current data from the gameSettings.xml file it will change when the Set Mod Override button is clicked.
+
                     <h2 id="lstBoxes">The List Boxes</h2>
                     <h4 id="lstModFolders">The "Mod Folders" List Box</h4>
                     The list on the left shows the sub-folders in the "Mod Folders Path" which contain your mods<br>
@@ -89,27 +93,36 @@
                     <br><a href="#">Top</a><br>
 
                     <h2 id="FolderPaths">Folder Paths</h2>
-                    <h4 id="ModFoldersPath">Mod Folders Path</h4>
+                    <h4 id="ModFoldersPath">Mod Folder Path</h4>
                     The location of the folder containing the sub-folders which hold the mods for a particular map or server (or however you wish to separate your mod files).<br>
                     These sub-folders are the items that appear in the "Mod Folders" list.<br>
                     Use the <span style="font-weight: bold;">Browse</span> button to set this value<br>
                     <p><img style="width: 462px; height: 306px;" alt="Mod Folders Screenshot" title="Mod Folders Screenshot" src="images/explore_mod_folders.png"></p>
-                    <h4 id="GameFolderPath">Game Folder Path</h4>
+
+                    <h4 id="GameDataPath">Game Folder Path</h4>
                     This is the location where Farming Simulator installed the game config files.<br>
                     This is usually in your user directory, for example, "C:\Users\your_user_name\Documents\My Games\FarmingSimyulator2022".<br>
                     Use the <span style="font-weight: bold;">Browse</span> button to set this value
                     <br>
                     <p><img style="width: 473px; height: 437px;" alt="Game Folder Screenshot" title="Game Folder Screenshot" src="images/explore_game_folder.png"></p>
-                    <br><a href="#">Top</a><br>
+
+                    <h4 id="GameExePath">Game .exe Path</h4>
+                    This is the location where Farming Simulator installed the game files.<br>
+                    The default is in the "C:\Program Files (x86)" folder, but may, for example if you use Steam, be located elsewhere.
+                    Use the <span style="font-weight: bold;">Browse</span> button to set this value
+                    <br>
+                    <a href="#">Top</a><br>
 
                     <h1 id="Menus">Menus</h1>
                     <h2>The File Menu</h2>
-                    <h4>Open Game Folder</h4>
-                    This will open the Farming Simulator installation folder in Windows File Manager
+                    <h4>Open Game Data Directory</h4>
+                    This will open the Farming Simulator user data installation folder in Windows File Manager
                     <h4>Open gameSettings.xml</h4>
                     This will open the Farming Simulator installation gameSetting.xml file in your dfault XML app
                     <h4>Open game.xml</h4>
                     This will open the Farming Simulator installation game.xml file in your dfault XML app
+                    <h4>Refresh Data</h4>
+                    This will refresh the data in the lists and the "Current Override" box
                     <h4>Exit</h4>
                     Closes the Mods Manager application.
                     <br><a href="#">Top</a><br>
@@ -117,9 +130,7 @@
                     <h2>The Mods Menu</h2>
                     The "Mods" menu allows you to carry actions your mod files and their folders.
                     <h4>Open Mods Folder</h4>
-                    Opens the currently selected folder in the default file manager e.g. 'Windows File Manager'<br>
-                    <h4>Refresh Lists</h4>
-                    Reloads the content of the mods folder and refreshes the list content<br>
+                    Opens the currently selected mod folder in the default file manager e.g. 'Windows File Manager'<br>
                     <h4>Launch Mod Hub</h4>
                     Launches the default browser to open the "Mod Hub" website<br>
                     <h3 id="mnuModFolders">Mods Folders Menu</h3>
@@ -136,9 +147,6 @@
                     Updates the list and selects the new folder.
 
                     <h3 id="mnuModFiles">Mod Files Menu</h3>
-                    <h4>Add Mod to List</h4>
-                    Adds a mod zip file to the "Mods List" using the file open dialog box to locate and select the mod file.<br>
-                    You can select multiple files to add.
                     <h4>Remove Selected Mod</h4>
                     Removes the highlighted mod file from the folder and removes it from the "Mods List".<br>
                     NOTE: <span style="color: red;">This action deletes the file from your PC</span><br>
@@ -165,11 +173,7 @@
                     Checkable menu item<br>
                     Sets the value for the gameSettings.xml file to True if checked.<br>
                     If you want to override the games default mod folder the option must be checked.<br>
-                    <h4>Ask Before Updating XML </h4>
-                    Checkable menu item.<br>
-                    This option is there to prevent you from updating the file when you do not want to. <span style="color: red;">Unchecked by default</span> as it can be annoying.<br>
-                    If checked a message box asking if you want to update the gameSettings.xml file will pop up before the application makes any changes.<br>
-
+                    
                     <h3 id="mnuLaunchOptions">Launch Options</h3>
                     These option allow you to start the game with the console enabled. <span style="color: red;">PLEASE MAKE SURE YOU KNOW WHAT THIS MEANS</span> before checking them.<br>
                     Google is your friend here if you don't know.
@@ -177,6 +181,12 @@
                     Updates the game.xml file element "Controls" to true if checked. This will allow the "back tick" key to open the console in game.<br>
                     <h4>Launch With Cheats</h4>
                     This adds the -cheats switch to the launch command which allows the debug/cheat commands to be used in the console (requires "Launch With In Game Console" to be checked
+                    <h4>Launch as Restart</h4>
+                    This will add the "-restart" switch when launching the game. This will bypass the intro video and go straight to the menu screen.
+                    <h4>Open User Setting Directory</h4>
+                    This will open the directory containing the local user settings file.
+                    <span style="color: red;">IT IS NOT A GOOD IDEA TO MANUALLY CHANGE THESE</span>
+                    so please don't. If you do make sure you copy the original file before making any changes so you can roll it back.
                     <br><a href="#">Top</a><br>
 
                     <h2 id="mnuhelp">The Help Menu</h2>
@@ -186,7 +196,7 @@
                     Displays the application about box
                     <br><a href="#">Top</a><br>
                     <h2>Buttons</h2>
-                    <h4 id="btnSetModPath">Set Mod Path in Game Settings</h4>
+                    <h4 id="btnSetModPath">Set Mod Override</h4>
                     Use this button if you want to update the gameSettings.xml file <span style="font-weight: bold; font-style: italic;">without</span> launching the game.<br>
                     This will update the gameSettings.xml file in the "Game Folder Path" with the values of "Mod Folder Override Active" under the "Options" menu (True idf checked) and the "Mod Folders Path".
                     If the "Ask Before Updating XML" value under the "Options" menu is not checked it <span style="color: red;">WILL NOT ASK</span> before updating the file.

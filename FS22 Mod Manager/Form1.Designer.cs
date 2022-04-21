@@ -569,7 +569,7 @@
             this.txtGameExeFile.ReadOnly = true;
             this.txtGameExeFile.Size = new System.Drawing.Size(322, 23);
             this.txtGameExeFile.TabIndex = 7;
-            this.txtGameExeFile.Text = "C:\\path\\to\\fs22.exe";
+            this.txtGameExeFile.Text = "C:\\path\\to\\FarmingSimulator2022.exe";
             this.txtGameExeFile.WordWrap = false;
             this.txtGameExeFile.TextChanged += new System.EventHandler(this.txtGameExeFile_TextChanged);
             // 
@@ -600,18 +600,18 @@
             this.txtUserDataPath.ReadOnly = true;
             this.txtUserDataPath.Size = new System.Drawing.Size(322, 23);
             this.txtUserDataPath.TabIndex = 4;
-            this.txtUserDataPath.Text = "C:\\User\\data\\path";
+            this.txtUserDataPath.Text = "C:\\Game\\User\\data\\path";
             this.txtUserDataPath.WordWrap = false;
             this.txtUserDataPath.TextChanged += new System.EventHandler(this.txtUserDataPath_TextChanged);
             // 
             // lblUserDataPath
             // 
             this.lblUserDataPath.AutoSize = true;
-            this.lblUserDataPath.Location = new System.Drawing.Point(20, 67);
+            this.lblUserDataPath.Location = new System.Drawing.Point(12, 66);
             this.lblUserDataPath.Name = "lblUserDataPath";
-            this.lblUserDataPath.Size = new System.Drawing.Size(84, 15);
+            this.lblUserDataPath.Size = new System.Drawing.Size(91, 15);
             this.lblUserDataPath.TabIndex = 3;
-            this.lblUserDataPath.Text = "User Data Path";
+            this.lblUserDataPath.Text = "Game User Data";
             // 
             // btnModFolderPath
             // 
