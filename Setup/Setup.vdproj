@@ -404,7 +404,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FS22 Mod Manager"
         "ProductCode" = "8:{EB21F4FC-C12F-4FDB-A685-21C104044453}"
-        "PackageCode" = "8:{64B82BE8-6DAE-44B4-A266-4370E0E6B307}"
+        "PackageCode" = "8:{C4AE390D-5F92-4C58-88CC-66721BE18758}"
         "UpgradeCode" = "8:{C45CEDD6-B243-4A3E-9568-B60F78A03CFD}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -421,7 +421,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_5D6232432FA745CAABFD442F1C4E0E4D"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -524,7 +524,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_FDE2B990F9AB4E188E7C44A381BB9478"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E5A813BC9E6048BB95463E3C005C0DEE"
             {
             "Name" = "8:FS22 Mod Manager"
             "Arguments" = "8:"
@@ -532,10 +532,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_8B58201449C04F55AEB35CF1E5765C7E"
             "Folder" = "8:_9A0397A4497A47CCB630E245853F1D71"
             "WorkingFolder" = "8:_398E1001D9574A2FAEA6F055D681EABE"
-            "Icon" = "8:"
+            "Icon" = "8:_5D6232432FA745CAABFD442F1C4E0E4D"
             "Feature" = "8:"
             }
         }
@@ -937,6 +937,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8B58201449C04F55AEB35CF1E5765C7E"
+            {
+            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Release\\net6.0-windows\\apphost.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_398E1001D9574A2FAEA6F055D681EABE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:PublishItems"
+            "OutputProjectGuid" = "8:{EB3E52D1-108F-4850-8F04-0D81C794EC5E}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
         }
     }
 }
