@@ -305,6 +305,12 @@ namespace FS22_Mod_Manager
              */
             Settings.Default.LaunchWithConsole = mnuOptLaunchConsole.Checked;
             game_xml_controls_element(true);
+            if (mnuOptLaunchLaunchCheats.Checked)
+            {
+                // uncheck this option and update settings file as it requires the console to use
+                mnuOptLaunchLaunchCheats.Checked = false;
+                Settings.Default.LaunchWithCheats = false;
+            }
         }
 
         private void mnuOptLaunchLaunchCheats_Click(object sender, EventArgs e)
@@ -313,6 +319,13 @@ namespace FS22_Mod_Manager
              * Checks/Unchecks the launch with cheats option
              */
             Settings.Default.LaunchWithCheats = true;
+            // console needs to be set to use cheats
+            if (false == Settings.Default.LaunchWithConsole)
+            {
+                mnuOptLaunchConsole.Checked = true;
+                Settings.Default.LaunchWithConsole = true;
+                game_xml_controls_element(true);
+            }
         }
 
         private void mnuOptLaunchRestart_Click(object sender, EventArgs e)
