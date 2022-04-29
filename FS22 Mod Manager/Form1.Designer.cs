@@ -37,6 +37,8 @@
             this.mnuFileOpenGameXml = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFileRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFileOpenModMangerLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFileOpenGameLog = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMods = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,6 +131,8 @@
             this.mnuFileOpenGameXml,
             this.mnuFileSeparator1,
             this.mnuFileRefresh,
+            this.mnuFileOpenModMangerLog,
+            this.mnuFileOpenGameLog,
             this.mnuFileSeparator2,
             this.mnuFileExit});
             this.mnuFile.Name = "mnuFile";
@@ -171,6 +175,20 @@
             this.mnuFileRefresh.Size = new System.Drawing.Size(234, 22);
             this.mnuFileRefresh.Text = "Refresh Data";
             this.mnuFileRefresh.Click += new System.EventHandler(this.mnuFileRefresh_Click);
+            // 
+            // mnuFileOpenModMangerLog
+            // 
+            this.mnuFileOpenModMangerLog.Name = "mnuFileOpenModMangerLog";
+            this.mnuFileOpenModMangerLog.Size = new System.Drawing.Size(234, 22);
+            this.mnuFileOpenModMangerLog.Text = "Open Mod Manager Log";
+            this.mnuFileOpenModMangerLog.Click += new System.EventHandler(this.mnuFileOpenModMangerLog_Click);
+            // 
+            // mnuFileOpenGameLog
+            // 
+            this.mnuFileOpenGameLog.Name = "mnuFileOpenGameLog";
+            this.mnuFileOpenGameLog.Size = new System.Drawing.Size(234, 22);
+            this.mnuFileOpenGameLog.Text = "Open Game Log";
+            this.mnuFileOpenGameLog.Click += new System.EventHandler(this.mnuFileOpenGameLog_Click);
             // 
             // mnuFileSeparator2
             // 
@@ -827,5 +845,7 @@
         private ToolStripSeparator mnuModsSeparator;
         private ToolStripMenuItem mnuModsFolderOpen;
         private ToolStripMenuItem mnuModsLaunchModhub;
+        private ToolStripMenuItem mnuFileOpenModMangerLog;
+        private ToolStripMenuItem mnuFileOpenGameLog;
     }
 }

@@ -11,7 +11,7 @@ namespace FS22_Mod_Manager
     internal class Logger
     {
         private string m_exePath = string.Empty;
-        private string heading = "Farmming Simulator Log" + "\n-------------------------------------\n";
+        private string heading = "FS Mod Manager Log" + "\n-------------------------------------\n";
         private bool addTimeStamp = false;
 
         public Logger(string logFileName, bool clearLog = false)
