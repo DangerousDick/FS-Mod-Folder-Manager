@@ -130,5 +130,17 @@ namespace FS22_Mod_Manager {
                 this["MainWindowLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool OverwriteOnCopy {
+            get {
+                return ((bool)(this["OverwriteOnCopy"]));
+            }
+            set {
+                this["OverwriteOnCopy"] = value;
+            }
+        }
     }
 }

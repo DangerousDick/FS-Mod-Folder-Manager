@@ -58,6 +58,7 @@
             this.mnuOptMod = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptModDoubleClick = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptModOverride = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOptOverwriteOnCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuModLaunch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchLaunchCheats = new System.Windows.Forms.ToolStripMenuItem();
@@ -320,7 +321,8 @@
             // 
             this.mnuOptMod.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuOptModDoubleClick,
-            this.mnuOptModOverride});
+            this.mnuOptModOverride,
+            this.mnuOptOverwriteOnCopy});
             this.mnuOptMod.Name = "mnuOptMod";
             this.mnuOptMod.Size = new System.Drawing.Size(225, 22);
             this.mnuOptMod.Text = "Mod Options";
@@ -338,6 +340,13 @@
             this.mnuOptModOverride.Name = "mnuOptModOverride";
             this.mnuOptModOverride.Size = new System.Drawing.Size(266, 22);
             this.mnuOptModOverride.Text = "Mod Folder Override";
+            // 
+            // mnuOptOverwriteOnCopy
+            // 
+            this.mnuOptOverwriteOnCopy.CheckOnClick = true;
+            this.mnuOptOverwriteOnCopy.Name = "mnuOptOverwriteOnCopy";
+            this.mnuOptOverwriteOnCopy.Size = new System.Drawing.Size(266, 22);
+            this.mnuOptOverwriteOnCopy.Text = "Overwrite on Copy";
             // 
             // mnuModLaunch
             // 
@@ -847,5 +856,6 @@
         private ToolStripMenuItem mnuModsLaunchModhub;
         private ToolStripMenuItem mnuFileOpenModMangerLog;
         private ToolStripMenuItem mnuFileOpenGameLog;
+        private ToolStripMenuItem mnuOptOverwriteOnCopy;
     }
 }

@@ -237,7 +237,8 @@ namespace FS22_Mod_Manager
                         logger.LogWrite("\t" + file_list[i] + " -> " + dest_file);
                         try
                         {
-                            File.Copy(file_list[i], dest_file, true);  // overwrite set to true
+                            if (mnuOptOverwriteOnCopy.Checked) { File.Copy(file_list[i], dest_file, true); } // overwrite set to true
+                            else { File.Copy(file_list[i], dest_file, false); }
                         }
                         catch (Exception ex)
                         {
@@ -277,7 +278,10 @@ namespace FS22_Mod_Manager
                             try
                             {
                                 if (file_list[i] != dest_file)
-                                { File.Copy(file_list[i], dest_file, true); } // overwrite set to true
+                                {
+                                    if (mnuOptOverwriteOnCopy.Checked) { File.Copy(file_list[i], dest_file, true); } // overwrite set to true
+                                    else { File.Copy(file_list[i], dest_file, false); }
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -843,6 +847,7 @@ namespace FS22_Mod_Manager
                 // get options menu settings
                 mnuOptModDoubleClick.Checked = Settings.Default.AllowDoubleClick;
                 mnuOptModOverride.Checked = Settings.Default.ModFodlerOverride;
+                mnuOptOverwriteOnCopy.Checked = Settings.Default.OverwriteOnCopy;
                 mnuOptLaunchConsole.Checked = Settings.Default.LaunchWithConsole;
                 mnuOptLaunchLaunchCheats.Checked = Settings.Default.LaunchWithCheats;
                 mnuOptLaunchRestart.Checked = Settings.Default.LaunchAsRestart;
@@ -868,6 +873,7 @@ namespace FS22_Mod_Manager
             // options menu settings
             Settings.Default.AllowDoubleClick = mnuOptModDoubleClick.Checked;
             Settings.Default.ModFodlerOverride = mnuOptModOverride.Checked;
+            Settings.Default.OverwriteOnCopy = mnuOptOverwriteOnCopy.Checked;
             Settings.Default.LaunchWithConsole = mnuOptLaunchConsole.Checked;
             Settings.Default.LaunchWithCheats = mnuOptLaunchLaunchCheats.Checked;
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
@@ -890,6 +896,7 @@ namespace FS22_Mod_Manager
             // options menu settings
             logger.LogWrite("Option AllowDoubleClick = " + Settings.Default.AllowDoubleClick.ToString());
             logger.LogWrite("Option ModFodlerOverride = " + Settings.Default.ModFodlerOverride.ToString());
+            logger.LogWrite("Option OverwriteOnCopy = " + Settings.Default.OverwriteOnCopy.ToString());
             logger.LogWrite("Option LaunchWithConsole = " + Settings.Default.LaunchWithConsole.ToString());
             logger.LogWrite("Option LaunchWithCheats= " + Settings.Default.LaunchWithCheats.ToString());
             logger.LogWrite("Option LaunchAsRestart = " + Settings.Default.LaunchAsRestart.ToString());
