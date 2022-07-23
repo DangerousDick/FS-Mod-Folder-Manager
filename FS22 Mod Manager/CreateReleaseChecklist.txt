@@ -1,5 +1,5 @@
 ﻿Before creating release and generating the MSI file...
-* Set applicaiton version in form1.cs file
+* Set applicaiton version in MainForm.cs file
 * Update help/help.html to reflect changes if required
 * Update Setup project version number (otherwise old version will not be uninstalled)
 * Tag and push all changes to github
