@@ -229,7 +229,7 @@ namespace FS22_Mod_Manager
             try
             {
                 string[] file_list = get_file_list(init_dir, "Zip files (*.zip)|*.zip|All files (*.*)|*.*");
-                if (file_list.Length > 0)
+                if (null != file_list && file_list.Length > 0)
                 {
                     for (int i = 0; i < file_list.Length; i++)
                     {
@@ -267,7 +267,7 @@ namespace FS22_Mod_Manager
             try
             {
                 string[] file_list = get_file_list(init_dir, "Zip files (*.zip)|*.zip|All files (*.*)|*.*");
-                if (file_list.Length > 0)
+                if (null != file_list && file_list.Length > 0)
                 {
                     for (int i = 0; i < file_list.Length; i++)
                     {
@@ -771,6 +771,7 @@ namespace FS22_Mod_Manager
                     else
                     {
                         stsStatusLabel.Text = "No file selected";
+                        return null;
                     }
                 }
                 catch (Exception ex)
@@ -789,7 +790,7 @@ namespace FS22_Mod_Manager
              */
             // get new folder name
             string new_folder = Interaction.InputBox("New folder name?", "New Folder");
-            if (new_folder != null)
+            if (new_folder.Length > 0)
             {
                 new_folder = Path.Join(txtModFolderPath.Text, new_folder);
                 // create new folder and update lists
