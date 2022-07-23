@@ -39,6 +39,8 @@
             this.mnuFileRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileOpenModMangerLog = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileOpenGameLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuFileZipGameDataDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMods = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +136,8 @@
             this.mnuFileRefresh,
             this.mnuFileOpenModMangerLog,
             this.mnuFileOpenGameLog,
+            this.toolStripMenuItem1,
+            this.mnuFileZipGameDataDirectory,
             this.mnuFileSeparator2,
             this.mnuFileExit});
             this.mnuFile.Name = "mnuFile";
@@ -190,6 +194,18 @@
             this.mnuFileOpenGameLog.Size = new System.Drawing.Size(234, 22);
             this.mnuFileOpenGameLog.Text = "Open Game Log";
             this.mnuFileOpenGameLog.Click += new System.EventHandler(this.mnuFileOpenGameLog_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(231, 6);
+            // 
+            // mnuFileZipGameDataDirectory
+            // 
+            this.mnuFileZipGameDataDirectory.Name = "mnuFileZipGameDataDirectory";
+            this.mnuFileZipGameDataDirectory.Size = new System.Drawing.Size(234, 22);
+            this.mnuFileZipGameDataDirectory.Text = "Zip Game Data Directory";
+            this.mnuFileZipGameDataDirectory.Click += new System.EventHandler(this.mnuFileZipGameDataDirectory_Click);
             // 
             // mnuFileSeparator2
             // 
@@ -857,5 +873,7 @@
         private ToolStripMenuItem mnuFileOpenModMangerLog;
         private ToolStripMenuItem mnuFileOpenGameLog;
         private ToolStripMenuItem mnuOptOverwriteOnCopy;
+        private ToolStripSeparator toolStripMenuItem1;
+        private ToolStripMenuItem mnuFileZipGameDataDirectory;
     }
 }

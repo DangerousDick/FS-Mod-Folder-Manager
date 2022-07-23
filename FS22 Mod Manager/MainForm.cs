@@ -2,6 +2,7 @@ namespace FS22_Mod_Manager
 {
     using System.Diagnostics;       // for Process class
     using Microsoft.VisualBasic;    // for input box
+    using System.IO.Compression;
 
     public partial class frmMain : Form
     {
@@ -95,6 +96,43 @@ namespace FS22_Mod_Manager
              * Opens the Farming Sinlator game.xml file
              */
             open_with_default_app(txtUserDataPath.Text + "\\game.xml");
+        }
+
+        private void mnuFileZipGameDataDirectory_Click(object sender, EventArgs e)
+        {
+            /*
+             *  Create a zip file from the game data directory
+            */
+            string folderName = txtUserDataPath.Text;
+            string zipName = txtUserDataPath.Text + ".zip";
+            stsStatusLabel.Text = "Creating zip please wait...";
+            if (File.Exists(zipName))
+            {
+                string message = "Do you want to overwrite existing zip file?";
+                string caption = "Zip file already exists";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show(message, caption, buttons))
+                {
+                    // delete the folder
+                    logger.LogWrite("deleting file " + zipName);
+                    File.Delete(zipName);
+                }
+                else
+                {
+                    stsStatusLabel.Text = "Zip creation caneled";
+                    return;
+                }
+            }
+            try
+            {
+                ZipFile.CreateFromDirectory(folderName, zipName, CompressionLevel.Fastest, true);
+            }
+            catch(Exception ex)
+            {
+                stsStatusLabel.Text = "Zip creation failed!";
+                logger.LogWrite("ERROR: Zip creation failed!\n" + ex.Message);
+            }
+            stsStatusLabel.Text = "Zip created";
         }
 
         private void mnuFileRefresh_Click(object sender, EventArgs e)
