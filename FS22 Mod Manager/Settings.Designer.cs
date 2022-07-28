@@ -142,5 +142,53 @@ namespace FS22_Mod_Manager {
                 this["OverwriteOnCopy"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Medium")]
+        public string performanceClass {
+            get {
+                return ((string)(this["performanceClass"]));
+            }
+            set {
+                this["performanceClass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.000000")]
+        public string lodDistanceCoeff {
+            get {
+                return ((string)(this["lodDistanceCoeff"]));
+            }
+            set {
+                this["lodDistanceCoeff"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.000000")]
+        public string terrainLODDistanceCoeff {
+            get {
+                return ((string)(this["terrainLODDistanceCoeff"]));
+            }
+            set {
+                this["terrainLODDistanceCoeff"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.000000")]
+        public string foliageViewDistanceCoeff {
+            get {
+                return ((string)(this["foliageViewDistanceCoeff"]));
+            }
+            set {
+                this["foliageViewDistanceCoeff"] = value;
+            }
+        }
     }
 }

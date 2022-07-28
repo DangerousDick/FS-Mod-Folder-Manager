@@ -4,7 +4,7 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="CopyOptions.cs">
+    <Compile Update="ScalabilityOptions.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

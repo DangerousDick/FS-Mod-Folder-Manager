@@ -65,6 +65,8 @@
             this.mnuOptLaunchConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchLaunchCheats = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchRestart = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOptScalabilityOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptionsOpenOptsDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -328,6 +330,7 @@
             this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuOptMod,
             this.mnuModLaunch,
+            this.gameOptionsToolStripMenuItem,
             this.mnuOptionsOpenOptsDirectory});
             this.mnuOptions.Name = "mnuOptions";
             this.mnuOptions.Size = new System.Drawing.Size(61, 20);
@@ -397,6 +400,21 @@
             this.mnuOptLaunchRestart.Size = new System.Drawing.Size(234, 22);
             this.mnuOptLaunchRestart.Text = "Launch as Restart";
             this.mnuOptLaunchRestart.Click += new System.EventHandler(this.mnuOptLaunchRestart_Click);
+            // 
+            // gameOptionsToolStripMenuItem
+            // 
+            this.gameOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuOptScalabilityOptions});
+            this.gameOptionsToolStripMenuItem.Name = "gameOptionsToolStripMenuItem";
+            this.gameOptionsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.gameOptionsToolStripMenuItem.Text = "Game Options";
+            // 
+            // mnuOptScalabilityOptions
+            // 
+            this.mnuOptScalabilityOptions.Name = "mnuOptScalabilityOptions";
+            this.mnuOptScalabilityOptions.Size = new System.Drawing.Size(180, 22);
+            this.mnuOptScalabilityOptions.Text = "Scalability Options";
+            this.mnuOptScalabilityOptions.Click += new System.EventHandler(this.mnuOptScalabilityOptions_Click);
             // 
             // mnuOptionsOpenOptsDirectory
             // 
@@ -875,5 +893,7 @@
         private ToolStripMenuItem mnuOptOverwriteOnCopy;
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem mnuFileZipGameDataDirectory;
+        private ToolStripMenuItem gameOptionsToolStripMenuItem;
+        private ToolStripMenuItem mnuOptScalabilityOptions;
     }
 }

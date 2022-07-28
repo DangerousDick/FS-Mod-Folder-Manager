@@ -58,6 +58,7 @@ namespace FS22_Mod_Manager
             read_mod_override_from_xml();
             game_xml_controls_element();
             update_mod_override_values();
+            read_scalability_options();
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -411,6 +412,19 @@ namespace FS22_Mod_Manager
             catch (Exception ex)
             {
                 logger.LogWrite(ex.Message);
+            }
+        }
+
+        private void mnuOptScalabilityOptions_Click(object sender, EventArgs e)
+        {
+            /*
+            * show scalability options dialog box
+            */
+            ScalabilityOptions so = new ScalabilityOptions();
+            so.ShowDialog();
+            if (true == so.returnOK)
+            {
+                write_scalability_options();
             }
         }
 
@@ -985,6 +999,126 @@ namespace FS22_Mod_Manager
             }
         }
 
+        private void write_mod_override_to_xml()
+        {
+            /*
+             * Read the gameSettings.xml file and get the attribute values
+             * element name is modsDirectoryOverride
+             * attributes are active="true/false" and directory="c:\path\string"
+             */
+            logger.LogWrite("Saving mod override values to gameSettings.xml", true);
+            System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+            xmlDoc.Load(gameSettingsXmlFile);
+            System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName("modsDirectoryOverride");
+            if (elemList.Count > 0)
+            {
+                for (int i = 0; i < elemList.Count; i++)
+                {
+                    // set attributes
+                    elemList[i].Attributes["active"].Value = mnuOptModOverride.Checked.ToString().ToLower();
+                    elemList[i].Attributes["directory"].Value = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
+                }
+                xmlDoc.Save(gameSettingsXmlFile);
+            }
+        }
+
+        private void read_scalability_options()
+        {
+            /*
+             * Read the game.xml file and get the scalability element value
+             * <scalability>
+             *      <performanceClass>Medium</performanceClass>
+             *      <lodDistanceCoeff>1.000000</lodDistanceCoeff>
+             *      <terrainLODDistanceCoeff>1.000000</terrainLODDistanceCoeff>
+             *      <foliageViewDistanceCoeff>1.000000</foliageViewDistanceCoeff>
+             * </scalability>
+             * 
+             * The Coeff values are a percentage 1.000000 is 100%
+            */
+            string val;
+            val = read_xml_file_element(gameXmlFile, "performanceClass");
+            if (val.Length > 0) { Settings.Default.performanceClass = val; }
+            val = read_xml_file_element(gameXmlFile, "lodDistanceCoeff");
+            if (val.Length > 0) { Settings.Default.lodDistanceCoeff = val; }
+            val = read_xml_file_element(gameXmlFile, "terrainLODDistanceCoeff");
+            if (val.Length > 0) { Settings.Default.terrainLODDistanceCoeff = val; }
+            val = read_xml_file_element(gameXmlFile, "foliageViewDistanceCoeff");
+            if (val.Length > 0) { Settings.Default.foliageViewDistanceCoeff = val; }
+        }
+
+        private void write_scalability_options()
+        {
+            /*
+             * Write the scalability element values to the game.xml file
+             * <scalability>
+             *      <performanceClass>Medium</performanceClass>
+             *      <lodDistanceCoeff>1.000000</lodDistanceCoeff>
+             *      <terrainLODDistanceCoeff>1.000000</terrainLODDistanceCoeff>
+             *      <foliageViewDistanceCoeff>1.000000</foliageViewDistanceCoeff>
+             * </scalability>
+             * 
+             * The Coeff values are a percentage 1.000000 is 100%
+            */
+            write_xml_file_element_value(gameXmlFile, "performanceClass", Settings.Default.performanceClass);
+            write_xml_file_element_value(gameXmlFile, "lodDistanceCoeff", Settings.Default.lodDistanceCoeff);
+            write_xml_file_element_value(gameXmlFile, "terrainLODDistanceCoeff", Settings.Default.terrainLODDistanceCoeff);
+            write_xml_file_element_value(gameXmlFile, "foliageViewDistanceCoeff", Settings.Default.foliageViewDistanceCoeff);
+        }
+
+        private string read_xml_file_element(string xmlFileName, string elementName)
+        {
+            /*
+             * Read the XML file xmlFileName and get the elementName value
+            */
+            logger.LogWrite("getting " + elementName + " From " + xmlFileName) ;
+            try
+            {
+                System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+                xmlDoc.Load(xmlFileName);
+                System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName(elementName);
+                if (elemList.Count > 0)
+                {
+                    // set scalability settings to value in xml file
+                    string elementValue = elemList[0].InnerXml;
+                    logger.LogWrite(elementName + " = " + elementValue);
+                    if (elementValue != null && elementValue.Length > 0) { return elementValue; }
+                    else { return ""; }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.Message);
+            }
+            return null;
+        }
+
+        private string write_xml_file_element_value(string xmlFileName, string elementName, string elementValue)
+        {
+            /*
+             * Write the value of elementName to the XML file xmlFileName
+            */
+            logger.LogWrite("writting " + elementName + " to " + xmlFileName);
+            try
+            {
+                System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+                xmlDoc.Load(xmlFileName);
+                System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName(elementName);
+                if (elemList.Count > 0)
+                {
+                    // write the element value and save document
+                    elemList[0].InnerXml = elementValue;
+                    xmlDoc.Save(gameXmlFile);
+                    //<lodDistanceCoeff>1.000000</lodDistanceCoeff>
+                    logger.LogWrite("\t<" + elementName + ">" + elementValue + "</" + elementName + ">");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.Message);
+            }
+            return null;
+        }
+
         private void game_xml_controls_element(bool write_value=false)
         {
             /*
@@ -1027,29 +1161,6 @@ namespace FS22_Mod_Manager
             catch (Exception ex)
             {
                 logger.LogWrite(ex.Message);
-            }
-        }
-
-        private void write_mod_override_to_xml()
-        {
-            /*
-             * Read the gameSettings.xml file and get the attribute values
-             * element name is modsDirectoryOverride
-             * attributes are active="true/false" and directory="c:\path\string"
-             */
-            logger.LogWrite("Saving mod override values to gameSettings.xml", true);
-            System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
-            xmlDoc.Load(gameSettingsXmlFile);
-            System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName("modsDirectoryOverride");
-            if (elemList.Count > 0)
-            {
-                for (int i = 0; i < elemList.Count; i++)
-                {
-                    // set attributes
-                    elemList[i].Attributes["active"].Value = mnuOptModOverride.Checked.ToString().ToLower();
-                    elemList[i].Attributes["directory"].Value = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
-                }
-                xmlDoc.Save(gameSettingsXmlFile);
             }
         }
 
