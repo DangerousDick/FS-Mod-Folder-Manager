@@ -7,7 +7,7 @@ namespace FS22_Mod_Manager
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V1.4.7";
+        const string version = "V1.4.8";
         // private variables to be set on form load
         private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "AppData\\Local\\FS22_Mod_Manager");
