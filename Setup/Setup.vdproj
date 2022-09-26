@@ -15,43 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_13140FC30DDB40A6A84B45282571C18E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5D6232432FA745CAABFD442F1C4E0E4D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9621442D31A447688991AFAA873BCC87"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BA8C4F1AA1C74B1295F051F056826CF5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BEC17397CC0A4C8BA8883F6C465C4A8C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C0EDE898980E409B9E91A9E82598AB11"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F17412FD5E2E48CC824BCCEAD9C1A69A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -152,132 +116,12 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13140FC30DDB40A6A84B45282571C18E"
-            {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\help\\images\\checkable_menu_items.png"
-            "TargetName" = "8:checkable_menu_items.png"
-            "Tag" = "8:"
-            "Folder" = "8:_906B9A2D46F7440691EFF54544B63C55"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D6232432FA745CAABFD442F1C4E0E4D"
             {
             "SourcePath" = "8:..\\FS22 Mod Manager\\tractor_red.ico"
             "TargetName" = "8:tractor_red.ico"
             "Tag" = "8:"
             "Folder" = "8:_081969BC89FB4D99A796ED7F7B26FB77"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9621442D31A447688991AFAA873BCC87"
-            {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\help\\images\\DigiCardRenewal.png"
-            "TargetName" = "8:DigiCardRenewal.png"
-            "Tag" = "8:"
-            "Folder" = "8:_906B9A2D46F7440691EFF54544B63C55"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BA8C4F1AA1C74B1295F051F056826CF5"
-            {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\help\\images\\explore_game_folder.png"
-            "TargetName" = "8:explore_game_folder.png"
-            "Tag" = "8:"
-            "Folder" = "8:_906B9A2D46F7440691EFF54544B63C55"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BEC17397CC0A4C8BA8883F6C465C4A8C"
-            {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\help\\images\\application.png"
-            "TargetName" = "8:application.png"
-            "Tag" = "8:"
-            "Folder" = "8:_906B9A2D46F7440691EFF54544B63C55"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C0EDE898980E409B9E91A9E82598AB11"
-            {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\help\\help.html"
-            "TargetName" = "8:help.html"
-            "Tag" = "8:"
-            "Folder" = "8:_E9B329A8FA674F138FECA1B5E86FB34A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F17412FD5E2E48CC824BCCEAD9C1A69A"
-            {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\help\\images\\explore_mod_folders.png"
-            "TargetName" = "8:explore_mod_folders.png"
-            "Tag" = "8:"
-            "Folder" = "8:_906B9A2D46F7440691EFF54544B63C55"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -337,28 +181,6 @@
                                         {
                                         }
                                     }
-                                }
-                            }
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_E9B329A8FA674F138FECA1B5E86FB34A"
-                    {
-                    "Name" = "8:Help"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_9FC476479A464C1893E079A0DFE7988B"
-                        "Folders"
-                        {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_906B9A2D46F7440691EFF54544B63C55"
-                            {
-                            "Name" = "8:images"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_CA92001519424F69868DD62D4D7A1390"
-                                "Folders"
-                                {
                                 }
                             }
                         }
@@ -939,7 +761,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8B58201449C04F55AEB35CF1E5765C7E"
             {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Debug\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Release\\net6.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_398E1001D9574A2FAEA6F055D681EABE"
