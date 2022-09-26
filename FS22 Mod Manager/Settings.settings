@@ -44,5 +44,8 @@
     <Setting Name="foliageViewDistanceCoeff" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.000000</Value>
     </Setting>
+    <Setting Name="maxNumMirrors" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

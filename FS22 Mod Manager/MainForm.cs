@@ -58,7 +58,7 @@ namespace FS22_Mod_Manager
             read_mod_override_from_xml();
             game_xml_controls_element();
             update_mod_override_values();
-            read_scalability_options();
+            read_game_options();
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -145,6 +145,16 @@ namespace FS22_Mod_Manager
             populate_file_list();
             read_mod_override_from_xml();
             game_xml_controls_element();
+        }
+
+        private void mnuFileOpenModMangerLog_Click(object sender, EventArgs e)
+        {
+            open_with_default_app(AppTempDirectory + "\\FsModManager.log");
+        }
+
+        private void mnuFileOpenGameLog_Click(object sender, EventArgs e)
+        {
+            open_with_default_app(txtUserDataPath.Text + "\\log.txt");
         }
 
         private void mnuFileExit_Click(object sender, EventArgs e)
@@ -399,6 +409,20 @@ namespace FS22_Mod_Manager
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
         }
 
+        private void gameOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*
+            * show game options dialog box
+            */
+            read_game_options();
+            GameOptions so = new GameOptions();
+            so.ShowDialog();
+            if (true == so.returnOK)
+            {
+                write_game_options();
+            }
+        }
+
         private void mnuHelpOpen_Click(object sender, EventArgs e)
         {
             /*
@@ -407,24 +431,11 @@ namespace FS22_Mod_Manager
             try
             {
                 string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-                open_with_default_app(projectDirectory + "\\help\\help.html");
+                open_with_default_app("https://github.com/DangerousDick/FsModsManager/wiki");
             }
             catch (Exception ex)
             {
                 logger.LogWrite(ex.Message);
-            }
-        }
-
-        private void mnuOptScalabilityOptions_Click(object sender, EventArgs e)
-        {
-            /*
-            * show scalability options dialog box
-            */
-            ScalabilityOptions so = new ScalabilityOptions();
-            so.ShowDialog();
-            if (true == so.returnOK)
-            {
-                write_scalability_options();
             }
         }
 
@@ -1022,7 +1033,7 @@ namespace FS22_Mod_Manager
             }
         }
 
-        private void read_scalability_options()
+        private void read_game_options()
         {
             /*
              * Read the game.xml file and get the scalability element value
@@ -1032,21 +1043,37 @@ namespace FS22_Mod_Manager
              *      <terrainLODDistanceCoeff>1.000000</terrainLODDistanceCoeff>
              *      <foliageViewDistanceCoeff>1.000000</foliageViewDistanceCoeff>
              * </scalability>
+             * Read the number of mirrors from gamesettings.xml
+             * <maxNumMirrors>5</maxNumMirrors>
              * 
              * The Coeff values are a percentage 1.000000 is 100%
             */
             string val;
+            // scalability options
             val = read_xml_file_element(gameXmlFile, "performanceClass");
-            if (val.Length > 0) { Settings.Default.performanceClass = val; }
+            if (!string.IsNullOrEmpty(val) && val.Length > 0)
+            { Settings.Default.performanceClass = val; }
+            //else { Settings.Default.performanceClass = "Medium"; }
             val = read_xml_file_element(gameXmlFile, "lodDistanceCoeff");
-            if (val.Length > 0) { Settings.Default.lodDistanceCoeff = val; }
+            if (!string.IsNullOrEmpty(val) && val.Length > 0)
+            { Settings.Default.lodDistanceCoeff = val; }
+            //else { Settings.Default.lodDistanceCoeff = "1.000000"; }
             val = read_xml_file_element(gameXmlFile, "terrainLODDistanceCoeff");
-            if (val.Length > 0) { Settings.Default.terrainLODDistanceCoeff = val; }
+            if (!string.IsNullOrEmpty(val) && val.Length > 0)
+            { Settings.Default.terrainLODDistanceCoeff = val; }
+            //else { Settings.Default.terrainLODDistanceCoeff = "1.000000"; }
             val = read_xml_file_element(gameXmlFile, "foliageViewDistanceCoeff");
-            if (val.Length > 0) { Settings.Default.foliageViewDistanceCoeff = val; }
+            if (!string.IsNullOrEmpty(val) && val.Length > 0)
+            { Settings.Default.foliageViewDistanceCoeff = val; }
+            //else { Settings.Default.foliageViewDistanceCoeff = "1.000000"; }
+            // maximum number of mirrors
+            val = read_xml_file_element(gameSettingsXmlFile, "maxNumMirrors");
+            if (!string.IsNullOrEmpty(val) && val.Length > 0)
+            { Settings.Default.maxNumMirrors = val; }
+            //else { Settings.Default.foliageViewDistanceCoeff = "0"; }
         }
 
-        private void write_scalability_options()
+        private void write_game_options()
         {
             /*
              * Write the scalability element values to the game.xml file
@@ -1056,6 +1083,8 @@ namespace FS22_Mod_Manager
              *      <terrainLODDistanceCoeff>1.000000</terrainLODDistanceCoeff>
              *      <foliageViewDistanceCoeff>1.000000</foliageViewDistanceCoeff>
              * </scalability>
+             * Write number of mirrors to gameSettings.xml
+             * <maxNumMirrors>5</maxNumMirrors>
              * 
              * The Coeff values are a percentage 1.000000 is 100%
             */
@@ -1063,6 +1092,7 @@ namespace FS22_Mod_Manager
             write_xml_file_element_value(gameXmlFile, "lodDistanceCoeff", Settings.Default.lodDistanceCoeff);
             write_xml_file_element_value(gameXmlFile, "terrainLODDistanceCoeff", Settings.Default.terrainLODDistanceCoeff);
             write_xml_file_element_value(gameXmlFile, "foliageViewDistanceCoeff", Settings.Default.foliageViewDistanceCoeff);
+            write_xml_file_element_value(gameSettingsXmlFile, "maxNumMirrors", Settings.Default.maxNumMirrors);
         }
 
         private string read_xml_file_element(string xmlFileName, string elementName)
@@ -1107,7 +1137,7 @@ namespace FS22_Mod_Manager
                 {
                     // write the element value and save document
                     elemList[0].InnerXml = elementValue;
-                    xmlDoc.Save(gameXmlFile);
+                    xmlDoc.Save(xmlFileName);
                     //<lodDistanceCoeff>1.000000</lodDistanceCoeff>
                     logger.LogWrite("\t<" + elementName + ">" + elementValue + "</" + elementName + ">");
                 }
@@ -1272,16 +1302,6 @@ namespace FS22_Mod_Manager
             {
                 logger.LogWrite(ex.Message, true);
             }
-        }
-
-        private void mnuFileOpenModMangerLog_Click(object sender, EventArgs e)
-        {
-            open_with_default_app(AppTempDirectory + "\\FsModManager.log");
-        }
-
-        private void mnuFileOpenGameLog_Click(object sender, EventArgs e)
-        {
-            open_with_default_app(txtUserDataPath.Text + "\\log.txt");
         }
     }
 }

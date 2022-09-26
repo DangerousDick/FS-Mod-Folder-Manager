@@ -190,5 +190,17 @@ namespace FS22_Mod_Manager {
                 this["foliageViewDistanceCoeff"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string maxNumMirrors {
+            get {
+                return ((string)(this["maxNumMirrors"]));
+            }
+            set {
+                this["maxNumMirrors"] = value;
+            }
+        }
     }
 }

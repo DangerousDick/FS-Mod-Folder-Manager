@@ -10,15 +10,15 @@ using System.Windows.Forms;
 
 namespace FS22_Mod_Manager
 {
-    public partial class ScalabilityOptions : Form
+    public partial class GameOptions : Form
     {
         public bool returnOK = false;
-        public ScalabilityOptions(string filename = "filename", bool filename_edit = false)
+        public GameOptions(string filename = "filename", bool filename_edit = false)
         {
             InitializeComponent();
         }
 
-        private void ScalabilityOptions_Load(object sender, EventArgs e)
+        private void GameOptions_Load(object sender, EventArgs e)
         {
             /*
              * load values from Settings
@@ -27,17 +27,22 @@ namespace FS22_Mod_Manager
             nudLodDistanceCoeff.Text = Settings.Default.lodDistanceCoeff;
             nudTerrainLODDistanceCoeff.Text = Settings.Default.terrainLODDistanceCoeff;
             nudFoliageViewDistanceCoeff.Text = Settings.Default.foliageViewDistanceCoeff;
+            nudMaximumMirrors.Text = Settings.Default.maxNumMirrors;
         }
 
-        private void ScalabilityOptions_FormClosing(object sender, FormClosingEventArgs e)
+        private void GameOptions_FormClosing(object sender, FormClosingEventArgs e)
         {
             /*
              * write values for scalability to game.xml
              */
-            Settings.Default.performanceClass = cmbPerformanceClass.Text;
-            Settings.Default.lodDistanceCoeff = nudLodDistanceCoeff.Text;
-            Settings.Default.terrainLODDistanceCoeff = nudTerrainLODDistanceCoeff.Text;
-            Settings.Default.foliageViewDistanceCoeff = nudFoliageViewDistanceCoeff.Text;
+            if (returnOK)
+            {
+                Settings.Default.performanceClass = cmbPerformanceClass.Text;
+                Settings.Default.lodDistanceCoeff = nudLodDistanceCoeff.Text;
+                Settings.Default.terrainLODDistanceCoeff = nudTerrainLODDistanceCoeff.Text;
+                Settings.Default.foliageViewDistanceCoeff = nudFoliageViewDistanceCoeff.Text;
+                Settings.Default.maxNumMirrors = nudMaximumMirrors.Text;
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
