@@ -61,6 +61,7 @@
             this.mnuOptModDoubleClick = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptModOverride = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptOverwriteOnCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOptdDleteToRecycleBin = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuModLaunch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptLaunchLaunchCheats = new System.Windows.Forms.ToolStripMenuItem();
@@ -340,7 +341,8 @@
             this.mnuOptMod.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuOptModDoubleClick,
             this.mnuOptModOverride,
-            this.mnuOptOverwriteOnCopy});
+            this.mnuOptOverwriteOnCopy,
+            this.mnuOptdDleteToRecycleBin});
             this.mnuOptMod.Name = "mnuOptMod";
             this.mnuOptMod.Size = new System.Drawing.Size(225, 22);
             this.mnuOptMod.Text = "Mod Options";
@@ -365,6 +367,13 @@
             this.mnuOptOverwriteOnCopy.Name = "mnuOptOverwriteOnCopy";
             this.mnuOptOverwriteOnCopy.Size = new System.Drawing.Size(266, 22);
             this.mnuOptOverwriteOnCopy.Text = "Overwrite on Copy";
+            // 
+            // mnuOptdDleteToRecycleBin
+            // 
+            this.mnuOptdDleteToRecycleBin.CheckOnClick = true;
+            this.mnuOptdDleteToRecycleBin.Name = "mnuOptdDleteToRecycleBin";
+            this.mnuOptdDleteToRecycleBin.Size = new System.Drawing.Size(266, 22);
+            this.mnuOptdDleteToRecycleBin.Text = "Delete to Recycle Bin";
             // 
             // mnuModLaunch
             // 
@@ -885,5 +894,6 @@
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem mnuFileZipGameDataDirectory;
         private ToolStripMenuItem gameOptionsToolStripMenuItem;
+        private ToolStripMenuItem mnuOptdDleteToRecycleBin;
     }
 }

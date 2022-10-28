@@ -202,5 +202,17 @@ namespace FS22_Mod_Manager {
                 this["maxNumMirrors"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DeleteToRecycleBin {
+            get {
+                return ((bool)(this["DeleteToRecycleBin"]));
+            }
+            set {
+                this["DeleteToRecycleBin"] = value;
+            }
+        }
     }
 }
