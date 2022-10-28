@@ -201,7 +201,16 @@ namespace FS22_Mod_Manager
                 {
                     // delete the folder
                     logger.LogWrite("Removing folder: " + remove_folder);
-                    Directory.Delete(remove_folder, true);
+                    if (mnuOptdDleteToRecycleBin.Checked)
+                    {
+                        Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(remove_folder,
+                            Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                            Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                    }
+                    else
+                    {
+                        Directory.Delete(remove_folder, true);
+                    }
                     populate_folder_list();
                     populate_file_list();
                 }
@@ -256,7 +265,16 @@ namespace FS22_Mod_Manager
             logger.LogWrite("DELETING file " + del_file);
             try
             {
-                File.Delete(del_file);
+                if (mnuOptdDleteToRecycleBin.Checked)
+                {
+                    Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(del_file,
+                        Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                        Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                }
+                else
+                {
+                    File.Delete(del_file);
+                }
                 populate_file_list();
             }
             catch (Exception ex) 
@@ -915,6 +933,7 @@ namespace FS22_Mod_Manager
                 mnuOptLaunchConsole.Checked = Settings.Default.LaunchWithConsole;
                 mnuOptLaunchLaunchCheats.Checked = Settings.Default.LaunchWithCheats;
                 mnuOptLaunchRestart.Checked = Settings.Default.LaunchAsRestart;
+                mnuOptdDleteToRecycleBin.Checked = Settings.Default.DeleteToRecycleBin;
 
                 log_user_settings();
             }
@@ -941,6 +960,7 @@ namespace FS22_Mod_Manager
             Settings.Default.LaunchWithConsole = mnuOptLaunchConsole.Checked;
             Settings.Default.LaunchWithCheats = mnuOptLaunchLaunchCheats.Checked;
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
+            Settings.Default.DeleteToRecycleBin = mnuOptdDleteToRecycleBin.Checked;
             // Window location
             Settings.Default.MainWindowLocation = this.Location;
             Settings.Default.Save();
