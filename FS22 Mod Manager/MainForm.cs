@@ -115,7 +115,7 @@ namespace FS22_Mod_Manager
                 if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show(message, caption, buttons))
                 {
                     // delete the folder
-                    logger.LogWrite("deleting file " + zipName);
+                    logger.LogWrite("deleting file " + zipName, true);
                     File.Delete(zipName);
                 }
                 else
@@ -131,7 +131,7 @@ namespace FS22_Mod_Manager
             catch(Exception ex)
             {
                 stsStatusLabel.Text = "Zip creation failed!";
-                logger.LogWrite("ERROR: Zip creation failed!\n" + ex.Message);
+                logger.LogWrite("ERROR: Zip creation failed!\n" + ex.Message, true);
             }
             stsStatusLabel.Text = "Zip created";
         }
@@ -173,7 +173,7 @@ namespace FS22_Mod_Manager
             string new_folder = create_new_mod_folder();
             if ("" != new_folder)
             {
-                logger.LogWrite(new_folder + " created");
+                logger.LogWrite(new_folder + " created", true);
                 if (Directory.Exists(new_folder))
                 {
                     populate_folder_list();
@@ -200,7 +200,7 @@ namespace FS22_Mod_Manager
                 if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show(message, caption, buttons))
                 {
                     // delete the folder
-                    logger.LogWrite("Removing folder: " + remove_folder);
+                    logger.LogWrite("Removing folder: " + remove_folder, true);
                     if (mnuOptdDleteToRecycleBin.Checked)
                     {
                         Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(remove_folder,
@@ -225,7 +225,7 @@ namespace FS22_Mod_Manager
             */
             string new_folder = create_new_mod_folder();
             string existing_folder = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
-            logger.LogWrite("Creating " + new_folder + " From " + existing_folder);
+            logger.LogWrite("Creating " + new_folder + " From " + existing_folder, true);
             try
             {
                 if (Directory.Exists(new_folder) && Directory.Exists(existing_folder))
@@ -239,12 +239,12 @@ namespace FS22_Mod_Manager
                         logger.LogWrite(file.FullName + " --> " + targetFilePath);
                     }
                     lstModFolders.Items.Add(Path.GetFileName(new_folder));
-                    logger.LogWrite(new_folder + " created");
+                    logger.LogWrite(new_folder + " created", true);
                 }
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.ToString());
+                logger.LogWrite(ex.ToString(), true);
             }
         }
 
@@ -262,7 +262,7 @@ namespace FS22_Mod_Manager
              * Deletes the mod file from the directory and removes it from the list
              */
             string del_file = Path.Join(txtModFolderPath.Text, lstModFolders.Text, lstModFiles.Text);
-            logger.LogWrite("DELETING file " + del_file);
+            logger.LogWrite("DELETING file " + del_file, true);
             try
             {
                 if (mnuOptdDleteToRecycleBin.Checked)
@@ -279,7 +279,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex) 
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -309,7 +309,7 @@ namespace FS22_Mod_Manager
                         }
                         catch (Exception ex)
                         {
-                            logger.LogWrite(ex.Message);
+                            logger.LogWrite(ex.Message, true);
                         }
                     }
                     populate_file_list();
@@ -317,7 +317,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             { 
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -352,7 +352,7 @@ namespace FS22_Mod_Manager
                             }
                             catch (Exception ex)
                             {
-                                logger.LogWrite(ex.Message);
+                                logger.LogWrite(ex.Message, true);
                             }
                         }
                     }
@@ -361,7 +361,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -376,7 +376,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
 
         }
@@ -432,6 +432,7 @@ namespace FS22_Mod_Manager
             /*
             * show game options dialog box
             */
+            logger.LogWrite("Showing game options dialog", true);
             read_game_options();
             GameOptions so = new GameOptions();
             so.ShowDialog();
@@ -453,7 +454,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -475,7 +476,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -556,13 +557,13 @@ namespace FS22_Mod_Manager
                             populate_file_list();
                         }
                         catch (IOException ex)
-                        { logger.LogWrite("Failed to rename folder\n" + ex.Message); }
+                        { logger.LogWrite("Failed to rename folder\n" + ex.Message, true); }
                     }
                 }
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -575,14 +576,14 @@ namespace FS22_Mod_Manager
             /*
              *  add scroll to end funtionality so the end of the path is visible 
              */
-            logger.LogWrite("Mod override values changed: " + txtModOverrideValues.Text);
+            logger.LogWrite("Mod override values changed: " + txtModOverrideValues.Text, true);
             try
             {
                 txtModOverrideValues.Select(txtModOverrideValues.TextLength, 0);
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -591,14 +592,14 @@ namespace FS22_Mod_Manager
             /*
              *  add scroll to end funtionality so the end of the path is visible 
              */
-            logger.LogWrite("Mod folder path changed: " + txtModFolderPath.Text);
+            logger.LogWrite("Mod folder path changed: " + txtModFolderPath.Text, true);
             try
             { 
                 txtModFolderPath.Select(txtModFolderPath.TextLength, 0);
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -607,14 +608,14 @@ namespace FS22_Mod_Manager
             /*
              *  add scroll to end funtionality so the end of the path is visible 
              */
-            logger.LogWrite("User data path changed: " + txtUserDataPath.Text);
+            logger.LogWrite("User data path changed: " + txtUserDataPath.Text, true);
             try
             {
                 txtUserDataPath.Select(txtUserDataPath.TextLength, 0);
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -623,14 +624,14 @@ namespace FS22_Mod_Manager
             /*
              *  add scroll to end funtionality so the end of the path is visible 
              */
-            logger.LogWrite("Game EXE changed: " + txtGameExeFile.Text);
+            logger.LogWrite("Game EXE changed: " + txtGameExeFile.Text, true);
             try
             {
                 txtGameExeFile.Select(txtGameExeFile.TextLength, 0);
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -665,7 +666,7 @@ namespace FS22_Mod_Manager
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWrite(ex.Message);
+                    logger.LogWrite(ex.Message, true);
                 }
             }
         }
@@ -689,7 +690,7 @@ namespace FS22_Mod_Manager
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWrite(ex.Message);
+                    logger.LogWrite(ex.Message, true);
                 }
             }
         }
@@ -728,7 +729,7 @@ namespace FS22_Mod_Manager
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWrite(ex.Message);
+                    logger.LogWrite(ex.Message, true);
                 }
             }
         }
@@ -817,7 +818,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -826,7 +827,7 @@ namespace FS22_Mod_Manager
             /*
              * Use the open file dialog class to get a list of mod files
              * */
-            logger.LogWrite("Getting file list");
+            logger.LogWrite("Getting file list", true);
             List<string> file_list = new List<string>();
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -857,7 +858,7 @@ namespace FS22_Mod_Manager
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWrite(ex.Message);
+                    logger.LogWrite(ex.Message, true);
                 }
             }
             return file_list.ToArray();
@@ -875,7 +876,7 @@ namespace FS22_Mod_Manager
             {
                 new_folder = Path.Join(txtModFolderPath.Text, new_folder);
                 // create new folder and update lists
-                logger.LogWrite("Creating new folder");
+                logger.LogWrite("Creating new folder", true);
                 try
                 {
                     Directory.CreateDirectory(new_folder);
@@ -895,7 +896,8 @@ namespace FS22_Mod_Manager
             /*
              * Read the user settings file and set the application values
              */
-            logger.LogWrite("Getting default user settings");
+            logger.LogWrite("Getting user settings");
+            logger.LogWrite("---------------------");
             try
             { 
                 // get textbox values
@@ -936,6 +938,7 @@ namespace FS22_Mod_Manager
                 mnuOptdDleteToRecycleBin.Checked = Settings.Default.DeleteToRecycleBin;
 
                 log_user_settings();
+                logger.LogWrite("-----------------------------");
             }
             catch (Exception ex)
             {
@@ -948,7 +951,8 @@ namespace FS22_Mod_Manager
             /*
              * Write the application user settings to file
              */
-            logger.LogWrite("Saving default user settings");
+            logger.LogWrite("Saving user settings");
+            logger.LogWrite("--------------------");
             // textbox values
             Settings.Default.ModFolderPath = txtModFolderPath.Text;
             Settings.Default.UserDataPath = txtUserDataPath.Text;
@@ -965,6 +969,7 @@ namespace FS22_Mod_Manager
             Settings.Default.MainWindowLocation = this.Location;
             Settings.Default.Save();
             log_user_settings();
+            logger.LogWrite("----------------------------");
         }
 
         private void log_user_settings()
@@ -981,6 +986,7 @@ namespace FS22_Mod_Manager
             logger.LogWrite("Option AllowDoubleClick = " + Settings.Default.AllowDoubleClick.ToString());
             logger.LogWrite("Option ModFodlerOverride = " + Settings.Default.ModFodlerOverride.ToString());
             logger.LogWrite("Option OverwriteOnCopy = " + Settings.Default.OverwriteOnCopy.ToString());
+            logger.LogWrite("Option DeleteToRecycleBin = " + Settings.Default.DeleteToRecycleBin.ToString());
             logger.LogWrite("Option LaunchWithConsole = " + Settings.Default.LaunchWithConsole.ToString());
             logger.LogWrite("Option LaunchWithCheats= " + Settings.Default.LaunchWithCheats.ToString());
             logger.LogWrite("Option LaunchAsRestart = " + Settings.Default.LaunchAsRestart.ToString());
@@ -1026,7 +1032,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -1108,6 +1114,7 @@ namespace FS22_Mod_Manager
              * 
              * The Coeff values are a percentage 1.000000 is 100%
             */
+            logger.LogWrite("Saving game options", true);
             write_xml_file_element_value(gameXmlFile, "performanceClass", Settings.Default.performanceClass);
             write_xml_file_element_value(gameXmlFile, "lodDistanceCoeff", Settings.Default.lodDistanceCoeff);
             write_xml_file_element_value(gameXmlFile, "terrainLODDistanceCoeff", Settings.Default.terrainLODDistanceCoeff);
@@ -1120,7 +1127,7 @@ namespace FS22_Mod_Manager
             /*
              * Read the XML file xmlFileName and get the elementName value
             */
-            logger.LogWrite("getting " + elementName + " From " + xmlFileName) ;
+            logger.LogWrite("getting " + elementName + " From " + xmlFileName, true) ;
             try
             {
                 System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
@@ -1137,7 +1144,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
             return null;
         }
@@ -1147,7 +1154,7 @@ namespace FS22_Mod_Manager
             /*
              * Write the value of elementName to the XML file xmlFileName
             */
-            logger.LogWrite("writting " + elementName + " to " + xmlFileName);
+            logger.LogWrite("writing " + elementName + " to " + xmlFileName, true);
             try
             {
                 System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
@@ -1164,7 +1171,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
             return null;
         }
@@ -1178,7 +1185,7 @@ namespace FS22_Mod_Manager
              *      <openDevConsole onWarnings="false" onErrors="false"/>
              * </development>
              */
-            logger.LogWrite("Getting console settings from game.xml");
+            logger.LogWrite("Getting console settings from game.xml", true);
             try
             { 
                 System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
@@ -1210,7 +1217,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -1219,7 +1226,7 @@ namespace FS22_Mod_Manager
             /*
              * Populate the mod files list from the mod folder list selected item
              */
-            logger.LogWrite("Populating mod files list box from " + lstModFolders.Text);
+            logger.LogWrite("Populating mod files list box from " + lstModFolders.Text, true);
             try
             { 
                 if (lstModFiles.Items.Count > 0)
@@ -1239,7 +1246,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
@@ -1248,7 +1255,7 @@ namespace FS22_Mod_Manager
             /*
              * Get the folders from the mod folder path and populate the list box
              */
-            logger.LogWrite("Populating mod folders list box from " + txtModFolderPath.Text);
+            logger.LogWrite("Populating mod folders list box from " + txtModFolderPath.Text, true);
             try
             { 
                 if (Directory.Exists(txtModFolderPath.Text))
@@ -1274,7 +1281,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                logger.LogWrite(ex.Message);
+                logger.LogWrite(ex.Message, true);
             }
         }
 
