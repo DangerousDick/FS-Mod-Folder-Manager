@@ -3,6 +3,9 @@ namespace FS22_Mod_Manager
     using System.Diagnostics;       // for Process class
     using Microsoft.VisualBasic;    // for input box
     using System.IO.Compression;
+    using System.IO;
+    using System.Windows.Forms;
+    using System.Security.Cryptography;
 
     public partial class frmMain : Form
     {
@@ -157,6 +160,41 @@ namespace FS22_Mod_Manager
             open_with_default_app(txtUserDataPath.Text + "\\log.txt");
         }
 
+        private void mnuFileOpenGameNotes_Click(object sender, EventArgs e)
+        {
+            /*
+             * Open game notes text file
+             * Default location is in the mod file directory
+             * Default name is mod folder_game_notes
+             * e.g. c:\path\to\mod_folders\mod_folder game notes.txt
+             */
+            //String modFolder = Path.GetFileNameWithoutExtension(Path.Join(txtModFolderPath.Text, lstModFolders.Text, lstModFiles.Text));
+            //String default_file_name = Path.Join(txtModFolderPath.Text, lstModFolders.Text, modFolder + " game notes.txt");
+            String default_file_name = Path.Join(txtModFolderPath.Text, lstModFolders.Text, lstModFolders.Text + " game notes.txt");
+            if (!File.Exists(default_file_name))
+            {
+                // does the user want to create it?
+                string message = "File \"" + lstModFolders.Text + " game notes.txt\" does not exist. Do you want to create it?";
+                string caption = "Create new file?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                // Displays the MessageBox.
+                if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show(message, caption, buttons))
+                {
+                    // create text new file
+                    String file_name = Path.GetFileNameWithoutExtension(default_file_name);
+                    using (StreamWriter sw = File.CreateText(default_file_name))
+                    {
+                        sw.WriteLine(file_name + " game notes\n");
+                    }
+                }
+            }
+            default_file_name = get_file_name(Path.GetDirectoryName(default_file_name), "Text files(*.txt)|*.txt|All files (*.*)|*.*");
+            if (default_file_name.Length > 0)
+                {
+                    open_with_default_app(default_file_name);
+                }
+        }
+
         private void mnuFileExit_Click(object sender, EventArgs e)
         {
             /*
@@ -204,8 +242,8 @@ namespace FS22_Mod_Manager
                     if (mnuOptdDleteToRecycleBin.Checked)
                     {
                         Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(remove_folder,
-                            Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
-                            Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                        Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                        Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
                     }
                     else
                     {
@@ -268,8 +306,8 @@ namespace FS22_Mod_Manager
                 if (mnuOptdDleteToRecycleBin.Checked)
                 {
                     Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(del_file,
-                        Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
-                        Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                    Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                    Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
                 }
                 else
                 {
@@ -558,6 +596,48 @@ namespace FS22_Mod_Manager
                         }
                         catch (IOException ex)
                         { logger.LogWrite("Failed to rename folder\n" + ex.Message, true); }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.Message, true);
+            }
+        }
+
+        private void mnuContextModCopyToAll_Click(object sender, EventArgs e)
+        {
+            /*
+             *  copy selected file to all folders
+             */
+            // get selected mod file name
+            string mod_file = Path.Join(txtModFolderPath.Text, lstModFolders.Text, lstModFiles.Text);
+            logger.LogWrite("Copying " + mod_file + "to all folders");
+            // get confirmation
+            string message = "Do you want to copy " + mod_file + " to ALL folders?";
+            string caption = "Copy to all";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            try
+            {
+                if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show(message, caption, buttons))
+                {
+                    // copy to all folders in list
+                    foreach (string folder in lstModFolders.Items)
+                    {
+                        string dest_file = Path.Join(txtModFolderPath.Text, folder, Path.GetFileName(mod_file));
+                        logger.LogWrite("\t" + mod_file + " -> " + dest_file);
+                        try
+                        {
+                            if (mod_file != dest_file) // ignore selected mod file
+                            {
+                                if (mnuOptOverwriteOnCopy.Checked) { File.Copy(mod_file, dest_file, true); } // overwrite set to true
+                                else { File.Copy(mod_file, dest_file, false); }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.LogWrite(ex.Message, true);
+                        }
                     }
                 }
             }
@@ -862,6 +942,46 @@ namespace FS22_Mod_Manager
                 }
             }
             return file_list.ToArray();
+        }
+
+        private string get_file_name(string default_path, string file_filter)
+        {
+            /*
+             * Use the open file dialog class to get a file name
+             * */
+            logger.LogWrite("Getting file name", true);
+            if (default_path != null && default_path.Length > 0)
+            {
+                // create file
+                using (OpenFileDialog ofd = new OpenFileDialog())
+                {
+                    try
+                    {
+                        ofd.Filter = file_filter;
+                        ofd.FilterIndex = 1;
+                        ofd.InitialDirectory = default_path;
+                        if (ofd.ShowDialog() == DialogResult.OK)
+                        {
+                            logger.LogWrite("Selected file " + ofd.FileName);
+                            return ofd.FileName;
+                        }
+                        else
+                        {
+                            stsStatusLabel.Text = "No file selected";
+                            return "";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogWrite(ex.Message, true);
+                    }
+                }
+            }
+            else
+            {
+                // get file name
+            }
+            return "";
         }
 
         public string create_new_mod_folder()

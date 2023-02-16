@@ -39,6 +39,7 @@
             this.mnuFileRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileOpenModMangerLog = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileOpenGameLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFileOpenGameNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFileZipGameDataDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -107,6 +108,8 @@
             this.mnuContexstFileRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContextFileSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mnuContextModCopyToAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuContextOpenGameNotes = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuApplicationMain.SuspendLayout();
             this.stsStatusBar.SuspendLayout();
             this.pnlLists.SuspendLayout();
@@ -138,6 +141,7 @@
             this.mnuFileRefresh,
             this.mnuFileOpenModMangerLog,
             this.mnuFileOpenGameLog,
+            this.mnuFileOpenGameNotes,
             this.toolStripMenuItem1,
             this.mnuFileZipGameDataDirectory,
             this.mnuFileSeparator2,
@@ -196,6 +200,13 @@
             this.mnuFileOpenGameLog.Size = new System.Drawing.Size(234, 22);
             this.mnuFileOpenGameLog.Text = "Open Game Log";
             this.mnuFileOpenGameLog.Click += new System.EventHandler(this.mnuFileOpenGameLog_Click);
+            // 
+            // mnuFileOpenGameNotes
+            // 
+            this.mnuFileOpenGameNotes.Name = "mnuFileOpenGameNotes";
+            this.mnuFileOpenGameNotes.Size = new System.Drawing.Size(234, 22);
+            this.mnuFileOpenGameNotes.Text = "Open Game notes";
+            this.mnuFileOpenGameNotes.Click += new System.EventHandler(this.mnuFileOpenGameNotes_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -712,10 +723,12 @@
             this.mnuContextFolderRemove,
             this.mnuContextFolderRename,
             this.mnuContextFolderSeparator,
+            this.mnuContextCopyToSelected,
             this.mnuContextFolderCopyAsNew,
-            this.mnuContextCopyToSelected});
+            this.toolStripMenuItem2,
+            this.mnuContextOpenGameNotes});
             this.mnuContextFolderList.Name = "mnuContextFolderList";
-            this.mnuContextFolderList.Size = new System.Drawing.Size(241, 120);
+            this.mnuContextFolderList.Size = new System.Drawing.Size(241, 148);
             // 
             // mnuContextFolderAdd
             // 
@@ -764,26 +777,38 @@
             this.mnuContextFileSeparator,
             this.mnuContextModCopyToAll});
             this.mnuContextFileList.Name = "mnuContextFileList";
-            this.mnuContextFileList.Size = new System.Drawing.Size(203, 54);
+            this.mnuContextFileList.Size = new System.Drawing.Size(209, 54);
             // 
             // mnuContexstFileRemove
             // 
             this.mnuContexstFileRemove.Name = "mnuContexstFileRemove";
-            this.mnuContexstFileRemove.Size = new System.Drawing.Size(202, 22);
+            this.mnuContexstFileRemove.Size = new System.Drawing.Size(208, 22);
             this.mnuContexstFileRemove.Text = "Remove Mod File";
             this.mnuContexstFileRemove.Click += new System.EventHandler(this.mnuModFileRemove_Click);
             // 
             // mnuContextFileSeparator
             // 
             this.mnuContextFileSeparator.Name = "mnuContextFileSeparator";
-            this.mnuContextFileSeparator.Size = new System.Drawing.Size(199, 6);
+            this.mnuContextFileSeparator.Size = new System.Drawing.Size(205, 6);
             // 
             // mnuContextModCopyToAll
             // 
             this.mnuContextModCopyToAll.Name = "mnuContextModCopyToAll";
-            this.mnuContextModCopyToAll.Size = new System.Drawing.Size(202, 22);
-            this.mnuContextModCopyToAll.Text = "Copy Mod to All Folders";
-            this.mnuContextModCopyToAll.Click += new System.EventHandler(this.mnuModFileCopyToAll_Click);
+            this.mnuContextModCopyToAll.Size = new System.Drawing.Size(208, 22);
+            this.mnuContextModCopyToAll.Text = "Copy Mod to ALL Folders";
+            this.mnuContextModCopyToAll.Click += new System.EventHandler(this.mnuContextModCopyToAll_Click);
+            // 
+            // mnuContextOpenGameNotes
+            // 
+            this.mnuContextOpenGameNotes.Name = "mnuContextOpenGameNotes";
+            this.mnuContextOpenGameNotes.Size = new System.Drawing.Size(240, 22);
+            this.mnuContextOpenGameNotes.Text = "Open Game Notes";
+            this.mnuContextOpenGameNotes.Click += new System.EventHandler(this.mnuFileOpenGameNotes_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(237, 6);
             // 
             // frmMain
             // 
@@ -895,5 +920,8 @@
         private ToolStripMenuItem mnuFileZipGameDataDirectory;
         private ToolStripMenuItem gameOptionsToolStripMenuItem;
         private ToolStripMenuItem mnuOptdDleteToRecycleBin;
+        private ToolStripMenuItem mnuFileOpenGameNotes;
+        private ToolStripSeparator toolStripMenuItem2;
+        private ToolStripMenuItem mnuContextOpenGameNotes;
     }
 }
