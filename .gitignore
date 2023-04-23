@@ -4,3 +4,4 @@ obj
 *.log
 *.msi
 *.exe
+/FS22 Mod Manager/App.config
