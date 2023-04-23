@@ -28,817 +28,771 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.mnuApplicationMain = new System.Windows.Forms.MenuStrip();
-            this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpenUserDataDir = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpenGameSettingsXml = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpenGameXml = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFileRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpenModMangerLog = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpenGameLog = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpenGameNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFileZipGameDataDirectory = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMods = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModsFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModFolderAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModFolderRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModFolderRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCopyAsNewFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuModsFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModFileRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModFileCopyToSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModFileCopyToAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModsSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuModsFolderOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModsLaunchModhub = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptMod = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptModDoubleClick = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptModOverride = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptOverwriteOnCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptdDleteToRecycleBin = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuModLaunch = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptLaunchConsole = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptLaunchLaunchCheats = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptLaunchRestart = new System.Windows.Forms.ToolStripMenuItem();
-            this.gameOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOptionsOpenOptsDirectory = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelpOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelpSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.stsStatusBar = new System.Windows.Forms.StatusStrip();
-            this.stsStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pnlLists = new System.Windows.Forms.Panel();
-            this.lblModFileCount = new System.Windows.Forms.Label();
-            this.lstModFiles = new System.Windows.Forms.ListBox();
-            this.lblModFiles = new System.Windows.Forms.Label();
-            this.lblModFolderCount = new System.Windows.Forms.Label();
-            this.lstModFolders = new System.Windows.Forms.ListBox();
-            this.lblModFolders = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.lblModOverrideValues = new System.Windows.Forms.Label();
-            this.txtModOverrideValues = new System.Windows.Forms.TextBox();
-            this.btnLaunchGame = new System.Windows.Forms.Button();
-            this.btnSetModOverride = new System.Windows.Forms.Button();
-            this.btnGameExeFile = new System.Windows.Forms.Button();
-            this.txtGameExeFile = new System.Windows.Forms.TextBox();
-            this.lblGameExeFile = new System.Windows.Forms.Label();
-            this.btnUserDataPath = new System.Windows.Forms.Button();
-            this.txtUserDataPath = new System.Windows.Forms.TextBox();
-            this.lblUserDataPath = new System.Windows.Forms.Label();
-            this.btnModFolderPath = new System.Windows.Forms.Button();
-            this.txtModFolderPath = new System.Windows.Forms.TextBox();
-            this.lblModFolderPath = new System.Windows.Forms.Label();
-            this.mnuContextFolderList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuContextFolderAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextFolderRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextFolderRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextFolderSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuContextFolderCopyAsNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextCopyToSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextFileList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuContexstFileRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextFileSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuContextModCopyToAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuContextOpenGameNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuApplicationMain.SuspendLayout();
-            this.stsStatusBar.SuspendLayout();
-            this.pnlLists.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.mnuContextFolderList.SuspendLayout();
-            this.mnuContextFileList.SuspendLayout();
-            this.SuspendLayout();
+            mnuApplicationMain = new MenuStrip();
+            mnuFile = new ToolStripMenuItem();
+            mnuFileOpenUserDataDir = new ToolStripMenuItem();
+            mnuFileOpenGameSettingsXml = new ToolStripMenuItem();
+            mnuFileOpenGameXml = new ToolStripMenuItem();
+            mnuFileSeparator1 = new ToolStripSeparator();
+            mnuFileRefresh = new ToolStripMenuItem();
+            mnuFileOpenModMangerLog = new ToolStripMenuItem();
+            mnuFileOpenGameLog = new ToolStripMenuItem();
+            mnuFileOpenGameNotes = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripSeparator();
+            mnuFileZipGameDataDirectory = new ToolStripMenuItem();
+            mnuFileSeparator2 = new ToolStripSeparator();
+            mnuFileExit = new ToolStripMenuItem();
+            mnuMods = new ToolStripMenuItem();
+            mnuModsFolder = new ToolStripMenuItem();
+            mnuModFolderAdd = new ToolStripMenuItem();
+            mnuModFolderRemove = new ToolStripMenuItem();
+            mnuModFolderRename = new ToolStripMenuItem();
+            mnuCopyAsNewFolder = new ToolStripMenuItem();
+            MnuModsFile = new ToolStripMenuItem();
+            mnuModFileRemove = new ToolStripMenuItem();
+            mnuModFileCopyToSelected = new ToolStripMenuItem();
+            mnuModFileCopyToAll = new ToolStripMenuItem();
+            mnuModsSeparator = new ToolStripSeparator();
+            mnuModsFolderOpen = new ToolStripMenuItem();
+            mnuModsLaunchModhub = new ToolStripMenuItem();
+            mnuOptions = new ToolStripMenuItem();
+            mnuOptMod = new ToolStripMenuItem();
+            mnuOptModDoubleClick = new ToolStripMenuItem();
+            mnuOptModOverride = new ToolStripMenuItem();
+            mnuOptOverwriteOnCopy = new ToolStripMenuItem();
+            mnuOptdDleteToRecycleBin = new ToolStripMenuItem();
+            mnuOptOnlyShowZips = new ToolStripMenuItem();
+            mnuModLaunch = new ToolStripMenuItem();
+            mnuOptLaunchConsole = new ToolStripMenuItem();
+            mnuOptLaunchLaunchCheats = new ToolStripMenuItem();
+            mnuOptLaunchRestart = new ToolStripMenuItem();
+            gameOptionsToolStripMenuItem = new ToolStripMenuItem();
+            mnuOptionsOpenOptsDirectory = new ToolStripMenuItem();
+            mnuHelp = new ToolStripMenuItem();
+            mnuHelpOpen = new ToolStripMenuItem();
+            mnuHelpSeparator = new ToolStripSeparator();
+            mnuHelpAbout = new ToolStripMenuItem();
+            stsStatusBar = new StatusStrip();
+            stsStatusLabel = new ToolStripStatusLabel();
+            pnlLists = new Panel();
+            lblModFileCount = new Label();
+            lstModFiles = new ListBox();
+            lblModFiles = new Label();
+            lblModFolderCount = new Label();
+            lstModFolders = new ListBox();
+            lblModFolders = new Label();
+            panel1 = new Panel();
+            btnExit = new Button();
+            lblModOverrideValues = new Label();
+            txtModOverrideValues = new TextBox();
+            btnLaunchGame = new Button();
+            btnSetModOverride = new Button();
+            btnGameExeFile = new Button();
+            txtGameExeFile = new TextBox();
+            lblGameExeFile = new Label();
+            btnUserDataPath = new Button();
+            txtUserDataPath = new TextBox();
+            lblUserDataPath = new Label();
+            btnModFolderPath = new Button();
+            txtModFolderPath = new TextBox();
+            lblModFolderPath = new Label();
+            mnuContextFolderList = new ContextMenuStrip(components);
+            mnuContextFolderAdd = new ToolStripMenuItem();
+            mnuContextFolderRemove = new ToolStripMenuItem();
+            mnuContextFolderRename = new ToolStripMenuItem();
+            mnuContextFolderSeparator = new ToolStripSeparator();
+            mnuContextCopyToSelected = new ToolStripMenuItem();
+            mnuContextFolderCopyAsNew = new ToolStripMenuItem();
+            toolStripMenuItem2 = new ToolStripSeparator();
+            mnuContextOpenGameNotes = new ToolStripMenuItem();
+            mnuContextFileList = new ContextMenuStrip(components);
+            mnuContexstFileRemove = new ToolStripMenuItem();
+            mnuContextFileSeparator = new ToolStripSeparator();
+            mnuContextModCopyToAll = new ToolStripMenuItem();
+            mnuApplicationMain.SuspendLayout();
+            stsStatusBar.SuspendLayout();
+            pnlLists.SuspendLayout();
+            panel1.SuspendLayout();
+            mnuContextFolderList.SuspendLayout();
+            mnuContextFileList.SuspendLayout();
+            SuspendLayout();
             // 
             // mnuApplicationMain
             // 
-            this.mnuApplicationMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile,
-            this.mnuMods,
-            this.mnuOptions,
-            this.mnuHelp});
-            this.mnuApplicationMain.Location = new System.Drawing.Point(0, 0);
-            this.mnuApplicationMain.Name = "mnuApplicationMain";
-            this.mnuApplicationMain.Size = new System.Drawing.Size(530, 24);
-            this.mnuApplicationMain.TabIndex = 0;
-            this.mnuApplicationMain.Text = "menuStrip1";
+            mnuApplicationMain.Items.AddRange(new ToolStripItem[] { mnuFile, mnuMods, mnuOptions, mnuHelp });
+            mnuApplicationMain.Location = new Point(0, 0);
+            mnuApplicationMain.Name = "mnuApplicationMain";
+            mnuApplicationMain.Size = new Size(530, 24);
+            mnuApplicationMain.TabIndex = 0;
+            mnuApplicationMain.Text = "menuStrip1";
             // 
             // mnuFile
             // 
-            this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFileOpenUserDataDir,
-            this.mnuFileOpenGameSettingsXml,
-            this.mnuFileOpenGameXml,
-            this.mnuFileSeparator1,
-            this.mnuFileRefresh,
-            this.mnuFileOpenModMangerLog,
-            this.mnuFileOpenGameLog,
-            this.mnuFileOpenGameNotes,
-            this.toolStripMenuItem1,
-            this.mnuFileZipGameDataDirectory,
-            this.mnuFileSeparator2,
-            this.mnuFileExit});
-            this.mnuFile.Name = "mnuFile";
-            this.mnuFile.Size = new System.Drawing.Size(37, 20);
-            this.mnuFile.Text = "File";
+            mnuFile.DropDownItems.AddRange(new ToolStripItem[] { mnuFileOpenUserDataDir, mnuFileOpenGameSettingsXml, mnuFileOpenGameXml, mnuFileSeparator1, mnuFileRefresh, mnuFileOpenModMangerLog, mnuFileOpenGameLog, mnuFileOpenGameNotes, toolStripMenuItem1, mnuFileZipGameDataDirectory, mnuFileSeparator2, mnuFileExit });
+            mnuFile.Name = "mnuFile";
+            mnuFile.Size = new Size(37, 20);
+            mnuFile.Text = "File";
             // 
             // mnuFileOpenUserDataDir
             // 
-            this.mnuFileOpenUserDataDir.Name = "mnuFileOpenUserDataDir";
-            this.mnuFileOpenUserDataDir.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.mnuFileOpenUserDataDir.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileOpenUserDataDir.Text = "Open Game Data Directory";
-            this.mnuFileOpenUserDataDir.Click += new System.EventHandler(this.mnuFileOpenUserDataDir_Click);
+            mnuFileOpenUserDataDir.Name = "mnuFileOpenUserDataDir";
+            mnuFileOpenUserDataDir.ShortcutKeys = Keys.F2;
+            mnuFileOpenUserDataDir.Size = new Size(234, 22);
+            mnuFileOpenUserDataDir.Text = "Open Game Data Directory";
+            mnuFileOpenUserDataDir.Click += mnuFileOpenUserDataDir_Click;
             // 
             // mnuFileOpenGameSettingsXml
             // 
-            this.mnuFileOpenGameSettingsXml.Name = "mnuFileOpenGameSettingsXml";
-            this.mnuFileOpenGameSettingsXml.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.mnuFileOpenGameSettingsXml.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileOpenGameSettingsXml.Text = "Open gameSettings.xml";
-            this.mnuFileOpenGameSettingsXml.Click += new System.EventHandler(this.mnuFileOpenGameSettingsXml_Click);
+            mnuFileOpenGameSettingsXml.Name = "mnuFileOpenGameSettingsXml";
+            mnuFileOpenGameSettingsXml.ShortcutKeys = Keys.F3;
+            mnuFileOpenGameSettingsXml.Size = new Size(234, 22);
+            mnuFileOpenGameSettingsXml.Text = "Open gameSettings.xml";
+            mnuFileOpenGameSettingsXml.Click += mnuFileOpenGameSettingsXml_Click;
             // 
             // mnuFileOpenGameXml
             // 
-            this.mnuFileOpenGameXml.Name = "mnuFileOpenGameXml";
-            this.mnuFileOpenGameXml.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.mnuFileOpenGameXml.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileOpenGameXml.Text = "Open game.xml";
-            this.mnuFileOpenGameXml.Click += new System.EventHandler(this.mnuFileOpenGameXml_Click);
+            mnuFileOpenGameXml.Name = "mnuFileOpenGameXml";
+            mnuFileOpenGameXml.ShortcutKeys = Keys.F4;
+            mnuFileOpenGameXml.Size = new Size(234, 22);
+            mnuFileOpenGameXml.Text = "Open game.xml";
+            mnuFileOpenGameXml.Click += mnuFileOpenGameXml_Click;
             // 
             // mnuFileSeparator1
             // 
-            this.mnuFileSeparator1.Name = "mnuFileSeparator1";
-            this.mnuFileSeparator1.Size = new System.Drawing.Size(231, 6);
+            mnuFileSeparator1.Name = "mnuFileSeparator1";
+            mnuFileSeparator1.Size = new Size(231, 6);
             // 
             // mnuFileRefresh
             // 
-            this.mnuFileRefresh.Name = "mnuFileRefresh";
-            this.mnuFileRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.mnuFileRefresh.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileRefresh.Text = "Refresh Data";
-            this.mnuFileRefresh.Click += new System.EventHandler(this.mnuFileRefresh_Click);
+            mnuFileRefresh.Name = "mnuFileRefresh";
+            mnuFileRefresh.ShortcutKeys = Keys.F5;
+            mnuFileRefresh.Size = new Size(234, 22);
+            mnuFileRefresh.Text = "Refresh Data";
+            mnuFileRefresh.Click += mnuFileRefresh_Click;
             // 
             // mnuFileOpenModMangerLog
             // 
-            this.mnuFileOpenModMangerLog.Name = "mnuFileOpenModMangerLog";
-            this.mnuFileOpenModMangerLog.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileOpenModMangerLog.Text = "Open Mod Manager Log";
-            this.mnuFileOpenModMangerLog.Click += new System.EventHandler(this.mnuFileOpenModMangerLog_Click);
+            mnuFileOpenModMangerLog.Name = "mnuFileOpenModMangerLog";
+            mnuFileOpenModMangerLog.Size = new Size(234, 22);
+            mnuFileOpenModMangerLog.Text = "Open Mod Manager Log";
+            mnuFileOpenModMangerLog.Click += mnuFileOpenModMangerLog_Click;
             // 
             // mnuFileOpenGameLog
             // 
-            this.mnuFileOpenGameLog.Name = "mnuFileOpenGameLog";
-            this.mnuFileOpenGameLog.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileOpenGameLog.Text = "Open Game Log";
-            this.mnuFileOpenGameLog.Click += new System.EventHandler(this.mnuFileOpenGameLog_Click);
+            mnuFileOpenGameLog.Name = "mnuFileOpenGameLog";
+            mnuFileOpenGameLog.Size = new Size(234, 22);
+            mnuFileOpenGameLog.Text = "Open Game Log";
+            mnuFileOpenGameLog.Click += mnuFileOpenGameLog_Click;
             // 
             // mnuFileOpenGameNotes
             // 
-            this.mnuFileOpenGameNotes.Name = "mnuFileOpenGameNotes";
-            this.mnuFileOpenGameNotes.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileOpenGameNotes.Text = "Open Game notes";
-            this.mnuFileOpenGameNotes.Click += new System.EventHandler(this.mnuFileOpenGameNotes_Click);
+            mnuFileOpenGameNotes.Name = "mnuFileOpenGameNotes";
+            mnuFileOpenGameNotes.Size = new Size(234, 22);
+            mnuFileOpenGameNotes.Text = "Open Game notes";
+            mnuFileOpenGameNotes.Click += mnuFileOpenGameNotes_Click;
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(231, 6);
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(231, 6);
             // 
             // mnuFileZipGameDataDirectory
             // 
-            this.mnuFileZipGameDataDirectory.Name = "mnuFileZipGameDataDirectory";
-            this.mnuFileZipGameDataDirectory.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileZipGameDataDirectory.Text = "Zip Game Data Directory";
-            this.mnuFileZipGameDataDirectory.Click += new System.EventHandler(this.mnuFileZipGameDataDirectory_Click);
+            mnuFileZipGameDataDirectory.Name = "mnuFileZipGameDataDirectory";
+            mnuFileZipGameDataDirectory.Size = new Size(234, 22);
+            mnuFileZipGameDataDirectory.Text = "Zip Game Data Directory";
+            mnuFileZipGameDataDirectory.Click += mnuFileZipGameDataDirectory_Click;
             // 
             // mnuFileSeparator2
             // 
-            this.mnuFileSeparator2.Name = "mnuFileSeparator2";
-            this.mnuFileSeparator2.Size = new System.Drawing.Size(231, 6);
+            mnuFileSeparator2.Name = "mnuFileSeparator2";
+            mnuFileSeparator2.Size = new Size(231, 6);
             // 
             // mnuFileExit
             // 
-            this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.mnuFileExit.Size = new System.Drawing.Size(234, 22);
-            this.mnuFileExit.Text = "Exit";
-            this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
+            mnuFileExit.Name = "mnuFileExit";
+            mnuFileExit.ShortcutKeys = Keys.Alt | Keys.X;
+            mnuFileExit.Size = new Size(234, 22);
+            mnuFileExit.Text = "Exit";
+            mnuFileExit.Click += mnuFileExit_Click;
             // 
             // mnuMods
             // 
-            this.mnuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuModsFolder,
-            this.MnuModsFile,
-            this.mnuModsSeparator,
-            this.mnuModsFolderOpen,
-            this.mnuModsLaunchModhub});
-            this.mnuMods.Name = "mnuMods";
-            this.mnuMods.Size = new System.Drawing.Size(75, 20);
-            this.mnuMods.Text = "Mods Files";
+            mnuMods.DropDownItems.AddRange(new ToolStripItem[] { mnuModsFolder, MnuModsFile, mnuModsSeparator, mnuModsFolderOpen, mnuModsLaunchModhub });
+            mnuMods.Name = "mnuMods";
+            mnuMods.Size = new Size(75, 20);
+            mnuMods.Text = "Mods Files";
             // 
             // mnuModsFolder
             // 
-            this.mnuModsFolder.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuModFolderAdd,
-            this.mnuModFolderRemove,
-            this.mnuModFolderRename,
-            this.mnuCopyAsNewFolder});
-            this.mnuModsFolder.Name = "mnuModsFolder";
-            this.mnuModsFolder.Size = new System.Drawing.Size(206, 22);
-            this.mnuModsFolder.Text = "Mod Folder Actions";
+            mnuModsFolder.DropDownItems.AddRange(new ToolStripItem[] { mnuModFolderAdd, mnuModFolderRemove, mnuModFolderRename, mnuCopyAsNewFolder });
+            mnuModsFolder.Name = "mnuModsFolder";
+            mnuModsFolder.Size = new Size(206, 22);
+            mnuModsFolder.Text = "Mod Folder Actions";
             // 
             // mnuModFolderAdd
             // 
-            this.mnuModFolderAdd.Name = "mnuModFolderAdd";
-            this.mnuModFolderAdd.Size = new System.Drawing.Size(226, 22);
-            this.mnuModFolderAdd.Text = "Add New Folder";
-            this.mnuModFolderAdd.Click += new System.EventHandler(this.mnuModFolderAdd_Click);
+            mnuModFolderAdd.Name = "mnuModFolderAdd";
+            mnuModFolderAdd.Size = new Size(226, 22);
+            mnuModFolderAdd.Text = "Add New Folder";
+            mnuModFolderAdd.Click += mnuModFolderAdd_Click;
             // 
             // mnuModFolderRemove
             // 
-            this.mnuModFolderRemove.Name = "mnuModFolderRemove";
-            this.mnuModFolderRemove.Size = new System.Drawing.Size(226, 22);
-            this.mnuModFolderRemove.Text = "Remove Selected Folder";
-            this.mnuModFolderRemove.Click += new System.EventHandler(this.mnuModFolderRemove_Click);
+            mnuModFolderRemove.Name = "mnuModFolderRemove";
+            mnuModFolderRemove.Size = new Size(226, 22);
+            mnuModFolderRemove.Text = "Remove Selected Folder";
+            mnuModFolderRemove.Click += mnuModFolderRemove_Click;
             // 
             // mnuModFolderRename
             // 
-            this.mnuModFolderRename.Name = "mnuModFolderRename";
-            this.mnuModFolderRename.Size = new System.Drawing.Size(226, 22);
-            this.mnuModFolderRename.Text = "Rename Folder";
-            this.mnuModFolderRename.Click += new System.EventHandler(this.mnuContextFolderRename_Click);
+            mnuModFolderRename.Name = "mnuModFolderRename";
+            mnuModFolderRename.Size = new Size(226, 22);
+            mnuModFolderRename.Text = "Rename Folder";
+            mnuModFolderRename.Click += mnuContextFolderRename_Click;
             // 
             // mnuCopyAsNewFolder
             // 
-            this.mnuCopyAsNewFolder.Name = "mnuCopyAsNewFolder";
-            this.mnuCopyAsNewFolder.Size = new System.Drawing.Size(226, 22);
-            this.mnuCopyAsNewFolder.Text = "Copy Selected as New Folder";
-            this.mnuCopyAsNewFolder.Click += new System.EventHandler(this.mnuModFolderCopyAsNewFolder_Click);
+            mnuCopyAsNewFolder.Name = "mnuCopyAsNewFolder";
+            mnuCopyAsNewFolder.Size = new Size(226, 22);
+            mnuCopyAsNewFolder.Text = "Copy Selected as New Folder";
+            mnuCopyAsNewFolder.Click += mnuModFolderCopyAsNewFolder_Click;
             // 
             // MnuModsFile
             // 
-            this.MnuModsFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuModFileRemove,
-            this.mnuModFileCopyToSelected,
-            this.mnuModFileCopyToAll});
-            this.MnuModsFile.Name = "MnuModsFile";
-            this.MnuModsFile.Size = new System.Drawing.Size(206, 22);
-            this.MnuModsFile.Text = "Mod File Actions";
+            MnuModsFile.DropDownItems.AddRange(new ToolStripItem[] { mnuModFileRemove, mnuModFileCopyToSelected, mnuModFileCopyToAll });
+            MnuModsFile.Name = "MnuModsFile";
+            MnuModsFile.Size = new Size(206, 22);
+            MnuModsFile.Text = "Mod File Actions";
             // 
             // mnuModFileRemove
             // 
-            this.mnuModFileRemove.Name = "mnuModFileRemove";
-            this.mnuModFileRemove.Size = new System.Drawing.Size(259, 22);
-            this.mnuModFileRemove.Text = "Remove Selected Mod File";
-            this.mnuModFileRemove.Click += new System.EventHandler(this.mnuModFileRemove_Click);
+            mnuModFileRemove.Name = "mnuModFileRemove";
+            mnuModFileRemove.Size = new Size(259, 22);
+            mnuModFileRemove.Text = "Remove Selected Mod File";
+            mnuModFileRemove.Click += mnuModFileRemove_Click;
             // 
             // mnuModFileCopyToSelected
             // 
-            this.mnuModFileCopyToSelected.Name = "mnuModFileCopyToSelected";
-            this.mnuModFileCopyToSelected.Size = new System.Drawing.Size(259, 22);
-            this.mnuModFileCopyToSelected.Text = "Copy Mod file(s) to Selected Folder";
-            this.mnuModFileCopyToSelected.Click += new System.EventHandler(this.mnuModCopyToSelected_Click);
+            mnuModFileCopyToSelected.Name = "mnuModFileCopyToSelected";
+            mnuModFileCopyToSelected.Size = new Size(259, 22);
+            mnuModFileCopyToSelected.Text = "Copy Mod file(s) to Selected Folder";
+            mnuModFileCopyToSelected.Click += mnuModCopyToSelected_Click;
             // 
             // mnuModFileCopyToAll
             // 
-            this.mnuModFileCopyToAll.Name = "mnuModFileCopyToAll";
-            this.mnuModFileCopyToAll.Size = new System.Drawing.Size(259, 22);
-            this.mnuModFileCopyToAll.Text = "Copy Mod to ALL Folders";
-            this.mnuModFileCopyToAll.Click += new System.EventHandler(this.mnuModFileCopyToAll_Click);
+            mnuModFileCopyToAll.Name = "mnuModFileCopyToAll";
+            mnuModFileCopyToAll.Size = new Size(259, 22);
+            mnuModFileCopyToAll.Text = "Copy Mod to ALL Folders";
+            mnuModFileCopyToAll.Click += mnuModFileCopyToAll_Click;
             // 
             // mnuModsSeparator
             // 
-            this.mnuModsSeparator.Name = "mnuModsSeparator";
-            this.mnuModsSeparator.Size = new System.Drawing.Size(203, 6);
+            mnuModsSeparator.Name = "mnuModsSeparator";
+            mnuModsSeparator.Size = new Size(203, 6);
             // 
             // mnuModsFolderOpen
             // 
-            this.mnuModsFolderOpen.Name = "mnuModsFolderOpen";
-            this.mnuModsFolderOpen.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.mnuModsFolderOpen.Size = new System.Drawing.Size(206, 22);
-            this.mnuModsFolderOpen.Text = "Open Mods Directory";
-            this.mnuModsFolderOpen.Click += new System.EventHandler(this.mnuModFolderOpen_Click);
+            mnuModsFolderOpen.Name = "mnuModsFolderOpen";
+            mnuModsFolderOpen.ShortcutKeys = Keys.F6;
+            mnuModsFolderOpen.Size = new Size(206, 22);
+            mnuModsFolderOpen.Text = "Open Mods Directory";
+            mnuModsFolderOpen.Click += mnuModFolderOpen_Click;
             // 
             // mnuModsLaunchModhub
             // 
-            this.mnuModsLaunchModhub.Name = "mnuModsLaunchModhub";
-            this.mnuModsLaunchModhub.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.mnuModsLaunchModhub.Size = new System.Drawing.Size(206, 22);
-            this.mnuModsLaunchModhub.Text = "Launch Mod Hub";
-            this.mnuModsLaunchModhub.Click += new System.EventHandler(this.mnuModsLaunchModhub_Click);
+            mnuModsLaunchModhub.Name = "mnuModsLaunchModhub";
+            mnuModsLaunchModhub.ShortcutKeys = Keys.F7;
+            mnuModsLaunchModhub.Size = new Size(206, 22);
+            mnuModsLaunchModhub.Text = "Launch Mod Hub";
+            mnuModsLaunchModhub.Click += mnuModsLaunchModhub_Click;
             // 
             // mnuOptions
             // 
-            this.mnuOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuOptMod,
-            this.mnuModLaunch,
-            this.gameOptionsToolStripMenuItem,
-            this.mnuOptionsOpenOptsDirectory});
-            this.mnuOptions.Name = "mnuOptions";
-            this.mnuOptions.Size = new System.Drawing.Size(61, 20);
-            this.mnuOptions.Text = "Options";
+            mnuOptions.DropDownItems.AddRange(new ToolStripItem[] { mnuOptMod, mnuModLaunch, gameOptionsToolStripMenuItem, mnuOptionsOpenOptsDirectory });
+            mnuOptions.Name = "mnuOptions";
+            mnuOptions.Size = new Size(61, 20);
+            mnuOptions.Text = "Options";
             // 
             // mnuOptMod
             // 
-            this.mnuOptMod.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuOptModDoubleClick,
-            this.mnuOptModOverride,
-            this.mnuOptOverwriteOnCopy,
-            this.mnuOptdDleteToRecycleBin});
-            this.mnuOptMod.Name = "mnuOptMod";
-            this.mnuOptMod.Size = new System.Drawing.Size(225, 22);
-            this.mnuOptMod.Text = "Mod Options";
+            mnuOptMod.DropDownItems.AddRange(new ToolStripItem[] { mnuOptModDoubleClick, mnuOptModOverride, mnuOptOverwriteOnCopy, mnuOptdDleteToRecycleBin, mnuOptOnlyShowZips });
+            mnuOptMod.Name = "mnuOptMod";
+            mnuOptMod.Size = new Size(225, 22);
+            mnuOptMod.Text = "Mod Options";
             // 
             // mnuOptModDoubleClick
             // 
-            this.mnuOptModDoubleClick.CheckOnClick = true;
-            this.mnuOptModDoubleClick.Name = "mnuOptModDoubleClick";
-            this.mnuOptModDoubleClick.Size = new System.Drawing.Size(266, 22);
-            this.mnuOptModDoubleClick.Text = "Allow Double Click Folder to Launch";
+            mnuOptModDoubleClick.CheckOnClick = true;
+            mnuOptModDoubleClick.Name = "mnuOptModDoubleClick";
+            mnuOptModDoubleClick.Size = new Size(266, 22);
+            mnuOptModDoubleClick.Text = "Allow Double Click Folder to Launch";
             // 
             // mnuOptModOverride
             // 
-            this.mnuOptModOverride.CheckOnClick = true;
-            this.mnuOptModOverride.Name = "mnuOptModOverride";
-            this.mnuOptModOverride.Size = new System.Drawing.Size(266, 22);
-            this.mnuOptModOverride.Text = "Mod Folder Override";
+            mnuOptModOverride.CheckOnClick = true;
+            mnuOptModOverride.Name = "mnuOptModOverride";
+            mnuOptModOverride.Size = new Size(266, 22);
+            mnuOptModOverride.Text = "Mod Folder Override";
             // 
             // mnuOptOverwriteOnCopy
             // 
-            this.mnuOptOverwriteOnCopy.CheckOnClick = true;
-            this.mnuOptOverwriteOnCopy.Name = "mnuOptOverwriteOnCopy";
-            this.mnuOptOverwriteOnCopy.Size = new System.Drawing.Size(266, 22);
-            this.mnuOptOverwriteOnCopy.Text = "Overwrite on Copy";
+            mnuOptOverwriteOnCopy.CheckOnClick = true;
+            mnuOptOverwriteOnCopy.Name = "mnuOptOverwriteOnCopy";
+            mnuOptOverwriteOnCopy.Size = new Size(266, 22);
+            mnuOptOverwriteOnCopy.Text = "Overwrite on Copy";
             // 
             // mnuOptdDleteToRecycleBin
             // 
-            this.mnuOptdDleteToRecycleBin.CheckOnClick = true;
-            this.mnuOptdDleteToRecycleBin.Name = "mnuOptdDleteToRecycleBin";
-            this.mnuOptdDleteToRecycleBin.Size = new System.Drawing.Size(266, 22);
-            this.mnuOptdDleteToRecycleBin.Text = "Delete to Recycle Bin";
+            mnuOptdDleteToRecycleBin.CheckOnClick = true;
+            mnuOptdDleteToRecycleBin.Name = "mnuOptdDleteToRecycleBin";
+            mnuOptdDleteToRecycleBin.Size = new Size(266, 22);
+            mnuOptdDleteToRecycleBin.Text = "Delete to Recycle Bin";
+            // 
+            // mnuOptOnlyShowZips
+            // 
+            mnuOptOnlyShowZips.CheckOnClick = true;
+            mnuOptOnlyShowZips.Name = "mnuOptOnlyShowZips";
+            mnuOptOnlyShowZips.Size = new Size(266, 22);
+            mnuOptOnlyShowZips.Text = "Only Show Zip Files";
+            mnuOptOnlyShowZips.Click += mnuOptOnlyShowZips_Click;
             // 
             // mnuModLaunch
             // 
-            this.mnuModLaunch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuOptLaunchConsole,
-            this.mnuOptLaunchLaunchCheats,
-            this.mnuOptLaunchRestart});
-            this.mnuModLaunch.Name = "mnuModLaunch";
-            this.mnuModLaunch.Size = new System.Drawing.Size(225, 22);
-            this.mnuModLaunch.Text = "Launch Options";
+            mnuModLaunch.DropDownItems.AddRange(new ToolStripItem[] { mnuOptLaunchConsole, mnuOptLaunchLaunchCheats, mnuOptLaunchRestart });
+            mnuModLaunch.Name = "mnuModLaunch";
+            mnuModLaunch.Size = new Size(225, 22);
+            mnuModLaunch.Text = "Launch Options";
             // 
             // mnuOptLaunchConsole
             // 
-            this.mnuOptLaunchConsole.CheckOnClick = true;
-            this.mnuOptLaunchConsole.Name = "mnuOptLaunchConsole";
-            this.mnuOptLaunchConsole.Size = new System.Drawing.Size(234, 22);
-            this.mnuOptLaunchConsole.Text = "Launch with In-Game Console";
-            this.mnuOptLaunchConsole.Click += new System.EventHandler(this.mnuOptLaunchConsole_Click);
+            mnuOptLaunchConsole.CheckOnClick = true;
+            mnuOptLaunchConsole.Name = "mnuOptLaunchConsole";
+            mnuOptLaunchConsole.Size = new Size(234, 22);
+            mnuOptLaunchConsole.Text = "Launch with In-Game Console";
+            mnuOptLaunchConsole.Click += mnuOptLaunchConsole_Click;
             // 
             // mnuOptLaunchLaunchCheats
             // 
-            this.mnuOptLaunchLaunchCheats.CheckOnClick = true;
-            this.mnuOptLaunchLaunchCheats.Name = "mnuOptLaunchLaunchCheats";
-            this.mnuOptLaunchLaunchCheats.Size = new System.Drawing.Size(234, 22);
-            this.mnuOptLaunchLaunchCheats.Text = "Launch with Console Cheats";
-            this.mnuOptLaunchLaunchCheats.Click += new System.EventHandler(this.mnuOptLaunchLaunchCheats_Click);
+            mnuOptLaunchLaunchCheats.CheckOnClick = true;
+            mnuOptLaunchLaunchCheats.Name = "mnuOptLaunchLaunchCheats";
+            mnuOptLaunchLaunchCheats.Size = new Size(234, 22);
+            mnuOptLaunchLaunchCheats.Text = "Launch with Console Cheats";
+            mnuOptLaunchLaunchCheats.Click += mnuOptLaunchLaunchCheats_Click;
             // 
             // mnuOptLaunchRestart
             // 
-            this.mnuOptLaunchRestart.CheckOnClick = true;
-            this.mnuOptLaunchRestart.Name = "mnuOptLaunchRestart";
-            this.mnuOptLaunchRestart.Size = new System.Drawing.Size(234, 22);
-            this.mnuOptLaunchRestart.Text = "Launch as Restart";
-            this.mnuOptLaunchRestart.Click += new System.EventHandler(this.mnuOptLaunchRestart_Click);
+            mnuOptLaunchRestart.CheckOnClick = true;
+            mnuOptLaunchRestart.Name = "mnuOptLaunchRestart";
+            mnuOptLaunchRestart.Size = new Size(234, 22);
+            mnuOptLaunchRestart.Text = "Launch as Restart";
+            mnuOptLaunchRestart.Click += mnuOptLaunchRestart_Click;
             // 
             // gameOptionsToolStripMenuItem
             // 
-            this.gameOptionsToolStripMenuItem.Name = "gameOptionsToolStripMenuItem";
-            this.gameOptionsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.gameOptionsToolStripMenuItem.Text = "Game Options";
-            this.gameOptionsToolStripMenuItem.Click += new System.EventHandler(this.gameOptionsToolStripMenuItem_Click);
+            gameOptionsToolStripMenuItem.Name = "gameOptionsToolStripMenuItem";
+            gameOptionsToolStripMenuItem.Size = new Size(225, 22);
+            gameOptionsToolStripMenuItem.Text = "Game Options";
+            gameOptionsToolStripMenuItem.Click += gameOptionsToolStripMenuItem_Click;
             // 
             // mnuOptionsOpenOptsDirectory
             // 
-            this.mnuOptionsOpenOptsDirectory.Name = "mnuOptionsOpenOptsDirectory";
-            this.mnuOptionsOpenOptsDirectory.Size = new System.Drawing.Size(225, 22);
-            this.mnuOptionsOpenOptsDirectory.Text = "Open User Settings Directory";
-            this.mnuOptionsOpenOptsDirectory.Click += new System.EventHandler(this.mnuOptionsOpenOptsDirectory_Click);
+            mnuOptionsOpenOptsDirectory.Name = "mnuOptionsOpenOptsDirectory";
+            mnuOptionsOpenOptsDirectory.Size = new Size(225, 22);
+            mnuOptionsOpenOptsDirectory.Text = "Open User Settings Directory";
+            mnuOptionsOpenOptsDirectory.Click += mnuOptionsOpenOptsDirectory_Click;
             // 
             // mnuHelp
             // 
-            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHelpOpen,
-            this.mnuHelpSeparator,
-            this.mnuHelpAbout});
-            this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
-            this.mnuHelp.Text = "Help";
+            mnuHelp.DropDownItems.AddRange(new ToolStripItem[] { mnuHelpOpen, mnuHelpSeparator, mnuHelpAbout });
+            mnuHelp.Name = "mnuHelp";
+            mnuHelp.Size = new Size(44, 20);
+            mnuHelp.Text = "Help";
             // 
             // mnuHelpOpen
             // 
-            this.mnuHelpOpen.Name = "mnuHelpOpen";
-            this.mnuHelpOpen.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.mnuHelpOpen.Size = new System.Drawing.Size(118, 22);
-            this.mnuHelpOpen.Text = "Help";
-            this.mnuHelpOpen.Click += new System.EventHandler(this.mnuHelpOpen_Click);
+            mnuHelpOpen.Name = "mnuHelpOpen";
+            mnuHelpOpen.ShortcutKeys = Keys.F1;
+            mnuHelpOpen.Size = new Size(118, 22);
+            mnuHelpOpen.Text = "Help";
+            mnuHelpOpen.Click += mnuHelpOpen_Click;
             // 
             // mnuHelpSeparator
             // 
-            this.mnuHelpSeparator.Name = "mnuHelpSeparator";
-            this.mnuHelpSeparator.Size = new System.Drawing.Size(115, 6);
+            mnuHelpSeparator.Name = "mnuHelpSeparator";
+            mnuHelpSeparator.Size = new Size(115, 6);
             // 
             // mnuHelpAbout
             // 
-            this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.Size = new System.Drawing.Size(118, 22);
-            this.mnuHelpAbout.Text = "About";
-            this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
+            mnuHelpAbout.Name = "mnuHelpAbout";
+            mnuHelpAbout.Size = new Size(118, 22);
+            mnuHelpAbout.Text = "About";
+            mnuHelpAbout.Click += mnuHelpAbout_Click;
             // 
             // stsStatusBar
             // 
-            this.stsStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stsStatusLabel});
-            this.stsStatusBar.Location = new System.Drawing.Point(0, 549);
-            this.stsStatusBar.Name = "stsStatusBar";
-            this.stsStatusBar.Size = new System.Drawing.Size(530, 22);
-            this.stsStatusBar.TabIndex = 1;
+            stsStatusBar.Items.AddRange(new ToolStripItem[] { stsStatusLabel });
+            stsStatusBar.Location = new Point(0, 549);
+            stsStatusBar.Name = "stsStatusBar";
+            stsStatusBar.Size = new Size(530, 22);
+            stsStatusBar.TabIndex = 1;
             // 
             // stsStatusLabel
             // 
-            this.stsStatusLabel.Name = "stsStatusLabel";
-            this.stsStatusLabel.Size = new System.Drawing.Size(130, 17);
-            this.stsStatusLabel.Text = "FS22 Mod File Manager";
+            stsStatusLabel.Name = "stsStatusLabel";
+            stsStatusLabel.Size = new Size(130, 17);
+            stsStatusLabel.Text = "FS22 Mod File Manager";
             // 
             // pnlLists
             // 
-            this.pnlLists.Controls.Add(this.lblModFileCount);
-            this.pnlLists.Controls.Add(this.lstModFiles);
-            this.pnlLists.Controls.Add(this.lblModFiles);
-            this.pnlLists.Controls.Add(this.lblModFolderCount);
-            this.pnlLists.Controls.Add(this.lstModFolders);
-            this.pnlLists.Controls.Add(this.lblModFolders);
-            this.pnlLists.Location = new System.Drawing.Point(0, 27);
-            this.pnlLists.Name = "pnlLists";
-            this.pnlLists.Size = new System.Drawing.Size(518, 345);
-            this.pnlLists.TabIndex = 4;
+            pnlLists.Controls.Add(lblModFileCount);
+            pnlLists.Controls.Add(lstModFiles);
+            pnlLists.Controls.Add(lblModFiles);
+            pnlLists.Controls.Add(lblModFolderCount);
+            pnlLists.Controls.Add(lstModFolders);
+            pnlLists.Controls.Add(lblModFolders);
+            pnlLists.Location = new Point(0, 27);
+            pnlLists.Name = "pnlLists";
+            pnlLists.Size = new Size(518, 345);
+            pnlLists.TabIndex = 4;
             // 
             // lblModFileCount
             // 
-            this.lblModFileCount.AutoSize = true;
-            this.lblModFileCount.Location = new System.Drawing.Point(246, 324);
-            this.lblModFileCount.Name = "lblModFileCount";
-            this.lblModFileCount.Size = new System.Drawing.Size(61, 15);
-            this.lblModFileCount.TabIndex = 5;
-            this.lblModFileCount.Text = "File Count";
+            lblModFileCount.AutoSize = true;
+            lblModFileCount.Location = new Point(246, 324);
+            lblModFileCount.Name = "lblModFileCount";
+            lblModFileCount.Size = new Size(61, 15);
+            lblModFileCount.TabIndex = 5;
+            lblModFileCount.Text = "File Count";
             // 
             // lstModFiles
             // 
-            this.lstModFiles.FormattingEnabled = true;
-            this.lstModFiles.ItemHeight = 15;
-            this.lstModFiles.Location = new System.Drawing.Point(246, 28);
-            this.lstModFiles.Name = "lstModFiles";
-            this.lstModFiles.Size = new System.Drawing.Size(261, 289);
-            this.lstModFiles.TabIndex = 4;
-            this.lstModFiles.DoubleClick += new System.EventHandler(this.lstModFiles_DoubleClick);
-            this.lstModFiles.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstModFiles_MouseUp);
+            lstModFiles.FormattingEnabled = true;
+            lstModFiles.ItemHeight = 15;
+            lstModFiles.Location = new Point(246, 28);
+            lstModFiles.Name = "lstModFiles";
+            lstModFiles.Size = new Size(261, 289);
+            lstModFiles.TabIndex = 4;
+            lstModFiles.DoubleClick += lstModFiles_DoubleClick;
+            lstModFiles.MouseUp += lstModFiles_MouseUp;
             // 
             // lblModFiles
             // 
-            this.lblModFiles.AutoSize = true;
-            this.lblModFiles.Location = new System.Drawing.Point(246, 11);
-            this.lblModFiles.Name = "lblModFiles";
-            this.lblModFiles.Size = new System.Drawing.Size(58, 15);
-            this.lblModFiles.TabIndex = 3;
-            this.lblModFiles.Text = "Mod FIles";
+            lblModFiles.AutoSize = true;
+            lblModFiles.Location = new Point(246, 11);
+            lblModFiles.Name = "lblModFiles";
+            lblModFiles.Size = new Size(58, 15);
+            lblModFiles.TabIndex = 3;
+            lblModFiles.Text = "Mod FIles";
             // 
             // lblModFolderCount
             // 
-            this.lblModFolderCount.AutoSize = true;
-            this.lblModFolderCount.Location = new System.Drawing.Point(12, 324);
-            this.lblModFolderCount.Name = "lblModFolderCount";
-            this.lblModFolderCount.Size = new System.Drawing.Size(76, 15);
-            this.lblModFolderCount.TabIndex = 2;
-            this.lblModFolderCount.Text = "Folder Count";
+            lblModFolderCount.AutoSize = true;
+            lblModFolderCount.Location = new Point(12, 324);
+            lblModFolderCount.Name = "lblModFolderCount";
+            lblModFolderCount.Size = new Size(76, 15);
+            lblModFolderCount.TabIndex = 2;
+            lblModFolderCount.Text = "Folder Count";
             // 
             // lstModFolders
             // 
-            this.lstModFolders.FormattingEnabled = true;
-            this.lstModFolders.ItemHeight = 15;
-            this.lstModFolders.Location = new System.Drawing.Point(12, 28);
-            this.lstModFolders.Name = "lstModFolders";
-            this.lstModFolders.Size = new System.Drawing.Size(220, 289);
-            this.lstModFolders.TabIndex = 1;
-            this.lstModFolders.SelectedIndexChanged += new System.EventHandler(this.lstModFolders_SelectedIndexChanged);
-            this.lstModFolders.DoubleClick += new System.EventHandler(this.lstModFolders_DoubleClick);
-            this.lstModFolders.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstModFolders_MouseUp);
+            lstModFolders.FormattingEnabled = true;
+            lstModFolders.ItemHeight = 15;
+            lstModFolders.Location = new Point(12, 28);
+            lstModFolders.Name = "lstModFolders";
+            lstModFolders.Size = new Size(220, 289);
+            lstModFolders.TabIndex = 1;
+            lstModFolders.SelectedIndexChanged += lstModFolders_SelectedIndexChanged;
+            lstModFolders.DoubleClick += lstModFolders_DoubleClick;
+            lstModFolders.MouseUp += lstModFolders_MouseUp;
             // 
             // lblModFolders
             // 
-            this.lblModFolders.AutoSize = true;
-            this.lblModFolders.Location = new System.Drawing.Point(12, 11);
-            this.lblModFolders.Name = "lblModFolders";
-            this.lblModFolders.Size = new System.Drawing.Size(73, 15);
-            this.lblModFolders.TabIndex = 0;
-            this.lblModFolders.Text = "Mod Folders";
+            lblModFolders.AutoSize = true;
+            lblModFolders.Location = new Point(12, 11);
+            lblModFolders.Name = "lblModFolders";
+            lblModFolders.Size = new Size(73, 15);
+            lblModFolders.TabIndex = 0;
+            lblModFolders.Text = "Mod Folders";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Controls.Add(this.lblModOverrideValues);
-            this.panel1.Controls.Add(this.txtModOverrideValues);
-            this.panel1.Controls.Add(this.btnLaunchGame);
-            this.panel1.Controls.Add(this.btnSetModOverride);
-            this.panel1.Controls.Add(this.btnGameExeFile);
-            this.panel1.Controls.Add(this.txtGameExeFile);
-            this.panel1.Controls.Add(this.lblGameExeFile);
-            this.panel1.Controls.Add(this.btnUserDataPath);
-            this.panel1.Controls.Add(this.txtUserDataPath);
-            this.panel1.Controls.Add(this.lblUserDataPath);
-            this.panel1.Controls.Add(this.btnModFolderPath);
-            this.panel1.Controls.Add(this.txtModFolderPath);
-            this.panel1.Controls.Add(this.lblModFolderPath);
-            this.panel1.Location = new System.Drawing.Point(0, 378);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(518, 167);
-            this.panel1.TabIndex = 5;
+            panel1.Controls.Add(btnExit);
+            panel1.Controls.Add(lblModOverrideValues);
+            panel1.Controls.Add(txtModOverrideValues);
+            panel1.Controls.Add(btnLaunchGame);
+            panel1.Controls.Add(btnSetModOverride);
+            panel1.Controls.Add(btnGameExeFile);
+            panel1.Controls.Add(txtGameExeFile);
+            panel1.Controls.Add(lblGameExeFile);
+            panel1.Controls.Add(btnUserDataPath);
+            panel1.Controls.Add(txtUserDataPath);
+            panel1.Controls.Add(lblUserDataPath);
+            panel1.Controls.Add(btnModFolderPath);
+            panel1.Controls.Add(txtModFolderPath);
+            panel1.Controls.Add(lblModFolderPath);
+            panel1.Location = new Point(0, 378);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(518, 167);
+            panel1.TabIndex = 5;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(432, 136);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
-            this.btnExit.TabIndex = 13;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            btnExit.Location = new Point(432, 136);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(75, 23);
+            btnExit.TabIndex = 13;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // lblModOverrideValues
             // 
-            this.lblModOverrideValues.AutoSize = true;
-            this.lblModOverrideValues.Location = new System.Drawing.Point(8, 11);
-            this.lblModOverrideValues.Name = "lblModOverrideValues";
-            this.lblModOverrideValues.Size = new System.Drawing.Size(95, 15);
-            this.lblModOverrideValues.TabIndex = 12;
-            this.lblModOverrideValues.Text = "Current Override";
+            lblModOverrideValues.AutoSize = true;
+            lblModOverrideValues.Location = new Point(8, 11);
+            lblModOverrideValues.Name = "lblModOverrideValues";
+            lblModOverrideValues.Size = new Size(95, 15);
+            lblModOverrideValues.TabIndex = 12;
+            lblModOverrideValues.Text = "Current Override";
             // 
             // txtModOverrideValues
             // 
-            this.txtModOverrideValues.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtModOverrideValues.Location = new System.Drawing.Point(104, 7);
-            this.txtModOverrideValues.Name = "txtModOverrideValues";
-            this.txtModOverrideValues.ReadOnly = true;
-            this.txtModOverrideValues.Size = new System.Drawing.Size(403, 23);
-            this.txtModOverrideValues.TabIndex = 11;
-            this.txtModOverrideValues.Text = "Mod Override Values";
-            this.txtModOverrideValues.WordWrap = false;
-            this.txtModOverrideValues.TextChanged += new System.EventHandler(this.txtModOverrideValues_TextChanged);
+            txtModOverrideValues.BackColor = SystemColors.InactiveCaption;
+            txtModOverrideValues.Location = new Point(104, 7);
+            txtModOverrideValues.Name = "txtModOverrideValues";
+            txtModOverrideValues.ReadOnly = true;
+            txtModOverrideValues.Size = new Size(403, 23);
+            txtModOverrideValues.TabIndex = 11;
+            txtModOverrideValues.Text = "Mod Override Values";
+            txtModOverrideValues.WordWrap = false;
+            txtModOverrideValues.TextChanged += txtModOverrideValues_TextChanged;
             // 
             // btnLaunchGame
             // 
-            this.btnLaunchGame.Location = new System.Drawing.Point(145, 136);
-            this.btnLaunchGame.Name = "btnLaunchGame";
-            this.btnLaunchGame.Size = new System.Drawing.Size(123, 23);
-            this.btnLaunchGame.TabIndex = 10;
-            this.btnLaunchGame.Text = "Launch FS22";
-            this.btnLaunchGame.UseVisualStyleBackColor = true;
-            this.btnLaunchGame.Click += new System.EventHandler(this.btnLaunchGame_Click);
+            btnLaunchGame.Location = new Point(145, 136);
+            btnLaunchGame.Name = "btnLaunchGame";
+            btnLaunchGame.Size = new Size(123, 23);
+            btnLaunchGame.TabIndex = 10;
+            btnLaunchGame.Text = "Launch FS22";
+            btnLaunchGame.UseVisualStyleBackColor = true;
+            btnLaunchGame.Click += btnLaunchGame_Click;
             // 
             // btnSetModOverride
             // 
-            this.btnSetModOverride.Location = new System.Drawing.Point(10, 136);
-            this.btnSetModOverride.Name = "btnSetModOverride";
-            this.btnSetModOverride.Size = new System.Drawing.Size(123, 23);
-            this.btnSetModOverride.TabIndex = 9;
-            this.btnSetModOverride.Text = "Set Mod Override";
-            this.btnSetModOverride.UseVisualStyleBackColor = true;
-            this.btnSetModOverride.Click += new System.EventHandler(this.btnSetModOverride_Click);
+            btnSetModOverride.Location = new Point(10, 136);
+            btnSetModOverride.Name = "btnSetModOverride";
+            btnSetModOverride.Size = new Size(123, 23);
+            btnSetModOverride.TabIndex = 9;
+            btnSetModOverride.Text = "Set Mod Override";
+            btnSetModOverride.UseVisualStyleBackColor = true;
+            btnSetModOverride.Click += btnSetModOverride_Click;
             // 
             // btnGameExeFile
             // 
-            this.btnGameExeFile.Location = new System.Drawing.Point(432, 91);
-            this.btnGameExeFile.Name = "btnGameExeFile";
-            this.btnGameExeFile.Size = new System.Drawing.Size(75, 23);
-            this.btnGameExeFile.TabIndex = 8;
-            this.btnGameExeFile.Text = "Browse";
-            this.btnGameExeFile.UseVisualStyleBackColor = true;
-            this.btnGameExeFile.Click += new System.EventHandler(this.btnGameExeFile_Click);
+            btnGameExeFile.Location = new Point(432, 91);
+            btnGameExeFile.Name = "btnGameExeFile";
+            btnGameExeFile.Size = new Size(75, 23);
+            btnGameExeFile.TabIndex = 8;
+            btnGameExeFile.Text = "Browse";
+            btnGameExeFile.UseVisualStyleBackColor = true;
+            btnGameExeFile.Click += btnGameExeFile_Click;
             // 
             // txtGameExeFile
             // 
-            this.txtGameExeFile.BackColor = System.Drawing.SystemColors.Info;
-            this.txtGameExeFile.Location = new System.Drawing.Point(104, 92);
-            this.txtGameExeFile.Name = "txtGameExeFile";
-            this.txtGameExeFile.ReadOnly = true;
-            this.txtGameExeFile.Size = new System.Drawing.Size(322, 23);
-            this.txtGameExeFile.TabIndex = 7;
-            this.txtGameExeFile.Text = "C:\\path\\to\\FarmingSimulator2022.exe";
-            this.txtGameExeFile.WordWrap = false;
-            this.txtGameExeFile.TextChanged += new System.EventHandler(this.txtGameExeFile_TextChanged);
+            txtGameExeFile.BackColor = SystemColors.Info;
+            txtGameExeFile.Location = new Point(104, 92);
+            txtGameExeFile.Name = "txtGameExeFile";
+            txtGameExeFile.ReadOnly = true;
+            txtGameExeFile.Size = new Size(322, 23);
+            txtGameExeFile.TabIndex = 7;
+            txtGameExeFile.Text = "C:\\path\\to\\FarmingSimulator2022.exe";
+            txtGameExeFile.WordWrap = false;
+            txtGameExeFile.TextChanged += txtGameExeFile_TextChanged;
             // 
             // lblGameExeFile
             // 
-            this.lblGameExeFile.AutoSize = true;
-            this.lblGameExeFile.Location = new System.Drawing.Point(15, 96);
-            this.lblGameExeFile.Name = "lblGameExeFile";
-            this.lblGameExeFile.Size = new System.Drawing.Size(89, 15);
-            this.lblGameExeFile.TabIndex = 6;
-            this.lblGameExeFile.Text = "Game .exe Path";
+            lblGameExeFile.AutoSize = true;
+            lblGameExeFile.Location = new Point(15, 96);
+            lblGameExeFile.Name = "lblGameExeFile";
+            lblGameExeFile.Size = new Size(89, 15);
+            lblGameExeFile.TabIndex = 6;
+            lblGameExeFile.Text = "Game .exe Path";
             // 
             // btnUserDataPath
             // 
-            this.btnUserDataPath.Location = new System.Drawing.Point(432, 62);
-            this.btnUserDataPath.Name = "btnUserDataPath";
-            this.btnUserDataPath.Size = new System.Drawing.Size(75, 23);
-            this.btnUserDataPath.TabIndex = 5;
-            this.btnUserDataPath.Text = "Browse";
-            this.btnUserDataPath.UseVisualStyleBackColor = true;
-            this.btnUserDataPath.Click += new System.EventHandler(this.btnUserDataPath_Click);
+            btnUserDataPath.Location = new Point(432, 62);
+            btnUserDataPath.Name = "btnUserDataPath";
+            btnUserDataPath.Size = new Size(75, 23);
+            btnUserDataPath.TabIndex = 5;
+            btnUserDataPath.Text = "Browse";
+            btnUserDataPath.UseVisualStyleBackColor = true;
+            btnUserDataPath.Click += btnUserDataPath_Click;
             // 
             // txtUserDataPath
             // 
-            this.txtUserDataPath.BackColor = System.Drawing.SystemColors.Info;
-            this.txtUserDataPath.Location = new System.Drawing.Point(105, 63);
-            this.txtUserDataPath.Name = "txtUserDataPath";
-            this.txtUserDataPath.ReadOnly = true;
-            this.txtUserDataPath.Size = new System.Drawing.Size(322, 23);
-            this.txtUserDataPath.TabIndex = 4;
-            this.txtUserDataPath.Text = "C:\\Game\\User\\data\\path";
-            this.txtUserDataPath.WordWrap = false;
-            this.txtUserDataPath.TextChanged += new System.EventHandler(this.txtUserDataPath_TextChanged);
+            txtUserDataPath.BackColor = SystemColors.Info;
+            txtUserDataPath.Location = new Point(105, 63);
+            txtUserDataPath.Name = "txtUserDataPath";
+            txtUserDataPath.ReadOnly = true;
+            txtUserDataPath.Size = new Size(322, 23);
+            txtUserDataPath.TabIndex = 4;
+            txtUserDataPath.Text = "C:\\Game\\User\\data\\path";
+            txtUserDataPath.WordWrap = false;
+            txtUserDataPath.TextChanged += txtUserDataPath_TextChanged;
             // 
             // lblUserDataPath
             // 
-            this.lblUserDataPath.AutoSize = true;
-            this.lblUserDataPath.Location = new System.Drawing.Point(12, 66);
-            this.lblUserDataPath.Name = "lblUserDataPath";
-            this.lblUserDataPath.Size = new System.Drawing.Size(91, 15);
-            this.lblUserDataPath.TabIndex = 3;
-            this.lblUserDataPath.Text = "Game User Data";
+            lblUserDataPath.AutoSize = true;
+            lblUserDataPath.Location = new Point(12, 66);
+            lblUserDataPath.Name = "lblUserDataPath";
+            lblUserDataPath.Size = new Size(91, 15);
+            lblUserDataPath.TabIndex = 3;
+            lblUserDataPath.Text = "Game User Data";
             // 
             // btnModFolderPath
             // 
-            this.btnModFolderPath.Location = new System.Drawing.Point(432, 33);
-            this.btnModFolderPath.Name = "btnModFolderPath";
-            this.btnModFolderPath.Size = new System.Drawing.Size(75, 23);
-            this.btnModFolderPath.TabIndex = 2;
-            this.btnModFolderPath.Text = "Browse";
-            this.btnModFolderPath.UseVisualStyleBackColor = true;
-            this.btnModFolderPath.Click += new System.EventHandler(this.btnModFolderPath_Click);
+            btnModFolderPath.Location = new Point(432, 33);
+            btnModFolderPath.Name = "btnModFolderPath";
+            btnModFolderPath.Size = new Size(75, 23);
+            btnModFolderPath.TabIndex = 2;
+            btnModFolderPath.Text = "Browse";
+            btnModFolderPath.UseVisualStyleBackColor = true;
+            btnModFolderPath.Click += btnModFolderPath_Click;
             // 
             // txtModFolderPath
             // 
-            this.txtModFolderPath.BackColor = System.Drawing.SystemColors.Info;
-            this.txtModFolderPath.Location = new System.Drawing.Point(105, 34);
-            this.txtModFolderPath.Name = "txtModFolderPath";
-            this.txtModFolderPath.ReadOnly = true;
-            this.txtModFolderPath.Size = new System.Drawing.Size(322, 23);
-            this.txtModFolderPath.TabIndex = 1;
-            this.txtModFolderPath.Text = "C:\\path\\to\\mods\\folder";
-            this.txtModFolderPath.WordWrap = false;
-            this.txtModFolderPath.TextChanged += new System.EventHandler(this.txtModFolderPath_TextChanged);
+            txtModFolderPath.BackColor = SystemColors.Info;
+            txtModFolderPath.Location = new Point(105, 34);
+            txtModFolderPath.Name = "txtModFolderPath";
+            txtModFolderPath.ReadOnly = true;
+            txtModFolderPath.Size = new Size(322, 23);
+            txtModFolderPath.TabIndex = 1;
+            txtModFolderPath.Text = "C:\\path\\to\\mods\\folder";
+            txtModFolderPath.WordWrap = false;
+            txtModFolderPath.TextChanged += txtModFolderPath_TextChanged;
             // 
             // lblModFolderPath
             // 
-            this.lblModFolderPath.AutoSize = true;
-            this.lblModFolderPath.Location = new System.Drawing.Point(12, 38);
-            this.lblModFolderPath.Name = "lblModFolderPath";
-            this.lblModFolderPath.Size = new System.Drawing.Size(95, 15);
-            this.lblModFolderPath.TabIndex = 0;
-            this.lblModFolderPath.Text = "Mod Folder Path";
+            lblModFolderPath.AutoSize = true;
+            lblModFolderPath.Location = new Point(12, 38);
+            lblModFolderPath.Name = "lblModFolderPath";
+            lblModFolderPath.Size = new Size(95, 15);
+            lblModFolderPath.TabIndex = 0;
+            lblModFolderPath.Text = "Mod Folder Path";
             // 
             // mnuContextFolderList
             // 
-            this.mnuContextFolderList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuContextFolderAdd,
-            this.mnuContextFolderRemove,
-            this.mnuContextFolderRename,
-            this.mnuContextFolderSeparator,
-            this.mnuContextCopyToSelected,
-            this.mnuContextFolderCopyAsNew,
-            this.toolStripMenuItem2,
-            this.mnuContextOpenGameNotes});
-            this.mnuContextFolderList.Name = "mnuContextFolderList";
-            this.mnuContextFolderList.Size = new System.Drawing.Size(241, 148);
+            mnuContextFolderList.Items.AddRange(new ToolStripItem[] { mnuContextFolderAdd, mnuContextFolderRemove, mnuContextFolderRename, mnuContextFolderSeparator, mnuContextCopyToSelected, mnuContextFolderCopyAsNew, toolStripMenuItem2, mnuContextOpenGameNotes });
+            mnuContextFolderList.Name = "mnuContextFolderList";
+            mnuContextFolderList.Size = new Size(241, 148);
             // 
             // mnuContextFolderAdd
             // 
-            this.mnuContextFolderAdd.Name = "mnuContextFolderAdd";
-            this.mnuContextFolderAdd.Size = new System.Drawing.Size(240, 22);
-            this.mnuContextFolderAdd.Text = "Add New Folder";
-            this.mnuContextFolderAdd.Click += new System.EventHandler(this.mnuModFolderAdd_Click);
+            mnuContextFolderAdd.Name = "mnuContextFolderAdd";
+            mnuContextFolderAdd.Size = new Size(240, 22);
+            mnuContextFolderAdd.Text = "Add New Folder";
+            mnuContextFolderAdd.Click += mnuModFolderAdd_Click;
             // 
             // mnuContextFolderRemove
             // 
-            this.mnuContextFolderRemove.Name = "mnuContextFolderRemove";
-            this.mnuContextFolderRemove.Size = new System.Drawing.Size(240, 22);
-            this.mnuContextFolderRemove.Text = "Remove Folder";
-            this.mnuContextFolderRemove.Click += new System.EventHandler(this.mnuModFolderRemove_Click);
+            mnuContextFolderRemove.Name = "mnuContextFolderRemove";
+            mnuContextFolderRemove.Size = new Size(240, 22);
+            mnuContextFolderRemove.Text = "Remove Folder";
+            mnuContextFolderRemove.Click += mnuModFolderRemove_Click;
             // 
             // mnuContextFolderRename
             // 
-            this.mnuContextFolderRename.Name = "mnuContextFolderRename";
-            this.mnuContextFolderRename.Size = new System.Drawing.Size(240, 22);
-            this.mnuContextFolderRename.Text = "Rename Folder";
-            this.mnuContextFolderRename.Click += new System.EventHandler(this.mnuContextFolderRename_Click);
+            mnuContextFolderRename.Name = "mnuContextFolderRename";
+            mnuContextFolderRename.Size = new Size(240, 22);
+            mnuContextFolderRename.Text = "Rename Folder";
+            mnuContextFolderRename.Click += mnuContextFolderRename_Click;
             // 
             // mnuContextFolderSeparator
             // 
-            this.mnuContextFolderSeparator.Name = "mnuContextFolderSeparator";
-            this.mnuContextFolderSeparator.Size = new System.Drawing.Size(237, 6);
-            // 
-            // mnuContextFolderCopyAsNew
-            // 
-            this.mnuContextFolderCopyAsNew.Name = "mnuContextFolderCopyAsNew";
-            this.mnuContextFolderCopyAsNew.Size = new System.Drawing.Size(240, 22);
-            this.mnuContextFolderCopyAsNew.Text = "Copy Selected as New Folder";
-            this.mnuContextFolderCopyAsNew.Click += new System.EventHandler(this.mnuModFolderCopyAsNewFolder_Click);
+            mnuContextFolderSeparator.Name = "mnuContextFolderSeparator";
+            mnuContextFolderSeparator.Size = new Size(237, 6);
             // 
             // mnuContextCopyToSelected
             // 
-            this.mnuContextCopyToSelected.Name = "mnuContextCopyToSelected";
-            this.mnuContextCopyToSelected.Size = new System.Drawing.Size(240, 22);
-            this.mnuContextCopyToSelected.Text = "Copy Mod(s) to Selected Folder";
-            this.mnuContextCopyToSelected.Click += new System.EventHandler(this.mnuModCopyToSelected_Click);
+            mnuContextCopyToSelected.Name = "mnuContextCopyToSelected";
+            mnuContextCopyToSelected.Size = new Size(240, 22);
+            mnuContextCopyToSelected.Text = "Copy Mod(s) to Selected Folder";
+            mnuContextCopyToSelected.Click += mnuModCopyToSelected_Click;
             // 
-            // mnuContextFileList
+            // mnuContextFolderCopyAsNew
             // 
-            this.mnuContextFileList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuContexstFileRemove,
-            this.mnuContextFileSeparator,
-            this.mnuContextModCopyToAll});
-            this.mnuContextFileList.Name = "mnuContextFileList";
-            this.mnuContextFileList.Size = new System.Drawing.Size(209, 54);
-            // 
-            // mnuContexstFileRemove
-            // 
-            this.mnuContexstFileRemove.Name = "mnuContexstFileRemove";
-            this.mnuContexstFileRemove.Size = new System.Drawing.Size(208, 22);
-            this.mnuContexstFileRemove.Text = "Remove Mod File";
-            this.mnuContexstFileRemove.Click += new System.EventHandler(this.mnuModFileRemove_Click);
-            // 
-            // mnuContextFileSeparator
-            // 
-            this.mnuContextFileSeparator.Name = "mnuContextFileSeparator";
-            this.mnuContextFileSeparator.Size = new System.Drawing.Size(205, 6);
-            // 
-            // mnuContextModCopyToAll
-            // 
-            this.mnuContextModCopyToAll.Name = "mnuContextModCopyToAll";
-            this.mnuContextModCopyToAll.Size = new System.Drawing.Size(208, 22);
-            this.mnuContextModCopyToAll.Text = "Copy Mod to ALL Folders";
-            this.mnuContextModCopyToAll.Click += new System.EventHandler(this.mnuContextModCopyToAll_Click);
-            // 
-            // mnuContextOpenGameNotes
-            // 
-            this.mnuContextOpenGameNotes.Name = "mnuContextOpenGameNotes";
-            this.mnuContextOpenGameNotes.Size = new System.Drawing.Size(240, 22);
-            this.mnuContextOpenGameNotes.Text = "Open Game Notes";
-            this.mnuContextOpenGameNotes.Click += new System.EventHandler(this.mnuFileOpenGameNotes_Click);
+            mnuContextFolderCopyAsNew.Name = "mnuContextFolderCopyAsNew";
+            mnuContextFolderCopyAsNew.Size = new Size(240, 22);
+            mnuContextFolderCopyAsNew.Text = "Copy Selected as New Folder";
+            mnuContextFolderCopyAsNew.Click += mnuModFolderCopyAsNewFolder_Click;
             // 
             // toolStripMenuItem2
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(237, 6);
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(237, 6);
+            // 
+            // mnuContextOpenGameNotes
+            // 
+            mnuContextOpenGameNotes.Name = "mnuContextOpenGameNotes";
+            mnuContextOpenGameNotes.Size = new Size(240, 22);
+            mnuContextOpenGameNotes.Text = "Open Game Notes";
+            mnuContextOpenGameNotes.Click += mnuFileOpenGameNotes_Click;
+            // 
+            // mnuContextFileList
+            // 
+            mnuContextFileList.Items.AddRange(new ToolStripItem[] { mnuContexstFileRemove, mnuContextFileSeparator, mnuContextModCopyToAll });
+            mnuContextFileList.Name = "mnuContextFileList";
+            mnuContextFileList.Size = new Size(209, 54);
+            // 
+            // mnuContexstFileRemove
+            // 
+            mnuContexstFileRemove.Name = "mnuContexstFileRemove";
+            mnuContexstFileRemove.Size = new Size(208, 22);
+            mnuContexstFileRemove.Text = "Remove Mod File";
+            mnuContexstFileRemove.Click += mnuModFileRemove_Click;
+            // 
+            // mnuContextFileSeparator
+            // 
+            mnuContextFileSeparator.Name = "mnuContextFileSeparator";
+            mnuContextFileSeparator.Size = new Size(205, 6);
+            // 
+            // mnuContextModCopyToAll
+            // 
+            mnuContextModCopyToAll.Name = "mnuContextModCopyToAll";
+            mnuContextModCopyToAll.Size = new Size(208, 22);
+            mnuContextModCopyToAll.Text = "Copy Mod to ALL Folders";
+            mnuContextModCopyToAll.Click += mnuContextModCopyToAll_Click;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 571);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlLists);
-            this.Controls.Add(this.stsStatusBar);
-            this.Controls.Add(this.mnuApplicationMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.mnuApplicationMain;
-            this.Name = "frmMain";
-            this.Text = "FS22 Mod FIle Manager";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.mnuApplicationMain.ResumeLayout(false);
-            this.mnuApplicationMain.PerformLayout();
-            this.stsStatusBar.ResumeLayout(false);
-            this.stsStatusBar.PerformLayout();
-            this.pnlLists.ResumeLayout(false);
-            this.pnlLists.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.mnuContextFolderList.ResumeLayout(false);
-            this.mnuContextFileList.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(530, 571);
+            Controls.Add(panel1);
+            Controls.Add(pnlLists);
+            Controls.Add(stsStatusBar);
+            Controls.Add(mnuApplicationMain);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = mnuApplicationMain;
+            Name = "frmMain";
+            Text = "FS22 Mod FIle Manager";
+            FormClosed += frmMain_FormClosed;
+            Load += frmMain_Load;
+            mnuApplicationMain.ResumeLayout(false);
+            mnuApplicationMain.PerformLayout();
+            stsStatusBar.ResumeLayout(false);
+            stsStatusBar.PerformLayout();
+            pnlLists.ResumeLayout(false);
+            pnlLists.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            mnuContextFolderList.ResumeLayout(false);
+            mnuContextFileList.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -923,5 +877,6 @@
         private ToolStripMenuItem mnuFileOpenGameNotes;
         private ToolStripSeparator toolStripMenuItem2;
         private ToolStripMenuItem mnuContextOpenGameNotes;
+        private ToolStripMenuItem mnuOptOnlyShowZips;
     }
 }

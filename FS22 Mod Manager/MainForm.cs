@@ -20,7 +20,7 @@ namespace FS22_Mod_Manager
         static private string LogFileName = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "AppData\\Local\\FS22_Mod_Manager\\FsModManager.log");
         static private Logger logger = new Logger(LogFileName, true);
-        
+
         public frmMain()
         {
             InitializeComponent();
@@ -131,7 +131,7 @@ namespace FS22_Mod_Manager
             {
                 ZipFile.CreateFromDirectory(folderName, zipName, CompressionLevel.Fastest, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 stsStatusLabel.Text = "Zip creation failed!";
                 logger.LogWrite("ERROR: Zip creation failed!\n" + ex.Message, true);
@@ -190,9 +190,9 @@ namespace FS22_Mod_Manager
             }
             default_file_name = get_file_name(Path.GetDirectoryName(default_file_name), "Text files(*.txt)|*.txt|All files (*.*)|*.*");
             if (default_file_name.Length > 0)
-                {
-                    open_with_default_app(default_file_name);
-                }
+            {
+                open_with_default_app(default_file_name);
+            }
         }
 
         private void mnuFileExit_Click(object sender, EventArgs e)
@@ -233,7 +233,7 @@ namespace FS22_Mod_Manager
                 string message = "Are you sure you want to remove folder " + lstModFolders.Text + "?";
                 string caption = "Deleteing folder from disk";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                
+
                 // Displays the MessageBox.
                 if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show(message, caption, buttons))
                 {
@@ -315,7 +315,7 @@ namespace FS22_Mod_Manager
                 }
                 populate_file_list();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 logger.LogWrite(ex.Message, true);
             }
@@ -354,7 +354,7 @@ namespace FS22_Mod_Manager
                 }
             }
             catch (Exception ex)
-            { 
+            {
                 logger.LogWrite(ex.Message, true);
             }
         }
@@ -417,6 +417,11 @@ namespace FS22_Mod_Manager
                 logger.LogWrite(ex.Message, true);
             }
 
+        }
+
+        private void mnuOptOnlyShowZips_Click(object sender, EventArgs e)
+        {
+            populate_file_list();
         }
 
         private void mnuOptionsOpenOptsDirectory_Click(object sender, EventArgs e)
@@ -674,7 +679,7 @@ namespace FS22_Mod_Manager
              */
             logger.LogWrite("Mod folder path changed: " + txtModFolderPath.Text, true);
             try
-            { 
+            {
                 txtModFolderPath.Select(txtModFolderPath.TextLength, 0);
             }
             catch (Exception ex)
@@ -728,7 +733,7 @@ namespace FS22_Mod_Manager
             using (FolderBrowserDialog ofd = new FolderBrowserDialog())
             {
                 try
-                { 
+                {
                     string init_dir = txtModFolderPath.Text;
                     if (!Directory.Exists(init_dir))
                     {
@@ -759,7 +764,7 @@ namespace FS22_Mod_Manager
             using (FolderBrowserDialog ofd = new FolderBrowserDialog())
             {
                 try
-                { 
+                {
                     ofd.InitialDirectory = txtUserDataPath.Text;
 
                     if (ofd.ShowDialog() == DialogResult.OK)
@@ -785,7 +790,7 @@ namespace FS22_Mod_Manager
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 try
-                { 
+                {
                     string ini_dir = "C:\\";
                     if (Directory.Exists(Path.GetDirectoryName(txtGameExeFile.Text)))
                     {
@@ -837,7 +842,7 @@ namespace FS22_Mod_Manager
              * Launch FarmingSimulator2022.exe
              */
             List<string> args = new List<string>();
-            
+
             if (mnuOptLaunchRestart.Checked)
             {
                 args.Add(" -restart");
@@ -873,7 +878,7 @@ namespace FS22_Mod_Manager
             }
         }
 
-       private void lstModFiles_DoubleClick(object sender, EventArgs e)
+        private void lstModFiles_DoubleClick(object sender, EventArgs e)
         {
             /*
              * Show mod file in Windows default application
@@ -912,7 +917,7 @@ namespace FS22_Mod_Manager
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 try
-                { 
+                {
                     ofd.InitialDirectory = init_dir;
                     ofd.Multiselect = true;
                     ofd.Filter = "Zip files (*.zip)|*.zip|All files (*.*)|*.*";
@@ -1019,7 +1024,7 @@ namespace FS22_Mod_Manager
             logger.LogWrite("Getting user settings");
             logger.LogWrite("---------------------");
             try
-            { 
+            {
                 // get textbox values
                 txtModFolderPath.Text = Settings.Default.ModFolderPath;
                 if (false == Directory.Exists(Settings.Default.UserDataPath))
@@ -1056,6 +1061,7 @@ namespace FS22_Mod_Manager
                 mnuOptLaunchLaunchCheats.Checked = Settings.Default.LaunchWithCheats;
                 mnuOptLaunchRestart.Checked = Settings.Default.LaunchAsRestart;
                 mnuOptdDleteToRecycleBin.Checked = Settings.Default.DeleteToRecycleBin;
+                mnuOptOnlyShowZips.Checked = Settings.Default.OnlyShowZipFiles;
 
                 log_user_settings();
                 logger.LogWrite("-----------------------------");
@@ -1085,6 +1091,7 @@ namespace FS22_Mod_Manager
             Settings.Default.LaunchWithCheats = mnuOptLaunchLaunchCheats.Checked;
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
             Settings.Default.DeleteToRecycleBin = mnuOptdDleteToRecycleBin.Checked;
+            Settings.Default.OnlyShowZipFiles = mnuOptOnlyShowZips.Checked;
             // Window location
             Settings.Default.MainWindowLocation = this.Location;
             Settings.Default.Save();
@@ -1123,7 +1130,7 @@ namespace FS22_Mod_Manager
              */
             logger.LogWrite("Getting mod override values from gameSettings.xml");
             try
-            { 
+            {
                 System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
                 xmlDoc.Load(gameSettingsXmlFile);
                 System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName("modsDirectoryOverride");
@@ -1247,7 +1254,7 @@ namespace FS22_Mod_Manager
             /*
              * Read the XML file xmlFileName and get the elementName value
             */
-            logger.LogWrite("getting " + elementName + " From " + xmlFileName, true) ;
+            logger.LogWrite("getting " + elementName + " From " + xmlFileName, true);
             try
             {
                 System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
@@ -1296,7 +1303,7 @@ namespace FS22_Mod_Manager
             return null;
         }
 
-        private void game_xml_controls_element(bool write_value=false)
+        private void game_xml_controls_element(bool write_value = false)
         {
             /*
              * Read the game.xml file and get the controls element value
@@ -1307,7 +1314,7 @@ namespace FS22_Mod_Manager
              */
             logger.LogWrite("Getting console settings from game.xml", true);
             try
-            { 
+            {
                 System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
                 xmlDoc.Load(gameXmlFile);
                 System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName("controls");
@@ -1348,7 +1355,7 @@ namespace FS22_Mod_Manager
              */
             logger.LogWrite("Populating mod files list box from " + lstModFolders.Text, true);
             try
-            { 
+            {
                 if (lstModFiles.Items.Count > 0)
                 {
                     lstModFiles.Items.Clear();
@@ -1359,7 +1366,17 @@ namespace FS22_Mod_Manager
                     string[] files = Directory.GetFiles(mfp);
                     foreach (string file in files)
                     {
-                        lstModFiles.Items.Add(Path.GetFileName(file));
+                        if (mnuOptOnlyShowZips.Checked)
+                        {
+                            if (Path.GetExtension(file) == ".zip")
+                            {
+                                lstModFiles.Items.Add(Path.GetFileName(file));
+                            }
+                        }
+                        else
+                        {
+                            lstModFiles.Items.Add(Path.GetFileName(file));
+                        }
                     }
                     lblModFileCount.Text = string.Format("{0} Files", lstModFiles.Items.Count.ToString());
                 }
@@ -1377,7 +1394,7 @@ namespace FS22_Mod_Manager
              */
             logger.LogWrite("Populating mod folders list box from " + txtModFolderPath.Text, true);
             try
-            { 
+            {
                 if (Directory.Exists(txtModFolderPath.Text))
                 {
                     string[] dirs = Directory.GetDirectories(txtModFolderPath.Text);
