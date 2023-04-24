@@ -13,8 +13,10 @@ namespace FS22_Mod_Manager
 {
     public partial class CreateNewFolder : Form
     {
-        private string mod_folder_path = "";
-        private List<string> selected_mods = new List<string>();
+        public string new_folder_name = "";                         // for main form to select new folder in list
+
+        private string mod_folder_path = "";                        // full path to new mod folder
+        private List<string> selected_mods = new List<string>();    // List for selected mods
 
         public CreateNewFolder(string mod_folder)
         {
@@ -209,6 +211,7 @@ namespace FS22_Mod_Manager
                 lstSelectedModFiles.Items.Add(mod_file);
             }
             lblSelectedFileCount.Text = "Selected Files: " + lstSelectedModFiles.Items.Count.ToString();
+            lstSelectedModFiles.SelectedIndex = lstSelectedModFiles.Items.Count - 1;
         }
 
         private void copy_selected_mods()
@@ -223,6 +226,8 @@ namespace FS22_Mod_Manager
             if (result == DialogResult.OK)
             {
                 string folder_path = fbd.SelectedPath;
+                new_folder_name = Path.GetFileName(folder_path);
+                Debug.WriteLine($"new filder name: {new_folder_name}");
                 //copy files
                 foreach (string selected_file in selected_mods)
                 {
