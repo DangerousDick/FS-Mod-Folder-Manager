@@ -1467,5 +1467,15 @@ namespace FS22_Mod_Manager
                 logger.LogWrite(ex.Message, true);
             }
         }
+
+        private void mnuModsCreateNewFolder_Click(object sender, EventArgs e)
+        {
+            /*
+           * show create new mods folder dialog box
+           */
+            logger.LogWrite("Showing create new mods folder dialog", true);
+            CreateNewFolder cnf = new CreateNewFolder(txtModFolderPath.Text);
+            cnf.ShowDialog();
+        }
     }
 }

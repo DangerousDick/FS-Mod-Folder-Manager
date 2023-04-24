@@ -111,6 +111,8 @@
             mnuContexstFileRemove = new ToolStripMenuItem();
             mnuContextFileSeparator = new ToolStripSeparator();
             mnuContextModCopyToAll = new ToolStripMenuItem();
+            mnuModsCreateNewFolder = new ToolStripMenuItem();
+            toolStripMenuItem3 = new ToolStripSeparator();
             mnuApplicationMain.SuspendLayout();
             stsStatusBar.SuspendLayout();
             pnlLists.SuspendLayout();
@@ -220,7 +222,7 @@
             // 
             // mnuMods
             // 
-            mnuMods.DropDownItems.AddRange(new ToolStripItem[] { mnuModsFolder, MnuModsFile, mnuModsSeparator, mnuModsFolderOpen, mnuModsLaunchModhub });
+            mnuMods.DropDownItems.AddRange(new ToolStripItem[] { mnuModsFolder, MnuModsFile, mnuModsSeparator, mnuModsFolderOpen, mnuModsLaunchModhub, toolStripMenuItem3, mnuModsCreateNewFolder });
             mnuMods.Name = "mnuMods";
             mnuMods.Size = new Size(75, 20);
             mnuMods.Text = "Mods Files";
@@ -765,6 +767,18 @@
             mnuContextModCopyToAll.Text = "Copy Mod to ALL Folders";
             mnuContextModCopyToAll.Click += mnuContextModCopyToAll_Click;
             // 
+            // mnuModsCreateNewFolder
+            // 
+            mnuModsCreateNewFolder.Name = "mnuModsCreateNewFolder";
+            mnuModsCreateNewFolder.Size = new Size(206, 22);
+            mnuModsCreateNewFolder.Text = "Create New Mods Folder";
+            mnuModsCreateNewFolder.Click += mnuModsCreateNewFolder_Click;
+            // 
+            // toolStripMenuItem3
+            // 
+            toolStripMenuItem3.Name = "toolStripMenuItem3";
+            toolStripMenuItem3.Size = new Size(203, 6);
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -878,5 +892,7 @@
         private ToolStripSeparator toolStripMenuItem2;
         private ToolStripMenuItem mnuContextOpenGameNotes;
         private ToolStripMenuItem mnuOptOnlyShowZips;
+        private ToolStripSeparator toolStripMenuItem3;
+        private ToolStripMenuItem mnuModsCreateNewFolder;
     }
 }
