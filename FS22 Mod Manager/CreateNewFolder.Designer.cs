@@ -31,6 +31,9 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateNewFolder));
             pnlCreateNewFolder = new Panel();
+            chkOnlyShowZips = new CheckBox();
+            lblCurrentFavouritesFolder = new Label();
+            chkIncludeParentDir = new CheckBox();
             btnClose = new Button();
             lblSelectedFileCount = new Label();
             lblModFileCount = new Label();
@@ -51,6 +54,9 @@
             // 
             // pnlCreateNewFolder
             // 
+            pnlCreateNewFolder.Controls.Add(chkOnlyShowZips);
+            pnlCreateNewFolder.Controls.Add(lblCurrentFavouritesFolder);
+            pnlCreateNewFolder.Controls.Add(chkIncludeParentDir);
             pnlCreateNewFolder.Controls.Add(btnClose);
             pnlCreateNewFolder.Controls.Add(lblSelectedFileCount);
             pnlCreateNewFolder.Controls.Add(lblModFileCount);
@@ -65,12 +71,44 @@
             pnlCreateNewFolder.Controls.Add(lstFolders);
             pnlCreateNewFolder.Location = new Point(12, 12);
             pnlCreateNewFolder.Name = "pnlCreateNewFolder";
-            pnlCreateNewFolder.Size = new Size(776, 493);
+            pnlCreateNewFolder.Size = new Size(776, 499);
             pnlCreateNewFolder.TabIndex = 0;
+            // 
+            // chkOnlyShowZips
+            // 
+            chkOnlyShowZips.AutoSize = true;
+            chkOnlyShowZips.Checked = true;
+            chkOnlyShowZips.CheckState = CheckState.Checked;
+            chkOnlyShowZips.Location = new Point(226, 449);
+            chkOnlyShowZips.Name = "chkOnlyShowZips";
+            chkOnlyShowZips.Size = new Size(120, 19);
+            chkOnlyShowZips.TabIndex = 15;
+            chkOnlyShowZips.Text = "OnlyShowZIpFiles";
+            chkOnlyShowZips.UseVisualStyleBackColor = true;
+            chkOnlyShowZips.CheckedChanged += chkOnlyShowZips_CheckedChanged;
+            // 
+            // lblCurrentFavouritesFolder
+            // 
+            lblCurrentFavouritesFolder.Location = new Point(3, 472);
+            lblCurrentFavouritesFolder.Name = "lblCurrentFavouritesFolder";
+            lblCurrentFavouritesFolder.Size = new Size(770, 23);
+            lblCurrentFavouritesFolder.TabIndex = 14;
+            lblCurrentFavouritesFolder.Text = "Current Favourites Folder";
+            // 
+            // chkIncludeParentDir
+            // 
+            chkIncludeParentDir.AutoSize = true;
+            chkIncludeParentDir.Location = new Point(3, 446);
+            chkIncludeParentDir.Name = "chkIncludeParentDir";
+            chkIncludeParentDir.Size = new Size(164, 19);
+            chkIncludeParentDir.TabIndex = 13;
+            chkIncludeParentDir.Text = "Include Parent Folder Files";
+            chkIncludeParentDir.UseVisualStyleBackColor = true;
+            chkIncludeParentDir.CheckedChanged += chkIncludeParentDir_CheckedChanged;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(694, 462);
+            btnClose.Location = new Point(698, 446);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(75, 23);
             btnClose.TabIndex = 12;
@@ -81,7 +119,7 @@
             // lblSelectedFileCount
             // 
             lblSelectedFileCount.AutoSize = true;
-            lblSelectedFileCount.Location = new Point(461, 415);
+            lblSelectedFileCount.Location = new Point(444, 402);
             lblSelectedFileCount.Name = "lblSelectedFileCount";
             lblSelectedFileCount.Size = new Size(80, 15);
             lblSelectedFileCount.TabIndex = 11;
@@ -90,7 +128,7 @@
             // lblModFileCount
             // 
             lblModFileCount.AutoSize = true;
-            lblModFileCount.Location = new Point(243, 415);
+            lblModFileCount.Location = new Point(226, 402);
             lblModFileCount.Name = "lblModFileCount";
             lblModFileCount.Size = new Size(64, 15);
             lblModFileCount.TabIndex = 10;
@@ -99,7 +137,7 @@
             // lblFoldeerCount
             // 
             lblFoldeerCount.AutoSize = true;
-            lblFoldeerCount.Location = new Point(20, 415);
+            lblFoldeerCount.Location = new Point(3, 402);
             lblFoldeerCount.Name = "lblFoldeerCount";
             lblFoldeerCount.Size = new Size(51, 15);
             lblFoldeerCount.TabIndex = 9;
@@ -107,9 +145,9 @@
             // 
             // btnCreateFolder
             // 
-            btnCreateFolder.Location = new Point(461, 433);
+            btnCreateFolder.Location = new Point(444, 420);
             btnCreateFolder.Name = "btnCreateFolder";
-            btnCreateFolder.Size = new Size(308, 23);
+            btnCreateFolder.Size = new Size(329, 23);
             btnCreateFolder.TabIndex = 7;
             btnCreateFolder.Text = "Create Mods Folder";
             btnCreateFolder.UseVisualStyleBackColor = true;
@@ -117,7 +155,7 @@
             // 
             // btnChangeFolder
             // 
-            btnChangeFolder.Location = new Point(20, 433);
+            btnChangeFolder.Location = new Point(3, 420);
             btnChangeFolder.Name = "btnChangeFolder";
             btnChangeFolder.Size = new Size(217, 23);
             btnChangeFolder.TabIndex = 6;
@@ -128,7 +166,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(461, 15);
+            label3.Location = new Point(444, 2);
             label3.Name = "label3";
             label3.Size = new Size(105, 15);
             label3.TabIndex = 5;
@@ -137,7 +175,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(243, 15);
+            label2.Location = new Point(226, 2);
             label2.Name = "label2";
             label2.Size = new Size(58, 15);
             label2.TabIndex = 4;
@@ -146,7 +184,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(20, 15);
+            label1.Location = new Point(3, 2);
             label1.Name = "label1";
             label1.Size = new Size(97, 15);
             label1.TabIndex = 3;
@@ -157,9 +195,9 @@
             lstSelectedModFiles.FormattingEnabled = true;
             lstSelectedModFiles.HorizontalScrollbar = true;
             lstSelectedModFiles.ItemHeight = 15;
-            lstSelectedModFiles.Location = new Point(461, 33);
+            lstSelectedModFiles.Location = new Point(444, 20);
             lstSelectedModFiles.Name = "lstSelectedModFiles";
-            lstSelectedModFiles.Size = new Size(308, 379);
+            lstSelectedModFiles.Size = new Size(329, 379);
             lstSelectedModFiles.TabIndex = 2;
             lstSelectedModFiles.DoubleClick += lstSelectedModFiles_DoubleClick;
             // 
@@ -168,7 +206,7 @@
             lstModFiles.ContextMenuStrip = mnuCtxListModFiles;
             lstModFiles.FormattingEnabled = true;
             lstModFiles.ItemHeight = 15;
-            lstModFiles.Location = new Point(243, 33);
+            lstModFiles.Location = new Point(226, 20);
             lstModFiles.Name = "lstModFiles";
             lstModFiles.Size = new Size(212, 379);
             lstModFiles.TabIndex = 1;
@@ -191,7 +229,7 @@
             // 
             lstFolders.FormattingEnabled = true;
             lstFolders.ItemHeight = 15;
-            lstFolders.Location = new Point(20, 33);
+            lstFolders.Location = new Point(3, 20);
             lstFolders.Name = "lstFolders";
             lstFolders.Size = new Size(217, 379);
             lstFolders.TabIndex = 0;
@@ -201,7 +239,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 515);
+            ClientSize = new Size(800, 521);
             Controls.Add(pnlCreateNewFolder);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -231,5 +269,8 @@
         private Label lblModFileCount;
         private Label lblFoldeerCount;
         private Button btnClose;
+        private CheckBox chkIncludeParentDir;
+        private Label lblCurrentFavouritesFolder;
+        private CheckBox chkOnlyShowZips;
     }
 }

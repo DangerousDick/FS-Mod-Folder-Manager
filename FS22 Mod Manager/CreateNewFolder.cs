@@ -17,6 +17,7 @@ namespace FS22_Mod_Manager
 
         private string mod_folder_path = "";                        // full path to new mod folder
         private List<string> selected_mods = new List<string>();    // List for selected mods
+        private bool NO_SUB_DIRS = false;                           // Flag to indicated selected favourites folder has not subdirectories
 
         public CreateNewFolder(string mod_folder)
         {
@@ -30,7 +31,7 @@ namespace FS22_Mod_Manager
              * on form load populate the list boxes using the mod_folder path
              */
             populate_folder_list();
-            populate_file_list();
+            lblCurrentFavouritesFolder.Text = mod_folder_path;
         }
 
         private void btnClose_Click_1(object sender, EventArgs e)
@@ -52,16 +53,27 @@ namespace FS22_Mod_Manager
              * select another folder and populate lists
              */
             mod_folder_path = get_folder_list(mod_folder_path);
-            populate_folder_list();
-            populate_file_list();
+            if (mod_folder_path != "")
+            {
+                populate_folder_list();
+            }
+            lblCurrentFavouritesFolder.Text = mod_folder_path;
         }
 
         private void lstModFiles_DoubleClick(object sender, EventArgs e)
         {
             /*
-             * when double clicking a mod file add it to the selected mods list and check for duplicates
+             * when double clicking a mod file add it to the selected mods list, no duplicates, and repopulate listbox
              */
-            string mod_file_name = Path.Join(mod_folder_path, lstFolders.Text, lstModFiles.Text);
+            string mod_file_name = "";
+            if (NO_SUB_DIRS)
+            {
+                mod_file_name = Path.Join(mod_folder_path, lstModFiles.Text);
+            }
+            else
+            {
+                mod_file_name = Path.Join(mod_folder_path, lstFolders.Text, lstModFiles.Text);
+            }
             if (selected_mods.FindIndex(x => x.Equals(mod_file_name)) == -1)
             {
                 selected_mods.Add(mod_file_name);
@@ -87,15 +99,35 @@ namespace FS22_Mod_Manager
 
         private void mnuSelectAllMods_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < lstModFiles.Items.Count; i++)
+            try
             {
-                string mod_file_name = Path.Join(mod_folder_path, lstFolders.Text, lstModFiles.Items[i].ToString());
-                if (selected_mods.FindIndex(x => x.Equals(mod_file_name)) == -1)
+                if (lstModFiles.Items.Count > 0)
                 {
-                    selected_mods.Add(mod_file_name);
+                    for (int i = 0; i < lstModFiles.Items.Count; i++)
+                    {
+                        string mod_file_name = Path.Join(mod_folder_path, lstFolders.Text, lstModFiles.Items[i].ToString());
+                        if (selected_mods.FindIndex(x => x.Equals(mod_file_name)) == -1)
+                        {
+                            selected_mods.Add(mod_file_name);
+                        }
+                    }
+                    populate_selected_files_list();
                 }
-                populate_selected_files_list();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception: " + ex.Message);
+            }
+        }
+
+        private void chkIncludeParentDir_CheckedChanged(object sender, EventArgs e)
+        {
+            populate_file_list();
+        }
+
+        private void chkOnlyShowZips_CheckedChanged(object sender, EventArgs e)
+        {
+            populate_file_list();
         }
 
         // private methods
@@ -118,10 +150,6 @@ namespace FS22_Mod_Manager
                         {
                             return fbd.SelectedPath;
                         }
-                        else
-                        {
-                            return "";
-                        }
                     }
                     catch (Exception ex)
                     {
@@ -139,6 +167,7 @@ namespace FS22_Mod_Manager
              */
             try
             {
+                NO_SUB_DIRS = false;
                 if (Directory.Exists(mod_folder_path))
                 {
                     string[] dirs = Directory.GetDirectories(mod_folder_path);
@@ -146,24 +175,36 @@ namespace FS22_Mod_Manager
                     {
                         lstFolders.Items.Clear();
                     }
-                    foreach (string dir in dirs)
+                    // handle no subdirectories
+                    if (dirs.Length == 0)
                     {
-                        if (Directory.Exists(dir))
-                        {
-                            lstFolders.Items.Add(Path.GetFileName(dir));
-                        }
+                        NO_SUB_DIRS = true;
+                        lstFolders.Items.Clear();
+                        lblFoldeerCount.Text = "Folders: " + lstFolders.Items.Count.ToString();
                     }
-                    if (lstFolders.Items.Count > 0)
+                    else
                     {
-                        lstFolders.SelectedIndex = 0;
+                        foreach (string dir in dirs)
+                        {
+                            if (Directory.Exists(dir))
+                            {
+                                lstFolders.Items.Add(Path.GetFileName(dir));
+                            }
+                        }
+                        if (lstFolders.Items.Count > 0)
+                        {
+                            lstFolders.SelectedIndex = 0;
+                        }
                     }
                     lblFoldeerCount.Text = "Folders: " + lstFolders.Items.Count.ToString();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("created new folder" + ex.Message);
+                MessageBox.Show("Exception: " + ex.Message);
             }
+            // now populate the mod files list
+            populate_file_list();
         }
 
         private void populate_file_list()
@@ -177,15 +218,51 @@ namespace FS22_Mod_Manager
                 {
                     lstModFiles.Items.Clear();
                 }
-                if (lstFolders.Items.Count > 0)
+                // handle no subdirectories
+                if (NO_SUB_DIRS)
+                {
+                    lstModFiles.Items.Clear();
+                    string[] files = Directory.GetFiles(mod_folder_path);
+                    foreach (string file in files)
+                    {
+                        if (chkOnlyShowZips.Checked && Path.GetExtension(file) == ".zip")
+                        {
+                            lstModFiles.Items.Add(Path.GetFileName(file));
+                        }
+                        else if (!chkOnlyShowZips.Checked)
+                        {
+                            lstModFiles.Items.Add(Path.GetFileName(file));
+                        }
+                    }
+                }
+                else
                 {
                     string mfp = Path.Join(mod_folder_path, lstFolders.Text);
                     string[] files = Directory.GetFiles(mfp);
                     foreach (string file in files)
                     {
-                        if (Path.GetExtension(file) == ".zip")
+                        if (chkOnlyShowZips.Checked && Path.GetExtension(file) == ".zip")
                         {
                             lstModFiles.Items.Add(Path.GetFileName(file));
+                        }
+                        else if (!chkOnlyShowZips.Checked)
+                        {
+                            lstModFiles.Items.Add(Path.GetFileName(file));
+                        }
+                    }
+                    if (chkIncludeParentDir.Checked)
+                    {
+                        files = Directory.GetFiles(mod_folder_path);
+                        foreach (string file in files)
+                        {
+                            if (chkOnlyShowZips.Checked && Path.GetExtension(file) == ".zip")
+                            {
+                                lstModFiles.Items.Add(Path.GetFileName(file));
+                            }
+                            else if (!chkOnlyShowZips.Checked)
+                            {
+                                lstModFiles.Items.Add(Path.GetFileName(file));
+                            }
                         }
                     }
                 }
