@@ -120,6 +120,12 @@ namespace FS22_Mod_Manager
             }
         }
 
+        private void mnuRemoveAll_Click(object sender, EventArgs e)
+        {
+            lstSelectedModFiles.Items.Clear();
+            selected_mods.Clear();
+        }
+
         private void chkIncludeParentDir_CheckedChanged(object sender, EventArgs e)
         {
             populate_file_list();

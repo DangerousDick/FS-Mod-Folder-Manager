@@ -48,8 +48,11 @@
             mnuCtxListModFiles = new ContextMenuStrip(components);
             mnuSelectAllMods = new ToolStripMenuItem();
             lstFolders = new ListBox();
+            mnuCtxSelectedFiles = new ContextMenuStrip(components);
+            mnuCtxRemoveAll = new ToolStripMenuItem();
             pnlCreateNewFolder.SuspendLayout();
             mnuCtxListModFiles.SuspendLayout();
+            mnuCtxSelectedFiles.SuspendLayout();
             SuspendLayout();
             // 
             // pnlCreateNewFolder
@@ -192,6 +195,7 @@
             // 
             // lstSelectedModFiles
             // 
+            lstSelectedModFiles.ContextMenuStrip = mnuCtxSelectedFiles;
             lstSelectedModFiles.FormattingEnabled = true;
             lstSelectedModFiles.HorizontalScrollbar = true;
             lstSelectedModFiles.ItemHeight = 15;
@@ -235,6 +239,19 @@
             lstFolders.TabIndex = 0;
             lstFolders.SelectedIndexChanged += lstFolders_SelectedIndexChanged;
             // 
+            // mnuCtxSelectedFiles
+            // 
+            mnuCtxSelectedFiles.Items.AddRange(new ToolStripItem[] { mnuCtxRemoveAll });
+            mnuCtxSelectedFiles.Name = "mnuCtxSelectedFiles";
+            mnuCtxSelectedFiles.Size = new Size(135, 26);
+            // 
+            // mnuCtxRemoveAll
+            // 
+            mnuCtxRemoveAll.Name = "mnuCtxRemoveAll";
+            mnuCtxRemoveAll.Size = new Size(134, 22);
+            mnuCtxRemoveAll.Text = "Remove All";
+            mnuCtxRemoveAll.Click += mnuRemoveAll_Click;
+            // 
             // CreateNewFolder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -249,6 +266,7 @@
             pnlCreateNewFolder.ResumeLayout(false);
             pnlCreateNewFolder.PerformLayout();
             mnuCtxListModFiles.ResumeLayout(false);
+            mnuCtxSelectedFiles.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -272,5 +290,7 @@
         private CheckBox chkIncludeParentDir;
         private Label lblCurrentFavouritesFolder;
         private CheckBox chkOnlyShowZips;
+        private ContextMenuStrip mnuCtxSelectedFiles;
+        private ToolStripMenuItem mnuCtxRemoveAll;
     }
 }
