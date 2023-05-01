@@ -52,12 +52,13 @@ namespace FS22_Mod_Manager
             /*
              * select another folder and populate lists
              */
-            mod_folder_path = get_folder_list(mod_folder_path);
-            if (mod_folder_path != "")
+            string path = get_folder_list(mod_folder_path);
+            if (path != "")
             {
+                mod_folder_path = path;
                 populate_folder_list();
+                lblCurrentFavouritesFolder.Text = mod_folder_path;
             }
-            lblCurrentFavouritesFolder.Text = mod_folder_path;
         }
 
         private void lstModFiles_DoubleClick(object sender, EventArgs e)
