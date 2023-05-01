@@ -11,6 +11,8 @@ namespace FS22_Mod_Manager
     {
         // constant values
         const string version = "V1.6.0";
+        const string copyright = "Copyright Richard Sayer 2023";
+        const string app_description = "Farming Simulator 22 Mods Folder Manager " + version + "\nApplication to manage farming simulator mod folders";
         // private variables to be set on form load
         private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "AppData\\Local\\FS22_Mod_Manager");
@@ -534,12 +536,12 @@ namespace FS22_Mod_Manager
             {
                 string[] about_info = new string[]
                 {
-                    "Copyright Richard Sayer 2022",
-                    "Farming Simulator 22 Mods Folder Manager " + version,
-                    "Application to manage farming simulator mod folders"
+                    copyright,
+                    " ",
+                    app_description
                 };
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
-                MessageBox.Show(String.Join("\n", about_info), "About Mod Manager", buttons);
+                MessageBox.Show(String.Join("\n", about_info), "About Mods Folder Manager", buttons);
             }
             catch (Exception ex)
             {
