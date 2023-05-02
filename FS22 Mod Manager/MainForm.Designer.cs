@@ -57,6 +57,8 @@
             mnuModsSeparator = new ToolStripSeparator();
             mnuModsFolderOpen = new ToolStripMenuItem();
             mnuModsLaunchModhub = new ToolStripMenuItem();
+            toolStripMenuItem3 = new ToolStripSeparator();
+            mnuModsCreateNewFolder = new ToolStripMenuItem();
             mnuOptions = new ToolStripMenuItem();
             mnuOptMod = new ToolStripMenuItem();
             mnuOptModDoubleClick = new ToolStripMenuItem();
@@ -111,8 +113,6 @@
             mnuContexstFileRemove = new ToolStripMenuItem();
             mnuContextFileSeparator = new ToolStripSeparator();
             mnuContextModCopyToAll = new ToolStripMenuItem();
-            mnuModsCreateNewFolder = new ToolStripMenuItem();
-            toolStripMenuItem3 = new ToolStripSeparator();
             mnuApplicationMain.SuspendLayout();
             stsStatusBar.SuspendLayout();
             pnlLists.SuspendLayout();
@@ -231,7 +231,7 @@
             // 
             mnuModsFolder.DropDownItems.AddRange(new ToolStripItem[] { mnuModFolderAdd, mnuModFolderRemove, mnuModFolderRename, mnuCopyAsNewFolder });
             mnuModsFolder.Name = "mnuModsFolder";
-            mnuModsFolder.Size = new Size(206, 22);
+            mnuModsFolder.Size = new Size(204, 22);
             mnuModsFolder.Text = "Mod Folder Actions";
             // 
             // mnuModFolderAdd
@@ -266,7 +266,7 @@
             // 
             MnuModsFile.DropDownItems.AddRange(new ToolStripItem[] { mnuModFileRemove, mnuModFileCopyToSelected, mnuModFileCopyToAll });
             MnuModsFile.Name = "MnuModsFile";
-            MnuModsFile.Size = new Size(206, 22);
+            MnuModsFile.Size = new Size(204, 22);
             MnuModsFile.Text = "Mod File Actions";
             // 
             // mnuModFileRemove
@@ -293,23 +293,35 @@
             // mnuModsSeparator
             // 
             mnuModsSeparator.Name = "mnuModsSeparator";
-            mnuModsSeparator.Size = new Size(203, 6);
+            mnuModsSeparator.Size = new Size(201, 6);
             // 
             // mnuModsFolderOpen
             // 
             mnuModsFolderOpen.Name = "mnuModsFolderOpen";
             mnuModsFolderOpen.ShortcutKeys = Keys.F6;
-            mnuModsFolderOpen.Size = new Size(206, 22);
-            mnuModsFolderOpen.Text = "Open Mods Directory";
+            mnuModsFolderOpen.Size = new Size(204, 22);
+            mnuModsFolderOpen.Text = "Open Mods Folder";
             mnuModsFolderOpen.Click += mnuModFolderOpen_Click;
             // 
             // mnuModsLaunchModhub
             // 
             mnuModsLaunchModhub.Name = "mnuModsLaunchModhub";
             mnuModsLaunchModhub.ShortcutKeys = Keys.F7;
-            mnuModsLaunchModhub.Size = new Size(206, 22);
+            mnuModsLaunchModhub.Size = new Size(204, 22);
             mnuModsLaunchModhub.Text = "Launch Mod Hub";
             mnuModsLaunchModhub.Click += mnuModsLaunchModhub_Click;
+            // 
+            // toolStripMenuItem3
+            // 
+            toolStripMenuItem3.Name = "toolStripMenuItem3";
+            toolStripMenuItem3.Size = new Size(201, 6);
+            // 
+            // mnuModsCreateNewFolder
+            // 
+            mnuModsCreateNewFolder.Name = "mnuModsCreateNewFolder";
+            mnuModsCreateNewFolder.Size = new Size(204, 22);
+            mnuModsCreateNewFolder.Text = "Create New Mods Folder";
+            mnuModsCreateNewFolder.Click += mnuModsCreateNewFolder_Click;
             // 
             // mnuOptions
             // 
@@ -766,18 +778,6 @@
             mnuContextModCopyToAll.Size = new Size(208, 22);
             mnuContextModCopyToAll.Text = "Copy Mod to ALL Folders";
             mnuContextModCopyToAll.Click += mnuContextModCopyToAll_Click;
-            // 
-            // mnuModsCreateNewFolder
-            // 
-            mnuModsCreateNewFolder.Name = "mnuModsCreateNewFolder";
-            mnuModsCreateNewFolder.Size = new Size(206, 22);
-            mnuModsCreateNewFolder.Text = "Create New Mods Folder";
-            mnuModsCreateNewFolder.Click += mnuModsCreateNewFolder_Click;
-            // 
-            // toolStripMenuItem3
-            // 
-            toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(203, 6);
             // 
             // frmMain
             // 

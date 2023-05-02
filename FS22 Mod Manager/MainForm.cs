@@ -423,7 +423,7 @@ namespace FS22_Mod_Manager
                     lstModFolders.SetSelected(idx, true);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogWrite(ex.Message, true);
             }
