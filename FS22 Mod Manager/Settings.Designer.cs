@@ -226,5 +226,17 @@ namespace FS22_Mod_Manager {
                 this["OnlyShowZipFiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\fs22mods")]
+        public string DefaultFavouritesFolder {
+            get {
+                return ((string)(this["DefaultFavouritesFolder"]));
+            }
+            set {
+                this["DefaultFavouritesFolder"] = value;
+            }
+        }
     }
 }

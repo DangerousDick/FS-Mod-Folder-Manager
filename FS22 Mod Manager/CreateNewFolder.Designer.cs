@@ -31,6 +31,10 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateNewFolder));
             pnlCreateNewFolder = new Panel();
+            txtCurrentFavouritesFolder = new TextBox();
+            label4 = new Label();
+            btnBrowse = new Button();
+            txtDefaultFavouritesFolder = new TextBox();
             chkOnlyShowZips = new CheckBox();
             lblCurrentFavouritesFolder = new Label();
             chkIncludeParentDir = new CheckBox();
@@ -44,19 +48,23 @@
             label2 = new Label();
             label1 = new Label();
             lstSelectedModFiles = new ListBox();
+            mnuCtxSelectedFiles = new ContextMenuStrip(components);
+            mnuCtxRemoveAll = new ToolStripMenuItem();
             lstModFiles = new ListBox();
             mnuCtxListModFiles = new ContextMenuStrip(components);
             mnuSelectAllMods = new ToolStripMenuItem();
             lstFolders = new ListBox();
-            mnuCtxSelectedFiles = new ContextMenuStrip(components);
-            mnuCtxRemoveAll = new ToolStripMenuItem();
             pnlCreateNewFolder.SuspendLayout();
-            mnuCtxListModFiles.SuspendLayout();
             mnuCtxSelectedFiles.SuspendLayout();
+            mnuCtxListModFiles.SuspendLayout();
             SuspendLayout();
             // 
             // pnlCreateNewFolder
             // 
+            pnlCreateNewFolder.Controls.Add(txtCurrentFavouritesFolder);
+            pnlCreateNewFolder.Controls.Add(label4);
+            pnlCreateNewFolder.Controls.Add(btnBrowse);
+            pnlCreateNewFolder.Controls.Add(txtDefaultFavouritesFolder);
             pnlCreateNewFolder.Controls.Add(chkOnlyShowZips);
             pnlCreateNewFolder.Controls.Add(lblCurrentFavouritesFolder);
             pnlCreateNewFolder.Controls.Add(chkIncludeParentDir);
@@ -74,8 +82,47 @@
             pnlCreateNewFolder.Controls.Add(lstFolders);
             pnlCreateNewFolder.Location = new Point(12, 12);
             pnlCreateNewFolder.Name = "pnlCreateNewFolder";
-            pnlCreateNewFolder.Size = new Size(776, 499);
+            pnlCreateNewFolder.Size = new Size(776, 558);
             pnlCreateNewFolder.TabIndex = 0;
+            // 
+            // txtCurrentFavouritesFolder
+            // 
+            txtCurrentFavouritesFolder.BackColor = SystemColors.InactiveCaption;
+            txtCurrentFavouritesFolder.Location = new Point(153, 472);
+            txtCurrentFavouritesFolder.Name = "txtCurrentFavouritesFolder";
+            txtCurrentFavouritesFolder.ReadOnly = true;
+            txtCurrentFavouritesFolder.Size = new Size(620, 23);
+            txtCurrentFavouritesFolder.TabIndex = 19;
+            txtCurrentFavouritesFolder.Text = "Current Favourites Folder";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(3, 501);
+            label4.Name = "label4";
+            label4.Size = new Size(97, 15);
+            label4.TabIndex = 18;
+            label4.Text = "Default Favourite";
+            // 
+            // btnBrowse
+            // 
+            btnBrowse.Location = new Point(711, 499);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new Size(62, 23);
+            btnBrowse.TabIndex = 17;
+            btnBrowse.Text = "Browse";
+            btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.Click += btnDefaultFavourtiesBrowse_Click;
+            // 
+            // txtDefaultFavouritesFolder
+            // 
+            txtDefaultFavouritesFolder.BackColor = SystemColors.Info;
+            txtDefaultFavouritesFolder.Location = new Point(106, 498);
+            txtDefaultFavouritesFolder.Name = "txtDefaultFavouritesFolder";
+            txtDefaultFavouritesFolder.ReadOnly = true;
+            txtDefaultFavouritesFolder.Size = new Size(599, 23);
+            txtDefaultFavouritesFolder.TabIndex = 16;
+            txtDefaultFavouritesFolder.Text = "Default Favourites Folder";
             // 
             // chkOnlyShowZips
             // 
@@ -92,9 +139,10 @@
             // 
             // lblCurrentFavouritesFolder
             // 
+            lblCurrentFavouritesFolder.BackColor = SystemColors.Control;
             lblCurrentFavouritesFolder.Location = new Point(3, 472);
             lblCurrentFavouritesFolder.Name = "lblCurrentFavouritesFolder";
-            lblCurrentFavouritesFolder.Size = new Size(770, 23);
+            lblCurrentFavouritesFolder.Size = new Size(144, 20);
             lblCurrentFavouritesFolder.TabIndex = 14;
             lblCurrentFavouritesFolder.Text = "Current Favourites Folder";
             // 
@@ -111,11 +159,11 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(698, 446);
+            btnClose.Location = new Point(711, 529);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(75, 23);
+            btnClose.Size = new Size(62, 23);
             btnClose.TabIndex = 12;
-            btnClose.Text = "Close";
+            btnClose.Text = "Exit";
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click_1;
             // 
@@ -205,6 +253,19 @@
             lstSelectedModFiles.TabIndex = 2;
             lstSelectedModFiles.DoubleClick += lstSelectedModFiles_DoubleClick;
             // 
+            // mnuCtxSelectedFiles
+            // 
+            mnuCtxSelectedFiles.Items.AddRange(new ToolStripItem[] { mnuCtxRemoveAll });
+            mnuCtxSelectedFiles.Name = "mnuCtxSelectedFiles";
+            mnuCtxSelectedFiles.Size = new Size(135, 26);
+            // 
+            // mnuCtxRemoveAll
+            // 
+            mnuCtxRemoveAll.Name = "mnuCtxRemoveAll";
+            mnuCtxRemoveAll.Size = new Size(134, 22);
+            mnuCtxRemoveAll.Text = "Remove All";
+            mnuCtxRemoveAll.Click += mnuRemoveAll_Click;
+            // 
             // lstModFiles
             // 
             lstModFiles.ContextMenuStrip = mnuCtxListModFiles;
@@ -239,24 +300,12 @@
             lstFolders.TabIndex = 0;
             lstFolders.SelectedIndexChanged += lstFolders_SelectedIndexChanged;
             // 
-            // mnuCtxSelectedFiles
-            // 
-            mnuCtxSelectedFiles.Items.AddRange(new ToolStripItem[] { mnuCtxRemoveAll });
-            mnuCtxSelectedFiles.Name = "mnuCtxSelectedFiles";
-            mnuCtxSelectedFiles.Size = new Size(135, 26);
-            // 
-            // mnuCtxRemoveAll
-            // 
-            mnuCtxRemoveAll.Name = "mnuCtxRemoveAll";
-            mnuCtxRemoveAll.Size = new Size(134, 22);
-            mnuCtxRemoveAll.Text = "Remove All";
-            mnuCtxRemoveAll.Click += mnuRemoveAll_Click;
-            // 
             // CreateNewFolder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 521);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(800, 573);
             Controls.Add(pnlCreateNewFolder);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -265,8 +314,8 @@
             Load += CreateNewFolder_Load;
             pnlCreateNewFolder.ResumeLayout(false);
             pnlCreateNewFolder.PerformLayout();
-            mnuCtxListModFiles.ResumeLayout(false);
             mnuCtxSelectedFiles.ResumeLayout(false);
+            mnuCtxListModFiles.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -292,5 +341,9 @@
         private CheckBox chkOnlyShowZips;
         private ContextMenuStrip mnuCtxSelectedFiles;
         private ToolStripMenuItem mnuCtxRemoveAll;
+        private Label label4;
+        private Button btnBrowse;
+        private TextBox txtDefaultFavouritesFolder;
+        private TextBox txtCurrentFavouritesFolder;
     }
 }

@@ -19,10 +19,9 @@ namespace FS22_Mod_Manager
         private List<string> selected_mods = new List<string>();    // List for selected mods
         private bool NO_SUB_DIRS = false;                           // Flag to indicated selected favourites folder has not subdirectories
 
-        public CreateNewFolder(string mod_folder)
+        public CreateNewFolder()
         {
             InitializeComponent();
-            mod_folder_path = mod_folder;
         }
 
         private void CreateNewFolder_Load(object sender, EventArgs e)
@@ -30,12 +29,15 @@ namespace FS22_Mod_Manager
             /*
              * on form load populate the list boxes using the mod_folder path
              */
+            mod_folder_path = Settings.Default.DefaultFavouritesFolder;
+            txtCurrentFavouritesFolder.Text = mod_folder_path;
+            txtDefaultFavouritesFolder.Text = Settings.Default.DefaultFavouritesFolder;
             populate_folder_list();
-            lblCurrentFavouritesFolder.Text = mod_folder_path;
         }
 
         private void btnClose_Click_1(object sender, EventArgs e)
         {
+            Settings.Default.DefaultFavouritesFolder = txtDefaultFavouritesFolder.Text;
             Close();
         }
 
@@ -57,7 +59,38 @@ namespace FS22_Mod_Manager
             {
                 mod_folder_path = path;
                 populate_folder_list();
-                lblCurrentFavouritesFolder.Text = mod_folder_path;
+                txtCurrentFavouritesFolder.Text = mod_folder_path;
+            }
+        }
+
+        private void btnDefaultFavourtiesBrowse_Click(object sender, EventArgs e)
+        {
+            /*
+             * Mod folder path browse button clicked to so launch 
+             * file dialog to select or create new folder
+             */
+            using (FolderBrowserDialog ofd = new FolderBrowserDialog())
+            {
+                try
+                {
+                    string init_dir = txtDefaultFavouritesFolder.Text;
+                    if (!Directory.Exists(init_dir))
+                    {
+                        init_dir = "C:\\";
+                    }
+                    ofd.InitialDirectory = init_dir;
+
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        //Show in textbox
+                        txtDefaultFavouritesFolder.Text = ofd.SelectedPath;
+                        populate_folder_list();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error: {ex.Message}");
+                }
             }
         }
 

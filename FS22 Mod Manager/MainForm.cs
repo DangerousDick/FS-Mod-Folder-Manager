@@ -408,12 +408,12 @@ namespace FS22_Mod_Manager
         private void mnuModsCreateNewFolder_Click(object sender, EventArgs e)
         {
             /*
-           * show create new mods folder dialog box
-           */
+            * show create new mods folder dialog box
+            */
             logger.LogWrite("Showing create new mods folder dialog", true);
             try
             {
-                CreateNewFolder cnf = new CreateNewFolder(txtModFolderPath.Text);
+                CreateNewFolder cnf = new CreateNewFolder();
                 cnf.ShowDialog();
                 populate_folder_list();
                 // set listbox item to new folder
