@@ -186,7 +186,7 @@ namespace FS22_Mod_Manager
                     String file_name = Path.GetFileNameWithoutExtension(default_file_name);
                     using (StreamWriter sw = File.CreateText(default_file_name))
                     {
-                        sw.WriteLine(file_name + " game notes\n");
+                        sw.WriteLine(file_name);
                     }
                 }
             }
