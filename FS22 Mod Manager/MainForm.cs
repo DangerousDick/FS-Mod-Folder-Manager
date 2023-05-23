@@ -23,6 +23,9 @@ namespace FS22_Mod_Manager
             "AppData\\Local\\FS22_Mod_Manager\\FsModManager.log");
         static private Logger logger = new Logger(LogFileName, true);
 
+        // when populating lists if no subfolders then set flag
+        static bool NO_SUB_DIRS = false;
+
         public frmMain()
         {
             InitializeComponent();
@@ -1382,14 +1385,11 @@ namespace FS22_Mod_Manager
             logger.LogWrite("Populating mod files list box from " + lstModFolders.Text, true);
             try
             {
-                if (lstModFiles.Items.Count > 0)
+                // handle no subdirectories
+                if (NO_SUB_DIRS)
                 {
                     lstModFiles.Items.Clear();
-                }
-                if (lstModFolders.Items.Count > 0)
-                {
-                    string mfp = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
-                    string[] files = Directory.GetFiles(mfp);
+                    string[] files = Directory.GetFiles(txtModFolderPath.Text);
                     foreach (string file in files)
                     {
                         if (mnuOptOnlyShowZips.Checked)
@@ -1404,7 +1404,34 @@ namespace FS22_Mod_Manager
                             lstModFiles.Items.Add(Path.GetFileName(file));
                         }
                     }
-                    lblModFileCount.Text = string.Format("{0} Files", lstModFiles.Items.Count.ToString());
+                }
+                else
+                {
+
+                    if (lstModFiles.Items.Count > 0)
+                    {
+                        lstModFiles.Items.Clear();
+                    }
+                    if (lstModFolders.Items.Count > 0)
+                    {
+                        string mfp = Path.Join(txtModFolderPath.Text, lstModFolders.Text);
+                        string[] files = Directory.GetFiles(mfp);
+                        foreach (string file in files)
+                        {
+                            if (mnuOptOnlyShowZips.Checked)
+                            {
+                                if (Path.GetExtension(file) == ".zip")
+                                {
+                                    lstModFiles.Items.Add(Path.GetFileName(file));
+                                }
+                            }
+                            else
+                            {
+                                lstModFiles.Items.Add(Path.GetFileName(file));
+                            }
+                        }
+                        lblModFileCount.Text = string.Format("{0} Files", lstModFiles.Items.Count.ToString());
+                    }
                 }
             }
             catch (Exception ex)
@@ -1423,21 +1450,30 @@ namespace FS22_Mod_Manager
             {
                 if (Directory.Exists(txtModFolderPath.Text))
                 {
+                    NO_SUB_DIRS = false;
                     string[] dirs = Directory.GetDirectories(txtModFolderPath.Text);
                     if (lstModFolders.Items.Count > 0)
                     {
                         lstModFolders.Items.Clear();
                     }
-                    foreach (string dir in dirs)
+                    if (dirs.Length == 0)
                     {
-                        if (Directory.Exists(dir))
-                        {
-                            lstModFolders.Items.Add(Path.GetFileName(dir));
-                        }
+                        NO_SUB_DIRS = true;
+                        lstModFolders.Items.Clear();
                     }
-                    if (lstModFolders.Items.Count > 0)
+                    else
                     {
-                        lstModFolders.SelectedIndex = 0;
+                        foreach (string dir in dirs)
+                        {
+                            if (Directory.Exists(dir))
+                            {
+                                lstModFolders.Items.Add(Path.GetFileName(dir));
+                            }
+                        }
+                        if (lstModFolders.Items.Count > 0)
+                        {
+                            lstModFolders.SelectedIndex = 0;
+                        }
                     }
                     lblModFolderCount.Text = string.Format("{0} Folders", lstModFolders.Items.Count.ToString());
                 }
