@@ -347,8 +347,7 @@ namespace FS22_Mod_Manager
                         logger.LogWrite("\t" + file_list[i] + " -> " + dest_file);
                         try
                         {
-                            if (mnuOptOverwriteOnCopy.Checked) { File.Copy(file_list[i], dest_file, true); } // overwrite set to true
-                            else { File.Copy(file_list[i], dest_file, false); }
+                            File.Copy(file_list[i], dest_file, (mnuOptOverwriteOnCopy.Checked));
                         }
                         catch (Exception ex)
                         {
@@ -389,8 +388,7 @@ namespace FS22_Mod_Manager
                             {
                                 if (file_list[i] != dest_file)
                                 {
-                                    if (mnuOptOverwriteOnCopy.Checked) { File.Copy(file_list[i], dest_file, true); } // overwrite set to true
-                                    else { File.Copy(file_list[i], dest_file, false); }
+                                    File.Copy(file_list[i], dest_file, (mnuOptOverwriteOnCopy.Checked));
                                 }
                             }
                             catch (Exception ex)
@@ -664,8 +662,7 @@ namespace FS22_Mod_Manager
                         {
                             if (mod_file != dest_file) // ignore selected mod file
                             {
-                                if (mnuOptOverwriteOnCopy.Checked) { File.Copy(mod_file, dest_file, true); } // overwrite set to true
-                                else { File.Copy(mod_file, dest_file, false); }
+                                File.Copy(mod_file, dest_file, (mnuOptOverwriteOnCopy.Checked));
                             }
                         }
                         catch (Exception ex)
