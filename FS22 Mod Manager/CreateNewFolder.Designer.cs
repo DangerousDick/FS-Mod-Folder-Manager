@@ -97,6 +97,7 @@
             btnLoadList.TabIndex = 21;
             btnLoadList.Text = "Load List";
             btnLoadList.UseVisualStyleBackColor = true;
+            btnLoadList.Click += btnLoadList_Click;
             // 
             // btnSaveList
             // 
