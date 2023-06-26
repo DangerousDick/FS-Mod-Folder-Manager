@@ -5,7 +5,6 @@ namespace FS22_Mod_Manager
     using System.IO.Compression;
     using System.IO;
     using System.Windows.Forms;
-    //using System.Security.Cryptography;
 
     public partial class frmMain : Form
     {
