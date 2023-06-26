@@ -19,7 +19,7 @@ namespace FS22_Mod_Manager
         private string gameSettingsXmlFile = "";
         private string gameXmlFile = "";
         // static member variable for initialising log file class
-        static private string LogFileName = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+        static public string LogFileName = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "AppData\\Local\\FS22_Mod_Manager\\FsModManager.log");
         static private Logger logger = new Logger(LogFileName, true);
 

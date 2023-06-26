@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace FS22_Mod_Manager
 {
@@ -18,10 +19,12 @@ namespace FS22_Mod_Manager
         private string mod_folder_path = "";                        // full path to new mod folder
         private List<string> selected_mods = new List<string>();    // List for selected mods
         private bool NO_SUB_DIRS = false;                           // Flag to indicated selected favourites folder has not subdirectories
+        static private Logger logger = new Logger(frmMain.LogFileName, false); // DO NOT CLEAR LOG
 
         public CreateNewFolder()
         {
             InitializeComponent();
+            logger.LogWrite("Initializing create new folder dialog");
         }
 
         private void CreateNewFolder_Load(object sender, EventArgs e)
@@ -38,6 +41,7 @@ namespace FS22_Mod_Manager
         private void btnClose_Click_1(object sender, EventArgs e)
         {
             Settings.Default.DefaultFavouritesFolder = txtDefaultFavouritesFolder.Text;
+            logger.LogWrite("Closing create new folder dialog");
             Close();
         }
 
@@ -89,7 +93,7 @@ namespace FS22_Mod_Manager
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Error: {ex.Message}");
+                    logger.LogWrite($"Error: {ex.Message}");
                 }
             }
         }
@@ -338,36 +342,60 @@ namespace FS22_Mod_Manager
              * copy the files in selected_mods list to the folder
              */
 
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            var result = fbd.ShowDialog();
-            if (result == DialogResult.OK)
+            try
             {
-                string folder_path = fbd.SelectedPath;
-                new_folder_name = Path.GetFileName(folder_path);
-                Debug.WriteLine($"new filder name: {new_folder_name}");
-                //copy files
-                foreach (string selected_file in selected_mods)
+
+                using (FolderBrowserDialog fbd = new FolderBrowserDialog())
                 {
-                    string to_filename = Path.Join(folder_path, Path.GetFileName(selected_file));
-                    try
+                    string init_dir = txtCurrentFavouritesFolder.Text;
+                    if (!Directory.Exists(init_dir))
                     {
-                        if (!File.Exists(to_filename))
+                        init_dir = "C:\\";
+                    }
+                    fbd.InitialDirectory = init_dir;
+
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        string folder_path = fbd.SelectedPath;
+                        new_folder_name = Path.GetFileName(folder_path);
+                        logger.LogWrite($"new filder name: {new_folder_name}");
+                        //copy files
+                        foreach (string selected_file in selected_mods)
                         {
-                            Debug.WriteLine($"Copying {selected_file} to {to_filename}");
-                            File.Copy(selected_file, to_filename);
+                            string to_filename = Path.Join(folder_path, Path.GetFileName(selected_file));
+                            try
+                            {
+                                if (!File.Exists(to_filename))
+                                {
+                                    logger.LogWrite($"Copying {selected_file} to {to_filename}");
+                                    File.Copy(selected_file, to_filename);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.LogWrite($"Error: {ex.Message}");
+                            }
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Debug.WriteLine($"Error: {ex.Message}");
+                        logger.LogWrite("No folder selected");
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Debug.WriteLine("No folder selected");
+                logger.LogWrite($"Error: {ex.Message}");
             }
 
+        }
+
+        private void btnSaveList_Click(object sender, EventArgs e)
+        {
+            /* 
+             * save the list as a text file
+             */
+            logger.LogWrite("Save list to text file");
         }
     }
 }

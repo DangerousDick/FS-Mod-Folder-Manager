@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateNewFolder));
             pnlCreateNewFolder = new Panel();
+            btnLoadList = new Button();
+            btnSaveList = new Button();
             txtCurrentFavouritesFolder = new TextBox();
             label4 = new Label();
             btnBrowse = new Button();
@@ -61,6 +63,8 @@
             // 
             // pnlCreateNewFolder
             // 
+            pnlCreateNewFolder.Controls.Add(btnLoadList);
+            pnlCreateNewFolder.Controls.Add(btnSaveList);
             pnlCreateNewFolder.Controls.Add(txtCurrentFavouritesFolder);
             pnlCreateNewFolder.Controls.Add(label4);
             pnlCreateNewFolder.Controls.Add(btnBrowse);
@@ -84,6 +88,25 @@
             pnlCreateNewFolder.Name = "pnlCreateNewFolder";
             pnlCreateNewFolder.Size = new Size(776, 558);
             pnlCreateNewFolder.TabIndex = 0;
+            // 
+            // btnLoadList
+            // 
+            btnLoadList.Location = new Point(668, 420);
+            btnLoadList.Name = "btnLoadList";
+            btnLoadList.Size = new Size(84, 23);
+            btnLoadList.TabIndex = 21;
+            btnLoadList.Text = "Load List";
+            btnLoadList.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveList
+            // 
+            btnSaveList.Location = new Point(578, 420);
+            btnSaveList.Name = "btnSaveList";
+            btnSaveList.Size = new Size(84, 23);
+            btnSaveList.TabIndex = 20;
+            btnSaveList.Text = "Save List";
+            btnSaveList.UseVisualStyleBackColor = true;
+            btnSaveList.Click += btnSaveList_Click;
             // 
             // txtCurrentFavouritesFolder
             // 
@@ -198,7 +221,7 @@
             // 
             btnCreateFolder.Location = new Point(444, 420);
             btnCreateFolder.Name = "btnCreateFolder";
-            btnCreateFolder.Size = new Size(329, 23);
+            btnCreateFolder.Size = new Size(128, 23);
             btnCreateFolder.TabIndex = 7;
             btnCreateFolder.Text = "Create Mods Folder";
             btnCreateFolder.UseVisualStyleBackColor = true;
@@ -345,5 +368,7 @@
         private Button btnBrowse;
         private TextBox txtDefaultFavouritesFolder;
         private TextBox txtCurrentFavouritesFolder;
+        private Button btnLoadList;
+        private Button btnSaveList;
     }
 }
