@@ -36,12 +36,14 @@ namespace FS22_Mod_Manager
             mod_folder_path = Settings.Default.DefaultFavouritesFolder;
             txtCurrentFavouritesFolder.Text = mod_folder_path;
             txtDefaultFavouritesFolder.Text = Settings.Default.DefaultFavouritesFolder;
+            txtSavedListsPath.Text = Settings.Default.DefaultSavedListsFolder;
             populate_folder_list();
         }
 
         private void btnClose_Click_1(object sender, EventArgs e)
         {
             Settings.Default.DefaultFavouritesFolder = txtDefaultFavouritesFolder.Text;
+            Settings.Default.DefaultSavedListsFolder = txtSavedListsPath.Text;
             logger.LogWrite("Closing create new folder dialog\n\n", true);
             Close();
         }
@@ -88,8 +90,8 @@ namespace FS22_Mod_Manager
         private void btnDefaultFavourtiesBrowse_Click(object sender, EventArgs e)
         {
             /*
-             * Mod folder path browse button clicked to so launch 
-             * file dialog to select or create new folder
+             * Mod folder path browse button clicked so launch 
+             * folder dialog to select or create new folder
              */
             using (FolderBrowserDialog ofd = new FolderBrowserDialog())
             {
@@ -107,6 +109,36 @@ namespace FS22_Mod_Manager
                         //Show in textbox
                         txtDefaultFavouritesFolder.Text = ofd.SelectedPath;
                         populate_folder_list();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWrite($"Error: {ex.Message}");
+                }
+            }
+        }
+
+        private void btnSavedListsBrowse_Click(object sender, EventArgs e)
+        {
+            /*
+             * Saved lists path browse button clicked so launch 
+             * folder dialog to select or create new folder
+             */
+            using (FolderBrowserDialog ofd = new FolderBrowserDialog())
+            {
+                try
+                {
+                    string init_dir = txtSavedListsPath.Text;
+                    if (!Directory.Exists(init_dir))
+                    {
+                        init_dir = "C:\\"; // default is root of C drive
+                    }
+                    ofd.InitialDirectory = init_dir;
+
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        //Show in textbox
+                        txtSavedListsPath.Text = ofd.SelectedPath;
                     }
                 }
                 catch (Exception ex)
@@ -416,7 +448,7 @@ namespace FS22_Mod_Manager
             // use SaveFileDialog to get or create a text file to write to.
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
-                sfd.InitialDirectory = txtDefaultFavouritesFolder.Text;
+                sfd.InitialDirectory = txtSavedListsPath.Text;
                 sfd.Filter = "Text File|*.txt";
                 sfd.Title = "Save list to text file";
                 sfd.ShowDialog();
@@ -460,6 +492,7 @@ namespace FS22_Mod_Manager
             {
                 ofd.Filter = "Text File|*.txt";
                 ofd.Title = "Open saved list";
+                ofd.InitialDirectory = txtSavedListsPath.Text;
                 ofd.ShowDialog();
                 if (ofd.FileName != "" && File.Exists(ofd.FileName))
                 {

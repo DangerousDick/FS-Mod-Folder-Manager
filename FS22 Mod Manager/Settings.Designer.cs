@@ -238,5 +238,17 @@ namespace FS22_Mod_Manager {
                 this["DefaultFavouritesFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\fs22mods\\SavedLists")]
+        public string DefaultSavedListsFolder {
+            get {
+                return ((string)(this["DefaultSavedListsFolder"]));
+            }
+            set {
+                this["DefaultSavedListsFolder"] = value;
+            }
+        }
     }
 }

@@ -31,6 +31,9 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateNewFolder));
             pnlCreateNewFolder = new Panel();
+            btnSavedListsBrowse = new Button();
+            txtSavedListsPath = new TextBox();
+            label5 = new Label();
             btnLoadList = new Button();
             btnSaveList = new Button();
             txtCurrentFavouritesFolder = new TextBox();
@@ -63,6 +66,9 @@
             // 
             // pnlCreateNewFolder
             // 
+            pnlCreateNewFolder.Controls.Add(btnSavedListsBrowse);
+            pnlCreateNewFolder.Controls.Add(txtSavedListsPath);
+            pnlCreateNewFolder.Controls.Add(label5);
             pnlCreateNewFolder.Controls.Add(btnLoadList);
             pnlCreateNewFolder.Controls.Add(btnSaveList);
             pnlCreateNewFolder.Controls.Add(txtCurrentFavouritesFolder);
@@ -89,6 +95,34 @@
             pnlCreateNewFolder.Size = new Size(776, 558);
             pnlCreateNewFolder.TabIndex = 0;
             // 
+            // btnSavedListsBrowse
+            // 
+            btnSavedListsBrowse.Location = new Point(643, 529);
+            btnSavedListsBrowse.Name = "btnSavedListsBrowse";
+            btnSavedListsBrowse.Size = new Size(62, 23);
+            btnSavedListsBrowse.TabIndex = 24;
+            btnSavedListsBrowse.Text = "Browse";
+            btnSavedListsBrowse.UseVisualStyleBackColor = true;
+            btnSavedListsBrowse.Click += btnSavedListsBrowse_Click;
+            // 
+            // txtSavedListsPath
+            // 
+            txtSavedListsPath.BackColor = SystemColors.Info;
+            txtSavedListsPath.Location = new Point(106, 526);
+            txtSavedListsPath.Name = "txtSavedListsPath";
+            txtSavedListsPath.Size = new Size(531, 23);
+            txtSavedListsPath.TabIndex = 23;
+            txtSavedListsPath.Text = "Saved Lists Path";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(3, 529);
+            label5.Name = "label5";
+            label5.Size = new Size(91, 15);
+            label5.TabIndex = 22;
+            label5.Text = "Saved Lists Path";
+            // 
             // btnLoadList
             // 
             btnLoadList.Location = new Point(668, 420);
@@ -112,10 +146,10 @@
             // txtCurrentFavouritesFolder
             // 
             txtCurrentFavouritesFolder.BackColor = SystemColors.InactiveCaption;
-            txtCurrentFavouritesFolder.Location = new Point(153, 472);
+            txtCurrentFavouritesFolder.Location = new Point(141, 469);
             txtCurrentFavouritesFolder.Name = "txtCurrentFavouritesFolder";
             txtCurrentFavouritesFolder.ReadOnly = true;
-            txtCurrentFavouritesFolder.Size = new Size(620, 23);
+            txtCurrentFavouritesFolder.Size = new Size(632, 23);
             txtCurrentFavouritesFolder.TabIndex = 19;
             txtCurrentFavouritesFolder.Text = "Current Favourites Folder";
             // 
@@ -130,7 +164,7 @@
             // 
             // btnBrowse
             // 
-            btnBrowse.Location = new Point(711, 499);
+            btnBrowse.Location = new Point(643, 501);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new Size(62, 23);
             btnBrowse.TabIndex = 17;
@@ -144,7 +178,7 @@
             txtDefaultFavouritesFolder.Location = new Point(106, 498);
             txtDefaultFavouritesFolder.Name = "txtDefaultFavouritesFolder";
             txtDefaultFavouritesFolder.ReadOnly = true;
-            txtDefaultFavouritesFolder.Size = new Size(599, 23);
+            txtDefaultFavouritesFolder.Size = new Size(531, 23);
             txtDefaultFavouritesFolder.TabIndex = 16;
             txtDefaultFavouritesFolder.Text = "Default Favourites Folder";
             // 
@@ -371,5 +405,8 @@
         private TextBox txtCurrentFavouritesFolder;
         private Button btnLoadList;
         private Button btnSaveList;
+        private Button btnSavedListsBrowse;
+        private TextBox txtSavedListsPath;
+        private Label label5;
     }
 }

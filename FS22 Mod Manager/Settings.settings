@@ -56,5 +56,8 @@
     <Setting Name="DefaultFavouritesFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\fs22mods</Value>
     </Setting>
+    <Setting Name="DefaultSavedListsFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\fs22mods\SavedLists</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
