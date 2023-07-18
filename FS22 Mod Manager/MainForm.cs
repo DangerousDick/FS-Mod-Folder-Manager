@@ -65,7 +65,6 @@ namespace FS22_Mod_Manager
             read_mod_override_from_xml();
             game_xml_controls_element();
             update_mod_override_values();
-            read_game_options();
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -496,7 +495,7 @@ namespace FS22_Mod_Manager
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
         }
 
-         private void mnuHelpOpen_Click(object sender, EventArgs e)
+        private void mnuHelpOpen_Click(object sender, EventArgs e)
         {
             /*
              * Launches the help files
@@ -1176,73 +1175,6 @@ namespace FS22_Mod_Manager
                 }
                 xmlDoc.Save(gameSettingsXmlFile);
             }
-        }
-
-        private void read_game_options()
-        {
-            /*
-             * Read the game.xml file and get the scalability element value
-             * <scalability>
-             *      <performanceClass>Medium</performanceClass>
-             *      <lodDistanceCoeff>1.000000</lodDistanceCoeff>
-             *      <terrainLODDistanceCoeff>1.000000</terrainLODDistanceCoeff>
-             *      <foliageViewDistanceCoeff>1.000000</foliageViewDistanceCoeff>
-             * </scalability>
-             * Read the number of mirrors from gamesettings.xml
-             * <maxNumMirrors>5</maxNumMirrors>
-             * 
-             * The Coeff values are a percentage 1.000000 is 100%
-            */
-            string val;
-            // scalability options
-            val = read_xml_file_element(gameXmlFile, "performanceClass");
-            if (!string.IsNullOrEmpty(val) && val.Length > 0)
-            { Settings.Default.performanceClass = val; }
-            //else { Settings.Default.performanceClass = "Medium"; }
-            val = read_xml_file_element(gameXmlFile, "lodDistanceCoeff");
-            if (!string.IsNullOrEmpty(val) && val.Length > 0)
-            { Settings.Default.lodDistanceCoeff = val; }
-            //else { Settings.Default.lodDistanceCoeff = "1.000000"; }
-            val = read_xml_file_element(gameXmlFile, "terrainLODDistanceCoeff");
-            if (!string.IsNullOrEmpty(val) && val.Length > 0)
-            { Settings.Default.terrainLODDistanceCoeff = val; }
-            //else { Settings.Default.terrainLODDistanceCoeff = "1.000000"; }
-            val = read_xml_file_element(gameXmlFile, "foliageViewDistanceCoeff");
-            if (!string.IsNullOrEmpty(val) && val.Length > 0)
-            { Settings.Default.foliageViewDistanceCoeff = val; }
-            //else { Settings.Default.foliageViewDistanceCoeff = "1.000000"; }
-            // maximum number of mirrors
-            val = read_xml_file_element(gameSettingsXmlFile, "maxNumMirrors");
-            if (!string.IsNullOrEmpty(val) && val.Length > 0)
-            { Settings.Default.maxNumMirrors = val; }
-            //else { Settings.Default.foliageViewDistanceCoeff = "0"; }
-        }
-
-        private string read_xml_file_element(string xmlFileName, string elementName)
-        {
-            /*
-             * Read the XML file xmlFileName and get the elementName value
-            */
-            logger.LogWrite("getting " + elementName + " From " + xmlFileName, true);
-            try
-            {
-                System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
-                xmlDoc.Load(xmlFileName);
-                System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName(elementName);
-                if (elemList.Count > 0)
-                {
-                    // set scalability settings to value in xml file
-                    string elementValue = elemList[0].InnerXml;
-                    logger.LogWrite(elementName + " = " + elementValue);
-                    if (elementValue != null && elementValue.Length > 0) { return elementValue; }
-                    else { return ""; }
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogWrite(ex.Message, true);
-            }
-            return null;
         }
 
         private void game_xml_controls_element(bool write_value = false)

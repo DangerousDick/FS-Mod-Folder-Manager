@@ -32,21 +32,6 @@
     <Setting Name="OverwriteOnCopy" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="performanceClass" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Medium</Value>
-    </Setting>
-    <Setting Name="lodDistanceCoeff" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.000000</Value>
-    </Setting>
-    <Setting Name="terrainLODDistanceCoeff" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.000000</Value>
-    </Setting>
-    <Setting Name="foliageViewDistanceCoeff" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.000000</Value>
-    </Setting>
-    <Setting Name="maxNumMirrors" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="DeleteToRecycleBin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
