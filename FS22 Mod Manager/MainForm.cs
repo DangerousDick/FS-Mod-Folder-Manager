@@ -496,22 +496,7 @@ namespace FS22_Mod_Manager
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
         }
 
-        private void gameOptionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            /*
-            * show game options dialog box
-            */
-            logger.LogWrite("Showing game options dialog", true);
-            read_game_options();
-            GameOptions so = new GameOptions();
-            so.ShowDialog();
-            if (true == so.returnOK)
-            {
-                write_game_options();
-            }
-        }
-
-        private void mnuHelpOpen_Click(object sender, EventArgs e)
+         private void mnuHelpOpen_Click(object sender, EventArgs e)
         {
             /*
              * Launches the help files
@@ -579,24 +564,6 @@ namespace FS22_Mod_Manager
                 lstModFiles.SelectedIndex = location;                //Index selected
                 mnuContextFileList.Show(PointToScreen(e.Location));   //Show Menu
             }
-        }
-
-        private void mnuContextFolderRefresh_Click(object sender, EventArgs e)
-        {
-            /*
-             *  Refresh folder lists and game file data
-             */
-            logger.LogWrite("Refreshing application data fields", true);
-            string selected_folder = lstModFolders.Text;
-            string selected_file = lstModFiles.Text;
-            // refresh lists
-            populate_folder_list();
-            lstModFolders.SelectedIndex = lstModFolders.FindString(Path.GetFileName(selected_folder));
-            populate_file_list();
-            lstModFiles.SelectedIndex = lstModFiles.FindString(Path.GetFileName(selected_file));
-            // refresh game file data
-            read_mod_override_from_xml();
-            game_xml_controls_element();
         }
 
         private void mnuContextFolderRename_Click(object sender, EventArgs e)
@@ -1251,29 +1218,6 @@ namespace FS22_Mod_Manager
             //else { Settings.Default.foliageViewDistanceCoeff = "0"; }
         }
 
-        private void write_game_options()
-        {
-            /*
-             * Write the scalability element values to the game.xml file
-             * <scalability>
-             *      <performanceClass>Medium</performanceClass>
-             *      <lodDistanceCoeff>1.000000</lodDistanceCoeff>
-             *      <terrainLODDistanceCoeff>1.000000</terrainLODDistanceCoeff>
-             *      <foliageViewDistanceCoeff>1.000000</foliageViewDistanceCoeff>
-             * </scalability>
-             * Write number of mirrors to gameSettings.xml
-             * <maxNumMirrors>5</maxNumMirrors>
-             * 
-             * The Coeff values are a percentage 1.000000 is 100%
-            */
-            logger.LogWrite("Saving game options", true);
-            write_xml_file_element_value(gameXmlFile, "performanceClass", Settings.Default.performanceClass);
-            write_xml_file_element_value(gameXmlFile, "lodDistanceCoeff", Settings.Default.lodDistanceCoeff);
-            write_xml_file_element_value(gameXmlFile, "terrainLODDistanceCoeff", Settings.Default.terrainLODDistanceCoeff);
-            write_xml_file_element_value(gameXmlFile, "foliageViewDistanceCoeff", Settings.Default.foliageViewDistanceCoeff);
-            write_xml_file_element_value(gameSettingsXmlFile, "maxNumMirrors", Settings.Default.maxNumMirrors);
-        }
-
         private string read_xml_file_element(string xmlFileName, string elementName)
         {
             /*
@@ -1292,33 +1236,6 @@ namespace FS22_Mod_Manager
                     logger.LogWrite(elementName + " = " + elementValue);
                     if (elementValue != null && elementValue.Length > 0) { return elementValue; }
                     else { return ""; }
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogWrite(ex.Message, true);
-            }
-            return null;
-        }
-
-        private string write_xml_file_element_value(string xmlFileName, string elementName, string elementValue)
-        {
-            /*
-             * Write the value of elementName to the XML file xmlFileName
-            */
-            logger.LogWrite("writing " + elementName + " to " + xmlFileName, true);
-            try
-            {
-                System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
-                xmlDoc.Load(xmlFileName);
-                System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName(elementName);
-                if (elemList.Count > 0)
-                {
-                    // write the element value and save document
-                    elemList[0].InnerXml = elementValue;
-                    xmlDoc.Save(xmlFileName);
-                    //<lodDistanceCoeff>1.000000</lodDistanceCoeff>
-                    logger.LogWrite("\t<" + elementName + ">" + elementValue + "</" + elementName + ">");
                 }
             }
             catch (Exception ex)
