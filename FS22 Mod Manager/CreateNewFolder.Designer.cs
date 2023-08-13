@@ -95,14 +95,14 @@
             pnlCreateNewFolder.Location = new Point(17, 20);
             pnlCreateNewFolder.Margin = new Padding(4, 5, 4, 5);
             pnlCreateNewFolder.Name = "pnlCreateNewFolder";
-            pnlCreateNewFolder.Size = new Size(1109, 930);
+            pnlCreateNewFolder.Size = new Size(1109, 971);
             pnlCreateNewFolder.TabIndex = 0;
             // 
             // btnCreateListFromFolder
             // 
             btnCreateListFromFolder.Location = new Point(633, 742);
             btnCreateListFromFolder.Name = "btnCreateListFromFolder";
-            btnCreateListFromFolder.Size = new Size(247, 38);
+            btnCreateListFromFolder.Size = new Size(258, 38);
             btnCreateListFromFolder.TabIndex = 25;
             btnCreateListFromFolder.Text = "Create List From Folder";
             btnCreateListFromFolder.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@
             // 
             // btnSavedListsBrowse
             // 
-            btnSavedListsBrowse.Location = new Point(919, 882);
+            btnSavedListsBrowse.Location = new Point(1013, 879);
             btnSavedListsBrowse.Margin = new Padding(4, 5, 4, 5);
             btnSavedListsBrowse.Name = "btnSavedListsBrowse";
             btnSavedListsBrowse.Size = new Size(89, 38);
@@ -122,17 +122,17 @@
             // txtSavedListsPath
             // 
             txtSavedListsPath.BackColor = SystemColors.Info;
-            txtSavedListsPath.Location = new Point(151, 877);
+            txtSavedListsPath.Location = new Point(158, 883);
             txtSavedListsPath.Margin = new Padding(4, 5, 4, 5);
             txtSavedListsPath.Name = "txtSavedListsPath";
-            txtSavedListsPath.Size = new Size(757, 31);
+            txtSavedListsPath.Size = new Size(847, 31);
             txtSavedListsPath.TabIndex = 23;
             txtSavedListsPath.Text = "Saved Lists Path";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(4, 882);
+            label5.Location = new Point(4, 886);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(138, 25);
@@ -141,10 +141,10 @@
             // 
             // btnLoadList
             // 
-            btnLoadList.Location = new Point(982, 742);
+            btnLoadList.Location = new Point(1001, 742);
             btnLoadList.Margin = new Padding(4, 5, 4, 5);
             btnLoadList.Name = "btnLoadList";
-            btnLoadList.Size = new Size(92, 38);
+            btnLoadList.Size = new Size(101, 38);
             btnLoadList.TabIndex = 21;
             btnLoadList.Text = "Load List";
             btnLoadList.UseVisualStyleBackColor = true;
@@ -152,10 +152,10 @@
             // 
             // btnSaveList
             // 
-            btnSaveList.Location = new Point(887, 742);
+            btnSaveList.Location = new Point(898, 742);
             btnSaveList.Margin = new Padding(4, 5, 4, 5);
             btnSaveList.Name = "btnSaveList";
-            btnSaveList.Size = new Size(90, 38);
+            btnSaveList.Size = new Size(95, 38);
             btnSaveList.TabIndex = 20;
             btnSaveList.Text = "Save List";
             btnSaveList.UseVisualStyleBackColor = true;
@@ -163,19 +163,19 @@
             // 
             // txtCurrentFavouritesFolder
             // 
-            txtCurrentFavouritesFolder.BackColor = SystemColors.InactiveCaption;
-            txtCurrentFavouritesFolder.Location = new Point(201, 782);
+            txtCurrentFavouritesFolder.BackColor = SystemColors.Info;
+            txtCurrentFavouritesFolder.Location = new Point(158, 799);
             txtCurrentFavouritesFolder.Margin = new Padding(4, 5, 4, 5);
             txtCurrentFavouritesFolder.Name = "txtCurrentFavouritesFolder";
             txtCurrentFavouritesFolder.ReadOnly = true;
-            txtCurrentFavouritesFolder.Size = new Size(901, 31);
+            txtCurrentFavouritesFolder.Size = new Size(847, 31);
             txtCurrentFavouritesFolder.TabIndex = 19;
             txtCurrentFavouritesFolder.Text = "Current Favourites Folder";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(4, 835);
+            label4.Location = new Point(4, 842);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(146, 25);
@@ -184,7 +184,7 @@
             // 
             // btnBrowse
             // 
-            btnBrowse.Location = new Point(919, 835);
+            btnBrowse.Location = new Point(1013, 835);
             btnBrowse.Margin = new Padding(4, 5, 4, 5);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new Size(89, 38);
@@ -196,11 +196,11 @@
             // txtDefaultFavouritesFolder
             // 
             txtDefaultFavouritesFolder.BackColor = SystemColors.Info;
-            txtDefaultFavouritesFolder.Location = new Point(151, 830);
+            txtDefaultFavouritesFolder.Location = new Point(158, 839);
             txtDefaultFavouritesFolder.Margin = new Padding(4, 5, 4, 5);
             txtDefaultFavouritesFolder.Name = "txtDefaultFavouritesFolder";
             txtDefaultFavouritesFolder.ReadOnly = true;
-            txtDefaultFavouritesFolder.Size = new Size(757, 31);
+            txtDefaultFavouritesFolder.Size = new Size(847, 31);
             txtDefaultFavouritesFolder.TabIndex = 16;
             txtDefaultFavouritesFolder.Text = "Default Favourites Folder";
             // 
@@ -209,7 +209,7 @@
             chkOnlyShowZips.AutoSize = true;
             chkOnlyShowZips.Checked = true;
             chkOnlyShowZips.CheckState = CheckState.Checked;
-            chkOnlyShowZips.Location = new Point(323, 748);
+            chkOnlyShowZips.Location = new Point(323, 706);
             chkOnlyShowZips.Margin = new Padding(4, 5, 4, 5);
             chkOnlyShowZips.Name = "chkOnlyShowZips";
             chkOnlyShowZips.Size = new Size(179, 29);
@@ -221,17 +221,17 @@
             // lblCurrentFavouritesFolder
             // 
             lblCurrentFavouritesFolder.BackColor = SystemColors.Control;
-            lblCurrentFavouritesFolder.Location = new Point(4, 787);
+            lblCurrentFavouritesFolder.Location = new Point(4, 798);
             lblCurrentFavouritesFolder.Margin = new Padding(4, 0, 4, 0);
             lblCurrentFavouritesFolder.Name = "lblCurrentFavouritesFolder";
-            lblCurrentFavouritesFolder.Size = new Size(206, 33);
+            lblCurrentFavouritesFolder.Size = new Size(158, 33);
             lblCurrentFavouritesFolder.TabIndex = 14;
             lblCurrentFavouritesFolder.Text = "Current Favourites Folder";
             // 
             // chkIncludeParentDir
             // 
             chkIncludeParentDir.AutoSize = true;
-            chkIncludeParentDir.Location = new Point(4, 743);
+            chkIncludeParentDir.Location = new Point(0, 700);
             chkIncludeParentDir.Margin = new Padding(4, 5, 4, 5);
             chkIncludeParentDir.Name = "chkIncludeParentDir";
             chkIncludeParentDir.Size = new Size(243, 29);
@@ -242,7 +242,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(1016, 882);
+            btnClose.Location = new Point(1013, 927);
             btnClose.Margin = new Padding(4, 5, 4, 5);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(89, 38);
@@ -286,7 +286,7 @@
             btnCreateFolder.Location = new Point(634, 700);
             btnCreateFolder.Margin = new Padding(4, 5, 4, 5);
             btnCreateFolder.Name = "btnCreateFolder";
-            btnCreateFolder.Size = new Size(440, 38);
+            btnCreateFolder.Size = new Size(471, 38);
             btnCreateFolder.TabIndex = 7;
             btnCreateFolder.Text = "Create Mods Folder";
             btnCreateFolder.UseVisualStyleBackColor = true;
@@ -294,12 +294,12 @@
             // 
             // btnChangeFolder
             // 
-            btnChangeFolder.Location = new Point(4, 700);
+            btnChangeFolder.Location = new Point(1016, 795);
             btnChangeFolder.Margin = new Padding(4, 5, 4, 5);
             btnChangeFolder.Name = "btnChangeFolder";
-            btnChangeFolder.Size = new Size(310, 38);
+            btnChangeFolder.Size = new Size(89, 38);
             btnChangeFolder.TabIndex = 6;
-            btnChangeFolder.Text = "Select Favourites Folder";
+            btnChangeFolder.Text = "Browse";
             btnChangeFolder.UseVisualStyleBackColor = true;
             btnChangeFolder.Click += btnChangeFolder_Click;
             // 
@@ -402,7 +402,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1143, 955);
+            ClientSize = new Size(1143, 1003);
             Controls.Add(pnlCreateNewFolder);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
