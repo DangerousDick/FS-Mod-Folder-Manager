@@ -231,7 +231,7 @@
             // chkIncludeParentDir
             // 
             chkIncludeParentDir.AutoSize = true;
-            chkIncludeParentDir.Location = new Point(0, 700);
+            chkIncludeParentDir.Location = new Point(4, 700);
             chkIncludeParentDir.Margin = new Padding(4, 5, 4, 5);
             chkIncludeParentDir.Name = "chkIncludeParentDir";
             chkIncludeParentDir.Size = new Size(243, 29);
@@ -257,9 +257,9 @@
             lblSelectedFileCount.Location = new Point(634, 670);
             lblSelectedFileCount.Margin = new Padding(4, 0, 4, 0);
             lblSelectedFileCount.Name = "lblSelectedFileCount";
-            lblSelectedFileCount.Size = new Size(121, 25);
+            lblSelectedFileCount.Size = new Size(135, 25);
             lblSelectedFileCount.TabIndex = 11;
-            lblSelectedFileCount.Text = "Selected Files:";
+            lblSelectedFileCount.Text = "Selected Count:";
             // 
             // lblModFileCount
             // 
@@ -267,9 +267,9 @@
             lblModFileCount.Location = new Point(323, 670);
             lblModFileCount.Margin = new Padding(4, 0, 4, 0);
             lblModFileCount.Name = "lblModFileCount";
-            lblModFileCount.Size = new Size(98, 25);
+            lblModFileCount.Size = new Size(90, 25);
             lblModFileCount.TabIndex = 10;
-            lblModFileCount.Text = "Mod Files: ";
+            lblModFileCount.Text = "FileCount:";
             // 
             // lblFoldeerCount
             // 
@@ -277,9 +277,9 @@
             lblFoldeerCount.Location = new Point(4, 670);
             lblFoldeerCount.Margin = new Padding(4, 0, 4, 0);
             lblFoldeerCount.Name = "lblFoldeerCount";
-            lblFoldeerCount.Size = new Size(79, 25);
+            lblFoldeerCount.Size = new Size(124, 25);
             lblFoldeerCount.TabIndex = 9;
-            lblFoldeerCount.Text = "Folders: ";
+            lblFoldeerCount.Text = "Folder Count: ";
             // 
             // btnCreateFolder
             // 
@@ -430,9 +430,6 @@
         private Button btnChangeFolder;
         private ContextMenuStrip mnuCtxListModFiles;
         private ToolStripMenuItem mnuSelectAllMods;
-        private Label lblSelectedFileCount;
-        private Label lblModFileCount;
-        private Label lblFoldeerCount;
         private Button btnClose;
         private CheckBox chkIncludeParentDir;
         private Label lblCurrentFavouritesFolder;
@@ -449,5 +446,8 @@
         private TextBox txtSavedListsPath;
         private Label label5;
         private Button btnCreateListFromFolder;
+        private Label lblSelectedFileCount;
+        private Label lblModFileCount;
+        private Label lblFoldeerCount;
     }
 }
