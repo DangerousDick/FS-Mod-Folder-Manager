@@ -329,9 +329,9 @@
             label1.Location = new Point(4, 3);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(147, 25);
+            label1.Size = new Size(155, 25);
             label1.TabIndex = 3;
-            label1.Text = "Favourites Folder";
+            label1.Text = "Favourites Folders";
             // 
             // lstSelectedModFiles
             // 
