@@ -15,9 +15,9 @@ namespace FS22_Mod_Manager
 {
     public partial class CreateNewFolder : Form
     {
-        public string new_folder_name = "";                         // for main form to select new folder in list
+        public string new_folder_name = string.Empty;               // for main form to select new folder in list
 
-        private string mod_folder_path = "";                        // full path to new mod folder
+        private string favourites_mod_folder_path = string.Empty;   // full path to new mod folder
         private List<string> selected_mods = new List<string>();    // List for selected mods
         private bool NO_SUB_DIRS = false;                           // Flag to indicated selected favourites folder has not subdirectories
         static private Logger logger = new Logger(frmMain.LogFileName, false); // DO NOT CLEAR LOG
@@ -33,8 +33,8 @@ namespace FS22_Mod_Manager
             /*
              * on form load populate the list boxes using the mod_folder path
              */
-            mod_folder_path = Settings.Default.DefaultFavouritesFolder;
-            txtCurrentFavouritesFolder.Text = mod_folder_path;
+            favourites_mod_folder_path = Settings.Default.DefaultFavouritesFolder;
+            txtCurrentFavouritesFolder.Text = favourites_mod_folder_path;
             txtDefaultFavouritesFolder.Text = Settings.Default.DefaultFavouritesFolder;
             txtSavedListsPath.Text = Settings.Default.DefaultSavedListsFolder;
             populate_folder_list();
@@ -56,12 +56,64 @@ namespace FS22_Mod_Manager
             copy_selected_mods();
         }
 
+        private void btnCreateListFromFolder_Click(object sender, EventArgs e)
+        {
+            /*
+             * Creates a new text file list from an existing folder
+             * 
+             * Looks for the mod zip files in the default favorites folder
+             * Any that don't exist will be commented out and prefixed with "NOT DOWNLOADED"
+             */
+            try
+            {
+
+                using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+                {
+                    // set initial path
+                    string init_dir = Settings.Default.ModFolderPath;
+                    if (!Directory.Exists(init_dir))
+                    {
+                        init_dir = "C:\\";
+                    }
+                    fbd.InitialDirectory = init_dir;
+                    // show folder browser dialog
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        logger.LogWrite("Showing folder dialog");
+                        if (Directory.Exists(fbd.SelectedPath))
+                        {
+                            List<string> mods_list = get_list_from_folder(fbd.SelectedPath);
+                            string saved_file_path = Path.Join(txtSavedListsPath.Text, Path.GetFileName(fbd.SelectedPath) + ".txt");
+                            save_list_to_file(mods_list, saved_file_path);
+                            if (saved_file_path != string.Empty)
+                            {
+                                // clear current list
+                                selected_mods.Clear();
+                                lstSelectedModFiles.Items.Clear();
+                                // load newly created list
+                                read_list_from_file(saved_file_path);
+                                populate_selected_files_list();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        logger.LogWrite("No folder selected");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite($"Error: {ex.Message}");
+            }
+        }
+
         private void btnSaveList_Click(object sender, EventArgs e)
         {
             /* 
              * save the list as a text file
              */
-            save_list_to_file();
+            save_list_to_file(lstSelectedModFiles.Items.Cast<string>().ToList());
         }
 
         private void btnLoadList_Click(object sender, EventArgs e)
@@ -78,12 +130,12 @@ namespace FS22_Mod_Manager
             /*
              * select another folder and populate lists
              */
-            string path = get_folder_list(mod_folder_path);
+            string path = get_folder_list(favourites_mod_folder_path);
             if (path != "")
             {
-                mod_folder_path = path;
+                favourites_mod_folder_path = path;
                 populate_folder_list();
-                txtCurrentFavouritesFolder.Text = mod_folder_path;
+                txtCurrentFavouritesFolder.Text = favourites_mod_folder_path;
             }
         }
 
@@ -156,11 +208,11 @@ namespace FS22_Mod_Manager
             string mod_file_name = "";
             if (NO_SUB_DIRS)
             {
-                mod_file_name = Path.Join(mod_folder_path, lstModFiles.Text);
+                mod_file_name = Path.Join(favourites_mod_folder_path, lstModFiles.Text);
             }
             else
             {
-                mod_file_name = Path.Join(mod_folder_path, lstFolders.Text, lstModFiles.Text);
+                mod_file_name = Path.Join(favourites_mod_folder_path, lstFolders.Text, lstModFiles.Text);
             }
             if (selected_mods.FindIndex(x => x.Equals(mod_file_name)) == -1)
             {
@@ -193,7 +245,7 @@ namespace FS22_Mod_Manager
                 {
                     for (int i = 0; i < lstModFiles.Items.Count; i++)
                     {
-                        string mod_file_name = Path.Join(mod_folder_path, lstFolders.Text, lstModFiles.Items[i].ToString());
+                        string mod_file_name = Path.Join(favourites_mod_folder_path, lstFolders.Text, lstModFiles.Items[i].ToString());
                         if (selected_mods.FindIndex(x => x.Equals(mod_file_name)) == -1)
                         {
                             selected_mods.Add(mod_file_name);
@@ -204,7 +256,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception: " + ex.Message);
+                logger.LogWrite($"Exception: {ex.Message}");
             }
         }
 
@@ -247,7 +299,7 @@ namespace FS22_Mod_Manager
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Exception: " + ex.Message);
+                        logger.LogWrite($"Exception: {ex.Message}");
                     }
                 }
             }
@@ -262,9 +314,9 @@ namespace FS22_Mod_Manager
             try
             {
                 NO_SUB_DIRS = false;
-                if (Directory.Exists(mod_folder_path))
+                if (Directory.Exists(favourites_mod_folder_path))
                 {
-                    string[] dirs = Directory.GetDirectories(mod_folder_path);
+                    string[] dirs = Directory.GetDirectories(favourites_mod_folder_path);
                     if (lstFolders.Items.Count > 0)
                     {
                         lstFolders.Items.Clear();
@@ -295,7 +347,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception: " + ex.Message);
+                logger.LogWrite($"Exception: {ex.Message}");
             }
             // now populate the mod files list
             populate_file_list();
@@ -316,7 +368,7 @@ namespace FS22_Mod_Manager
                 if (NO_SUB_DIRS)
                 {
                     lstModFiles.Items.Clear();
-                    string[] files = Directory.GetFiles(mod_folder_path);
+                    string[] files = Directory.GetFiles(favourites_mod_folder_path);
                     foreach (string file in files)
                     {
                         if (chkOnlyShowZips.Checked && Path.GetExtension(file) == ".zip")
@@ -331,7 +383,7 @@ namespace FS22_Mod_Manager
                 }
                 else
                 {
-                    string mfp = Path.Join(mod_folder_path, lstFolders.Text);
+                    string mfp = Path.Join(favourites_mod_folder_path, lstFolders.Text);
                     string[] files = Directory.GetFiles(mfp);
                     foreach (string file in files)
                     {
@@ -346,7 +398,7 @@ namespace FS22_Mod_Manager
                     }
                     if (chkIncludeParentDir.Checked)
                     {
-                        files = Directory.GetFiles(mod_folder_path);
+                        files = Directory.GetFiles(favourites_mod_folder_path);
                         foreach (string file in files)
                         {
                             if (chkOnlyShowZips.Checked && Path.GetExtension(file) == ".zip")
@@ -364,7 +416,7 @@ namespace FS22_Mod_Manager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception: " + ex.Message);
+                logger.LogWrite($"Exception: {ex.Message}");
             }
         }
 
@@ -439,62 +491,84 @@ namespace FS22_Mod_Manager
             }
         }
 
-        private void save_list_to_file()
+        private void save_list_to_file(List<string> mods_list, string save_file_name = "")
         {
             /*
              * use the StreamWrite to save the list of selected mods to a text file
              */
-
-            // use SaveFileDialog to get or create a text file to write to.
-            using (SaveFileDialog sfd = new SaveFileDialog())
+            if (save_file_name == "")
             {
-                sfd.InitialDirectory = txtSavedListsPath.Text;
-                sfd.Filter = "Text File|*.txt";
-                sfd.Title = "Save list to text file";
-                sfd.ShowDialog();
-                // If the file name is not an empty string open it for saving.
-                if (sfd.FileName != "")
+                // use SaveFileDialog to get or create a text file to write to.
+                using (SaveFileDialog sfd = new SaveFileDialog())
                 {
-                    if (File.Exists(sfd.FileName))
+                    sfd.InitialDirectory = txtSavedListsPath.Text;
+                    sfd.Filter = "Text File|*.txt";
+                    sfd.Title = "Save list to text file";
+                    if (sfd.ShowDialog() == DialogResult.OK)
                     {
-                        // delete file if it already exists so a new clean file is created.
-                        File.Delete(sfd.FileName);
+                        // get the file name
+                        if (sfd.FileName != "")
+                        {
+                            save_file_name = sfd.FileName;
+                        }
                     }
-                    using (StreamWriter sw = File.CreateText(sfd.FileName))
+                }
+            }
+            if (File.Exists(save_file_name))
+            {
+                // delete file if it already exists so a new clean file is created.
+                File.Delete(save_file_name);
+            }
+            if (save_file_name != "")
+            {
+                using (StreamWriter sw = File.CreateText(save_file_name))
+                {
+                    try
                     {
-                        try
+                        // write each item from the list box to the text file
+                        foreach (string selected_file in mods_list)
                         {
-                            // write each item from the list box to the text file
-                            foreach (string selected_file in lstSelectedModFiles.Items)
-                            {
-                                logger.LogWrite($"Adding {selected_file} to {sfd.FileName}");
-                                sw.WriteLine($"{selected_file}");
-                            }
+                            logger.LogWrite($"Adding {selected_file} to {save_file_name}");
+                            sw.WriteLine($"{selected_file}");
                         }
-                        catch (Exception ex)
-                        {
-                            logger.LogWrite($"Error: {ex.Message}");
-                        }
-                        sw.Close();
                     }
+                    catch (Exception ex)
+                    {
+                        logger.LogWrite($"Error: {ex.Message}");
+                    }
+                    sw.Close();
                 }
             }
         }
 
-        private void read_list_from_file()
+        private void read_list_from_file(string read_file_path = "")
         {
             /*
              * Use File.ReadAllLines to load the list from a text file
              */
 
             logger.LogWrite("load list from text file");
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            if (read_file_path == "")
             {
-                ofd.Filter = "Text File|*.txt";
-                ofd.Title = "Open saved list";
-                ofd.InitialDirectory = txtSavedListsPath.Text;
-                ofd.ShowDialog();
-                if (ofd.FileName != "" && File.Exists(ofd.FileName))
+                using (OpenFileDialog ofd = new OpenFileDialog())
+                {
+                    ofd.Filter = "Text File|*.txt";
+                    ofd.Title = "Open saved list";
+                    ofd.InitialDirectory = txtSavedListsPath.Text;
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        if (ofd.FileName != "")
+                        {
+                            read_file_path = ofd.FileName;
+                        }
+                    }
+                }
+            }
+
+
+            if (File.Exists(read_file_path))
+            {
+                if (lstSelectedModFiles.SelectedItems.Count > 0)
                 {
                     // does the user want to clear current list?
                     string message = "Would you like to clear the current list?";
@@ -506,34 +580,87 @@ namespace FS22_Mod_Manager
                         selected_mods.Clear();
                         lstSelectedModFiles.Items.Clear();
                     }
+                }
 
-                    logger.LogWrite($"Opening file {ofd.FileName}");
-                    try
+                logger.LogWrite($"Opening file {read_file_path}");
+                try
+                {
+                    string[] lines = File.ReadAllLines(read_file_path);
+                    if (lines.Length > 0)
                     {
-                        string[] lines = File.ReadAllLines(ofd.FileName);
-                        if (lines.Length > 0)
+                        foreach (string l in lines)
                         {
-                            foreach (string l in lines)
-                            {
-                                add_file_to_selected_mods_list(l);
-                            }
-                            populate_selected_files_list();
+                            add_file_to_selected_mods_list(l);
                         }
+                        populate_selected_files_list();
                     }
-                    catch (Exception ex)
-                    {
-                        logger.LogWrite($"Error: {ex.Message}");
-                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWrite($"Error: {ex.Message}");
                 }
             }
         }
 
         private void add_file_to_selected_mods_list(string mod_file_name)
         {
+            /*
+             * adds a file to the list only if it does not already exist
+             */
             if (selected_mods.FindIndex(x => x.Equals(mod_file_name)) == -1)
             {
                 selected_mods.Add(mod_file_name);
             }
+        }
+
+        private List<string> get_list_from_folder(string mod_folder)
+        {
+            /* 
+             * get list of file in mod folder
+             */
+            List<string> mods_list = new List<string>();
+            try
+            {
+                foreach (string file_path in Directory.GetFiles(mod_folder))
+                {
+                    if (File.Exists(file_path))
+                    {
+                        // This path is a file add it to the list if it is a .zip file
+                        if (Path.GetExtension(file_path) == ".zip")
+                        {
+                            //mods_list.Add(Path.GetFileName(file_path));
+                            string mod_file = Path.GetFileName(file_path);
+                            // is the mod in our favourites folder?
+                            var search_result = Directory.EnumerateFiles(favourites_mod_folder_path, mod_file, SearchOption.AllDirectories);
+                            if (search_result.Any())
+                            {
+                                logger.LogWrite($"{search_result.First()}");
+                                mods_list.Add(search_result.First());
+                            }
+                            else
+                            {
+                                logger.LogWrite($"NOT DOWNLOADED: {mod_file}");
+                                mods_list.Add($"NOT DOWNLOADED: {mod_file}");
+                            }
+                        }
+                    }
+                    else if (Directory.Exists(file_path))
+                    {
+                        // This path is a directory do you want this to be recursive?
+                        logger.LogWrite($"Recursive path: {file_path}");
+                    }
+                    else
+                    {
+                        // file or path not found so ignore it
+                        logger.LogWrite($"Error: {file_path} is not a valid file or directory path.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite($"Error: {ex.Message}");
+            }
+            return mods_list;
         }
     }
 }
