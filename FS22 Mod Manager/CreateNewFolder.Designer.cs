@@ -178,9 +178,9 @@
             label4.Location = new Point(4, 842);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(146, 25);
+            label4.Size = new Size(154, 25);
             label4.TabIndex = 18;
-            label4.Text = "Default Favourite";
+            label4.Text = "Default Favourites";
             // 
             // btnBrowse
             // 
