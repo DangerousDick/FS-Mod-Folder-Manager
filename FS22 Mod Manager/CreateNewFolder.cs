@@ -61,8 +61,8 @@ namespace FS22_Mod_Manager
             /*
              * Creates a new text file list from an existing folder
              * 
-             * Looks for the mod zip files in the default favorites folder
-             * Any that don't exist will be commented out and prefixed with "NOT DOWNLOADED"
+             * Looks for the mod zip files in the default favorites folder and use that path by default
+             * Any that don't exist in the favourites folders will use the selected folder path
              */
             try
             {
@@ -639,8 +639,8 @@ namespace FS22_Mod_Manager
                             }
                             else
                             {
-                                logger.LogWrite($"NOT DOWNLOADED: {mod_file}");
-                                mods_list.Add($"NOT DOWNLOADED: {mod_file}");
+                                logger.LogWrite(file_path);
+                                mods_list.Add(file_path);
                             }
                         }
                     }
