@@ -416,9 +416,9 @@ namespace FS22_Mod_Manager
                 cnf.ShowDialog();
                 populate_folder_list();
                 // set listbox item to new folder
-                if (cnf.new_folder_name != "")
+                if (cnf.selected_folder != "")
                 {
-                    int idx = lstModFolders.FindString(cnf.new_folder_name);
+                    int idx = lstModFolders.FindString(cnf.selected_folder);
                     lstModFolders.SetSelected(idx, true);
                 }
             }

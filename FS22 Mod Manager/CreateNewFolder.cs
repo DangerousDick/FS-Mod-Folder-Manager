@@ -15,7 +15,8 @@ namespace FS22_Mod_Manager
 {
     public partial class CreateNewFolder : Form
     {
-        public string new_folder_name = string.Empty;               // for main form to select new folder in list
+        //public string new_folder_name = string.Empty;               // for main form to select new folder in list
+        public string selected_folder { get; set; }
 
         private string current_default_mod_folder = string.Empty;   // full path to current default mods folder in the main form
         private string favourites_mod_folder_path = string.Empty;   // full path to new mod folder
@@ -72,7 +73,7 @@ namespace FS22_Mod_Manager
                 using (FolderBrowserDialog fbd = new FolderBrowserDialog())
                 {
                     // set initial path
-                    string init_dir = Settings.Default.ModFolderPath;
+                    string init_dir = current_default_mod_folder;
                     if (!Directory.Exists(init_dir))
                     {
                         init_dir = "C:\\";
@@ -451,7 +452,7 @@ namespace FS22_Mod_Manager
 
                 using (FolderBrowserDialog fbd = new FolderBrowserDialog())
                 {
-                    string init_dir = current_default_mod_folder; // txtCurrentFavouritesFolder.Text;
+                    string init_dir = current_default_mod_folder;
                     if (!Directory.Exists(init_dir))
                     {
                         init_dir = "C:\\";
@@ -461,8 +462,9 @@ namespace FS22_Mod_Manager
                     if (fbd.ShowDialog() == DialogResult.OK)
                     {
                         string folder_path = fbd.SelectedPath;
-                        new_folder_name = Path.GetFileName(folder_path);
-                        logger.LogWrite($"new folder name: {new_folder_name}");
+                        //new_folder_name = Path.GetFileName(folder_path);
+                        selected_folder = Path.GetFileName(folder_path);
+                        logger.LogWrite($"new folder name: {selected_folder}");
                         //copy files
                         foreach (string selected_file in selected_mods)
                         {
