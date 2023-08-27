@@ -412,7 +412,7 @@ namespace FS22_Mod_Manager
             logger.LogWrite("Showing create new mods folder dialog", true);
             try
             {
-                CreateNewFolder cnf = new CreateNewFolder();
+                CreateNewFolder cnf = new CreateNewFolder(txtModFolderPath.Text);
                 cnf.ShowDialog();
                 populate_folder_list();
                 // set listbox item to new folder

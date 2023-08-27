@@ -17,15 +17,17 @@ namespace FS22_Mod_Manager
     {
         public string new_folder_name = string.Empty;               // for main form to select new folder in list
 
+        private string current_default_mod_folder = string.Empty;   // full path to current default mods folder in the main form
         private string favourites_mod_folder_path = string.Empty;   // full path to new mod folder
         private List<string> selected_mods = new List<string>();    // List for selected mods
         private bool NO_SUB_DIRS = false;                           // Flag to indicated selected favourites folder has not subdirectories
         static private Logger logger = new Logger(frmMain.LogFileName, false); // DO NOT CLEAR LOG
 
-        public CreateNewFolder()
+        public CreateNewFolder(string current_default_mod_folder)
         {
             InitializeComponent();
             logger.LogWrite("Initializing create new folder dialog", true);
+            this.current_default_mod_folder = current_default_mod_folder;
         }
 
         private void CreateNewFolder_Load(object sender, EventArgs e)
@@ -449,7 +451,7 @@ namespace FS22_Mod_Manager
 
                 using (FolderBrowserDialog fbd = new FolderBrowserDialog())
                 {
-                    string init_dir = txtCurrentFavouritesFolder.Text;
+                    string init_dir = current_default_mod_folder; // txtCurrentFavouritesFolder.Text;
                     if (!Directory.Exists(init_dir))
                     {
                         init_dir = "C:\\";
