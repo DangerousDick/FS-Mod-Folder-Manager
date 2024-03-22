@@ -444,6 +444,12 @@ namespace FS22_Mod_Manager
 
         }
 
+        private void mnuOptModOverride_Click(object sender, EventArgs e)
+        {
+            update_mod_override_values();
+            write_mod_override_to_xml();
+        }
+
         private void mnuOptOnlyShowZips_Click(object sender, EventArgs e)
         {
             populate_file_list();

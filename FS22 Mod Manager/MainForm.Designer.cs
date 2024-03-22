@@ -351,6 +351,7 @@
             mnuOptModOverride.Name = "mnuOptModOverride";
             mnuOptModOverride.Size = new Size(399, 34);
             mnuOptModOverride.Text = "Mod Folder Override";
+            mnuOptModOverride.Click += mnuOptModOverride_Click;
             // 
             // mnuOptOverwriteOnCopy
             // 
