@@ -9,7 +9,7 @@ namespace FS22_Mod_Manager
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V1.7.3";
+        const string version = "V1.7.4";
         const string copyright = "Copyright Richard Sayer 2024";
         const string app_description = "Farming Simulator 22 Mods Folder Manager " + version + "\nApplication to manage farming simulator mod folders";
         // private variables to be set on form load
