@@ -60,9 +60,12 @@
             mnuCtxListModFiles = new ContextMenuStrip(components);
             mnuSelectAllMods = new ToolStripMenuItem();
             lstFolders = new ListBox();
+            stsCreateModsFolderDialog = new StatusStrip();
+            stsCreateModsFolderStatus = new ToolStripStatusLabel();
             pnlCreateNewFolder.SuspendLayout();
             mnuCtxSelectedFiles.SuspendLayout();
             mnuCtxListModFiles.SuspendLayout();
+            stsCreateModsFolderDialog.SuspendLayout();
             SuspendLayout();
             // 
             // pnlCreateNewFolder
@@ -94,13 +97,13 @@
             pnlCreateNewFolder.Controls.Add(lstFolders);
             pnlCreateNewFolder.Location = new Point(6, 5);
             pnlCreateNewFolder.Name = "pnlCreateNewFolder";
-            pnlCreateNewFolder.Size = new Size(976, 574);
+            pnlCreateNewFolder.Size = new Size(976, 570);
             pnlCreateNewFolder.TabIndex = 0;
             // 
             // btnCreateListFromFolder
             // 
             btnCreateListFromFolder.Location = new Point(630, 421);
-            btnCreateListFromFolder.Margin = new Padding(2, 2, 2, 2);
+            btnCreateListFromFolder.Margin = new Padding(2);
             btnCreateListFromFolder.Name = "btnCreateListFromFolder";
             btnCreateListFromFolder.Size = new Size(181, 23);
             btnCreateListFromFolder.TabIndex = 25;
@@ -373,12 +376,28 @@
             lstFolders.TabIndex = 0;
             lstFolders.SelectedIndexChanged += lstFolders_SelectedIndexChanged;
             // 
+            // stsCreateModsFolderDialog
+            // 
+            stsCreateModsFolderDialog.Items.AddRange(new ToolStripItem[] { stsCreateModsFolderStatus });
+            stsCreateModsFolderDialog.Location = new Point(0, 576);
+            stsCreateModsFolderDialog.Name = "stsCreateModsFolderDialog";
+            stsCreateModsFolderDialog.Size = new Size(985, 22);
+            stsCreateModsFolderDialog.TabIndex = 2;
+            stsCreateModsFolderDialog.Text = "statusStrip1";
+            // 
+            // stsCreateModsFolderStatus
+            // 
+            stsCreateModsFolderStatus.Name = "stsCreateModsFolderStatus";
+            stsCreateModsFolderStatus.Size = new Size(118, 17);
+            stsCreateModsFolderStatus.Text = "toolStripStatusLabel1";
+            // 
             // CreateNewFolder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(985, 581);
+            ClientSize = new Size(985, 598);
+            Controls.Add(stsCreateModsFolderDialog);
             Controls.Add(pnlCreateNewFolder);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -389,7 +408,10 @@
             pnlCreateNewFolder.PerformLayout();
             mnuCtxSelectedFiles.ResumeLayout(false);
             mnuCtxListModFiles.ResumeLayout(false);
+            stsCreateModsFolderDialog.ResumeLayout(false);
+            stsCreateModsFolderDialog.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -424,5 +446,7 @@
         private Label lblSelectedFileCount;
         private Label lblModFileCount;
         private Label lblFoldeerCount;
+        private StatusStrip stsCreateModsFolderDialog;
+        private ToolStripStatusLabel stsCreateModsFolderStatus;
     }
 }

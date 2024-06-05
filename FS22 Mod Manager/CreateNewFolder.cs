@@ -41,6 +41,7 @@ namespace FS22_Mod_Manager
             txtDefaultFavouritesFolder.Text = Settings.Default.DefaultFavouritesFolder;
             txtSavedListsPath.Text = Settings.Default.DefaultSavedListsFolder;
             populate_folder_list();
+            stsCreateModsFolderStatus.Text = "Double click a mod to add it to the list";
         }
 
         private void btnClose_Click_1(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace FS22_Mod_Manager
             /*
              * create the new folder
              */
-            copy_selected_mods();
+            stsCreateModsFolderStatus.Text = copy_selected_mods();            
         }
 
         private void btnCreateListFromFolder_Click(object sender, EventArgs e)
@@ -96,18 +97,25 @@ namespace FS22_Mod_Manager
                                 // load newly created list
                                 read_list_from_file(saved_file_path);
                                 populate_selected_files_list();
+                                stsCreateModsFolderStatus.Text = $"List created from {Path.GetFileName(fbd.SelectedPath)}";
+                            }
+                            else
+                            {
+                                stsCreateModsFolderStatus.Text = $"Folder {Path.GetFileName(fbd.SelectedPath)} is empty";
                             }
                         }
                     }
                     else
                     {
                         logger.LogWrite("No folder selected");
+                        stsCreateModsFolderStatus.Text = "No folder selected";
                     }
                 }
             }
             catch (Exception ex)
             {
                 logger.LogWrite($"Error: {ex.Message}");
+                stsCreateModsFolderStatus.Text = $"Error: {ex.Message}";
             }
         }
 
@@ -440,13 +448,14 @@ namespace FS22_Mod_Manager
             lstSelectedModFiles.SelectedIndex = lstSelectedModFiles.Items.Count - 1;
         }
 
-        private void copy_selected_mods()
+        private String copy_selected_mods()
         {
             /* 
              * use the FolderBrowserDialog to get/create a folder
              * copy the files in selected_mods list to the folder
              */
 
+            string return_msg = "";
             try
             {
 
@@ -462,7 +471,6 @@ namespace FS22_Mod_Manager
                     if (fbd.ShowDialog() == DialogResult.OK)
                     {
                         string folder_path = fbd.SelectedPath;
-                        //new_folder_name = Path.GetFileName(folder_path);
                         selected_folder = Path.GetFileName(folder_path);
                         logger.LogWrite($"new folder name: {selected_folder}");
                         //copy files
@@ -482,17 +490,24 @@ namespace FS22_Mod_Manager
                                 logger.LogWrite($"Error: {ex.Message}");
                             }
                         }
+                        if (Directory.Exists(init_dir))
+                            return_msg = $"Folder created: {selected_folder}";
+                        else
+                            return_msg = $"Failed to create folder {selected_folder} see log for details.";
                     }
                     else
                     {
                         logger.LogWrite("No folder selected");
+                        return_msg = "No folder selected";
                     }
                 }
             }
             catch (Exception ex)
             {
                 logger.LogWrite($"Error: {ex.Message}");
+                return_msg = ex.Message;
             }
+            return return_msg;
         }
 
         private void save_list_to_file(List<string> mods_list, string save_file_name = "")
@@ -535,10 +550,12 @@ namespace FS22_Mod_Manager
                             logger.LogWrite($"Adding {selected_file} to {save_file_name}");
                             sw.WriteLine($"{selected_file}");
                         }
+                        stsCreateModsFolderStatus.Text = $"List {Path.GetFileName(save_file_name)} saved";
                     }
                     catch (Exception ex)
                     {
                         logger.LogWrite($"Error: {ex.Message}");
+                        stsCreateModsFolderStatus.Text = $"Error: {ex.Message}";
                     }
                     sw.Close();
                 }
@@ -564,7 +581,12 @@ namespace FS22_Mod_Manager
                         if (ofd.FileName != "")
                         {
                             read_file_path = ofd.FileName;
+                            stsCreateModsFolderStatus.Text = $"List {Path.GetFileName(read_file_path)} loaded";
                         }
+                    }
+                    else
+                    {
+                        stsCreateModsFolderStatus.Text = "No list loaded";
                     }
                 }
             }
