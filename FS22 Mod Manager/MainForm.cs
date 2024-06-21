@@ -172,7 +172,7 @@ namespace FS22_Mod_Manager
              * e.g. c:\path\to\mod_folders\mod_folder game notes.txt
              */
             String default_file_name = Path.Join(txtModFolderPath.Text, lstModFolders.Text, lstModFolders.Text + " game notes.txt");
-            string default_content = "\nrules: \n\ngoal: \n\ndaily jobs:\n\ntodo:\n";
+            string default_content = "savegame: \n\ndaily jobs: \n\ntodo: \n\nfarm xpansion: \n\nrules: \n\ngoal: \n";
             if (!File.Exists(default_file_name))
             {
                 // does the user want to create it?
