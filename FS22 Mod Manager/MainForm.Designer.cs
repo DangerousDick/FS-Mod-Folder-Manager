@@ -85,6 +85,9 @@
             lstModFolders = new ListBox();
             lblModFolders = new Label();
             panel1 = new Panel();
+            btnChangeCharacterName = new Button();
+            txtCharacterName = new TextBox();
+            lblCharacterName = new Label();
             btnExit = new Button();
             lblModOverrideValues = new Label();
             txtModOverrideValues = new TextBox();
@@ -444,7 +447,7 @@
             // 
             stsStatusBar.ImageScalingSize = new Size(24, 24);
             stsStatusBar.Items.AddRange(new ToolStripItem[] { stsStatusLabel });
-            stsStatusBar.Location = new Point(0, 920);
+            stsStatusBar.Location = new Point(0, 912);
             stsStatusBar.Name = "stsStatusBar";
             stsStatusBar.Padding = new Padding(1, 0, 20, 0);
             stsStatusBar.Size = new Size(757, 32);
@@ -537,6 +540,9 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnChangeCharacterName);
+            panel1.Controls.Add(txtCharacterName);
+            panel1.Controls.Add(lblCharacterName);
             panel1.Controls.Add(btnExit);
             panel1.Controls.Add(lblModOverrideValues);
             panel1.Controls.Add(txtModOverrideValues);
@@ -554,12 +560,41 @@
             panel1.Location = new Point(0, 630);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(740, 278);
+            panel1.Size = new Size(740, 283);
             panel1.TabIndex = 5;
+            // 
+            // btnChangeCharacterName
+            // 
+            btnChangeCharacterName.Location = new Point(583, 195);
+            btnChangeCharacterName.Margin = new Padding(4, 5, 4, 5);
+            btnChangeCharacterName.Name = "btnChangeCharacterName";
+            btnChangeCharacterName.Size = new Size(141, 38);
+            btnChangeCharacterName.TabIndex = 16;
+            btnChangeCharacterName.Text = "Change Name";
+            btnChangeCharacterName.UseVisualStyleBackColor = true;
+            btnChangeCharacterName.Click += btnChangeName_Click;
+            // 
+            // txtCharacterName
+            // 
+            txtCharacterName.BackColor = SystemColors.InactiveCaption;
+            txtCharacterName.Location = new Point(150, 196);
+            txtCharacterName.Name = "txtCharacterName";
+            txtCharacterName.ReadOnly = true;
+            txtCharacterName.Size = new Size(426, 31);
+            txtCharacterName.TabIndex = 15;
+            // 
+            // lblCharacterName
+            // 
+            lblCharacterName.AutoSize = true;
+            lblCharacterName.Location = new Point(11, 196);
+            lblCharacterName.Name = "lblCharacterName";
+            lblCharacterName.Size = new Size(138, 25);
+            lblCharacterName.TabIndex = 14;
+            lblCharacterName.Text = "Character Name";
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(617, 227);
+            btnExit.Location = new Point(615, 236);
             btnExit.Margin = new Padding(4, 5, 4, 5);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(107, 38);
@@ -593,7 +628,7 @@
             // 
             // btnLaunchGame
             // 
-            btnLaunchGame.Location = new Point(207, 227);
+            btnLaunchGame.Location = new Point(205, 236);
             btnLaunchGame.Margin = new Padding(4, 5, 4, 5);
             btnLaunchGame.Name = "btnLaunchGame";
             btnLaunchGame.Size = new Size(176, 38);
@@ -604,7 +639,7 @@
             // 
             // btnSetModOverride
             // 
-            btnSetModOverride.Location = new Point(14, 227);
+            btnSetModOverride.Location = new Point(12, 236);
             btnSetModOverride.Margin = new Padding(4, 5, 4, 5);
             btnSetModOverride.Name = "btnSetModOverride";
             btnSetModOverride.Size = new Size(176, 38);
@@ -804,7 +839,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(757, 952);
+            ClientSize = new Size(757, 944);
             Controls.Add(panel1);
             Controls.Add(pnlLists);
             Controls.Add(stsStatusBar);
@@ -915,5 +950,8 @@
         private ToolStripMenuItem mnuOptOnlyShowZips;
         private ToolStripSeparator toolStripMenuItem3;
         private ToolStripMenuItem mnuModsCreateNewFolder;
+        private Label lblCharacterName;
+        private TextBox txtCharacterName;
+        private Button btnChangeCharacterName;
     }
 }

@@ -44,5 +44,8 @@
     <Setting Name="DefaultSavedListsFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\fs22mods\SavedLists</Value>
     </Setting>
+    <Setting Name="OnlinePresenceName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">OnlinePresenceName</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -42,7 +42,13 @@ namespace FS22_Mod_Manager
             read_user_settings();
             gameSettingsXmlFile = Path.Join(Settings.Default.UserDataPath, "gameSettings.xml");
             gameXmlFile = Path.Join(Settings.Default.UserDataPath, "game.xml");
-
+            if (online_presence_name_value() != Settings.Default.OnlinePresenceName)
+            {
+                // override setting with xml file value
+                txtCharacterName.Text = online_presence_name_value();
+                logger.LogWrite($"Overriding {Settings.Default.OnlinePresenceName} with {txtCharacterName.Text}");
+                Settings.Default.OnlinePresenceName = txtCharacterName.Text;
+            }
             // populate lists
             try
             {
@@ -103,6 +109,22 @@ namespace FS22_Mod_Manager
              * Opens the Farming Sinlator game.xml file
              */
             open_with_default_app(txtUserDataPath.Text + "\\game.xml");
+        }
+
+        private void btnChangeName_Click(object sender, EventArgs e)
+        {
+            /*
+             * Set the character onlinePresenceName in gameSettings.xml
+             */
+            string character_name = Interaction.InputBox("Enter a new name for your character", "Change Character Name", txtCharacterName.Text);
+            if (character_name != "")
+            {
+                stsStatusLabel.Text = $"Setting Online Presence Name to: {character_name}";
+                txtCharacterName.Text = character_name;
+                Settings.Default.OnlinePresenceName = character_name;
+                // set value in xml file
+                online_presence_name_value(true);
+            }
         }
 
         private void mnuFileZipGameDataDirectory_Click(object sender, EventArgs e)
@@ -1049,6 +1071,7 @@ namespace FS22_Mod_Manager
                 }
                 txtGameExeFile.Text = Settings.Default.GameExePath;
                 // get options menu settings
+                txtCharacterName.Text = Settings.Default.OnlinePresenceName;
                 mnuOptModDoubleClick.Checked = Settings.Default.AllowDoubleClick;
                 mnuOptModOverride.Checked = Settings.Default.ModFodlerOverride;
                 mnuOptOverwriteOnCopy.Checked = Settings.Default.OverwriteOnCopy;
@@ -1078,6 +1101,7 @@ namespace FS22_Mod_Manager
             Settings.Default.ModFolderPath = txtModFolderPath.Text;
             Settings.Default.UserDataPath = txtUserDataPath.Text;
             Settings.Default.GameExePath = txtGameExeFile.Text;
+            Settings.Default.OnlinePresenceName = txtCharacterName.Text;
             // options menu settings
             Settings.Default.AllowDoubleClick = mnuOptModDoubleClick.Checked;
             Settings.Default.ModFodlerOverride = mnuOptModOverride.Checked;
@@ -1156,6 +1180,41 @@ namespace FS22_Mod_Manager
             {
                 logger.LogWrite(ex.Message, true);
             }
+        }
+
+        public string online_presence_name_value(bool set_value = false)
+        {
+            /*
+             * read/write the value of onlinePresenceName in the gameSettings.xml file
+             */
+            string onlinePresenceName = "";
+            try
+            {
+                System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+                xmlDoc.Load(gameSettingsXmlFile);
+                System.Xml.XmlNodeList elemList = xmlDoc.GetElementsByTagName("onlinePresenceName");
+                if (elemList.Count > 0)
+                {
+                    if (true == set_value)
+                    {
+                        // set value for onlinePresenceName in gameSettings.xml
+                        logger.LogWrite("Saving settings value to onlinePresenceName in gameSettings.xml");
+                        elemList[0].InnerXml = Settings.Default.OnlinePresenceName;
+                        xmlDoc.Save(gameSettingsXmlFile);
+                    }
+                    else
+                    {
+                        // set mnuOptLaunchConsole.Checked to value in xml file
+                        onlinePresenceName = elemList[0].InnerXml;
+                        logger.LogWrite($"Reading onlinePresenceName in gameSettings.xml : {onlinePresenceName}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.Message, true);
+            }
+            return onlinePresenceName;
         }
 
         private void write_mod_override_to_xml()
