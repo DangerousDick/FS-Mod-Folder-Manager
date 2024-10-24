@@ -427,19 +427,19 @@
             // 
             mnuHelpOpen.Name = "mnuHelpOpen";
             mnuHelpOpen.ShortcutKeys = Keys.F1;
-            mnuHelpOpen.Size = new Size(182, 34);
+            mnuHelpOpen.Size = new Size(270, 34);
             mnuHelpOpen.Text = "Help";
             mnuHelpOpen.Click += mnuHelpOpen_Click;
             // 
             // mnuHelpSeparator
             // 
             mnuHelpSeparator.Name = "mnuHelpSeparator";
-            mnuHelpSeparator.Size = new Size(179, 6);
+            mnuHelpSeparator.Size = new Size(267, 6);
             // 
             // mnuHelpAbout
             // 
             mnuHelpAbout.Name = "mnuHelpAbout";
-            mnuHelpAbout.Size = new Size(182, 34);
+            mnuHelpAbout.Size = new Size(270, 34);
             mnuHelpAbout.Text = "About";
             mnuHelpAbout.Click += mnuHelpAbout_Click;
             // 
@@ -456,8 +456,8 @@
             // stsStatusLabel
             // 
             stsStatusLabel.Name = "stsStatusLabel";
-            stsStatusLabel.Size = new Size(200, 25);
-            stsStatusLabel.Text = "FS22 Mod File Manager";
+            stsStatusLabel.Size = new Size(273, 25);
+            stsStatusLabel.Text = "Farming simulator Mod Manager";
             // 
             // pnlLists
             // 
@@ -633,7 +633,7 @@
             btnLaunchGame.Name = "btnLaunchGame";
             btnLaunchGame.Size = new Size(176, 38);
             btnLaunchGame.TabIndex = 10;
-            btnLaunchGame.Text = "Launch FS22";
+            btnLaunchGame.Text = "Launch Game";
             btnLaunchGame.UseVisualStyleBackColor = true;
             btnLaunchGame.Click += btnLaunchGame_Click;
             // 
@@ -849,7 +849,7 @@
             MainMenuStrip = mnuApplicationMain;
             Margin = new Padding(4, 5, 4, 5);
             Name = "frmMain";
-            Text = "FS22 Mod FIle Manager";
+            Text = "Farming Simulator Mod Manager";
             FormClosed += frmMain_FormClosed;
             Load += frmMain_Load;
             mnuApplicationMain.ResumeLayout(false);
