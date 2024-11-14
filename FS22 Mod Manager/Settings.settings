@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="UserDataPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Documents\My Games\FarmingSimulator2022</Value>
+      <Value Profile="(Default)">Documents\My Games\FarmingSimulator2025</Value>
     </Setting>
     <Setting Name="GameExePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files (x86)\Farming Simulator 2022\FarmingSimulator2022.exe</Value>
+      <Value Profile="(Default)">C:\Program Files (x86)\Farming Simulator 2025\FarmingSimulator2022.exe</Value>
     </Setting>
     <Setting Name="ModFolderPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\fs22mods</Value>
+      <Value Profile="(Default)">C:\fs25mods</Value>
     </Setting>
     <Setting Name="AllowDoubleClick" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -39,10 +39,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="DefaultFavouritesFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\fs22mods</Value>
+      <Value Profile="(Default)">C:\FS25FavouriteMods</Value>
     </Setting>
     <Setting Name="DefaultSavedListsFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\fs22mods\SavedLists</Value>
+      <Value Profile="(Default)">C:\FS25FavouriteMods\SavedLists</Value>
     </Setting>
     <Setting Name="OnlinePresenceName" Type="System.String" Scope="User">
       <Value Profile="(Default)">OnlinePresenceName</Value>

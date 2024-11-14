@@ -12,7 +12,7 @@ namespace FS22_Mod_Manager {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace FS22_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Documents\\My Games\\FarmingSimulator2022")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Documents\\My Games\\FarmingSimulator2025")]
         public string UserDataPath {
             get {
                 return ((string)(this["UserDataPath"]));
@@ -37,7 +37,7 @@ namespace FS22_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\Farming Simulator 2022\\FarmingSimulator2022.exe")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\Farming Simulator 2025\\FarmingSimulator2022.exe")]
         public string GameExePath {
             get {
                 return ((string)(this["GameExePath"]));
@@ -49,7 +49,7 @@ namespace FS22_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\fs22mods")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\fs25mods")]
         public string ModFolderPath {
             get {
                 return ((string)(this["ModFolderPath"]));
@@ -169,7 +169,7 @@ namespace FS22_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\fs22mods")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\FS25FavouriteMods")]
         public string DefaultFavouritesFolder {
             get {
                 return ((string)(this["DefaultFavouritesFolder"]));
@@ -181,7 +181,7 @@ namespace FS22_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\fs22mods\\SavedLists")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\FS25FavouriteMods\\SavedLists")]
         public string DefaultSavedListsFolder {
             get {
                 return ((string)(this["DefaultSavedListsFolder"]));

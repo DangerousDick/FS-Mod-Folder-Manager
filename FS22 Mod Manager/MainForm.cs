@@ -5,13 +5,15 @@ namespace FS22_Mod_Manager
     using System.IO.Compression;
     using System.IO;
     using System.Windows.Forms;
+    using System.Drawing.Text;
+    using System.Text.RegularExpressions;
 
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V1.7.4";
+        const string version = "V1.8.0";
         const string copyright = "Copyright Richard Sayer 2024";
-        const string app_description = "Farming Simulator 22 Mods Folder Manager " + version + "\nApplication to manage farming simulator mod folders";
+        const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
         // private variables to be set on form load
         private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "AppData\\Local\\FS22_Mod_Manager");
@@ -71,6 +73,13 @@ namespace FS22_Mod_Manager
             read_mod_override_from_xml();
             game_xml_controls_element();
             update_mod_override_values();
+            // get savegame folders and set money
+            cmbSavegameDirs.Items.AddRange(get_savegame_folder_list(txtUserDataPath.Text).ToArray());
+            if (cmbSavegameDirs.Items.Count > 0)
+            {
+                cmbSavegameDirs.SelectedIndex = 0;
+            }
+            txtMoney.Text = get_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -836,6 +845,16 @@ namespace FS22_Mod_Manager
             }
         }
 
+        private void cmbSavegameDirs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtMoney.Text = get_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
+        }
+
+        private void btnUpdateMoney_Click(object sender, EventArgs e)
+        {
+            set_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
+        }
+
         private void btnSetModOverride_Click(object sender, EventArgs e)
         {
             /*
@@ -1197,14 +1216,14 @@ namespace FS22_Mod_Manager
                 {
                     if (true == set_value)
                     {
-                        // set value for onlinePresenceName in gameSettings.xml
+                        // write value for onlinePresenceName to gameSettings.xml
                         logger.LogWrite("Saving settings value to onlinePresenceName in gameSettings.xml");
                         elemList[0].InnerXml = Settings.Default.OnlinePresenceName;
                         xmlDoc.Save(gameSettingsXmlFile);
                     }
                     else
                     {
-                        // set mnuOptLaunchConsole.Checked to value in xml file
+                        // read value for onlinePresenceName from gameSettings.xml
                         onlinePresenceName = elemList[0].InnerXml;
                         logger.LogWrite($"Reading onlinePresenceName in gameSettings.xml : {onlinePresenceName}");
                     }
@@ -1215,6 +1234,132 @@ namespace FS22_Mod_Manager
                 logger.LogWrite(ex.Message, true);
             }
             return onlinePresenceName;
+        }
+
+        public List<string> get_savegame_folder_list(string path)
+        {
+            /* 
+             * get a list of all the savegame? folders in the user data directory path given
+             * */
+            List<string> saveGameDirs = new List<string> { };
+
+            string[] dirs = Directory.GetDirectories(path);
+            for (int i = 0; i < dirs.Length; i++)
+            {
+                Match result = Regex.Match(dirs[i], @"savegame[0-9]");
+                if (result.Success)
+                {
+                    DirectoryInfo info = new DirectoryInfo(dirs[i]);
+                    saveGameDirs.Add(info.Name);
+                    logger.LogWrite("savegame folder found" + dirs[1]);
+                }
+            }
+            return saveGameDirs;
+        }
+
+        public string get_savegame_money_value(string savegamePath)
+        {
+            /*
+             * read the money value from careerSavegame.xml file ande farms.xml file
+             * check they match (need to decide which value to keep, probably the highest)
+             * return the money value
+             */
+
+            string careerSavegameMoney = "";
+            string farmsMoney = "";
+            try
+            {
+                // get value from careerSavegame.xml
+                System.Xml.XmlDocument xmlCareerSavegame = new System.Xml.XmlDocument();
+                xmlCareerSavegame.Load(Path.Join(savegamePath, "careerSavegame.xml"));
+                System.Xml.XmlNodeList csmElemList = xmlCareerSavegame.GetElementsByTagName("money");
+                if (csmElemList.Count > 0)
+                {
+                    // read value
+                    careerSavegameMoney = csmElemList[0].InnerXml;
+                    logger.LogWrite($"Reading money in careerSavegame.xml : {careerSavegameMoney}");
+                }
+
+                // get value from farms.xml
+                System.Xml.XmlDocument xmlFarms = new System.Xml.XmlDocument();
+                xmlFarms.Load(Path.Join(savegamePath, "farms.xml"));
+                System.Xml.XmlNodeList fmElemList = xmlFarms.GetElementsByTagName("farm");
+                if (fmElemList.Count > 0)
+                {
+                    for (int i = 0; i < fmElemList.Count; i++)
+                    {
+                        farmsMoney = fmElemList[i].Attributes["money"].Value;
+                        int index = farmsMoney.IndexOf('.');
+                        if (index > 0)
+                        {
+                            //farmsMoney.Substring(0, index);
+                            if (farmsMoney.Substring(0, index) == careerSavegameMoney)
+                            {
+                                logger.LogWrite("farmsMoney matches careerSavegame money");
+                            }
+                            else
+                            {
+                                logger.LogWrite("Error: farmsMoney DOES NOT match careerSavegame money");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    logger.LogWrite("Error: money not found in Farms.xml");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.Message, true);
+            }
+            return careerSavegameMoney;
+        }
+
+        public void set_savegame_money_value(string savegamePath)
+        {
+            /*
+             * write money value to careerSavegame.xml farms.xmml files
+             */
+            try
+            {
+                // write value to careerSavegame.xml
+                System.Xml.XmlDocument xmlCareerSavegame = new System.Xml.XmlDocument();
+                xmlCareerSavegame.Load(Path.Join(savegamePath, "careerSavegame.xml"));
+                System.Xml.XmlNodeList csmElemList = xmlCareerSavegame.GetElementsByTagName("money");
+                if (csmElemList.Count > 0)
+                {
+                    // write value for money to careerSavegame.xml
+                    logger.LogWrite("Saving money value to careerSavegame.xml");
+                    csmElemList[0].InnerXml = txtMoney.Text;
+                    xmlCareerSavegame.Save(Path.Join(savegamePath, "careerSavegame.xml"));
+                }
+
+                // get value from careerSavegame.xml
+                System.Xml.XmlDocument xmlFarms = new System.Xml.XmlDocument();
+                xmlFarms.Load(Path.Join(savegamePath, "farms.xml"));
+                System.Xml.XmlNodeList fmElemList = xmlFarms.GetElementsByTagName("farm");
+                if (fmElemList.Count > 0)
+                {
+                    // write value for money to careerSavegame.xml
+                    logger.LogWrite("Saving money value to farms.xml");
+                    for (int i = 0; i < fmElemList.Count; i++)
+                    {
+                        // set attributes
+                        string farmsMoney = fmElemList[i].Attributes["money"].Value;
+                        int index = farmsMoney.IndexOf('.');
+                        string tmp = farmsMoney.Substring(index, (farmsMoney.Length - index));
+                        farmsMoney = txtMoney.Text + tmp;
+                        fmElemList[i].Attributes["money"].Value = farmsMoney;
+                    }
+                    xmlFarms.Save(Path.Join(savegamePath, "farms.xml"));
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.Message, true);
+            }
         }
 
         private void write_mod_override_to_xml()

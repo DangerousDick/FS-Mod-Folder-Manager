@@ -85,6 +85,10 @@
             lstModFolders = new ListBox();
             lblModFolders = new Label();
             panel1 = new Panel();
+            lblUpdateMoney = new Label();
+            btnUpdateMoney = new Button();
+            txtMoney = new TextBox();
+            cmbSavegameDirs = new ComboBox();
             btnChangeCharacterName = new Button();
             txtCharacterName = new TextBox();
             lblCharacterName = new Label();
@@ -427,19 +431,19 @@
             // 
             mnuHelpOpen.Name = "mnuHelpOpen";
             mnuHelpOpen.ShortcutKeys = Keys.F1;
-            mnuHelpOpen.Size = new Size(270, 34);
+            mnuHelpOpen.Size = new Size(182, 34);
             mnuHelpOpen.Text = "Help";
             mnuHelpOpen.Click += mnuHelpOpen_Click;
             // 
             // mnuHelpSeparator
             // 
             mnuHelpSeparator.Name = "mnuHelpSeparator";
-            mnuHelpSeparator.Size = new Size(267, 6);
+            mnuHelpSeparator.Size = new Size(179, 6);
             // 
             // mnuHelpAbout
             // 
             mnuHelpAbout.Name = "mnuHelpAbout";
-            mnuHelpAbout.Size = new Size(270, 34);
+            mnuHelpAbout.Size = new Size(182, 34);
             mnuHelpAbout.Text = "About";
             mnuHelpAbout.Click += mnuHelpAbout_Click;
             // 
@@ -447,7 +451,7 @@
             // 
             stsStatusBar.ImageScalingSize = new Size(24, 24);
             stsStatusBar.Items.AddRange(new ToolStripItem[] { stsStatusLabel });
-            stsStatusBar.Location = new Point(0, 912);
+            stsStatusBar.Location = new Point(0, 991);
             stsStatusBar.Name = "stsStatusBar";
             stsStatusBar.Padding = new Padding(1, 0, 20, 0);
             stsStatusBar.Size = new Size(757, 32);
@@ -540,6 +544,10 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(lblUpdateMoney);
+            panel1.Controls.Add(btnUpdateMoney);
+            panel1.Controls.Add(txtMoney);
+            panel1.Controls.Add(cmbSavegameDirs);
             panel1.Controls.Add(btnChangeCharacterName);
             panel1.Controls.Add(txtCharacterName);
             panel1.Controls.Add(lblCharacterName);
@@ -560,8 +568,44 @@
             panel1.Location = new Point(0, 630);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(740, 283);
+            panel1.Size = new Size(740, 356);
             panel1.TabIndex = 5;
+            // 
+            // lblUpdateMoney
+            // 
+            lblUpdateMoney.AutoSize = true;
+            lblUpdateMoney.Location = new Point(18, 254);
+            lblUpdateMoney.Name = "lblUpdateMoney";
+            lblUpdateMoney.Size = new Size(130, 25);
+            lblUpdateMoney.TabIndex = 20;
+            lblUpdateMoney.Text = "Update Money";
+            // 
+            // btnUpdateMoney
+            // 
+            btnUpdateMoney.Location = new Point(617, 251);
+            btnUpdateMoney.Name = "btnUpdateMoney";
+            btnUpdateMoney.Size = new Size(107, 34);
+            btnUpdateMoney.TabIndex = 19;
+            btnUpdateMoney.Text = "Update";
+            btnUpdateMoney.UseVisualStyleBackColor = true;
+            btnUpdateMoney.Click += btnUpdateMoney_Click;
+            // 
+            // txtMoney
+            // 
+            txtMoney.Location = new Point(432, 249);
+            txtMoney.Name = "txtMoney";
+            txtMoney.Size = new Size(175, 31);
+            txtMoney.TabIndex = 18;
+            txtMoney.Text = "Money";
+            // 
+            // cmbSavegameDirs
+            // 
+            cmbSavegameDirs.FormattingEnabled = true;
+            cmbSavegameDirs.Location = new Point(150, 249);
+            cmbSavegameDirs.Name = "cmbSavegameDirs";
+            cmbSavegameDirs.Size = new Size(265, 33);
+            cmbSavegameDirs.TabIndex = 17;
+            cmbSavegameDirs.SelectedIndexChanged += cmbSavegameDirs_SelectedIndexChanged;
             // 
             // btnChangeCharacterName
             // 
@@ -594,7 +638,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(615, 236);
+            btnExit.Location = new Point(615, 315);
             btnExit.Margin = new Padding(4, 5, 4, 5);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(107, 38);
@@ -628,7 +672,7 @@
             // 
             // btnLaunchGame
             // 
-            btnLaunchGame.Location = new Point(205, 236);
+            btnLaunchGame.Location = new Point(205, 315);
             btnLaunchGame.Margin = new Padding(4, 5, 4, 5);
             btnLaunchGame.Name = "btnLaunchGame";
             btnLaunchGame.Size = new Size(176, 38);
@@ -639,7 +683,7 @@
             // 
             // btnSetModOverride
             // 
-            btnSetModOverride.Location = new Point(12, 236);
+            btnSetModOverride.Location = new Point(12, 315);
             btnSetModOverride.Margin = new Padding(4, 5, 4, 5);
             btnSetModOverride.Name = "btnSetModOverride";
             btnSetModOverride.Size = new Size(176, 38);
@@ -839,7 +883,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(757, 944);
+            ClientSize = new Size(757, 1023);
             Controls.Add(panel1);
             Controls.Add(pnlLists);
             Controls.Add(stsStatusBar);
@@ -953,5 +997,9 @@
         private Label lblCharacterName;
         private TextBox txtCharacterName;
         private Button btnChangeCharacterName;
+        private ComboBox cmbSavegameDirs;
+        private Label lblUpdateMoney;
+        private Button btnUpdateMoney;
+        private TextBox txtMoney;
     }
 }
