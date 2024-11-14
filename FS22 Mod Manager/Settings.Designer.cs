@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FS22_Mod_Manager {
+namespace FS_Mod_Manager {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -1,4 +1,4 @@
-namespace FS22_Mod_Manager
+namespace FS_Mod_Manager
 {
     using System.Diagnostics;       // for Process class
     using Microsoft.VisualBasic;    // for input box
@@ -16,12 +16,12 @@ namespace FS22_Mod_Manager
         const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
         // private variables to be set on form load
         private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            "AppData\\Local\\FS22_Mod_Manager");
+            "AppData\\Local\\FS_Mod_Manager");
         private string gameSettingsXmlFile = "";
         private string gameXmlFile = "";
         // static member variable for initialising log file class
         static public string LogFileName = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            "AppData\\Local\\FS22_Mod_Manager\\FsModManager.log");
+            "AppData\\Local\\FS_Mod_Manager\\FsModManager.log");
         static private Logger logger = new Logger(LogFileName, true);
 
         // when populating lists if no subfolders then set flag
@@ -39,6 +39,11 @@ namespace FS22_Mod_Manager
              */
             // Window location
             this.Location = Settings.Default.MainWindowLocation;
+            // create appdat folder
+            if (!Directory.Exists(AppTempDirectory))
+            {
+                Directory.CreateDirectory(AppTempDirectory);
+            }
             logger.LogWrite("Application started", true);
             // get user settings and set xml paths
             read_user_settings();
@@ -74,12 +79,7 @@ namespace FS22_Mod_Manager
             game_xml_controls_element();
             update_mod_override_values();
             // get savegame folders and set money
-            cmbSavegameDirs.Items.AddRange(get_savegame_folder_list(txtUserDataPath.Text).ToArray());
-            if (cmbSavegameDirs.Items.Count > 0)
-            {
-                cmbSavegameDirs.SelectedIndex = 0;
-            }
-            txtMoney.Text = get_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
+            read_savegame_money_value();
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -875,7 +875,7 @@ namespace FS22_Mod_Manager
         private void btnLaunchGame_Click(object sender, EventArgs e)
         {
             /*
-             * Launch FarmingSimulator2022.exe
+             * Launch FarmingSimulator exe
              */
             List<string> args = new List<string>();
 
@@ -1082,7 +1082,7 @@ namespace FS22_Mod_Manager
                      * look into how to check other prividers like Origin and Epic
                      */
                     string game_exe_path =
-                        "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Farming Simulator 2022\\FarmingSimulator2022.exe";
+                        "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Farming Simulator 2025\\FarmingSimulator2025.exe";
                     if (File.Exists(game_exe_path))
                     {
                         Settings.Default.GameExePath = game_exe_path;
@@ -1234,6 +1234,26 @@ namespace FS22_Mod_Manager
                 logger.LogWrite(ex.Message, true);
             }
             return onlinePresenceName;
+        }
+
+        public void read_savegame_money_value()
+        {
+            /* 
+             * read the value of the monye attributes for the save game
+             */
+            cmbSavegameDirs.Items.AddRange(get_savegame_folder_list(txtUserDataPath.Text).ToArray());
+            if (cmbSavegameDirs.Items.Count > 0)
+            {
+                if (cmbSavegameDirs.SelectedIndex >= 0)
+                {
+                    // do nothing
+                }
+                else
+                {
+                    cmbSavegameDirs.SelectedIndex = 0;
+                }
+            }
+            txtMoney.Text = get_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
         }
 
         public List<string> get_savegame_folder_list(string path)
@@ -1540,7 +1560,7 @@ namespace FS22_Mod_Manager
         static void run_exe_proces(string exe_name, string[] args)
         {
             /*
-             * Launch a process such as the FarmingSimulator2022.exe file
+             * Launch a process such as the FarmingSimulator exe file
              */
             // join arguments
             string arguments = String.Join(" ", args.Where(s => !String.IsNullOrEmpty(s)));

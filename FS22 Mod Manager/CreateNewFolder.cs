@@ -11,7 +11,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace FS22_Mod_Manager
+namespace FS_Mod_Manager
 {
     public partial class CreateNewFolder : Form
     {

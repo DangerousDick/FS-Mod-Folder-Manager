@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
 
-namespace FS22_Mod_Manager
+namespace FS_Mod_Manager
 {
     internal class Logger
     {
