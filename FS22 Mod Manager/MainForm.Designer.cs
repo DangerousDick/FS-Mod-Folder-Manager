@@ -85,18 +85,11 @@
             lstModFolders = new ListBox();
             lblModFolders = new Label();
             panel1 = new Panel();
-            lblUpdateMoney = new Label();
-            btnUpdateMoney = new Button();
-            txtMoney = new TextBox();
-            cmbSavegameDirs = new ComboBox();
             btnChangeCharacterName = new Button();
             txtCharacterName = new TextBox();
             lblCharacterName = new Label();
-            btnExit = new Button();
             lblModOverrideValues = new Label();
             txtModOverrideValues = new TextBox();
-            btnLaunchGame = new Button();
-            btnSetModOverride = new Button();
             btnGameExeFile = new Button();
             txtGameExeFile = new TextBox();
             lblGameExeFile = new Label();
@@ -106,6 +99,13 @@
             btnModFolderPath = new Button();
             txtModFolderPath = new TextBox();
             lblModFolderPath = new Label();
+            lblUpdateMoney = new Label();
+            btnUpdateMoney = new Button();
+            txtMoney = new TextBox();
+            cmbSavegameDirs = new ComboBox();
+            btnExit = new Button();
+            btnLaunchGame = new Button();
+            btnSetModOverride = new Button();
             mnuContextFolderList = new ContextMenuStrip(components);
             mnuContextFolderAdd = new ToolStripMenuItem();
             mnuContextFolderRemove = new ToolStripMenuItem();
@@ -119,12 +119,15 @@
             mnuContexstFileRemove = new ToolStripMenuItem();
             mnuContextFileSeparator = new ToolStripSeparator();
             mnuContextModCopyToAll = new ToolStripMenuItem();
+            panel2 = new Panel();
+            lblAddMoney = new Label();
             mnuApplicationMain.SuspendLayout();
             stsStatusBar.SuspendLayout();
             pnlLists.SuspendLayout();
             panel1.SuspendLayout();
             mnuContextFolderList.SuspendLayout();
             mnuContextFileList.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // mnuApplicationMain
@@ -451,7 +454,7 @@
             // 
             stsStatusBar.ImageScalingSize = new Size(24, 24);
             stsStatusBar.Items.AddRange(new ToolStripItem[] { stsStatusLabel });
-            stsStatusBar.Location = new Point(0, 991);
+            stsStatusBar.Location = new Point(0, 1040);
             stsStatusBar.Name = "stsStatusBar";
             stsStatusBar.Padding = new Padding(1, 0, 20, 0);
             stsStatusBar.Size = new Size(757, 32);
@@ -471,10 +474,10 @@
             pnlLists.Controls.Add(lblModFolderCount);
             pnlLists.Controls.Add(lstModFolders);
             pnlLists.Controls.Add(lblModFolders);
-            pnlLists.Location = new Point(0, 45);
+            pnlLists.Location = new Point(13, 45);
             pnlLists.Margin = new Padding(4, 5, 4, 5);
             pnlLists.Name = "pnlLists";
-            pnlLists.Size = new Size(740, 575);
+            pnlLists.Size = new Size(727, 575);
             pnlLists.TabIndex = 4;
             // 
             // lblModFileCount
@@ -544,18 +547,11 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(lblUpdateMoney);
-            panel1.Controls.Add(btnUpdateMoney);
-            panel1.Controls.Add(txtMoney);
-            panel1.Controls.Add(cmbSavegameDirs);
             panel1.Controls.Add(btnChangeCharacterName);
             panel1.Controls.Add(txtCharacterName);
             panel1.Controls.Add(lblCharacterName);
-            panel1.Controls.Add(btnExit);
             panel1.Controls.Add(lblModOverrideValues);
             panel1.Controls.Add(txtModOverrideValues);
-            panel1.Controls.Add(btnLaunchGame);
-            panel1.Controls.Add(btnSetModOverride);
             panel1.Controls.Add(btnGameExeFile);
             panel1.Controls.Add(txtGameExeFile);
             panel1.Controls.Add(lblGameExeFile);
@@ -565,47 +561,11 @@
             panel1.Controls.Add(btnModFolderPath);
             panel1.Controls.Add(txtModFolderPath);
             panel1.Controls.Add(lblModFolderPath);
-            panel1.Location = new Point(0, 630);
+            panel1.Location = new Point(13, 630);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(740, 356);
+            panel1.Size = new Size(727, 247);
             panel1.TabIndex = 5;
-            // 
-            // lblUpdateMoney
-            // 
-            lblUpdateMoney.AutoSize = true;
-            lblUpdateMoney.Location = new Point(18, 254);
-            lblUpdateMoney.Name = "lblUpdateMoney";
-            lblUpdateMoney.Size = new Size(130, 25);
-            lblUpdateMoney.TabIndex = 20;
-            lblUpdateMoney.Text = "Update Money";
-            // 
-            // btnUpdateMoney
-            // 
-            btnUpdateMoney.Location = new Point(617, 251);
-            btnUpdateMoney.Name = "btnUpdateMoney";
-            btnUpdateMoney.Size = new Size(107, 34);
-            btnUpdateMoney.TabIndex = 19;
-            btnUpdateMoney.Text = "Update";
-            btnUpdateMoney.UseVisualStyleBackColor = true;
-            btnUpdateMoney.Click += btnUpdateMoney_Click;
-            // 
-            // txtMoney
-            // 
-            txtMoney.Location = new Point(432, 249);
-            txtMoney.Name = "txtMoney";
-            txtMoney.Size = new Size(175, 31);
-            txtMoney.TabIndex = 18;
-            txtMoney.Text = "Money";
-            // 
-            // cmbSavegameDirs
-            // 
-            cmbSavegameDirs.FormattingEnabled = true;
-            cmbSavegameDirs.Location = new Point(150, 249);
-            cmbSavegameDirs.Name = "cmbSavegameDirs";
-            cmbSavegameDirs.Size = new Size(265, 33);
-            cmbSavegameDirs.TabIndex = 17;
-            cmbSavegameDirs.SelectedIndexChanged += cmbSavegameDirs_SelectedIndexChanged;
             // 
             // btnChangeCharacterName
             // 
@@ -636,17 +596,6 @@
             lblCharacterName.TabIndex = 14;
             lblCharacterName.Text = "Character Name";
             // 
-            // btnExit
-            // 
-            btnExit.Location = new Point(615, 315);
-            btnExit.Margin = new Padding(4, 5, 4, 5);
-            btnExit.Name = "btnExit";
-            btnExit.Size = new Size(107, 38);
-            btnExit.TabIndex = 13;
-            btnExit.Text = "Exit";
-            btnExit.UseVisualStyleBackColor = true;
-            btnExit.Click += btnExit_Click;
-            // 
             // lblModOverrideValues
             // 
             lblModOverrideValues.AutoSize = true;
@@ -669,28 +618,6 @@
             txtModOverrideValues.Text = "Mod Override Values";
             txtModOverrideValues.WordWrap = false;
             txtModOverrideValues.TextChanged += txtModOverrideValues_TextChanged;
-            // 
-            // btnLaunchGame
-            // 
-            btnLaunchGame.Location = new Point(205, 315);
-            btnLaunchGame.Margin = new Padding(4, 5, 4, 5);
-            btnLaunchGame.Name = "btnLaunchGame";
-            btnLaunchGame.Size = new Size(176, 38);
-            btnLaunchGame.TabIndex = 10;
-            btnLaunchGame.Text = "Launch Game";
-            btnLaunchGame.UseVisualStyleBackColor = true;
-            btnLaunchGame.Click += btnLaunchGame_Click;
-            // 
-            // btnSetModOverride
-            // 
-            btnSetModOverride.Location = new Point(12, 315);
-            btnSetModOverride.Margin = new Padding(4, 5, 4, 5);
-            btnSetModOverride.Name = "btnSetModOverride";
-            btnSetModOverride.Size = new Size(176, 38);
-            btnSetModOverride.TabIndex = 9;
-            btnSetModOverride.Text = "Set Mod Override";
-            btnSetModOverride.UseVisualStyleBackColor = true;
-            btnSetModOverride.Click += btnSetModOverride_Click;
             // 
             // btnGameExeFile
             // 
@@ -794,6 +721,75 @@
             lblModFolderPath.TabIndex = 0;
             lblModFolderPath.Text = "Mod Folder Path";
             // 
+            // lblUpdateMoney
+            // 
+            lblUpdateMoney.AutoSize = true;
+            lblUpdateMoney.Location = new Point(18, 42);
+            lblUpdateMoney.Name = "lblUpdateMoney";
+            lblUpdateMoney.Size = new Size(130, 25);
+            lblUpdateMoney.TabIndex = 20;
+            lblUpdateMoney.Text = "Update Money";
+            // 
+            // btnUpdateMoney
+            // 
+            btnUpdateMoney.Location = new Point(617, 39);
+            btnUpdateMoney.Name = "btnUpdateMoney";
+            btnUpdateMoney.Size = new Size(107, 34);
+            btnUpdateMoney.TabIndex = 19;
+            btnUpdateMoney.Text = "Update";
+            btnUpdateMoney.UseVisualStyleBackColor = true;
+            btnUpdateMoney.Click += btnUpdateMoney_Click;
+            // 
+            // txtMoney
+            // 
+            txtMoney.Location = new Point(432, 37);
+            txtMoney.Name = "txtMoney";
+            txtMoney.Size = new Size(175, 31);
+            txtMoney.TabIndex = 18;
+            txtMoney.Text = "Money";
+            // 
+            // cmbSavegameDirs
+            // 
+            cmbSavegameDirs.FormattingEnabled = true;
+            cmbSavegameDirs.Location = new Point(150, 37);
+            cmbSavegameDirs.Name = "cmbSavegameDirs";
+            cmbSavegameDirs.Size = new Size(265, 33);
+            cmbSavegameDirs.TabIndex = 17;
+            cmbSavegameDirs.SelectedIndexChanged += cmbSavegameDirs_SelectedIndexChanged;
+            // 
+            // btnExit
+            // 
+            btnExit.Location = new Point(628, 995);
+            btnExit.Margin = new Padding(4, 5, 4, 5);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(107, 38);
+            btnExit.TabIndex = 13;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
+            // 
+            // btnLaunchGame
+            // 
+            btnLaunchGame.Location = new Point(212, 995);
+            btnLaunchGame.Margin = new Padding(4, 5, 4, 5);
+            btnLaunchGame.Name = "btnLaunchGame";
+            btnLaunchGame.Size = new Size(176, 38);
+            btnLaunchGame.TabIndex = 10;
+            btnLaunchGame.Text = "Launch Game";
+            btnLaunchGame.UseVisualStyleBackColor = true;
+            btnLaunchGame.Click += btnLaunchGame_Click;
+            // 
+            // btnSetModOverride
+            // 
+            btnSetModOverride.Location = new Point(24, 995);
+            btnSetModOverride.Margin = new Padding(4, 5, 4, 5);
+            btnSetModOverride.Name = "btnSetModOverride";
+            btnSetModOverride.Size = new Size(176, 38);
+            btnSetModOverride.TabIndex = 9;
+            btnSetModOverride.Text = "Set Mod Override";
+            btnSetModOverride.UseVisualStyleBackColor = true;
+            btnSetModOverride.Click += btnSetModOverride_Click;
+            // 
             // mnuContextFolderList
             // 
             mnuContextFolderList.ImageScalingSize = new Size(24, 24);
@@ -879,11 +875,36 @@
             mnuContextModCopyToAll.Text = "Copy Mod to ALL Folders";
             mnuContextModCopyToAll.Click += mnuContextModCopyToAll_Click;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(lblUpdateMoney);
+            panel2.Controls.Add(lblAddMoney);
+            panel2.Controls.Add(btnUpdateMoney);
+            panel2.Controls.Add(cmbSavegameDirs);
+            panel2.Controls.Add(txtMoney);
+            panel2.Location = new Point(18, 885);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(727, 85);
+            panel2.TabIndex = 6;
+            // 
+            // lblAddMoney
+            // 
+            lblAddMoney.AutoSize = true;
+            lblAddMoney.Location = new Point(18, 9);
+            lblAddMoney.Name = "lblAddMoney";
+            lblAddMoney.Size = new Size(229, 25);
+            lblAddMoney.TabIndex = 14;
+            lblAddMoney.Text = "Add money to saved game";
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(757, 1023);
+            ClientSize = new Size(757, 1072);
+            Controls.Add(btnLaunchGame);
+            Controls.Add(btnSetModOverride);
+            Controls.Add(panel2);
+            Controls.Add(btnExit);
             Controls.Add(panel1);
             Controls.Add(pnlLists);
             Controls.Add(stsStatusBar);
@@ -906,6 +927,8 @@
             panel1.PerformLayout();
             mnuContextFolderList.ResumeLayout(false);
             mnuContextFileList.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1001,5 +1024,7 @@
         private Label lblUpdateMoney;
         private Button btnUpdateMoney;
         private TextBox txtMoney;
+        private Panel panel2;
+        private Label lblAddMoney;
     }
 }
