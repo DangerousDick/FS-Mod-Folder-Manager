@@ -91,6 +91,14 @@ namespace FS_Mod_Manager
             write_user_settings();
         }
 
+        private void frmMain_Paint(object sender, PaintEventArgs e)
+        {
+            /*
+             * refresh values when form get focus
+             */
+            read_savegame_money_value();
+        }
+
         /*
          * MENU EVENT HANDLERS
          */
@@ -847,12 +855,12 @@ namespace FS_Mod_Manager
 
         private void cmbSavegameDirs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtMoney.Text = get_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
+            txtMoney.Text = read_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
         }
 
         private void btnUpdateMoney_Click(object sender, EventArgs e)
         {
-            set_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
+            write_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
         }
 
         private void btnSetModOverride_Click(object sender, EventArgs e)
@@ -1241,6 +1249,7 @@ namespace FS_Mod_Manager
             /* 
              * read the value of the monye attributes for the save game
              */
+            cmbSavegameDirs.Items.Clear();
             cmbSavegameDirs.Items.AddRange(get_savegame_folder_list(txtUserDataPath.Text).ToArray());
             if (cmbSavegameDirs.Items.Count > 0)
             {
@@ -1253,7 +1262,7 @@ namespace FS_Mod_Manager
                     cmbSavegameDirs.SelectedIndex = 0;
                 }
             }
-            txtMoney.Text = get_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
+            txtMoney.Text = Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text);
         }
 
         public List<string> get_savegame_folder_list(string path)
@@ -1277,7 +1286,7 @@ namespace FS_Mod_Manager
             return saveGameDirs;
         }
 
-        public string get_savegame_money_value(string savegamePath)
+        public string read_savegame_money_value(string savegamePath)
         {
             /*
              * read the money value from careerSavegame.xml file ande farms.xml file
@@ -1337,7 +1346,7 @@ namespace FS_Mod_Manager
             return careerSavegameMoney;
         }
 
-        public void set_savegame_money_value(string savegamePath)
+        public void write_savegame_money_value(string savegamePath)
         {
             /*
              * write money value to careerSavegame.xml farms.xmml files
@@ -1381,7 +1390,6 @@ namespace FS_Mod_Manager
                 logger.LogWrite(ex.Message, true);
             }
         }
-
         private void write_mod_override_to_xml()
         {
             /*

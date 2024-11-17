@@ -917,6 +917,7 @@
             Text = "Farming Simulator Mod Manager";
             FormClosed += frmMain_FormClosed;
             Load += frmMain_Load;
+            Paint += frmMain_Paint;
             mnuApplicationMain.ResumeLayout(false);
             mnuApplicationMain.PerformLayout();
             stsStatusBar.ResumeLayout(false);
