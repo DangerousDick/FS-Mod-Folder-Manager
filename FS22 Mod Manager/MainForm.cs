@@ -79,7 +79,7 @@ namespace FS_Mod_Manager
             game_xml_controls_element();
             update_mod_override_values();
             // get savegame folders and set money
-            read_savegame_money_value();
+            populate_savegame_money_value();
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -96,7 +96,7 @@ namespace FS_Mod_Manager
             /*
              * refresh values when form get focus
              */
-            read_savegame_money_value();
+            populate_savegame_money_value();
         }
 
         /*
@@ -1244,7 +1244,7 @@ namespace FS_Mod_Manager
             return onlinePresenceName;
         }
 
-        public void read_savegame_money_value()
+        public void populate_savegame_money_value()
         {
             /* 
              * read the value of the monye attributes for the save game
@@ -1262,7 +1262,7 @@ namespace FS_Mod_Manager
                     cmbSavegameDirs.SelectedIndex = 0;
                 }
             }
-            txtMoney.Text = Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text);
+            txtMoney.Text = read_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
         }
 
         public List<string> get_savegame_folder_list(string path)
