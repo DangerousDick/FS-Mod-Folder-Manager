@@ -91,14 +91,6 @@ namespace FS_Mod_Manager
             write_user_settings();
         }
 
-        private void frmMain_Paint(object sender, PaintEventArgs e)
-        {
-            /*
-             * refresh values when form get focus
-             */
-            populate_savegame_money_value();
-        }
-
         /*
          * MENU EVENT HANDLERS
          */
@@ -190,6 +182,7 @@ namespace FS_Mod_Manager
             populate_file_list();
             read_mod_override_from_xml();
             game_xml_controls_element();
+            txtMoney.Text = read_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
         }
 
         private void mnuFileOpenModMangerLog_Click(object sender, EventArgs e)
