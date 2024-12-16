@@ -7,6 +7,7 @@ namespace FS_Mod_Manager
     using System.Windows.Forms;
     using System.Drawing.Text;
     using System.Text.RegularExpressions;
+    using FS_Mod_Manager;
 
     public partial class frmMain : Form
     {
@@ -14,6 +15,8 @@ namespace FS_Mod_Manager
         const string version = "V1.8.0";
         const string copyright = "Copyright Richard Sayer 2024";
         const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
+        // this is usally where steam places farming simulator
+        const string steamapps_path = "\"C:\\\\Program Files (x86)\\\\Steam\\\\steamapps\\\\common\\\\Farming Simulator 2025\\\\FarmingSimulator2025.exe\""; 
         // private variables to be set on form load
         private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "AppData\\Local\\FS_Mod_Manager");
@@ -1063,7 +1066,21 @@ namespace FS_Mod_Manager
             try
             {
                 // get textbox values
-                txtModFolderPath.Text = Settings.Default.ModFolderPath;
+                if (Directory.Exists(Settings.Default.ModFolderPath))
+                {
+                    txtModFolderPath.Text = Settings.Default.ModFolderPath;
+                }
+                else if (Directory.Exists(Path.Join(
+                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                        Settings.Default.ModFolderPath)))
+                {
+                    txtModFolderPath.Text = Path.Join(
+                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                        Settings.Default.ModFolderPath);
+                }
+                else { txtModFolderPath.Text = Settings.Default.ModFolderPath; } // do this anyway
+                //txtModFolderPath.Text = Settings.Default.ModFolderPath;
+
                 if (false == Directory.Exists(Settings.Default.UserDataPath))
                 {
                     // on initial start you may need to add the user home directiry to the user data path
@@ -1082,8 +1099,7 @@ namespace FS_Mod_Manager
                      * On initial run the game exe may be in a different location so Try steamapps
                      * look into how to check other prividers like Origin and Epic
                      */
-                    string game_exe_path =
-                        "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Farming Simulator 2025\\FarmingSimulator2025.exe";
+                    string game_exe_path = steamapps_path; //"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Farming Simulator 2025\\FarmingSimulator2025.exe";
                     if (File.Exists(game_exe_path))
                     {
                         Settings.Default.GameExePath = game_exe_path;

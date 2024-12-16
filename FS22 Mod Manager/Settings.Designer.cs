@@ -37,7 +37,7 @@ namespace FS_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\Farming Simulator 2025\\FarmingSimulator2022.exe")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\Farming Simulator 2025\\FarmingSimulator2025.exe")]
         public string GameExePath {
             get {
                 return ((string)(this["GameExePath"]));
@@ -49,7 +49,7 @@ namespace FS_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\fs25mods")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Documents\\My Games\\FarmingSimulator2025\\mods")]
         public string ModFolderPath {
             get {
                 return ((string)(this["ModFolderPath"]));
@@ -200,6 +200,18 @@ namespace FS_Mod_Manager {
             }
             set {
                 this["OnlinePresenceName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AppData\\Local\\FS_Mod_Manager")]
+        public string LocalAppDataPath {
+            get {
+                return ((string)(this["LocalAppDataPath"]));
+            }
+            set {
+                this["LocalAppDataPath"] = value;
             }
         }
     }

@@ -1,15 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FS22_Mod_Manager" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FS_Mod_Manager" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="UserDataPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">Documents\My Games\FarmingSimulator2025</Value>
     </Setting>
     <Setting Name="GameExePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files (x86)\Farming Simulator 2025\FarmingSimulator2022.exe</Value>
+      <Value Profile="(Default)">C:\Program Files (x86)\Farming Simulator 2025\FarmingSimulator2025.exe</Value>
     </Setting>
     <Setting Name="ModFolderPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\fs25mods</Value>
+      <Value Profile="(Default)">Documents\My Games\FarmingSimulator2025\mods</Value>
     </Setting>
     <Setting Name="AllowDoubleClick" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -46,6 +46,9 @@
     </Setting>
     <Setting Name="OnlinePresenceName" Type="System.String" Scope="User">
       <Value Profile="(Default)">OnlinePresenceName</Value>
+    </Setting>
+    <Setting Name="LocalAppDataPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AppData\Local\FS_Mod_Manager</Value>
     </Setting>
   </Settings>
 </SettingsFile>

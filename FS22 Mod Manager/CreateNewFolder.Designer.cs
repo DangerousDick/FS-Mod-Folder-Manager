@@ -403,7 +403,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "CreateNewFolder";
             Text = "Create New Mods Folder";
-            Load += CreateNewFolder_Load;
+            //Load += CreateNewFolder_Load;
             pnlCreateNewFolder.ResumeLayout(false);
             pnlCreateNewFolder.PerformLayout();
             mnuCtxSelectedFiles.ResumeLayout(false);

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FS22 Mod Manager", "FS22 Mod Manager\FS22 Mod Manager.csproj", "{EB3E52D1-108F-4850-8F04-0D81C794EC5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FS Mod Manager", "FS22 Mod Manager\FS Mod Manager.csproj", "{EB3E52D1-108F-4850-8F04-0D81C794EC5E}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{965B99E9-4A97-42E4-AB4B-F37F69BDE4DB}"
 EndProject

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.IO;
+using FS_Mod_Manager;
 
 namespace FS_Mod_Manager
 {
@@ -36,20 +37,33 @@ namespace FS_Mod_Manager
             /*
              * on form load populate the list boxes using the mod_folder path
              */
-            favourites_mod_folder_path = Settings.Default.DefaultFavouritesFolder;
-            txtCurrentFavouritesFolder.Text = favourites_mod_folder_path;
-            txtDefaultFavouritesFolder.Text = Settings.Default.DefaultFavouritesFolder;
-            txtSavedListsPath.Text = Settings.Default.DefaultSavedListsFolder;
-            populate_folder_list();
-            stsCreateModsFolderStatus.Text = "Double click a mod to add it to the list";
+            try
+            {
+                favourites_mod_folder_path = Settings.Default.DefaultFavouritesFolder;
+                txtCurrentFavouritesFolder.Text = favourites_mod_folder_path;
+                txtDefaultFavouritesFolder.Text = Settings.Default.DefaultFavouritesFolder;
+                txtSavedListsPath.Text = Settings.Default.DefaultSavedListsFolder;
+                populate_folder_list();
+                stsCreateModsFolderStatus.Text = "Double click a mod to add it to the list";
+            }
+            catch (Exception ex) {
+                // do nothing
+            }
         }
 
         private void btnClose_Click_1(object sender, EventArgs e)
         {
-            Settings.Default.DefaultFavouritesFolder = txtDefaultFavouritesFolder.Text;
-            Settings.Default.DefaultSavedListsFolder = txtSavedListsPath.Text;
-            logger.LogWrite("Closing create new folder dialog\n\n", true);
-            Close();
+            try
+            {
+                Settings.Default.DefaultFavouritesFolder = txtDefaultFavouritesFolder.Text;
+                Settings.Default.DefaultSavedListsFolder = txtSavedListsPath.Text;
+                logger.LogWrite("Closing create new folder dialog\n\n", true);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                // do nothing
+            }
         }
 
         private void btnCreateFolder_Click(object sender, EventArgs e)

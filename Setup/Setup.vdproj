@@ -225,15 +225,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FS22 Mod Manager"
-        "ProductCode" = "8:{5B5DDF0F-6FB1-4247-8B79-F831FD74B7E8}"
-        "PackageCode" = "8:{04789397-EBD6-44DC-95F7-C3DB58F417D1}"
+        "ProductCode" = "8:{43DE658B-019C-4300-BEC0-202362DEE46B}"
+        "PackageCode" = "8:{4A4CF554-3247-49E4-8797-0CAA4499E95F}"
         "UpgradeCode" = "8:{C45CEDD6-B243-4A3E-9568-B60F78A03CFD}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.7.4"
+        "ProductVersion" = "8:1.8.0"
         "Manufacturer" = "8:FarmerField"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -761,7 +761,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8B58201449C04F55AEB35CF1E5765C7E"
             {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Debug\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Release\\net6.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_398E1001D9574A2FAEA6F055D681EABE"
