@@ -5,3 +5,4 @@ obj
 *.msi
 *.exe
 /FS22 Mod Manager/App.config
+/UpgradeLog.htm
