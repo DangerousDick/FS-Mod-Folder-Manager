@@ -224,9 +224,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Farming Simulator Mod Manager"
-        "ProductCode" = "8:{43DE658B-019C-4300-BEC0-202362DEE46B}"
-        "PackageCode" = "8:{D515B2F0-BB12-4BA4-AD9C-6D444234453B}"
+        "ProductName" = "8:FS22 Mod Manager"
+        "ProductCode" = "8:{5B5DDF0F-6FB1-4247-8B79-F831FD74B7E8}"
+        "PackageCode" = "8:{04789397-EBD6-44DC-95F7-C3DB58F417D1}"
         "UpgradeCode" = "8:{C45CEDD6-B243-4A3E-9568-B60F78A03CFD}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
