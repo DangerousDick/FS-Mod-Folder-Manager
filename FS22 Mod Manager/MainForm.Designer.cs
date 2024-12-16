@@ -732,11 +732,11 @@
             // 
             // btnUpdateMoney
             // 
-            btnUpdateMoney.Location = new Point(617, 39);
+            btnUpdateMoney.Location = new Point(650, 39);
             btnUpdateMoney.Name = "btnUpdateMoney";
-            btnUpdateMoney.Size = new Size(107, 34);
+            btnUpdateMoney.Size = new Size(74, 34);
             btnUpdateMoney.TabIndex = 19;
-            btnUpdateMoney.Text = "Update";
+            btnUpdateMoney.Text = "Set";
             btnUpdateMoney.UseVisualStyleBackColor = true;
             btnUpdateMoney.Click += btnUpdateMoney_Click;
             // 
@@ -744,7 +744,7 @@
             // 
             txtMoney.Location = new Point(432, 37);
             txtMoney.Name = "txtMoney";
-            txtMoney.Size = new Size(175, 31);
+            txtMoney.Size = new Size(212, 31);
             txtMoney.TabIndex = 18;
             txtMoney.Text = "Money";
             // 
