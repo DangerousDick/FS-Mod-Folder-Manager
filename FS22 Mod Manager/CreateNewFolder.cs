@@ -159,6 +159,30 @@ namespace FS_Mod_Manager
             if (path != "")
             {
                 favourites_mod_folder_path = path;
+                /* populate_folder_list();
+                txtCurrentFavouritesFolder.Text = favourites_mod_folder_path; */
+            }
+            else
+            {
+                // select a folder
+                using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+                {
+                    try
+                    {
+                        if (fbd.ShowDialog() == DialogResult.OK)
+                        {
+                            favourites_mod_folder_path = fbd.SelectedPath;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogWrite($"Exception: {ex.Message}");
+                    }
+                }
+            }
+
+            if (favourites_mod_folder_path != "")
+            {
                 populate_folder_list();
                 txtCurrentFavouritesFolder.Text = favourites_mod_folder_path;
             }

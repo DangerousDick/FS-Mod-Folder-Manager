@@ -95,17 +95,17 @@
             pnlCreateNewFolder.Controls.Add(lstSelectedModFiles);
             pnlCreateNewFolder.Controls.Add(lstModFiles);
             pnlCreateNewFolder.Controls.Add(lstFolders);
-            pnlCreateNewFolder.Location = new Point(6, 5);
+            pnlCreateNewFolder.Location = new Point(9, 8);
+            pnlCreateNewFolder.Margin = new Padding(4, 5, 4, 5);
             pnlCreateNewFolder.Name = "pnlCreateNewFolder";
-            pnlCreateNewFolder.Size = new Size(976, 570);
+            pnlCreateNewFolder.Size = new Size(1394, 950);
             pnlCreateNewFolder.TabIndex = 0;
             // 
             // btnCreateListFromFolder
             // 
-            btnCreateListFromFolder.Location = new Point(630, 421);
-            btnCreateListFromFolder.Margin = new Padding(2);
+            btnCreateListFromFolder.Location = new Point(900, 702);
             btnCreateListFromFolder.Name = "btnCreateListFromFolder";
-            btnCreateListFromFolder.Size = new Size(181, 23);
+            btnCreateListFromFolder.Size = new Size(259, 38);
             btnCreateListFromFolder.TabIndex = 25;
             btnCreateListFromFolder.Text = "Create List From Folder";
             btnCreateListFromFolder.UseVisualStyleBackColor = true;
@@ -113,9 +113,10 @@
             // 
             // btnSavedListsBrowse
             // 
-            btnSavedListsBrowse.Location = new Point(909, 511);
+            btnSavedListsBrowse.Location = new Point(1299, 852);
+            btnSavedListsBrowse.Margin = new Padding(4, 5, 4, 5);
             btnSavedListsBrowse.Name = "btnSavedListsBrowse";
-            btnSavedListsBrowse.Size = new Size(62, 25);
+            btnSavedListsBrowse.Size = new Size(89, 42);
             btnSavedListsBrowse.TabIndex = 24;
             btnSavedListsBrowse.Text = "Browse";
             btnSavedListsBrowse.UseVisualStyleBackColor = true;
@@ -124,26 +125,29 @@
             // txtSavedListsPath
             // 
             txtSavedListsPath.BackColor = SystemColors.Info;
-            txtSavedListsPath.Location = new Point(111, 512);
+            txtSavedListsPath.Location = new Point(159, 853);
+            txtSavedListsPath.Margin = new Padding(4, 5, 4, 5);
             txtSavedListsPath.Name = "txtSavedListsPath";
-            txtSavedListsPath.Size = new Size(792, 23);
+            txtSavedListsPath.Size = new Size(1130, 31);
             txtSavedListsPath.TabIndex = 23;
             txtSavedListsPath.Text = "Saved Lists Path";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(3, 514);
+            label5.Location = new Point(4, 857);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(91, 15);
+            label5.Size = new Size(138, 25);
             label5.TabIndex = 22;
             label5.Text = "Saved Lists Path";
             // 
             // btnLoadList
             // 
-            btnLoadList.Location = new Point(901, 421);
+            btnLoadList.Location = new Point(1287, 702);
+            btnLoadList.Margin = new Padding(4, 5, 4, 5);
             btnLoadList.Name = "btnLoadList";
-            btnLoadList.Size = new Size(71, 23);
+            btnLoadList.Size = new Size(101, 38);
             btnLoadList.TabIndex = 21;
             btnLoadList.Text = "Load List";
             btnLoadList.UseVisualStyleBackColor = true;
@@ -151,9 +155,10 @@
             // 
             // btnSaveList
             // 
-            btnSaveList.Location = new Point(823, 421);
+            btnSaveList.Location = new Point(1176, 702);
+            btnSaveList.Margin = new Padding(4, 5, 4, 5);
             btnSaveList.Name = "btnSaveList";
-            btnSaveList.Size = new Size(66, 23);
+            btnSaveList.Size = new Size(94, 38);
             btnSaveList.TabIndex = 20;
             btnSaveList.Text = "Save List";
             btnSaveList.UseVisualStyleBackColor = true;
@@ -162,27 +167,30 @@
             // txtCurrentFavouritesFolder
             // 
             txtCurrentFavouritesFolder.BackColor = SystemColors.Info;
-            txtCurrentFavouritesFolder.Location = new Point(111, 456);
+            txtCurrentFavouritesFolder.Location = new Point(159, 760);
+            txtCurrentFavouritesFolder.Margin = new Padding(4, 5, 4, 5);
             txtCurrentFavouritesFolder.Name = "txtCurrentFavouritesFolder";
             txtCurrentFavouritesFolder.ReadOnly = true;
-            txtCurrentFavouritesFolder.Size = new Size(792, 23);
+            txtCurrentFavouritesFolder.Size = new Size(1130, 31);
             txtCurrentFavouritesFolder.TabIndex = 19;
             txtCurrentFavouritesFolder.Text = "Current Favourites Folder";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(3, 487);
+            label4.Location = new Point(4, 812);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(102, 15);
+            label4.Size = new Size(154, 25);
             label4.TabIndex = 18;
             label4.Text = "Default Favourites";
             // 
             // btnBrowse
             // 
-            btnBrowse.Location = new Point(909, 483);
+            btnBrowse.Location = new Point(1299, 805);
+            btnBrowse.Margin = new Padding(4, 5, 4, 5);
             btnBrowse.Name = "btnBrowse";
-            btnBrowse.Size = new Size(62, 25);
+            btnBrowse.Size = new Size(89, 42);
             btnBrowse.TabIndex = 17;
             btnBrowse.Text = "Browse";
             btnBrowse.UseVisualStyleBackColor = true;
@@ -191,10 +199,11 @@
             // txtDefaultFavouritesFolder
             // 
             txtDefaultFavouritesFolder.BackColor = SystemColors.Info;
-            txtDefaultFavouritesFolder.Location = new Point(111, 485);
+            txtDefaultFavouritesFolder.Location = new Point(159, 808);
+            txtDefaultFavouritesFolder.Margin = new Padding(4, 5, 4, 5);
             txtDefaultFavouritesFolder.Name = "txtDefaultFavouritesFolder";
             txtDefaultFavouritesFolder.ReadOnly = true;
-            txtDefaultFavouritesFolder.Size = new Size(792, 23);
+            txtDefaultFavouritesFolder.Size = new Size(1130, 31);
             txtDefaultFavouritesFolder.TabIndex = 16;
             txtDefaultFavouritesFolder.Text = "Default Favourites Folder";
             // 
@@ -203,9 +212,10 @@
             chkOnlyShowZips.AutoSize = true;
             chkOnlyShowZips.Checked = true;
             chkOnlyShowZips.CheckState = CheckState.Checked;
-            chkOnlyShowZips.Location = new Point(226, 424);
+            chkOnlyShowZips.Location = new Point(323, 707);
+            chkOnlyShowZips.Margin = new Padding(4, 5, 4, 5);
             chkOnlyShowZips.Name = "chkOnlyShowZips";
-            chkOnlyShowZips.Size = new Size(120, 19);
+            chkOnlyShowZips.Size = new Size(179, 29);
             chkOnlyShowZips.TabIndex = 15;
             chkOnlyShowZips.Text = "OnlyShowZIpFiles";
             chkOnlyShowZips.UseVisualStyleBackColor = true;
@@ -214,18 +224,20 @@
             // lblCurrentFavouritesFolder
             // 
             lblCurrentFavouritesFolder.BackColor = SystemColors.Control;
-            lblCurrentFavouritesFolder.Location = new Point(13, 457);
+            lblCurrentFavouritesFolder.Location = new Point(19, 762);
+            lblCurrentFavouritesFolder.Margin = new Padding(4, 0, 4, 0);
             lblCurrentFavouritesFolder.Name = "lblCurrentFavouritesFolder";
-            lblCurrentFavouritesFolder.Size = new Size(111, 20);
+            lblCurrentFavouritesFolder.Size = new Size(159, 33);
             lblCurrentFavouritesFolder.TabIndex = 14;
             lblCurrentFavouritesFolder.Text = "Current Favourites Folder";
             // 
             // chkIncludeParentDir
             // 
             chkIncludeParentDir.AutoSize = true;
-            chkIncludeParentDir.Location = new Point(3, 420);
+            chkIncludeParentDir.Location = new Point(4, 700);
+            chkIncludeParentDir.Margin = new Padding(4, 5, 4, 5);
             chkIncludeParentDir.Name = "chkIncludeParentDir";
-            chkIncludeParentDir.Size = new Size(164, 19);
+            chkIncludeParentDir.Size = new Size(243, 29);
             chkIncludeParentDir.TabIndex = 13;
             chkIncludeParentDir.Text = "Include Parent Folder Files";
             chkIncludeParentDir.UseVisualStyleBackColor = true;
@@ -233,9 +245,10 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(909, 542);
+            btnClose.Location = new Point(1299, 903);
+            btnClose.Margin = new Padding(4, 5, 4, 5);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(62, 25);
+            btnClose.Size = new Size(89, 42);
             btnClose.TabIndex = 12;
             btnClose.Text = "Exit";
             btnClose.UseVisualStyleBackColor = true;
@@ -244,35 +257,39 @@
             // lblSelectedFileCount
             // 
             lblSelectedFileCount.AutoSize = true;
-            lblSelectedFileCount.Location = new Point(444, 402);
+            lblSelectedFileCount.Location = new Point(634, 670);
+            lblSelectedFileCount.Margin = new Padding(4, 0, 4, 0);
             lblSelectedFileCount.Name = "lblSelectedFileCount";
-            lblSelectedFileCount.Size = new Size(90, 15);
+            lblSelectedFileCount.Size = new Size(135, 25);
             lblSelectedFileCount.TabIndex = 11;
             lblSelectedFileCount.Text = "Selected Count:";
             // 
             // lblModFileCount
             // 
             lblModFileCount.AutoSize = true;
-            lblModFileCount.Location = new Point(226, 402);
+            lblModFileCount.Location = new Point(323, 670);
+            lblModFileCount.Margin = new Padding(4, 0, 4, 0);
             lblModFileCount.Name = "lblModFileCount";
-            lblModFileCount.Size = new Size(61, 15);
+            lblModFileCount.Size = new Size(90, 25);
             lblModFileCount.TabIndex = 10;
             lblModFileCount.Text = "FileCount:";
             // 
             // lblFoldeerCount
             // 
             lblFoldeerCount.AutoSize = true;
-            lblFoldeerCount.Location = new Point(3, 402);
+            lblFoldeerCount.Location = new Point(4, 670);
+            lblFoldeerCount.Margin = new Padding(4, 0, 4, 0);
             lblFoldeerCount.Name = "lblFoldeerCount";
-            lblFoldeerCount.Size = new Size(82, 15);
+            lblFoldeerCount.Size = new Size(124, 25);
             lblFoldeerCount.TabIndex = 9;
             lblFoldeerCount.Text = "Folder Count: ";
             // 
             // btnCreateFolder
             // 
-            btnCreateFolder.Location = new Point(444, 420);
+            btnCreateFolder.Location = new Point(634, 700);
+            btnCreateFolder.Margin = new Padding(4, 5, 4, 5);
             btnCreateFolder.Name = "btnCreateFolder";
-            btnCreateFolder.Size = new Size(180, 23);
+            btnCreateFolder.Size = new Size(257, 38);
             btnCreateFolder.TabIndex = 7;
             btnCreateFolder.Text = "Create Mods Folder";
             btnCreateFolder.UseVisualStyleBackColor = true;
@@ -280,9 +297,10 @@
             // 
             // btnChangeFolder
             // 
-            btnChangeFolder.Location = new Point(909, 456);
+            btnChangeFolder.Location = new Point(1299, 760);
+            btnChangeFolder.Margin = new Padding(4, 5, 4, 5);
             btnChangeFolder.Name = "btnChangeFolder";
-            btnChangeFolder.Size = new Size(62, 25);
+            btnChangeFolder.Size = new Size(89, 42);
             btnChangeFolder.TabIndex = 6;
             btnChangeFolder.Text = "Browse";
             btnChangeFolder.UseVisualStyleBackColor = true;
@@ -291,27 +309,30 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(444, 2);
+            label3.Location = new Point(634, 3);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(105, 15);
+            label3.Size = new Size(160, 25);
             label3.TabIndex = 5;
             label3.Text = "Selected Mod Files";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(226, 2);
+            label2.Location = new Point(323, 3);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(58, 15);
+            label2.Size = new Size(89, 25);
             label2.TabIndex = 4;
             label2.Text = "Mod Files";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(3, 2);
+            label1.Location = new Point(4, 3);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(102, 15);
+            label1.Size = new Size(155, 25);
             label1.TabIndex = 3;
             label1.Text = "Favourites Folders";
             // 
@@ -320,10 +341,11 @@
             lstSelectedModFiles.ContextMenuStrip = mnuCtxSelectedFiles;
             lstSelectedModFiles.FormattingEnabled = true;
             lstSelectedModFiles.HorizontalScrollbar = true;
-            lstSelectedModFiles.ItemHeight = 15;
-            lstSelectedModFiles.Location = new Point(444, 20);
+            lstSelectedModFiles.ItemHeight = 25;
+            lstSelectedModFiles.Location = new Point(634, 33);
+            lstSelectedModFiles.Margin = new Padding(4, 5, 4, 5);
             lstSelectedModFiles.Name = "lstSelectedModFiles";
-            lstSelectedModFiles.Size = new Size(529, 379);
+            lstSelectedModFiles.Size = new Size(754, 629);
             lstSelectedModFiles.TabIndex = 2;
             lstSelectedModFiles.DoubleClick += lstSelectedModFiles_DoubleClick;
             // 
@@ -332,12 +354,12 @@
             mnuCtxSelectedFiles.ImageScalingSize = new Size(24, 24);
             mnuCtxSelectedFiles.Items.AddRange(new ToolStripItem[] { mnuCtxRemoveAll });
             mnuCtxSelectedFiles.Name = "mnuCtxSelectedFiles";
-            mnuCtxSelectedFiles.Size = new Size(135, 26);
+            mnuCtxSelectedFiles.Size = new Size(174, 36);
             // 
             // mnuCtxRemoveAll
             // 
             mnuCtxRemoveAll.Name = "mnuCtxRemoveAll";
-            mnuCtxRemoveAll.Size = new Size(134, 22);
+            mnuCtxRemoveAll.Size = new Size(173, 32);
             mnuCtxRemoveAll.Text = "Remove All";
             mnuCtxRemoveAll.Click += mnuRemoveAll_Click;
             // 
@@ -345,10 +367,11 @@
             // 
             lstModFiles.ContextMenuStrip = mnuCtxListModFiles;
             lstModFiles.FormattingEnabled = true;
-            lstModFiles.ItemHeight = 15;
-            lstModFiles.Location = new Point(226, 20);
+            lstModFiles.ItemHeight = 25;
+            lstModFiles.Location = new Point(323, 33);
+            lstModFiles.Margin = new Padding(4, 5, 4, 5);
             lstModFiles.Name = "lstModFiles";
-            lstModFiles.Size = new Size(212, 379);
+            lstModFiles.Size = new Size(301, 629);
             lstModFiles.TabIndex = 1;
             lstModFiles.DoubleClick += lstModFiles_DoubleClick;
             // 
@@ -357,53 +380,57 @@
             mnuCtxListModFiles.ImageScalingSize = new Size(24, 24);
             mnuCtxListModFiles.Items.AddRange(new ToolStripItem[] { mnuSelectAllMods });
             mnuCtxListModFiles.Name = "mnuCtxListModFiles";
-            mnuCtxListModFiles.Size = new Size(156, 26);
+            mnuCtxListModFiles.Size = new Size(207, 36);
             // 
             // mnuSelectAllMods
             // 
             mnuSelectAllMods.Name = "mnuSelectAllMods";
-            mnuSelectAllMods.Size = new Size(155, 22);
+            mnuSelectAllMods.Size = new Size(206, 32);
             mnuSelectAllMods.Text = "Select All Mods";
             mnuSelectAllMods.Click += mnuSelectAllMods_Click;
             // 
             // lstFolders
             // 
             lstFolders.FormattingEnabled = true;
-            lstFolders.ItemHeight = 15;
-            lstFolders.Location = new Point(3, 20);
+            lstFolders.ItemHeight = 25;
+            lstFolders.Location = new Point(4, 33);
+            lstFolders.Margin = new Padding(4, 5, 4, 5);
             lstFolders.Name = "lstFolders";
-            lstFolders.Size = new Size(217, 379);
+            lstFolders.Size = new Size(308, 629);
             lstFolders.TabIndex = 0;
             lstFolders.SelectedIndexChanged += lstFolders_SelectedIndexChanged;
             // 
             // stsCreateModsFolderDialog
             // 
+            stsCreateModsFolderDialog.ImageScalingSize = new Size(24, 24);
             stsCreateModsFolderDialog.Items.AddRange(new ToolStripItem[] { stsCreateModsFolderStatus });
-            stsCreateModsFolderDialog.Location = new Point(0, 576);
+            stsCreateModsFolderDialog.Location = new Point(0, 965);
             stsCreateModsFolderDialog.Name = "stsCreateModsFolderDialog";
-            stsCreateModsFolderDialog.Size = new Size(985, 22);
+            stsCreateModsFolderDialog.Padding = new Padding(1, 0, 20, 0);
+            stsCreateModsFolderDialog.Size = new Size(1407, 32);
             stsCreateModsFolderDialog.TabIndex = 2;
             stsCreateModsFolderDialog.Text = "statusStrip1";
             // 
             // stsCreateModsFolderStatus
             // 
             stsCreateModsFolderStatus.Name = "stsCreateModsFolderStatus";
-            stsCreateModsFolderStatus.Size = new Size(118, 17);
+            stsCreateModsFolderStatus.Size = new Size(179, 25);
             stsCreateModsFolderStatus.Text = "toolStripStatusLabel1";
             // 
             // CreateNewFolder
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(985, 598);
+            ClientSize = new Size(1407, 997);
             Controls.Add(stsCreateModsFolderDialog);
             Controls.Add(pnlCreateNewFolder);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 5, 4, 5);
             Name = "CreateNewFolder";
             Text = "Create New Mods Folder";
-            //Load += CreateNewFolder_Load;
+            Load += CreateNewFolder_Load;
             pnlCreateNewFolder.ResumeLayout(false);
             pnlCreateNewFolder.PerformLayout();
             mnuCtxSelectedFiles.ResumeLayout(false);
