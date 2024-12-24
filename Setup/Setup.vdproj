@@ -207,6 +207,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_3DDE5BB36C5E4D2BB65F08E749DB9AA2"
+                    {
+                    "Name" = "8:FS Mod Manager"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_96FED4B5ED58404C93048B1E68184873"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -224,7 +235,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Farming Simulator Mod Manager"
+        "ProductName" = "8:Farming Simulator Mod Folder Manager"
         "ProductCode" = "8:{5B5DDF0F-6FB1-4247-8B79-F831FD74B7E8}"
         "PackageCode" = "8:{FEF42E6F-01B1-41B9-8303-2345ABDD98C4}"
         "UpgradeCode" = "8:{C45CEDD6-B243-4A3E-9568-B60F78A03CFD}"
@@ -234,7 +245,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.8.0"
-        "Manufacturer" = "8:FarmerField"
+        "Manufacturer" = "8:FarmaField"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:Farming Simulator Mod Manager"
@@ -346,9 +357,23 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A8672CD4ADD249CEB70505E250070853"
+            {
+            "Name" = "8:FS Mod Manager"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_8B58201449C04F55AEB35CF1E5765C7E"
+            "Folder" = "8:_3DDE5BB36C5E4D2BB65F08E749DB9AA2"
+            "WorkingFolder" = "8:_398E1001D9574A2FAEA6F055D681EABE"
+            "Icon" = "8:_5D6232432FA745CAABFD442F1C4E0E4D"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E5A813BC9E6048BB95463E3C005C0DEE"
             {
-            "Name" = "8:FS22 Mod Manager"
+            "Name" = "8:FS Mod Manager"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -761,7 +786,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8B58201449C04F55AEB35CF1E5765C7E"
             {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Debug\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Release\\net6.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_398E1001D9574A2FAEA6F055D681EABE"
