@@ -12,7 +12,7 @@ namespace FS_Mod_Manager
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V1.8.0";
+        const string version = "V1.8.1";
         const string copyright = "Copyright Richard Sayer 2024";
         const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
         // this is usally where steam places farming simulator
