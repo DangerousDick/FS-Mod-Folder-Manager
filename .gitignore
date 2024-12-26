@@ -1,8 +1,9 @@
 bin
 obj
+Debug
+Release
 .vs
 *.log
-*.msi
 *.exe
 /FS22 Mod Manager/App.config
 /UpgradeLog.htm
