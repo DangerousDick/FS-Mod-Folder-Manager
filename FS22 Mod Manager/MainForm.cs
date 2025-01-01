@@ -81,8 +81,6 @@ namespace FS_Mod_Manager
             read_mod_override_from_xml();
             game_xml_controls_element();
             update_mod_override_values();
-            // get savegame folders and set money
-            populate_savegame_money_value();
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -185,7 +183,6 @@ namespace FS_Mod_Manager
             populate_file_list();
             read_mod_override_from_xml();
             game_xml_controls_element();
-            txtMoney.Text = read_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
         }
 
         private void mnuFileOpenModMangerLog_Click(object sender, EventArgs e)
@@ -849,16 +846,6 @@ namespace FS_Mod_Manager
             }
         }
 
-        private void cmbSavegameDirs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtMoney.Text = read_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
-        }
-
-        private void btnUpdateMoney_Click(object sender, EventArgs e)
-        {
-            write_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
-        }
-
         private void btnSetModOverride_Click(object sender, EventArgs e)
         {
             /*
@@ -1253,27 +1240,6 @@ namespace FS_Mod_Manager
             return onlinePresenceName;
         }
 
-        public void populate_savegame_money_value()
-        {
-            /* 
-             * read the value of the monye attributes for the save game
-             */
-            cmbSavegameDirs.Items.Clear();
-            cmbSavegameDirs.Items.AddRange(get_savegame_folder_list(txtUserDataPath.Text).ToArray());
-            if (cmbSavegameDirs.Items.Count > 0)
-            {
-                if (cmbSavegameDirs.SelectedIndex >= 0)
-                {
-                    // do nothing
-                }
-                else
-                {
-                    cmbSavegameDirs.SelectedIndex = 0;
-                }
-            }
-            txtMoney.Text = read_savegame_money_value(Path.Join(txtUserDataPath.Text, cmbSavegameDirs.Text));
-        }
-
         public List<string> get_savegame_folder_list(string path)
         {
             /* 
@@ -1295,110 +1261,6 @@ namespace FS_Mod_Manager
             return saveGameDirs;
         }
 
-        public string read_savegame_money_value(string savegamePath)
-        {
-            /*
-             * read the money value from careerSavegame.xml file ande farms.xml file
-             * check they match (need to decide which value to keep, probably the highest)
-             * return the money value
-             */
-
-            string careerSavegameMoney = "";
-            string farmsMoney = "";
-            try
-            {
-                // get value from careerSavegame.xml
-                System.Xml.XmlDocument xmlCareerSavegame = new System.Xml.XmlDocument();
-                xmlCareerSavegame.Load(Path.Join(savegamePath, "careerSavegame.xml"));
-                System.Xml.XmlNodeList csmElemList = xmlCareerSavegame.GetElementsByTagName("money");
-                if (csmElemList.Count > 0)
-                {
-                    // read value
-                    careerSavegameMoney = csmElemList[0].InnerXml;
-                    logger.LogWrite($"Reading money in careerSavegame.xml : {careerSavegameMoney}");
-                }
-
-                // get value from farms.xml
-                System.Xml.XmlDocument xmlFarms = new System.Xml.XmlDocument();
-                xmlFarms.Load(Path.Join(savegamePath, "farms.xml"));
-                System.Xml.XmlNodeList fmElemList = xmlFarms.GetElementsByTagName("farm");
-                if (fmElemList.Count > 0)
-                {
-                    for (int i = 0; i < fmElemList.Count; i++)
-                    {
-                        farmsMoney = fmElemList[i].Attributes["money"].Value;
-                        int index = farmsMoney.IndexOf('.');
-                        if (index > 0)
-                        {
-                            //farmsMoney.Substring(0, index);
-                            if (farmsMoney.Substring(0, index) == careerSavegameMoney)
-                            {
-                                logger.LogWrite("farmsMoney matches careerSavegame money");
-                            }
-                            else
-                            {
-                                logger.LogWrite("Error: farmsMoney DOES NOT match careerSavegame money");
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    logger.LogWrite("Error: money not found in Farms.xml");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                logger.LogWrite(ex.Message, true);
-            }
-            return careerSavegameMoney;
-        }
-
-        public void write_savegame_money_value(string savegamePath)
-        {
-            /*
-             * write money value to careerSavegame.xml farms.xmml files
-             */
-            try
-            {
-                // write value to careerSavegame.xml
-                System.Xml.XmlDocument xmlCareerSavegame = new System.Xml.XmlDocument();
-                xmlCareerSavegame.Load(Path.Join(savegamePath, "careerSavegame.xml"));
-                System.Xml.XmlNodeList csmElemList = xmlCareerSavegame.GetElementsByTagName("money");
-                if (csmElemList.Count > 0)
-                {
-                    // write value for money to careerSavegame.xml
-                    logger.LogWrite("Saving money value to careerSavegame.xml");
-                    csmElemList[0].InnerXml = txtMoney.Text;
-                    xmlCareerSavegame.Save(Path.Join(savegamePath, "careerSavegame.xml"));
-                }
-
-                // get value from careerSavegame.xml
-                System.Xml.XmlDocument xmlFarms = new System.Xml.XmlDocument();
-                xmlFarms.Load(Path.Join(savegamePath, "farms.xml"));
-                System.Xml.XmlNodeList fmElemList = xmlFarms.GetElementsByTagName("farm");
-                if (fmElemList.Count > 0)
-                {
-                    // write value for money to careerSavegame.xml
-                    logger.LogWrite("Saving money value to farms.xml");
-                    for (int i = 0; i < fmElemList.Count; i++)
-                    {
-                        // set attributes
-                        string farmsMoney = fmElemList[i].Attributes["money"].Value;
-                        int index = farmsMoney.IndexOf('.');
-                        string tmp = farmsMoney.Substring(index, (farmsMoney.Length - index));
-                        farmsMoney = txtMoney.Text + tmp;
-                        fmElemList[i].Attributes["money"].Value = farmsMoney;
-                    }
-                    xmlFarms.Save(Path.Join(savegamePath, "farms.xml"));
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogWrite(ex.Message, true);
-            }
-        }
         private void write_mod_override_to_xml()
         {
             /*
