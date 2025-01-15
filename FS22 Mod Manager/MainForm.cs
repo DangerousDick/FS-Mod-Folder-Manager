@@ -1066,8 +1066,7 @@ namespace FS_Mod_Manager
                         Settings.Default.ModFolderPath);
                 }
                 else { txtModFolderPath.Text = Settings.Default.ModFolderPath; } // do this anyway
-                //txtModFolderPath.Text = Settings.Default.ModFolderPath;
-
+                // set user data path
                 if (false == Directory.Exists(Settings.Default.UserDataPath))
                 {
                     // on initial start you may need to add the user home directiry to the user data path
@@ -1079,7 +1078,7 @@ namespace FS_Mod_Manager
                         Settings.Default.UserDataPath = user_data_path;
                     }
                 }
-                txtUserDataPath.Text = Settings.Default.UserDataPath;
+                // set game exe path
                 if (false == File.Exists(Settings.Default.GameExePath))
                 {
                     /*
@@ -1092,9 +1091,11 @@ namespace FS_Mod_Manager
                         Settings.Default.GameExePath = game_exe_path;
                     }
                 }
+                // get text box values
+                txtUserDataPath.Text = Settings.Default.UserDataPath;
                 txtGameExeFile.Text = Settings.Default.GameExePath;
-                // get options menu settings
                 txtCharacterName.Text = Settings.Default.OnlinePresenceName;
+                // get options menu settings
                 mnuOptModDoubleClick.Checked = Settings.Default.AllowDoubleClick;
                 mnuOptModOverride.Checked = Settings.Default.ModFodlerOverride;
                 mnuOptOverwriteOnCopy.Checked = Settings.Default.OverwriteOnCopy;
