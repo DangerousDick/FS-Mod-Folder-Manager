@@ -214,5 +214,17 @@ namespace FS_Mod_Manager {
                 this["LocalAppDataPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GameNotesTemplate.txt")]
+        public string GameNotesTemplate {
+            get {
+                return ((string)(this["GameNotesTemplate"]));
+            }
+            set {
+                this["GameNotesTemplate"] = value;
+            }
+        }
     }
 }

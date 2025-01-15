@@ -1,0 +1,11 @@
+savegame: 
+
+daily jobs: 
+
+todo: 
+
+farm expansion: 
+
+rules: 
+
+goals: 

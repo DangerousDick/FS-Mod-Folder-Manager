@@ -50,5 +50,8 @@
     <Setting Name="LocalAppDataPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">AppData\Local\FS_Mod_Manager</Value>
     </Setting>
+    <Setting Name="GameNotesTemplate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GameNotesTemplate.txt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

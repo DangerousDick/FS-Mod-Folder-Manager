@@ -8,6 +8,7 @@ namespace FS_Mod_Manager
     using System.Drawing.Text;
     using System.Text.RegularExpressions;
     using FS_Mod_Manager;
+    using System.Reflection;
 
     public partial class frmMain : Form
     {
@@ -204,7 +205,6 @@ namespace FS_Mod_Manager
              * e.g. c:\path\to\mod_folders\mod_folder game notes.txt
              */
             String default_file_name = Path.Join(txtModFolderPath.Text, lstModFolders.Text, lstModFolders.Text + " game notes.txt");
-            string default_content = $"map: {lstModFolders.Text} \nsavegame: \n\ndaily jobs: \n\ntodo: \n\nfarm xpansion: \n\nrules: \n\ngoal: \n";
             if (!File.Exists(default_file_name))
             {
                 // does the user want to create it?
@@ -217,7 +217,7 @@ namespace FS_Mod_Manager
                     // create text new file
                     using (StreamWriter sw = File.CreateText(default_file_name))
                     {
-                        sw.WriteLine(default_content);
+                        sw.WriteLine($"mod folder: {lstModFolders.Text}\r" + read_game_notes_template());
                     }
                 }
             }
@@ -1480,6 +1480,27 @@ namespace FS_Mod_Manager
             {
                 logger.LogWrite(ex.Message, true);
             }
+        }
+
+        private string read_game_notes_template()
+        {
+            /*
+             * Read the GameNotesTemplate.txt file and return string
+             */
+            string gameNotesText = "";
+
+            try
+            {
+                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Settings.Default.GameNotesTemplate);
+                StreamReader sr = new StreamReader(path);
+                gameNotesText = sr.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite(ex.ToString(), true);
+
+            }
+            return gameNotesText;
         }
     }
 }
