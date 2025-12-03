@@ -4,6 +4,9 @@
     <Compile Update="CreateNewFolder.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="CreateNewModsFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

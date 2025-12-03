@@ -435,6 +435,30 @@ namespace FS_Mod_Manager
             }
         }
 
+        //private void mnuModsCreateNewFolder_Click(object sender, EventArgs e)
+        //{
+        //    /*
+        //    * show create new mods folder dialog box
+        //    */
+        //    logger.LogWrite("Showing create new mods folder dialog", true);
+        //    try
+        //    {
+        //        CreateNewFolder cnf = new CreateNewFolder(txtModFolderPath.Text);
+        //        cnf.ShowDialog();
+        //        populate_folder_list();
+        //        // set listbox item to new folder
+        //        if (cnf.selected_folder != "")
+        //        {
+        //            int idx = lstModFolders.FindString(cnf.selected_folder);
+        //            lstModFolders.SetSelected(idx, true);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.LogWrite(ex.Message, true);
+        //    }
+        //}
+
         private void mnuModsCreateNewFolder_Click(object sender, EventArgs e)
         {
             /*
@@ -443,7 +467,7 @@ namespace FS_Mod_Manager
             logger.LogWrite("Showing create new mods folder dialog", true);
             try
             {
-                CreateNewFolder cnf = new CreateNewFolder(txtModFolderPath.Text);
+                frmCreateModsFolder cnf = new frmCreateModsFolder(txtModFolderPath.Text);
                 cnf.ShowDialog();
                 populate_folder_list();
                 // set listbox item to new folder

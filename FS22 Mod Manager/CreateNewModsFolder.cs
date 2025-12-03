@@ -1,0 +1,238 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace FS_Mod_Manager
+{
+    public partial class frmCreateModsFolder : Form
+    {
+        public string selected_folder { get; set; }
+
+        private string current_default_mod_folder = string.Empty;               // full path to current default mods folder in the main form
+        static private Logger logger = new Logger(frmMain.LogFileName, false);  // DO NOT CLEAR LOG
+
+        // class initialisation
+        public frmCreateModsFolder(string current_default_mod_folder)
+        {
+            InitializeComponent();
+            logger.LogWrite("Initializing create new folder dialog", true);
+            this.current_default_mod_folder = current_default_mod_folder;
+        }
+
+        private void frmCreateModsFolder_Load(object sender, EventArgs e)
+        {
+            current_default_mod_folder = Settings.Default.ModFolderPath;
+            toolStripStatusLabel1.Text = "Crate a new mods folder";
+        }
+
+        // form close tasks
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                logger.LogWrite("Closing create new folder dialog\n\n", true);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                // do nothing
+            }
+        }
+
+        // button click methods
+        private void btnCopyBrowse_Click(object sender, EventArgs e)
+        {
+            /*
+             * Folder to copy path browse button clicked so launch 
+             * folder dialog to select the folder
+             */
+            using (FolderBrowserDialog ofd = new FolderBrowserDialog())
+            {
+                try
+                {
+                    string init_dir = current_default_mod_folder;
+                    if (!Directory.Exists(init_dir))
+                    {
+                        init_dir = "C:\\";
+                    }
+                    ofd.InitialDirectory = init_dir;
+
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        //Show in textbox
+                        txtCopyFolder.Text = ofd.SelectedPath;
+                        PopulateModsList(txtCopyFolder.Text);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWrite($"Error: {ex.Message}");
+                }
+            }
+        }
+
+        private void btnNewBrowse_Click(object sender, EventArgs e)
+        {
+            /*
+             * New folder to create path browse button clicked so launch 
+             * folder dialog to select or create the new folder
+             */
+            using (FolderBrowserDialog ofd = new FolderBrowserDialog())
+            {
+                try
+                {
+                    string init_dir = current_default_mod_folder;
+                    if (!Directory.Exists(init_dir))
+                    {
+                        init_dir = "C:\\";
+                    }
+                    ofd.InitialDirectory = init_dir;
+
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        //Show in textbox
+                        txtNewFolder.Text = ofd.SelectedPath;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWrite($"Error: {ex.Message}");
+                }
+            }
+        }
+
+        private void btnCreateFolder_Click(object sender, EventArgs e)
+        {
+            /*
+            * create the new folder
+            */
+            toolStripStatusLabel1.Text = copy_selected_mods();
+        }
+
+        // private methods
+        private void PopulateModsList(String folderpath)
+        {
+            /*
+             * Populate the mods listbox with the mods in the selected folder
+             */
+            try
+            {
+
+                logger.LogWrite("Pupulating mods list");
+                if (Directory.Exists(folderpath))
+                {
+                    List<string> mods_list = get_list_from_folder(folderpath);
+                    if (mods_list.Count > 0)
+                    {
+                        // clear current list
+                        lstModsList.Items.Clear();
+                        foreach (string mod in mods_list)
+                        {
+                            // add file to list
+                            lstModsList.Items.Add(mod);
+                        }
+                        toolStripStatusLabel1.Text = $"List created from {Path.GetFileName(folderpath)}";
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = $"Folder {Path.GetFileName(folderpath)} is empty";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite($"Error: {ex.Message}");
+                toolStripStatusLabel1.Text = $"Error: {ex.Message}";
+            }
+        }
+
+        private List<string> get_list_from_folder(string mod_folder)
+        {
+            /* 
+             * get list of files in mods folder
+             */
+            List<string> mods_list = new List<string>();
+            try
+            {
+                foreach (string file_path in Directory.GetFiles(mod_folder))
+                {
+                    if (File.Exists(file_path))
+                    {
+                        // This path is a file add it to the list if it is a .zip file
+                        if (Path.GetExtension(file_path) == ".zip")
+                        {
+                            string mod_file = Path.GetFileName(file_path);
+                            logger.LogWrite(file_path);
+                            mods_list.Add(file_path);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite($"Error: {ex.Message}");
+            }
+            return mods_list;
+        }
+
+        private String copy_selected_mods()
+        {
+            /* 
+             * use the FolderBrowserDialog to get/create a folder
+             * copy the files in selected_mods list to the folder
+             */
+
+            string return_msg = "";
+            try
+            {
+                // create folder if it does not exist
+                if (!Directory.Exists(txtCopyFolder.Text) || !Directory.Exists(txtNewFolder.Text))
+                {
+                    //System.IO.Directory.CreateDirectory(txtNewFolder.Text);
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show($"Unable to create new directory {txtNewFolder.Text}\n Have you set both paths correctly?", "Set new folder path", buttons);
+                }
+                else 
+                {
+                    logger.LogWrite($"new folder name: {txtNewFolder.Text}");
+                    //copy files
+                    foreach (string selected_file in lstModsList.Items)
+                    {
+                        string to_filename = Path.Join(txtNewFolder.Text, Path.GetFileName(selected_file));
+                        try
+                        {
+                            if (!File.Exists(to_filename))
+                            {
+                                logger.LogWrite($"Copying {selected_file} to {to_filename}");
+                                File.Copy(selected_file, to_filename);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.LogWrite($"Error: {ex.Message}");
+                        }
+                        toolStripStatusLabel1.Text = $"Folder {txtNewFolder.Text} created";
+                        if (Directory.Exists(txtNewFolder.Text))
+                            return_msg = $"Folder created: {txtNewFolder.Text}";
+                        else
+                            return_msg = $"Failed to create folder {txtNewFolder.Text} see log for details.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWrite($"Error: {ex.Message}");
+                toolStripStatusLabel1.Text = $"Unable to create new directory {txtNewFolder.Text}";
+                return_msg = ex.Message;
+            }
+            selected_folder = Path.GetFileName(txtNewFolder.Text);
+            return return_msg;
+        }
+    }
+}
