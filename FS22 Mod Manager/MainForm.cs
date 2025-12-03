@@ -1,14 +1,15 @@
 namespace FS_Mod_Manager
 {
-    using System.Diagnostics;       // for Process class
-    using Microsoft.VisualBasic;    // for input box
-    using System.IO.Compression;
-    using System.IO;
-    using System.Windows.Forms;
-    using System.Drawing.Text;
-    using System.Text.RegularExpressions;
     using FS_Mod_Manager;
+    using Microsoft.VisualBasic;    // for input box
+    using System.Diagnostics;       // for Process class
+    using System.Drawing.Text;
+    using System.IO;
+    using System.IO.Compression;
+    using System.Linq;
     using System.Reflection;
+    using System.Text.RegularExpressions;
+    using System.Windows.Forms;
 
     public partial class frmMain : Form
     {
@@ -878,7 +879,16 @@ namespace FS_Mod_Manager
             {
                 args.Add(" -cheats");
             }
+            String argsString = "";
+           
+            //String[] arglist = args.ToArray();
+            foreach (var arg in args.ToArray())
+            {
+                argsString += ($" {arg}");
+            }
+            logger.LogWrite($"Game launched\n{txtGameExeFile.Text} {argsString}", true);
             run_exe_proces(txtGameExeFile.Text, args.ToArray());
+            stsStatusLabel.Text = "Launching Game";
         }
 
         /*
