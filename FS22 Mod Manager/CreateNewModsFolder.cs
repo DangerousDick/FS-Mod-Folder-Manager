@@ -17,6 +17,7 @@ namespace FS_Mod_Manager
 
         private string current_default_mod_folder = string.Empty;               // full path to current default mods folder in the main form
         static private Logger logger = new Logger(frmMain.LogFileName, false);  // DO NOT CLEAR LOG
+        private ContextMenuStrip mnulistboxContext;                             // context menu for listbox
 
         // class initialisation
         public frmCreateModsFolder(string current_default_mod_folder)
@@ -28,10 +29,11 @@ namespace FS_Mod_Manager
 
         private void frmCreateModsFolder_Load(object sender, EventArgs e)
         {
+            // default values
             current_default_mod_folder = Settings.Default.ModFolderPath;
             txtCopyFolder.Text = Settings.Default.DefaultFavouritesFolder;
             txtNewFolder.Text = $"{current_default_mod_folder}\\NewFolder";
-            if (txtCopyFolder.Text.Length > 0  && Directory.Exists(txtCopyFolder.Text))
+            if (txtCopyFolder.Text.Length > 0 && Directory.Exists(txtCopyFolder.Text))
             {
                 PopulateModsList(txtCopyFolder.Text);
             }
@@ -43,6 +45,7 @@ namespace FS_Mod_Manager
         {
             try
             {
+                lstModsList.ContextMenuStrip = mnulistboxContext;
                 Settings.Default.DefaultFavouritesFolder = txtCopyFolder.Text;
                 logger.LogWrite("Closing create new folder dialog\n\n", true);
                 Close();
@@ -53,7 +56,7 @@ namespace FS_Mod_Manager
             }
         }
 
-        // button click methods
+        // button events
         private void btnCopyBrowse_Click(object sender, EventArgs e)
         {
             /*
@@ -123,11 +126,111 @@ namespace FS_Mod_Manager
             statusBar.Text = copy_selected_mods();
         }
 
+        // mouse events
+        private void lstModsList_MouseUp(object sender, MouseEventArgs e)
+        {
+            /*
+             * right click event for listbox
+             */
+            if (e.Button == MouseButtons.Right)
+            {
+                int location = lstModsList.IndexFromPoint(e.Location);
+                if (lstModsList.SelectedItems.Count > 0)
+                {
+                    lstModsList.SelectedIndex = lstModsList.IndexFromPoint(e.Location);
+                    lstModsList.ContextMenuStrip = mnuListBoxContext;
+                    lstModsList.ContextMenuStrip.Show(Cursor.Position);
+                }
+            }
+        }
+
+        //menu events
+        private void mnuAddItem_Click(object sender, EventArgs e)
+        {
+            /*
+             * Add an item to the listbox
+             */
+            logger.LogWrite("Getting file list", true);
+            List<string> file_list = new List<string>();
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                try
+                {
+                    ofd.InitialDirectory = txtCopyFolder.Text;
+                    ofd.Multiselect = true;
+                    ofd.Filter = "Zip files (*.zip)|*.zip|All files (*.*)|*.*";
+                    ofd.FilterIndex = 1;
+                    ofd.RestoreDirectory = true;
+
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        //Show in textbox
+                        string[] selected_files = ofd.FileNames;
+                        int current_count = lstModsList.Items.Count;
+                        for (int i = 0; i < selected_files.Length; i++)
+                        {
+                            // if file exists don't add it again
+                            if (!lstModsList.Items.Contains(selected_files[i]))
+                            {
+                                // add file to listbox
+                                lstModsList.Items.Add(selected_files[i]);
+                                logger.LogWrite("Adding file " + selected_files[i] + " to list");
+                            }
+                        }
+                        if (current_count < lstModsList.Items.Count)
+                        {
+                            statusBar.Text = $"Added items to the list";
+                            lblFileCount.Text = $"{lstModsList.Items.Count} files found";
+                            lstModsList.SelectedIndex = lstModsList.Items.Count - 1;
+                        }
+                            
+                    }
+                    else
+                    {
+                        statusBar.Text= "No files selected";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWrite(ex.Message, true);
+                }
+            }
+        }
+
+        private void mnuReloadList_Click(object sender, EventArgs e)
+        {
+            /*
+             * reload data from  folder in txtCopyFolder textbox
+             */
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Clear list and reload from {txtCopyFolder.Text}?", "Reload List", buttons))
+            {
+                PopulateModsList(txtCopyFolder.Text);
+            }
+        }
+
+        private void mnuRemoveItem_Click(object sender, EventArgs e)
+        {
+            /*
+             * Deletes the mod file from the directory and removes it from the list
+             */
+            logger.LogWrite("DELETING listbox item", true);
+            if (lstModsList.SelectedIndex >= 0)
+            {
+                int Index = lstModsList.SelectedIndex;
+                string ItemText = lstModsList.Text;
+                lstModsList.Items.RemoveAt(lstModsList.SelectedIndex);
+                lstModsList.SelectedIndex = Index;
+                statusBar.Text = $"Removed:{ItemText}";
+                lblFileCount.Text = $"{lstModsList.Items.Count} files found";
+            }
+        }
+
         // private methods
         private void PopulateModsList(String folderpath)
         {
             /*
-             * Populate the mods listbox with the mods in the selected folder
+             * populate the mods listbox with the mods in the selected folder
              */
             try
             {
@@ -147,6 +250,10 @@ namespace FS_Mod_Manager
                         }
                         statusBar.Text = $"List created from {Path.GetFileName(folderpath)}";
                         lblFileCount.Text = $"{mods_list.Count} files found";
+                        if (lstModsList.Items.Count > 0)
+                        {
+                            lstModsList.SelectedIndex = 0;
+                        }
                     }
                     else
                     {

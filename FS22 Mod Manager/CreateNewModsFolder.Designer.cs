@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCreateModsFolder));
             lblCopyFolder = new Label();
             txtCopyFolder = new TextBox();
@@ -42,7 +43,12 @@
             statusStrip = new StatusStrip();
             statusBar = new ToolStripStatusLabel();
             lblFileCount = new Label();
+            mnuListBoxContext = new ContextMenuStrip(components);
+            mnuAddFile = new ToolStripMenuItem();
+            mnuRemoveFile = new ToolStripMenuItem();
+            mnuReloadList = new ToolStripMenuItem();
             statusStrip.SuspendLayout();
+            mnuListBoxContext.SuspendLayout();
             SuspendLayout();
             // 
             // lblCopyFolder
@@ -81,6 +87,7 @@
             lstModsList.Name = "lstModsList";
             lstModsList.Size = new Size(543, 484);
             lstModsList.TabIndex = 3;
+            lstModsList.MouseUp += lstModsList_MouseUp;
             // 
             // lblModsList
             // 
@@ -162,6 +169,34 @@
             lblFileCount.TabIndex = 11;
             lblFileCount.Text = "0 files";
             // 
+            // mnuListBoxContext
+            // 
+            mnuListBoxContext.Items.AddRange(new ToolStripItem[] { mnuAddFile, mnuRemoveFile, mnuReloadList });
+            mnuListBoxContext.Name = "mnuListBoxContext";
+            mnuListBoxContext.Size = new Size(181, 92);
+            mnuListBoxContext.Text = "mnuListBoxContext";
+            // 
+            // mnuAddFile
+            // 
+            mnuAddFile.Name = "mnuAddFile";
+            mnuAddFile.Size = new Size(180, 22);
+            mnuAddFile.Text = "Add Item";
+            mnuAddFile.Click += mnuAddItem_Click;
+            // 
+            // mnuRemoveFile
+            // 
+            mnuRemoveFile.Name = "mnuRemoveFile";
+            mnuRemoveFile.Size = new Size(180, 22);
+            mnuRemoveFile.Text = "Remove Item";
+            mnuRemoveFile.Click += mnuRemoveItem_Click;
+            // 
+            // mnuReloadList
+            // 
+            mnuReloadList.Name = "mnuReloadList";
+            mnuReloadList.Size = new Size(180, 22);
+            mnuReloadList.Text = "Reload List";
+            mnuReloadList.Click += mnuReloadList_Click;
+            // 
             // frmCreateModsFolder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -185,6 +220,7 @@
             Load += frmCreateModsFolder_Load;
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
+            mnuListBoxContext.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -204,5 +240,9 @@
         private StatusStrip statusStrip;
         private ToolStripStatusLabel statusBar;
         private Label lblFileCount;
+        private ContextMenuStrip mnuListBoxContext;
+        private ToolStripMenuItem mnuAddFile;
+        private ToolStripMenuItem mnuRemoveFile;
+        private ToolStripMenuItem mnuReloadList;
     }
 }

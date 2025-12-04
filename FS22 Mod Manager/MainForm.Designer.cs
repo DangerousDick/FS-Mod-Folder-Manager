@@ -564,7 +564,7 @@
             // 
             txtCharacterName.BackColor = SystemColors.InactiveCaption;
             txtCharacterName.Location = new Point(105, 118);
-            txtCharacterName.Margin = new Padding(2, 2, 2, 2);
+            txtCharacterName.Margin = new Padding(2);
             txtCharacterName.Name = "txtCharacterName";
             txtCharacterName.ReadOnly = true;
             txtCharacterName.Size = new Size(299, 23);
@@ -729,7 +729,7 @@
             mnuContextFolderList.ImageScalingSize = new Size(24, 24);
             mnuContextFolderList.Items.AddRange(new ToolStripItem[] { mnuContextFolderAdd, mnuContextFolderRemove, mnuContextFolderRename, mnuContextFolderSeparator, mnuContextCopyToSelected, mnuContextFolderCopyAsNew, toolStripMenuItem2, mnuContextOpenGameNotes });
             mnuContextFolderList.Name = "mnuContextFolderList";
-            mnuContextFolderList.Size = new Size(241, 148);
+            mnuContextFolderList.Size = new Size(241, 170);
             // 
             // mnuContextFolderAdd
             // 
