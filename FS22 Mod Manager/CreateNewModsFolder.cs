@@ -28,7 +28,13 @@ namespace FS_Mod_Manager
         private void frmCreateModsFolder_Load(object sender, EventArgs e)
         {
             current_default_mod_folder = Settings.Default.ModFolderPath;
-            toolStripStatusLabel1.Text = "Crate a new mods folder";
+            txtCopyFolder.Text = Settings.Default.DefaultFavouritesFolder;
+            txtNewFolder.Text = current_default_mod_folder;
+            if (txtCopyFolder.Text.Length > 0  && Directory.Exists(txtCopyFolder.Text))
+            {
+                PopulateModsList(txtCopyFolder.Text);
+            }
+            statusBar.Text = "Create a new mods folder";
         }
 
         // form close tasks
@@ -36,6 +42,7 @@ namespace FS_Mod_Manager
         {
             try
             {
+                Settings.Default.DefaultFavouritesFolder = txtCopyFolder.Text;
                 logger.LogWrite("Closing create new folder dialog\n\n", true);
                 Close();
             }
@@ -112,7 +119,7 @@ namespace FS_Mod_Manager
             /*
             * create the new folder
             */
-            toolStripStatusLabel1.Text = copy_selected_mods();
+            statusBar.Text = copy_selected_mods();
         }
 
         // private methods
@@ -137,18 +144,19 @@ namespace FS_Mod_Manager
                             // add file to list
                             lstModsList.Items.Add(mod);
                         }
-                        toolStripStatusLabel1.Text = $"List created from {Path.GetFileName(folderpath)}";
+                        statusBar.Text = $"List created from {Path.GetFileName(folderpath)}";
+                        lblFileCount.Text = $"{mods_list.Count} files found";
                     }
                     else
                     {
-                        toolStripStatusLabel1.Text = $"Folder {Path.GetFileName(folderpath)} is empty";
+                        statusBar.Text = $"Folder {Path.GetFileName(folderpath)} is empty";
                     }
                 }
             }
             catch (Exception ex)
             {
                 logger.LogWrite($"Error: {ex.Message}");
-                toolStripStatusLabel1.Text = $"Error: {ex.Message}";
+                statusBar.Text = $"Error: {ex.Message}";
             }
         }
 
@@ -217,7 +225,7 @@ namespace FS_Mod_Manager
                         {
                             logger.LogWrite($"Error: {ex.Message}");
                         }
-                        toolStripStatusLabel1.Text = $"Folder {txtNewFolder.Text} created";
+                        statusBar.Text = $"Folder {txtNewFolder.Text} created";
                         if (Directory.Exists(txtNewFolder.Text))
                             return_msg = $"Folder created: {txtNewFolder.Text}";
                         else
@@ -228,7 +236,7 @@ namespace FS_Mod_Manager
             catch (Exception ex)
             {
                 logger.LogWrite($"Error: {ex.Message}");
-                toolStripStatusLabel1.Text = $"Unable to create new directory {txtNewFolder.Text}";
+                statusBar.Text = $"Unable to create new directory {txtNewFolder.Text}";
                 return_msg = ex.Message;
             }
             selected_folder = Path.GetFileName(txtNewFolder.Text);

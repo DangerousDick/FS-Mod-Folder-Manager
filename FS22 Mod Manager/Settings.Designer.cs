@@ -12,7 +12,7 @@ namespace FS_Mod_Manager {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -181,18 +181,6 @@ namespace FS_Mod_Manager {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\FS25FavouriteMods\\SavedLists")]
-        public string DefaultSavedListsFolder {
-            get {
-                return ((string)(this["DefaultSavedListsFolder"]));
-            }
-            set {
-                this["DefaultSavedListsFolder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("OnlinePresenceName")]
         public string OnlinePresenceName {
             get {
@@ -224,6 +212,18 @@ namespace FS_Mod_Manager {
             }
             set {
                 this["GameNotesTemplate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ModTest")]
+        public string DefaultNewFolder {
+            get {
+                return ((string)(this["DefaultNewFolder"]));
+            }
+            set {
+                this["DefaultNewFolder"] = value;
             }
         }
     }

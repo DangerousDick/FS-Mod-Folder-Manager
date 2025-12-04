@@ -39,9 +39,10 @@
             btnNewFolder = new Button();
             btnCreateFolder = new Button();
             btnExit = new Button();
-            statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
-            statusStrip1.SuspendLayout();
+            statusStrip = new StatusStrip();
+            statusBar = new ToolStripStatusLabel();
+            lblFileCount = new Label();
+            statusStrip.SuspendLayout();
             SuspendLayout();
             // 
             // lblCopyFolder
@@ -93,7 +94,7 @@
             // lblNewFilder
             // 
             lblNewFilder.AutoSize = true;
-            lblNewFilder.Location = new Point(12, 553);
+            lblNewFilder.Location = new Point(12, 576);
             lblNewFilder.Name = "lblNewFilder";
             lblNewFilder.Size = new Size(67, 15);
             lblNewFilder.TabIndex = 5;
@@ -101,7 +102,7 @@
             // 
             // txtNewFolder
             // 
-            txtNewFolder.Location = new Point(85, 550);
+            txtNewFolder.Location = new Point(85, 573);
             txtNewFolder.Name = "txtNewFolder";
             txtNewFolder.Size = new Size(389, 23);
             txtNewFolder.TabIndex = 6;
@@ -109,7 +110,7 @@
             // 
             // btnNewFolder
             // 
-            btnNewFolder.Location = new Point(480, 550);
+            btnNewFolder.Location = new Point(480, 573);
             btnNewFolder.Name = "btnNewFolder";
             btnNewFolder.Size = new Size(75, 23);
             btnNewFolder.TabIndex = 7;
@@ -119,7 +120,7 @@
             // 
             // btnCreateFolder
             // 
-            btnCreateFolder.Location = new Point(19, 590);
+            btnCreateFolder.Location = new Point(19, 613);
             btnCreateFolder.Name = "btnCreateFolder";
             btnCreateFolder.Size = new Size(121, 23);
             btnCreateFolder.TabIndex = 8;
@@ -129,7 +130,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(480, 590);
+            btnExit.Location = new Point(480, 613);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 9;
@@ -137,27 +138,37 @@
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(0, 628);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(567, 22);
-            statusStrip1.TabIndex = 10;
-            statusStrip1.Text = "statusStrip1";
+            statusStrip.Items.AddRange(new ToolStripItem[] { statusBar });
+            statusStrip.Location = new Point(0, 641);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Size = new Size(567, 22);
+            statusStrip.TabIndex = 10;
+            statusStrip.Text = "statusStrip";
             // 
-            // toolStripStatusLabel1
+            // statusBar
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(118, 17);
-            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            statusBar.Name = "statusBar";
+            statusBar.Size = new Size(55, 17);
+            statusBar.Text = "statusBar";
+            // 
+            // lblFileCount
+            // 
+            lblFileCount.AutoSize = true;
+            lblFileCount.Location = new Point(12, 544);
+            lblFileCount.Name = "lblFileCount";
+            lblFileCount.Size = new Size(37, 15);
+            lblFileCount.TabIndex = 11;
+            lblFileCount.Text = "0 files";
             // 
             // frmCreateModsFolder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(567, 650);
-            Controls.Add(statusStrip1);
+            ClientSize = new Size(567, 663);
+            Controls.Add(lblFileCount);
+            Controls.Add(statusStrip);
             Controls.Add(btnExit);
             Controls.Add(btnCreateFolder);
             Controls.Add(btnNewFolder);
@@ -172,8 +183,8 @@
             Name = "frmCreateModsFolder";
             Text = "Create New Mods Folder";
             Load += frmCreateModsFolder_Load;
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -190,7 +201,8 @@
         private Button btnNewFolder;
         private Button btnCreateFolder;
         private Button btnExit;
-        private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private StatusStrip statusStrip;
+        private ToolStripStatusLabel statusBar;
+        private Label lblFileCount;
     }
 }

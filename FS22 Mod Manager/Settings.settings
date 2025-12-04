@@ -41,9 +41,6 @@
     <Setting Name="DefaultFavouritesFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\FS25FavouriteMods</Value>
     </Setting>
-    <Setting Name="DefaultSavedListsFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\FS25FavouriteMods\SavedLists</Value>
-    </Setting>
     <Setting Name="OnlinePresenceName" Type="System.String" Scope="User">
       <Value Profile="(Default)">OnlinePresenceName</Value>
     </Setting>
@@ -52,6 +49,9 @@
     </Setting>
     <Setting Name="GameNotesTemplate" Type="System.String" Scope="User">
       <Value Profile="(Default)">GameNotesTemplate.txt</Value>
+    </Setting>
+    <Setting Name="DefaultNewFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ModTest</Value>
     </Setting>
   </Settings>
 </SettingsFile>
