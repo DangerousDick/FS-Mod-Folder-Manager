@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace FS_Mod_Manager
 {
@@ -29,7 +30,7 @@ namespace FS_Mod_Manager
         {
             current_default_mod_folder = Settings.Default.ModFolderPath;
             txtCopyFolder.Text = Settings.Default.DefaultFavouritesFolder;
-            txtNewFolder.Text = current_default_mod_folder;
+            txtNewFolder.Text = $"{current_default_mod_folder}\\NewFolder";
             if (txtCopyFolder.Text.Length > 0  && Directory.Exists(txtCopyFolder.Text))
             {
                 PopulateModsList(txtCopyFolder.Text);
@@ -202,36 +203,37 @@ namespace FS_Mod_Manager
                 // create folder if it does not exist
                 if (!Directory.Exists(txtCopyFolder.Text) || !Directory.Exists(txtNewFolder.Text))
                 {
-                    //System.IO.Directory.CreateDirectory(txtNewFolder.Text);
-                    MessageBoxButtons buttons = MessageBoxButtons.OK;
-                    MessageBox.Show($"Unable to create new directory {txtNewFolder.Text}\n Have you set both paths correctly?", "Set new folder path", buttons);
-                }
-                else 
-                {
-                    logger.LogWrite($"new folder name: {txtNewFolder.Text}");
-                    //copy files
-                    foreach (string selected_file in lstModsList.Items)
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Create folder {txtNewFolder.Text}?", "Create Folder", buttons))
                     {
-                        string to_filename = Path.Join(txtNewFolder.Text, Path.GetFileName(selected_file));
-                        try
-                        {
-                            if (!File.Exists(to_filename))
-                            {
-                                logger.LogWrite($"Copying {selected_file} to {to_filename}");
-                                File.Copy(selected_file, to_filename);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.LogWrite($"Error: {ex.Message}");
-                        }
-                        statusBar.Text = $"Folder {txtNewFolder.Text} created";
-                        if (Directory.Exists(txtNewFolder.Text))
-                            return_msg = $"Folder created: {txtNewFolder.Text}";
-                        else
-                            return_msg = $"Failed to create folder {txtNewFolder.Text} see log for details.";
+                        System.IO.Directory.CreateDirectory(txtNewFolder.Text);
                     }
+                    else { return $"Folder not created"; }
                 }
+                // populate folder by copying files
+                logger.LogWrite($"creating new folder: {txtNewFolder.Text}");
+                foreach (string selected_file in lstModsList.Items)
+                {
+                    string to_filename = Path.Join(txtNewFolder.Text, Path.GetFileName(selected_file));
+                    try
+                    {
+                        if (!File.Exists(to_filename))
+                        {
+                            logger.LogWrite($"Copying {selected_file} to {to_filename}");
+                            File.Copy(selected_file, to_filename);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogWrite($"Error: {ex.Message}");
+                    }
+                    statusBar.Text = $"Folder {txtNewFolder.Text} created";
+                        if (Directory.Exists(txtNewFolder.Text))
+                        { return_msg = $"Folder created: {txtNewFolder.Text}"; }
+                        else
+                        { return_msg = $"Failed to create folder {txtNewFolder.Text} see log for details."; }
+                }
+                
             }
             catch (Exception ex)
             {

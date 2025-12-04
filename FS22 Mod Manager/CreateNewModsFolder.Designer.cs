@@ -94,7 +94,7 @@
             // lblNewFilder
             // 
             lblNewFilder.AutoSize = true;
-            lblNewFilder.Location = new Point(12, 576);
+            lblNewFilder.Location = new Point(12, 565);
             lblNewFilder.Name = "lblNewFilder";
             lblNewFilder.Size = new Size(67, 15);
             lblNewFilder.TabIndex = 5;
@@ -102,7 +102,7 @@
             // 
             // txtNewFolder
             // 
-            txtNewFolder.Location = new Point(85, 573);
+            txtNewFolder.Location = new Point(85, 562);
             txtNewFolder.Name = "txtNewFolder";
             txtNewFolder.Size = new Size(389, 23);
             txtNewFolder.TabIndex = 6;
@@ -110,7 +110,7 @@
             // 
             // btnNewFolder
             // 
-            btnNewFolder.Location = new Point(480, 573);
+            btnNewFolder.Location = new Point(480, 562);
             btnNewFolder.Name = "btnNewFolder";
             btnNewFolder.Size = new Size(75, 23);
             btnNewFolder.TabIndex = 7;
@@ -120,7 +120,7 @@
             // 
             // btnCreateFolder
             // 
-            btnCreateFolder.Location = new Point(19, 613);
+            btnCreateFolder.Location = new Point(19, 591);
             btnCreateFolder.Name = "btnCreateFolder";
             btnCreateFolder.Size = new Size(121, 23);
             btnCreateFolder.TabIndex = 8;
@@ -130,7 +130,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(480, 613);
+            btnExit.Location = new Point(480, 591);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 9;
@@ -141,7 +141,7 @@
             // statusStrip
             // 
             statusStrip.Items.AddRange(new ToolStripItem[] { statusBar });
-            statusStrip.Location = new Point(0, 641);
+            statusStrip.Location = new Point(0, 617);
             statusStrip.Name = "statusStrip";
             statusStrip.Size = new Size(567, 22);
             statusStrip.TabIndex = 10;
@@ -166,7 +166,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(567, 663);
+            ClientSize = new Size(567, 639);
             Controls.Add(lblFileCount);
             Controls.Add(statusStrip);
             Controls.Add(btnExit);
