@@ -200,8 +200,9 @@ namespace FS_Mod_Manager
             string return_msg = "";
             try
             {
-                // create folder if it does not exist
-                if (!Directory.Exists(txtCopyFolder.Text) || !Directory.Exists(txtNewFolder.Text))
+                // Check folder exist before proceeding
+                if (!Directory.Exists(txtCopyFolder.Text)) { return $"{txtCopyFolder.Text} DOES NOT EXIST"; }
+                if (!Directory.Exists(txtNewFolder.Text))
                 {
                     MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                     if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Create folder {txtNewFolder.Text}?", "Create Folder", buttons))
@@ -227,13 +228,15 @@ namespace FS_Mod_Manager
                     {
                         logger.LogWrite($"Error: {ex.Message}");
                     }
-                    statusBar.Text = $"Folder {txtNewFolder.Text} created";
-                        if (Directory.Exists(txtNewFolder.Text))
-                        { return_msg = $"Folder created: {txtNewFolder.Text}"; }
-                        else
-                        { return_msg = $"Failed to create folder {txtNewFolder.Text} see log for details."; }
+                    // check new folder was created
+                    if (Directory.Exists(txtNewFolder.Text))
+                    {
+                        statusBar.Text = $"Folder {txtNewFolder.Text} created";
+                        return_msg = $"Folder created: {txtNewFolder.Text}";
+                    }
+                    else
+                    { return_msg = $"Failed to create folder {txtNewFolder.Text} see log for details."; }
                 }
-                
             }
             catch (Exception ex)
             {
