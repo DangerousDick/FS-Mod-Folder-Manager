@@ -189,7 +189,7 @@
                         {
                             "{9EF0B969-E518-4E46-987F-47570745A589}:_DF19626F5D0640B69385717F117E23C6"
                             {
-                            "Name" = "8:net6.0-windows"
+                            "Name" = "8:net6.0-windows7"
                             "AlwaysCreate" = "11:FALSE"
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
@@ -261,9 +261,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Farming Simulator Mod Folder Manager"
+        "ProductName" = "8:FS Mod Folder Manager"
         "ProductCode" = "8:{7160879F-89F2-4BD9-8E17-806E5FE6FEBC}"
-        "PackageCode" = "8:{69D8030D-5B30-4EFF-9F2F-6D59F3374F34}"
+        "PackageCode" = "8:{E4A05CE2-3719-474E-9700-0B932A1174ED}"
         "UpgradeCode" = "8:{C45CEDD6-B243-4A3E-9568-B60F78A03CFD}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -274,11 +274,11 @@
         "Manufacturer" = "8:FarmaField"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Farming Simulator Mod Manager"
+        "Title" = "8:FS Mods Folder Manager"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Richard Sayer"
+        "ARPCONTACT" = "8:Farma Field"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:Manage FS mods folders when launching the game"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:_5D6232432FA745CAABFD442F1C4E0E4D"
         "ARPIconIndex" = "3:0"
@@ -812,7 +812,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8B58201449C04F55AEB35CF1E5765C7E"
             {
-            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Debug\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\FS22 Mod Manager\\obj\\Release\\net6.0-windows7.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_398E1001D9574A2FAEA6F055D681EABE"
