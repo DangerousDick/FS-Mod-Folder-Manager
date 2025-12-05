@@ -48,6 +48,8 @@
             mnuRemoveFile = new ToolStripMenuItem();
             mnuReloadList = new ToolStripMenuItem();
             mnuClearList = new ToolStripMenuItem();
+            btnClearList = new Button();
+            btnReloadList = new Button();
             statusStrip.SuspendLayout();
             mnuListBoxContext.SuspendLayout();
             SuspendLayout();
@@ -84,16 +86,16 @@
             lstModsList.FormattingEnabled = true;
             lstModsList.HorizontalScrollbar = true;
             lstModsList.ItemHeight = 15;
-            lstModsList.Location = new Point(12, 57);
+            lstModsList.Location = new Point(12, 72);
             lstModsList.Name = "lstModsList";
-            lstModsList.Size = new Size(543, 484);
+            lstModsList.Size = new Size(543, 469);
             lstModsList.TabIndex = 3;
             lstModsList.MouseUp += lstModsList_MouseUp;
             // 
             // lblModsList
             // 
             lblModsList.AutoSize = true;
-            lblModsList.Location = new Point(16, 39);
+            lblModsList.Location = new Point(12, 54);
             lblModsList.Name = "lblModsList";
             lblModsList.Size = new Size(58, 15);
             lblModsList.TabIndex = 4;
@@ -174,42 +176,64 @@
             // 
             mnuListBoxContext.Items.AddRange(new ToolStripItem[] { mnuAddFile, mnuRemoveFile, mnuReloadList, mnuClearList });
             mnuListBoxContext.Name = "mnuListBoxContext";
-            mnuListBoxContext.Size = new Size(181, 114);
+            mnuListBoxContext.Size = new Size(145, 92);
             mnuListBoxContext.Text = "mnuListBoxContext";
             // 
             // mnuAddFile
             // 
             mnuAddFile.Name = "mnuAddFile";
-            mnuAddFile.Size = new Size(180, 22);
+            mnuAddFile.Size = new Size(144, 22);
             mnuAddFile.Text = "Add Item";
             mnuAddFile.Click += mnuAddItem_Click;
             // 
             // mnuRemoveFile
             // 
             mnuRemoveFile.Name = "mnuRemoveFile";
-            mnuRemoveFile.Size = new Size(180, 22);
+            mnuRemoveFile.Size = new Size(144, 22);
             mnuRemoveFile.Text = "Remove Item";
             mnuRemoveFile.Click += mnuRemoveItem_Click;
             // 
             // mnuReloadList
             // 
             mnuReloadList.Name = "mnuReloadList";
-            mnuReloadList.Size = new Size(180, 22);
+            mnuReloadList.Size = new Size(144, 22);
             mnuReloadList.Text = "Reload List";
             mnuReloadList.Click += mnuReloadList_Click;
             // 
             // mnuClearList
             // 
             mnuClearList.Name = "mnuClearList";
-            mnuClearList.Size = new Size(180, 22);
+            mnuClearList.Size = new Size(144, 22);
             mnuClearList.Text = "Clear List";
             mnuClearList.Click += mnuClearList_Click;
+            // 
+            // btnClearList
+            // 
+            btnClearList.Location = new Point(89, 37);
+            btnClearList.Name = "btnClearList";
+            btnClearList.Size = new Size(75, 23);
+            btnClearList.TabIndex = 12;
+            btnClearList.Text = "Clear List";
+            btnClearList.UseVisualStyleBackColor = true;
+            btnClearList.Click += btnClearList_Click;
+            // 
+            // btnReloadList
+            // 
+            btnReloadList.Location = new Point(170, 37);
+            btnReloadList.Name = "btnReloadList";
+            btnReloadList.Size = new Size(75, 23);
+            btnReloadList.TabIndex = 13;
+            btnReloadList.Text = "Reload List";
+            btnReloadList.UseVisualStyleBackColor = true;
+            btnReloadList.Click += btnReloadList_Click;
             // 
             // frmCreateModsFolder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(567, 639);
+            Controls.Add(btnReloadList);
+            Controls.Add(btnClearList);
             Controls.Add(lblFileCount);
             Controls.Add(statusStrip);
             Controls.Add(btnExit);
@@ -253,5 +277,7 @@
         private ToolStripMenuItem mnuRemoveFile;
         private ToolStripMenuItem mnuReloadList;
         private ToolStripMenuItem mnuClearList;
+        private Button btnClearList;
+        private Button btnReloadList;
     }
 }

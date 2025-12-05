@@ -19,9 +19,15 @@ namespace FS_Mod_Manager
         static private Logger logger = new Logger(frmMain.LogFileName, false);  // DO NOT CLEAR LOG
         private ContextMenuStrip mnulistboxContext;                             // context menu for listbox
 
-        // class initialisation
+        /*
+         * class initialisation
+         **********************************************************************************************
+         */
         public frmCreateModsFolder(string current_default_mod_folder)
         {
+            /*
+             *  construction tasks
+             */
             InitializeComponent();
             logger.LogWrite("Initializing create new folder dialog", true);
             this.current_default_mod_folder = current_default_mod_folder;
@@ -29,7 +35,9 @@ namespace FS_Mod_Manager
 
         private void frmCreateModsFolder_Load(object sender, EventArgs e)
         {
-            // default values
+            /*
+             * tasks to do on form load
+             */
             current_default_mod_folder = Settings.Default.ModFolderPath;
             txtCopyFolder.Text = Settings.Default.DefaultFavouritesFolder;
             txtNewFolder.Text = $"{current_default_mod_folder}\\NewFolder";
@@ -40,9 +48,16 @@ namespace FS_Mod_Manager
             statusBar.Text = "Create a new mods folder";
         }
 
-        // form close tasks
+        /*
+         * button events
+         **********************************************************************************************
+         */
+
         private void btnExit_Click(object sender, EventArgs e)
         {
+            /*
+             * task to do before closing
+             */
             try
             {
                 lstModsList.ContextMenuStrip = mnulistboxContext;
@@ -56,7 +71,6 @@ namespace FS_Mod_Manager
             }
         }
 
-        // button events
         private void btnCopyBrowse_Click(object sender, EventArgs e)
         {
             /*
@@ -67,7 +81,7 @@ namespace FS_Mod_Manager
             {
                 try
                 {
-                    string init_dir = current_default_mod_folder;
+                    string init_dir = Directory.GetParent(txtCopyFolder.Text).ToString();
                     if (!Directory.Exists(init_dir))
                     {
                         init_dir = "C:\\";
@@ -126,7 +140,20 @@ namespace FS_Mod_Manager
             statusBar.Text = copy_selected_mods();
         }
 
-        // mouse events
+        private void btnClearList_Click(object sender, EventArgs e)
+        {
+            clear_listbox_items();
+        }
+
+        private void btnReloadList_Click(object sender, EventArgs e)
+        {
+            reload_list_box();
+        }
+
+        /*
+         * listbox events
+         **********************************************************************************************
+         */
         private void lstModsList_MouseUp(object sender, MouseEventArgs e)
         {
             /*
@@ -144,7 +171,10 @@ namespace FS_Mod_Manager
             }
         }
 
-        //menu events
+        /*
+         * menu events
+         **********************************************************************************************
+         */
         private void mnuAddItem_Click(object sender, EventArgs e)
         {
             /*
@@ -202,20 +232,12 @@ namespace FS_Mod_Manager
             /*
              * reload data from  folder in txtCopyFolder textbox
              */
-            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Clear list and reload from {txtCopyFolder.Text}?", "Reload List",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification))
-            {
-                PopulateModsList(txtCopyFolder.Text);
-            }
+            reload_list_box();
         }
 
         private void mnuClearList_Click(object sender, EventArgs e)
         {
-            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show("Are you sure you want to clear the list", "Clear the list", 
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification))
-            {
-                lstModsList.Items.Clear();
-            }
+            clear_listbox_items();
         }
 
         private void mnuRemoveItem_Click(object sender, EventArgs e)
@@ -235,7 +257,22 @@ namespace FS_Mod_Manager
             }
         }
 
-        // private methods
+        /*
+         * private methods
+         **********************************************************************************************
+         */
+        private void reload_list_box()
+        {
+            /*
+             * reload data from  folder in txtCopyFolder textbox
+             */
+            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Clear list and reload from {txtCopyFolder.Text}?", "Reload List",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification))
+            {
+                PopulateModsList(txtCopyFolder.Text);
+            }
+        }
+
         private void PopulateModsList(String folderpath)
         {
             /*
@@ -321,7 +358,7 @@ namespace FS_Mod_Manager
                 if (!Directory.Exists(txtNewFolder.Text))
                 {
                     if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Create folder {txtNewFolder.Text}?", "Create Folder",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification))
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification))
                     {
                         System.IO.Directory.CreateDirectory(txtNewFolder.Text);
                     }
@@ -362,6 +399,18 @@ namespace FS_Mod_Manager
             }
             selected_folder = Path.GetFileName(txtNewFolder.Text);
             return return_msg;
+        }
+
+        private void clear_listbox_items()
+        {
+            /*
+             * clear all items from the listbox
+             */
+            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show("Are you sure you want to clear the list", "Clear the list",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification))
+            {
+                lstModsList.Items.Clear();
+            }
         }
     }
 }
