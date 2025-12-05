@@ -1,8 +1,9 @@
 ﻿Before creating release and generating the MSI file...
 * Set application version in MainForm.cs file
 * Update github wiki to reflect changes if required (https://https://github.com/DangerousDick/FS-Mod-Folder-Manager/wiki)
-* Update Setup project version number (otherwise old version will not be uninstalled)
-* Generate MSI file
-* Copy MSI file to solution root folder
+* Using the Advanced installer application
+    * Update version in the project settings
+    * Generate MSI file
+    * MSI file should be copied to solution root folder automatically
 * Tag and push all changes to github
 * Create releases for both fs22-mods-manager and FsModManager projects in github
