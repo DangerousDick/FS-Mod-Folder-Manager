@@ -234,7 +234,7 @@
             // 
             mnuModsFolder.DropDownItems.AddRange(new ToolStripItem[] { mnuModFolderAdd, mnuModFolderRemove, mnuModFolderRename, mnuCopyAsNewFolder });
             mnuModsFolder.Name = "mnuModsFolder";
-            mnuModsFolder.Size = new Size(191, 22);
+            mnuModsFolder.Size = new Size(204, 22);
             mnuModsFolder.Text = "Mod Folder Actions";
             // 
             // mnuModFolderAdd
@@ -269,7 +269,7 @@
             // 
             MnuModsFile.DropDownItems.AddRange(new ToolStripItem[] { mnuModFileRemove, mnuModFileCopyToSelected, mnuModFileCopyToAll });
             MnuModsFile.Name = "MnuModsFile";
-            MnuModsFile.Size = new Size(191, 22);
+            MnuModsFile.Size = new Size(204, 22);
             MnuModsFile.Text = "Mod File Actions";
             // 
             // mnuModFileRemove
@@ -296,13 +296,13 @@
             // mnuModsSeparator
             // 
             mnuModsSeparator.Name = "mnuModsSeparator";
-            mnuModsSeparator.Size = new Size(188, 6);
+            mnuModsSeparator.Size = new Size(201, 6);
             // 
             // mnuModsFolderOpen
             // 
             mnuModsFolderOpen.Name = "mnuModsFolderOpen";
             mnuModsFolderOpen.ShortcutKeys = Keys.F6;
-            mnuModsFolderOpen.Size = new Size(191, 22);
+            mnuModsFolderOpen.Size = new Size(204, 22);
             mnuModsFolderOpen.Text = "Open Mods Folder";
             mnuModsFolderOpen.Click += mnuModFolderOpen_Click;
             // 
@@ -310,20 +310,20 @@
             // 
             mnuModsLaunchModhub.Name = "mnuModsLaunchModhub";
             mnuModsLaunchModhub.ShortcutKeys = Keys.F7;
-            mnuModsLaunchModhub.Size = new Size(191, 22);
+            mnuModsLaunchModhub.Size = new Size(204, 22);
             mnuModsLaunchModhub.Text = "Launch Mod Hub";
             mnuModsLaunchModhub.Click += mnuModsLaunchModhub_Click;
             // 
             // toolStripMenuItem3
             // 
             toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(188, 6);
+            toolStripMenuItem3.Size = new Size(201, 6);
             // 
             // mnuModsCreateNewFolder
             // 
             mnuModsCreateNewFolder.Name = "mnuModsCreateNewFolder";
-            mnuModsCreateNewFolder.Size = new Size(191, 22);
-            mnuModsCreateNewFolder.Text = "Copy as New Folder";
+            mnuModsCreateNewFolder.Size = new Size(204, 22);
+            mnuModsCreateNewFolder.Text = "Greate New Mods Folder";
             mnuModsCreateNewFolder.Click += mnuModsCreateNewFolder_Click;
             // 
             // mnuOptions
@@ -729,7 +729,7 @@
             mnuContextFolderList.ImageScalingSize = new Size(24, 24);
             mnuContextFolderList.Items.AddRange(new ToolStripItem[] { mnuContextFolderAdd, mnuContextFolderRemove, mnuContextFolderRename, mnuContextFolderSeparator, mnuContextCopyToSelected, mnuContextFolderCopyAsNew, toolStripMenuItem2, mnuContextOpenGameNotes });
             mnuContextFolderList.Name = "mnuContextFolderList";
-            mnuContextFolderList.Size = new Size(241, 170);
+            mnuContextFolderList.Size = new Size(241, 148);
             // 
             // mnuContextFolderAdd
             // 

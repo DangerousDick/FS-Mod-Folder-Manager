@@ -47,6 +47,7 @@
             mnuAddFile = new ToolStripMenuItem();
             mnuRemoveFile = new ToolStripMenuItem();
             mnuReloadList = new ToolStripMenuItem();
+            mnuClearList = new ToolStripMenuItem();
             statusStrip.SuspendLayout();
             mnuListBoxContext.SuspendLayout();
             SuspendLayout();
@@ -171,9 +172,9 @@
             // 
             // mnuListBoxContext
             // 
-            mnuListBoxContext.Items.AddRange(new ToolStripItem[] { mnuAddFile, mnuRemoveFile, mnuReloadList });
+            mnuListBoxContext.Items.AddRange(new ToolStripItem[] { mnuAddFile, mnuRemoveFile, mnuReloadList, mnuClearList });
             mnuListBoxContext.Name = "mnuListBoxContext";
-            mnuListBoxContext.Size = new Size(181, 92);
+            mnuListBoxContext.Size = new Size(181, 114);
             mnuListBoxContext.Text = "mnuListBoxContext";
             // 
             // mnuAddFile
@@ -196,6 +197,13 @@
             mnuReloadList.Size = new Size(180, 22);
             mnuReloadList.Text = "Reload List";
             mnuReloadList.Click += mnuReloadList_Click;
+            // 
+            // mnuClearList
+            // 
+            mnuClearList.Name = "mnuClearList";
+            mnuClearList.Size = new Size(180, 22);
+            mnuClearList.Text = "Clear List";
+            mnuClearList.Click += mnuClearList_Click;
             // 
             // frmCreateModsFolder
             // 
@@ -244,5 +252,6 @@
         private ToolStripMenuItem mnuAddFile;
         private ToolStripMenuItem mnuRemoveFile;
         private ToolStripMenuItem mnuReloadList;
+        private ToolStripMenuItem mnuClearList;
     }
 }

@@ -183,11 +183,11 @@ namespace FS_Mod_Manager
                             lblFileCount.Text = $"{lstModsList.Items.Count} files found";
                             lstModsList.SelectedIndex = lstModsList.Items.Count - 1;
                         }
-                            
+
                     }
                     else
                     {
-                        statusBar.Text= "No files selected";
+                        statusBar.Text = "No files selected";
                     }
                 }
                 catch (Exception ex)
@@ -202,10 +202,19 @@ namespace FS_Mod_Manager
             /*
              * reload data from  folder in txtCopyFolder textbox
              */
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Clear list and reload from {txtCopyFolder.Text}?", "Reload List", buttons))
+            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Clear list and reload from {txtCopyFolder.Text}?", "Reload List",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification))
             {
                 PopulateModsList(txtCopyFolder.Text);
+            }
+        }
+
+        private void mnuClearList_Click(object sender, EventArgs e)
+        {
+            if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show("Are you sure you want to clear the list", "Clear the list", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification))
+            {
+                lstModsList.Items.Clear();
             }
         }
 
@@ -311,8 +320,8 @@ namespace FS_Mod_Manager
                 if (!Directory.Exists(txtCopyFolder.Text)) { return $"{txtCopyFolder.Text} DOES NOT EXIST"; }
                 if (!Directory.Exists(txtNewFolder.Text))
                 {
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                    if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Create folder {txtNewFolder.Text}?", "Create Folder", buttons))
+                    if (System.Windows.Forms.DialogResult.Yes == MessageBox.Show($"Create folder {txtNewFolder.Text}?", "Create Folder",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification))
                     {
                         System.IO.Directory.CreateDirectory(txtNewFolder.Text);
                     }
