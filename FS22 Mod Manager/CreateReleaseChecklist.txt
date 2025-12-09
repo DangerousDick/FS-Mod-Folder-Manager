@@ -6,4 +6,3 @@
     * Generate MSI file
     * MSI file should be copied to solution root folder automatically
 * Tag and push all changes to github
-* Create releases for both fs22-mods-manager and FsModManager projects in github
