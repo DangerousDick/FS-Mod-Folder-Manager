@@ -14,7 +14,7 @@ namespace FS_Mod_Manager
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V1.9.0";
+        const string version = "V1.9.1";
         const string copyright = "Copyright Richard Sayer 2025";
         const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
         // this is usally where steam places farming simulator
@@ -540,7 +540,7 @@ namespace FS_Mod_Manager
             try
             {
                 string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-                open_with_default_app("https://github.com/DangerousDick/FsModsManager/wiki");
+                open_with_default_app("https://github.com/DangerousDick/FS-Mod-Folder-Manager/wiki");
             }
             catch (Exception ex)
             {

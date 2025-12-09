@@ -1,6 +1,6 @@
 ﻿Before creating release and generating the MSI file...
 * Set application version in MainForm.cs file
-* Update github wiki to reflect changes if required (https://https://github.com/DangerousDick/FS-Mod-Folder-Manager/wiki)
+* Update github wiki to reflect changes if required (https://github.com/DangerousDick/FS-Mod-Folder-Manager/wiki)
 * Using the Advanced installer application
     * Update version in the project settings
     * Generate MSI file
