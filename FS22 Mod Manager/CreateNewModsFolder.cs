@@ -142,12 +142,26 @@ namespace FS_Mod_Manager
 
         private void btnClearList_Click(object sender, EventArgs e)
         {
+            /*
+             * clear all of the listbox items
+             */
             clear_listbox_items();
         }
 
         private void btnReloadList_Click(object sender, EventArgs e)
         {
+            /*
+             * reload mods if the foolder shown in the txtCopyFolder textbox
+             */
             reload_list_box();
+        }
+
+        private void btnAddMod_Click(object sender, EventArgs e)
+        {
+            /*
+             * select and add mod(s) to the listbox
+             */
+            select_items_for_list();
         }
 
         /*
@@ -168,6 +182,23 @@ namespace FS_Mod_Manager
                     lstModsList.ContextMenuStrip = mnuListBoxContext;
                     lstModsList.ContextMenuStrip.Show(Cursor.Position);
                 }
+            }
+        }
+
+        private void lstModsList_DoubleClick(object sender, EventArgs e)
+        {
+            /*
+             * remove an item from the listbox on double click
+             */
+            logger.LogWrite("DELETING listbox item", true);
+            if (lstModsList.SelectedIndex >= 0)
+            {
+                int Index = lstModsList.SelectedIndex;
+                string ItemText = lstModsList.Text;
+                lstModsList.Items.RemoveAt(lstModsList.SelectedIndex);
+                lstModsList.SelectedIndex = Index;
+                statusBar.Text = $"Removed:{ItemText}";
+                lblFileCount.Text = $"{lstModsList.Items.Count} files found";
             }
         }
 
@@ -410,6 +441,60 @@ namespace FS_Mod_Manager
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification))
             {
                 lstModsList.Items.Clear();
+            }
+        }
+
+        private void select_items_for_list()
+        {
+            /*
+             * add amod to the listbox
+             * use the open file dialog to select the mod file(s) to add
+             * 
+             */
+            logger.LogWrite("Getting file list", true);
+            List<string> file_list = new List<string>();
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                try
+                {
+                    ofd.InitialDirectory = txtCopyFolder.Text;
+                    ofd.Multiselect = true;
+                    ofd.Filter = "Zip files (*.zip)|*.zip|All files (*.*)|*.*";
+                    ofd.FilterIndex = 1;
+                    ofd.RestoreDirectory = true;
+
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        //Show in textbox
+                        string[] selected_files = ofd.FileNames;
+                        int current_count = lstModsList.Items.Count;
+                        for (int i = 0; i < selected_files.Length; i++)
+                        {
+                            // if file exists don't add it again
+                            if (!lstModsList.Items.Contains(selected_files[i]))
+                            {
+                                // add file to listbox
+                                lstModsList.Items.Add(selected_files[i]);
+                                logger.LogWrite("Adding file " + selected_files[i] + " to list");
+                            }
+                        }
+                        if (current_count < lstModsList.Items.Count)
+                        {
+                            statusBar.Text = $"Added items to the list";
+                            lblFileCount.Text = $"{lstModsList.Items.Count} files found";
+                            lstModsList.SelectedIndex = lstModsList.Items.Count - 1;
+                        }
+
+                    }
+                    else
+                    {
+                        statusBar.Text = "No files selected";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.LogWrite(ex.Message, true);
+                }
             }
         }
     }

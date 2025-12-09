@@ -50,6 +50,7 @@
             mnuClearList = new ToolStripMenuItem();
             btnClearList = new Button();
             btnReloadList = new Button();
+            btnAddMod = new Button();
             statusStrip.SuspendLayout();
             mnuListBoxContext.SuspendLayout();
             SuspendLayout();
@@ -90,6 +91,7 @@
             lstModsList.Name = "lstModsList";
             lstModsList.Size = new Size(543, 469);
             lstModsList.TabIndex = 3;
+            lstModsList.DoubleClick += lstModsList_DoubleClick;
             lstModsList.MouseUp += lstModsList_MouseUp;
             // 
             // lblModsList
@@ -227,11 +229,22 @@
             btnReloadList.UseVisualStyleBackColor = true;
             btnReloadList.Click += btnReloadList_Click;
             // 
+            // btnAddMod
+            // 
+            btnAddMod.Location = new Point(251, 37);
+            btnAddMod.Name = "btnAddMod";
+            btnAddMod.Size = new Size(75, 23);
+            btnAddMod.TabIndex = 14;
+            btnAddMod.Text = "Add Mod";
+            btnAddMod.UseVisualStyleBackColor = true;
+            btnAddMod.Click += btnAddMod_Click;
+            // 
             // frmCreateModsFolder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(567, 639);
+            Controls.Add(btnAddMod);
             Controls.Add(btnReloadList);
             Controls.Add(btnClearList);
             Controls.Add(lblFileCount);
@@ -279,5 +292,6 @@
         private ToolStripMenuItem mnuClearList;
         private Button btnClearList;
         private Button btnReloadList;
+        private Button btnAddMod;
     }
 }
