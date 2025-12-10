@@ -487,6 +487,7 @@
             lstModFiles.Name = "lstModFiles";
             lstModFiles.Size = new Size(261, 289);
             lstModFiles.TabIndex = 4;
+            lstModFiles.SelectedIndexChanged += lstModFiles_SelectedIndexChanged;
             lstModFiles.DoubleClick += lstModFiles_DoubleClick;
             lstModFiles.MouseUp += lstModFiles_MouseUp;
             // 

@@ -18,7 +18,7 @@ namespace FS_Mod_Manager
         const string copyright = "Copyright Richard Sayer 2025";
         const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
         // this is usally where steam places farming simulator
-        const string steamapps_path = "\"C:\\\\Program Files (x86)\\\\Steam\\\\steamapps\\\\common\\\\Farming Simulator 2025\\\\FarmingSimulator2025.exe\""; 
+        const string steamapps_path = "\"C:\\\\Program Files (x86)\\\\Steam\\\\steamapps\\\\common\\\\Farming Simulator 2025\\\\FarmingSimulator2025.exe\"";
         // private variables to be set on form load
         private string AppTempDirectory = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "AppData\\Local\\FS_Mod_Manager");
@@ -131,11 +131,11 @@ namespace FS_Mod_Manager
             string character_name = Interaction.InputBox("Enter a new name for your character", "Change Character Name", txtCharacterName.Text);
             if (character_name != "")
             {
-                stsStatusLabel.Text = $"Setting Online Presence Name to: {character_name}";
                 txtCharacterName.Text = character_name;
                 Settings.Default.OnlinePresenceName = character_name;
                 // set value in xml file
                 online_presence_name_value(true);
+                stsStatusLabel.Text = $"Setting Online Presence Name to: {character_name}";
             }
         }
 
@@ -775,6 +775,7 @@ namespace FS_Mod_Manager
                         txtModFolderPath.Text = ofd.SelectedPath;
                         populate_folder_list();
                         populate_file_list();
+                        stsStatusLabel.Text = "Mod folder path set";
                     }
                 }
                 catch (Exception ex)
@@ -799,6 +800,7 @@ namespace FS_Mod_Manager
                     {
                         //Show in textbox
                         txtUserDataPath.Text = ofd.SelectedPath;
+                        stsStatusLabel.Text = "Game directory set";
                     }
                 }
                 catch (Exception ex)
@@ -833,6 +835,7 @@ namespace FS_Mod_Manager
                     {
                         //Show in textbox
                         txtGameExeFile.Text = ofd.FileName;
+                        stsStatusLabel.Text = "Game .exe set";
                     }
                     else
                     {
@@ -880,7 +883,7 @@ namespace FS_Mod_Manager
                 args.Add(" -cheats");
             }
             String argsString = "";
-           
+
             //String[] arglist = args.ToArray();
             foreach (var arg in args.ToArray())
             {
@@ -888,7 +891,7 @@ namespace FS_Mod_Manager
             }
             logger.LogWrite($"Game launched\n{txtGameExeFile.Text} {argsString}", true);
             run_exe_proces(txtGameExeFile.Text, args.ToArray());
-            stsStatusLabel.Text = "Launching Game";
+            stsStatusLabel.Text = "Launching Game... Please wait";
         }
 
         /*
@@ -901,6 +904,7 @@ namespace FS_Mod_Manager
              * Refresh the mod files list box
              */
             populate_file_list();
+            stsStatusLabel.Text = "Mod folder selected";
         }
 
         private void lstModFolders_DoubleClick(object sender, EventArgs e)
@@ -922,6 +926,12 @@ namespace FS_Mod_Manager
              */
             string mod_file_name = Path.Join(txtModFolderPath.Text, lstModFolders.Text, lstModFiles.Text);
             open_with_default_app(mod_file_name);
+            stsStatusLabel.Text = "Opening mod .zip file";
+        }
+
+        private void lstModFiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            stsStatusLabel.Text = "Mod file selected";
         }
 
         /*
@@ -937,6 +947,7 @@ namespace FS_Mod_Manager
             {
                 txtModOverrideValues.Text = "Override folder=" + mnuOptModOverride.Checked.ToString() +
                                             " : Dierctory=" + Path.Join(txtModFolderPath.Text, lstModFolders.Text);
+                stsStatusLabel.Text = "Overide values set";
             }
             catch (Exception ex)
             {
