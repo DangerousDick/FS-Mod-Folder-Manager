@@ -346,6 +346,7 @@
             mnuOptModDoubleClick.Name = "mnuOptModDoubleClick";
             mnuOptModDoubleClick.Size = new Size(266, 22);
             mnuOptModDoubleClick.Text = "Allow Double Click Folder to Launch";
+            mnuOptModDoubleClick.Click += mnuOptModDoubleClick_Click;
             // 
             // mnuOptModOverride
             // 
@@ -361,6 +362,7 @@
             mnuOptOverwriteOnCopy.Name = "mnuOptOverwriteOnCopy";
             mnuOptOverwriteOnCopy.Size = new Size(266, 22);
             mnuOptOverwriteOnCopy.Text = "Overwrite on Copy";
+            mnuOptOverwriteOnCopy.Click += mnuOptOverwriteOnCopy_Click;
             // 
             // mnuOptdDleteToRecycleBin
             // 
@@ -368,6 +370,7 @@
             mnuOptdDleteToRecycleBin.Name = "mnuOptdDleteToRecycleBin";
             mnuOptdDleteToRecycleBin.Size = new Size(266, 22);
             mnuOptdDleteToRecycleBin.Text = "Delete to Recycle Bin";
+            mnuOptdDleteToRecycleBin.Click += mnuOptdDleteToRecycleBin_Click;
             // 
             // mnuOptOnlyShowZips
             // 

@@ -14,7 +14,7 @@ namespace FS_Mod_Manager
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V1.9.1";
+        const string version = "V1.9.2";
         const string copyright = "Copyright Richard Sayer 2025";
         const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
         // this is usally where steam places farming simulator
@@ -226,6 +226,7 @@ namespace FS_Mod_Manager
             if (default_file_name.Length > 0)
             {
                 open_with_default_app(default_file_name);
+                stsStatusLabel.Text = "Opening game notes file";
             }
         }
 
@@ -252,6 +253,7 @@ namespace FS_Mod_Manager
                     lstModFolders.SelectedIndex = lstModFolders.FindString(Path.GetFileName(new_folder));
                     populate_file_list();
                 }
+                stsStatusLabel.Text = "New mod folder created";
             }
         }
 
@@ -285,6 +287,7 @@ namespace FS_Mod_Manager
                     }
                     populate_folder_list();
                     populate_file_list();
+                    stsStatusLabel.Text = "Mod folder removed";
                 }
             }
         }
@@ -312,6 +315,7 @@ namespace FS_Mod_Manager
                     }
                     lstModFolders.Items.Add(Path.GetFileName(new_folder));
                     logger.LogWrite(new_folder + " created", true);
+                    stsStatusLabel.Text = "New mod folder created";
                 }
             }
             catch (Exception ex)
@@ -326,6 +330,7 @@ namespace FS_Mod_Manager
              * Opens the mods folder in Windows default file manager
              */
             open_with_default_app(txtModFolderPath.Text);
+            stsStatusLabel.Text = "Opening mod folder directory";
         }
 
         private void mnuModFileRemove_Click(object sender, EventArgs e)
@@ -384,6 +389,7 @@ namespace FS_Mod_Manager
                         }
                     }
                     populate_file_list();
+                    stsStatusLabel.Text = "Mod file(s) copied";
                 }
             }
             catch (Exception ex)
@@ -452,6 +458,7 @@ namespace FS_Mod_Manager
                     int idx = lstModFolders.FindString(cnf.selected_folder);
                     lstModFolders.SetSelected(idx, true);
                 }
+                stsStatusLabel.Text = "New mod folder created";
             }
             catch (Exception ex)
             {
@@ -472,18 +479,20 @@ namespace FS_Mod_Manager
             {
                 logger.LogWrite(ex.Message, true);
             }
-
+            stsStatusLabel.Text = "Opening Mod Hub web page";
         }
 
         private void mnuOptModOverride_Click(object sender, EventArgs e)
         {
             update_mod_override_values();
             write_mod_override_to_xml();
+            stsStatusLabel.Text = $"Mod override set to {mnuOptModOverride.Checked.ToString()}";
         }
 
         private void mnuOptOnlyShowZips_Click(object sender, EventArgs e)
         {
             populate_file_list();
+            stsStatusLabel.Text = $"Only show .zip files set to {mnuOptOnlyShowZips.Checked.ToString()}";
         }
 
         private void mnuOptionsOpenOptsDirectory_Click(object sender, EventArgs e)
@@ -492,6 +501,7 @@ namespace FS_Mod_Manager
              * Opens the settings temporary directory in Windows default file manager
              */
             open_with_default_app(AppTempDirectory);
+            stsStatusLabel.Text = "Opening options directory";
         }
 
         private void mnuOptLaunchConsole_Click(object sender, EventArgs e)
@@ -507,6 +517,7 @@ namespace FS_Mod_Manager
                 mnuOptLaunchLaunchCheats.Checked = false;
                 Settings.Default.LaunchWithCheats = false;
             }
+            stsStatusLabel.Text = $"Launch with console set {mnuOptLaunchConsole.Checked.ToString()}";
         }
 
         private void mnuOptLaunchLaunchCheats_Click(object sender, EventArgs e)
@@ -522,6 +533,7 @@ namespace FS_Mod_Manager
                 Settings.Default.LaunchWithConsole = true;
                 game_xml_controls_element(true);
             }
+            stsStatusLabel.Text = $"Launch with cheats set {mnuOptLaunchLaunchCheats.Checked.ToString()}";
         }
 
         private void mnuOptLaunchRestart_Click(object sender, EventArgs e)
@@ -530,6 +542,21 @@ namespace FS_Mod_Manager
              * Checks/Unchecks the launch as restart option
              */
             Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
+        }
+
+        private void mnuOptOverwriteOnCopy_Click(object sender, EventArgs e)
+        {
+            stsStatusLabel.Text = $"Overwrite on copy set to {mnuOptOverwriteOnCopy.Checked.ToString()}";
+        }
+
+        private void mnuOptModDoubleClick_Click(object sender, EventArgs e)
+        {
+            stsStatusLabel.Text = "Double click to launch set to " + mnuOptModDoubleClick.Checked.ToString();
+        }
+
+        private void mnuOptdDleteToRecycleBin_Click(object sender, EventArgs e)
+        {
+            stsStatusLabel.Text = $"Delete to recycle bin set to {mnuOptdDleteToRecycleBin.Checked.ToString()}";
         }
 
         private void mnuHelpOpen_Click(object sender, EventArgs e)
@@ -546,6 +573,7 @@ namespace FS_Mod_Manager
             {
                 logger.LogWrite(ex.Message, true);
             }
+            stsStatusLabel.Text = "Opening help wiki";
         }
 
         private void mnuHelpAbout_Click(object sender, EventArgs e)
@@ -568,6 +596,7 @@ namespace FS_Mod_Manager
             {
                 logger.LogWrite(ex.Message, true);
             }
+            stsStatusLabel.Text = "Showing app information";
         }
 
         /*
@@ -630,6 +659,7 @@ namespace FS_Mod_Manager
                         }
                         catch (IOException ex)
                         { logger.LogWrite("Failed to rename folder\n" + ex.Message, true); }
+                        stsStatusLabel.Text = "Folder renamed";
                     }
                 }
             }
