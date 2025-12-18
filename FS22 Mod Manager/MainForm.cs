@@ -453,9 +453,9 @@ namespace FS_Mod_Manager
                 cnf.ShowDialog();
                 populate_folder_list();
                 // set listbox item to new folder
-                if (cnf.selected_folder != "")
+                if (cnf.SelectedFolder.ToString() != "")
                 {
-                    int idx = lstModFolders.FindString(cnf.selected_folder);
+                    int idx = lstModFolders.FindString(cnf.SelectedFolder);
                     lstModFolders.SetSelected(idx, true);
                 }
                 stsStatusLabel.Text = "New mod folder created";

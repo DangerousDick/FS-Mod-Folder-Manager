@@ -13,11 +13,26 @@ namespace FS_Mod_Manager
 {
     public partial class frmCreateModsFolder : Form
     {
-        public string selected_folder { get; set; }
+        //public string selected_folder { get => selected_folder1; set => selected_folder1 = value; }
 
         private string current_default_mod_folder = string.Empty;               // full path to current default mods folder in the main form
         static private Logger logger = new Logger(frmMain.LogFileName, false);  // DO NOT CLEAR LOG
         private ContextMenuStrip mnulistboxContext;                             // context menu for listbox
+        private string selected_folder = "";
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string SelectedFolder
+        {
+            get => selected_folder;
+            set
+            {
+                if (selected_folder != value)
+                {
+
+                    selected_folder = value;
+                }
+            }
+        }
 
         /*
          * class initialisation
@@ -325,7 +340,7 @@ namespace FS_Mod_Manager
                 statusBar.Text = $"Unable to create new directory {txtNewFolder.Text}";
                 return_msg = ex.Message;
             }
-            selected_folder = Path.GetFileName(txtNewFolder.Text);
+            //selected_folder = Path.GetFileName(txtNewFolder.Text);
             return return_msg;
         }
 
