@@ -921,7 +921,7 @@ namespace FS_Mod_Manager
             }
             logger.LogWrite($"Game launched\n{txtGameExeFile.Text} {argsString}", true);
             run_exe_proces(txtGameExeFile.Text, args.ToArray());
-            stsStatusLabel.Text = "Launching Game... Please wait";
+            stsStatusLabel.Text = $"Launching {lstModFolders.SelectedItem.ToString()}... Please wait";
         }
 
         /*
