@@ -906,7 +906,7 @@ namespace FS_Mod_Manager
 
             if (mnuOptLaunchRestart.Checked)
             {
-                args.Add(" -restart");
+                args.Add(" -skipStartVideos");
             }
             if (mnuOptLaunchLaunchCheats.Checked)
             {
