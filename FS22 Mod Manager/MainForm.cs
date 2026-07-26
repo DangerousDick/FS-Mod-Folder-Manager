@@ -9,6 +9,7 @@ namespace FS_Mod_Manager
     using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
+    using System.Timers;
     using System.Windows.Forms;
 
     public partial class frmMain : Form
@@ -902,6 +903,11 @@ namespace FS_Mod_Manager
             /*
              * Launch FarmingSimulator exe
              */
+            if (true == FsIsRunning())
+            {
+                stsStatusLabel.Text = "Game is already running";
+                return;
+            }
             List<string> args = new List<string>();
 
             if (mnuOptLaunchRestart.Checked)
@@ -920,6 +926,7 @@ namespace FS_Mod_Manager
                 argsString += ($" {arg}");
             }
             logger.LogWrite($"Game launched\n{txtGameExeFile.Text} {argsString}", true);
+            StartupTimer();
             run_exe_proces(txtGameExeFile.Text, args.ToArray());
             stsStatusLabel.Text = $"Launching {lstModFolders.SelectedItem.ToString()}... Please wait";
         }
@@ -1553,6 +1560,61 @@ namespace FS_Mod_Manager
 
             }
             return gameNotesText;
+        }
+
+        private bool FsIsRunning()
+        {
+            /*
+             * Check if the Farming Simulator process is running
+             */
+            logger.LogWrite("Checking if Farming Simulator is running", true);
+            bool isRunning = false;
+
+            Process[] pList = Process.GetProcesses();
+            foreach (Process proc in pList)
+            {
+                if (proc.ProcessName.StartsWith("farmingsimulator", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    logger.LogWrite($"Process found: {proc.ProcessName}", true);
+                    isRunning = true;
+                    break;
+                }
+            }
+            return isRunning;
+        }
+
+        private void StartupTimer()
+        {
+            /*
+             * Timer handler to check if the FarmingSimulator exe is running.
+             * Timer is created by the launch of the game.
+             */
+            logger.LogWrite("Starting timer to check if Farming Simulator is running", true);
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+
+            t.Interval = 8000; //8 second timer
+            t.Tick += new EventHandler(timer_Tick);
+            t.Start();
+
+            void timer_Tick(object sender, EventArgs e)
+            {
+                /*
+                 * Timer tick event handler to check if the FarmingSimulator exe is running
+                 */
+                logger.LogWrite("Timer tick event handler to check if the Farming Simulator process is running", true);
+                if (true == FsIsRunning())
+                {
+                    logger.LogWrite("Stopping timer", true);
+                    t.Stop();
+                    stsStatusLabel.Text = $"{lstModFolders.SelectedItem.ToString()} is running";
+                }
+                else
+                {
+                    logger.LogWrite("Restarting timer", true);
+                    t.Start();
+                    stsStatusLabel.Text = $"Launch timer restarted";
+                }
+            }
         }
     }
 }
