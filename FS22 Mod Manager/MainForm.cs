@@ -15,8 +15,8 @@ namespace FS_Mod_Manager
     public partial class frmMain : Form
     {
         // constant values
-        const string version = "V2.0.0";
-        const string copyright = "Copyright Richard Sayer 2025";
+        const string version = "V2.0.1";
+        const string copyright = "Copyright Richard Sayer 2026";
         const string app_description = "Farming Simulator Mods Folder Manager " + version + "\nApplication to manage farming simulator mods";
         // this is usally where steam places farming simulator
         const string steamapps_path = "\"C:\\\\Program Files (x86)\\\\Steam\\\\steamapps\\\\common\\\\Farming Simulator 2025\\\\FarmingSimulator2025.exe\"";
