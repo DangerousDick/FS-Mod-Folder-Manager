@@ -537,12 +537,12 @@ namespace FS_Mod_Manager
             stsStatusLabel.Text = $"Launch with cheats set {mnuOptLaunchLaunchCheats.Checked.ToString()}";
         }
 
-        private void mnuOptLaunchRestart_Click(object sender, EventArgs e)
+        private void mnuOptLaunchNoStartVideo_Click(object sender, EventArgs e)
         {
             /*
              * Checks/Unchecks the launch as restart option
              */
-            Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
+            Settings.Default.LaunchAsRestart = mnuOptLaunchNoStartVideo.Checked;
         }
 
         private void mnuOptOverwriteOnCopy_Click(object sender, EventArgs e)
@@ -910,7 +910,7 @@ namespace FS_Mod_Manager
             }
             List<string> args = new List<string>();
 
-            if (mnuOptLaunchRestart.Checked)
+            if (mnuOptLaunchNoStartVideo.Checked)
             {
                 args.Add(" -skipStartVideos");
             }
@@ -1159,7 +1159,7 @@ namespace FS_Mod_Manager
                 mnuOptOverwriteOnCopy.Checked = Settings.Default.OverwriteOnCopy;
                 mnuOptLaunchConsole.Checked = Settings.Default.LaunchWithConsole;
                 mnuOptLaunchLaunchCheats.Checked = Settings.Default.LaunchWithCheats;
-                mnuOptLaunchRestart.Checked = Settings.Default.LaunchAsRestart;
+                mnuOptLaunchNoStartVideo.Checked = Settings.Default.LaunchAsRestart;
                 mnuOptdDleteToRecycleBin.Checked = Settings.Default.DeleteToRecycleBin;
                 mnuOptOnlyShowZips.Checked = Settings.Default.OnlyShowZipFiles;
 
@@ -1190,7 +1190,7 @@ namespace FS_Mod_Manager
             Settings.Default.OverwriteOnCopy = mnuOptOverwriteOnCopy.Checked;
             Settings.Default.LaunchWithConsole = mnuOptLaunchConsole.Checked;
             Settings.Default.LaunchWithCheats = mnuOptLaunchLaunchCheats.Checked;
-            Settings.Default.LaunchAsRestart = mnuOptLaunchRestart.Checked;
+            Settings.Default.LaunchAsRestart = mnuOptLaunchNoStartVideo.Checked;
             Settings.Default.DeleteToRecycleBin = mnuOptdDleteToRecycleBin.Checked;
             Settings.Default.OnlyShowZipFiles = mnuOptOnlyShowZips.Checked;
             // Window location

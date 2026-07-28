@@ -31,50 +31,50 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             mnuApplicationMain = new MenuStrip();
-            mnuFile = new ToolStripMenuItem("");
-            mnuFileOpenUserDataDir = new ToolStripMenuItem("");
-            mnuFileOpenGameSettingsXml = new ToolStripMenuItem("");
-            mnuFileOpenGameXml = new ToolStripMenuItem("");
+            mnuFile = new ToolStripMenuItem();
+            mnuFileOpenUserDataDir = new ToolStripMenuItem();
+            mnuFileOpenGameSettingsXml = new ToolStripMenuItem();
+            mnuFileOpenGameXml = new ToolStripMenuItem();
             mnuFileSeparator1 = new ToolStripSeparator();
-            mnuFileRefresh = new ToolStripMenuItem("");
-            mnuFileOpenModMangerLog = new ToolStripMenuItem("");
-            mnuFileOpenGameLog = new ToolStripMenuItem("");
-            mnuFileOpenGameNotes = new ToolStripMenuItem("");
+            mnuFileRefresh = new ToolStripMenuItem();
+            mnuFileOpenModMangerLog = new ToolStripMenuItem();
+            mnuFileOpenGameLog = new ToolStripMenuItem();
+            mnuFileOpenGameNotes = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
-            mnuFileZipGameDataDirectory = new ToolStripMenuItem("");
+            mnuFileZipGameDataDirectory = new ToolStripMenuItem();
             mnuFileSeparator2 = new ToolStripSeparator();
-            mnuFileExit = new ToolStripMenuItem("");
-            mnuMods = new ToolStripMenuItem("");
-            mnuModsFolder = new ToolStripMenuItem("");
-            mnuModFolderAdd = new ToolStripMenuItem("");
-            mnuModFolderRemove = new ToolStripMenuItem("");
-            mnuModFolderRename = new ToolStripMenuItem("");
-            mnuCopyAsNewFolder = new ToolStripMenuItem("");
-            MnuModsFile = new ToolStripMenuItem("");
-            mnuModFileRemove = new ToolStripMenuItem("");
-            mnuModFileCopyToSelected = new ToolStripMenuItem("");
-            mnuModFileCopyToAll = new ToolStripMenuItem("");
+            mnuFileExit = new ToolStripMenuItem();
+            mnuMods = new ToolStripMenuItem();
+            mnuModsFolder = new ToolStripMenuItem();
+            mnuModFolderAdd = new ToolStripMenuItem();
+            mnuModFolderRemove = new ToolStripMenuItem();
+            mnuModFolderRename = new ToolStripMenuItem();
+            mnuCopyAsNewFolder = new ToolStripMenuItem();
+            MnuModsFile = new ToolStripMenuItem();
+            mnuModFileRemove = new ToolStripMenuItem();
+            mnuModFileCopyToSelected = new ToolStripMenuItem();
+            mnuModFileCopyToAll = new ToolStripMenuItem();
             mnuModsSeparator = new ToolStripSeparator();
-            mnuModsFolderOpen = new ToolStripMenuItem("");
-            mnuModsLaunchModhub = new ToolStripMenuItem("");
+            mnuModsFolderOpen = new ToolStripMenuItem();
+            mnuModsLaunchModhub = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripSeparator();
-            mnuModsCreateNewFolder = new ToolStripMenuItem("");
-            mnuOptions = new ToolStripMenuItem("");
-            mnuOptMod = new ToolStripMenuItem("");
-            mnuOptModDoubleClick = new ToolStripMenuItem("");
-            mnuOptModOverride = new ToolStripMenuItem("");
-            mnuOptOverwriteOnCopy = new ToolStripMenuItem("");
-            mnuOptdDleteToRecycleBin = new ToolStripMenuItem("");
-            mnuOptOnlyShowZips = new ToolStripMenuItem("");
-            mnuModLaunch = new ToolStripMenuItem("");
-            mnuOptLaunchConsole = new ToolStripMenuItem("");
-            mnuOptLaunchLaunchCheats = new ToolStripMenuItem("");
-            mnuOptLaunchRestart = new ToolStripMenuItem("");
-            mnuOptionsOpenOptsDirectory = new ToolStripMenuItem("");
-            mnuHelp = new ToolStripMenuItem("");
-            mnuHelpOpen = new ToolStripMenuItem("");
+            mnuModsCreateNewFolder = new ToolStripMenuItem();
+            mnuOptions = new ToolStripMenuItem();
+            mnuOptMod = new ToolStripMenuItem();
+            mnuOptModDoubleClick = new ToolStripMenuItem();
+            mnuOptModOverride = new ToolStripMenuItem();
+            mnuOptOverwriteOnCopy = new ToolStripMenuItem();
+            mnuOptdDleteToRecycleBin = new ToolStripMenuItem();
+            mnuOptOnlyShowZips = new ToolStripMenuItem();
+            mnuModLaunch = new ToolStripMenuItem();
+            mnuOptLaunchConsole = new ToolStripMenuItem();
+            mnuOptLaunchLaunchCheats = new ToolStripMenuItem();
+            mnuOptLaunchNoStartVideo = new ToolStripMenuItem();
+            mnuOptionsOpenOptsDirectory = new ToolStripMenuItem();
+            mnuHelp = new ToolStripMenuItem();
+            mnuHelpOpen = new ToolStripMenuItem();
             mnuHelpSeparator = new ToolStripSeparator();
-            mnuHelpAbout = new ToolStripMenuItem("");
+            mnuHelpAbout = new ToolStripMenuItem();
             stsStatusBar = new StatusStrip();
             stsStatusLabel = new ToolStripStatusLabel();
             pnlLists = new Panel();
@@ -382,7 +382,7 @@
             // 
             // mnuModLaunch
             // 
-            mnuModLaunch.DropDownItems.AddRange(new ToolStripItem[] { mnuOptLaunchConsole, mnuOptLaunchLaunchCheats, mnuOptLaunchRestart });
+            mnuModLaunch.DropDownItems.AddRange(new ToolStripItem[] { mnuOptLaunchConsole, mnuOptLaunchLaunchCheats, mnuOptLaunchNoStartVideo });
             mnuModLaunch.Name = "mnuModLaunch";
             mnuModLaunch.Size = new Size(225, 22);
             mnuModLaunch.Text = "Launch Options";
@@ -405,11 +405,11 @@
             // 
             // mnuOptLaunchRestart
             // 
-            mnuOptLaunchRestart.CheckOnClick = true;
-            mnuOptLaunchRestart.Name = "mnuOptLaunchRestart";
-            mnuOptLaunchRestart.Size = new Size(234, 22);
-            mnuOptLaunchRestart.Text = "Launch as Restart";
-            mnuOptLaunchRestart.Click += mnuOptLaunchRestart_Click;
+            mnuOptLaunchNoStartVideo.CheckOnClick = true;
+            mnuOptLaunchNoStartVideo.Name = "mnuOptLaunchRestart";
+            mnuOptLaunchNoStartVideo.Size = new Size(234, 22);
+            mnuOptLaunchNoStartVideo.Text = "No Start Video";
+            mnuOptLaunchNoStartVideo.Click += mnuOptLaunchNoStartVideo_Click;
             // 
             // mnuOptionsOpenOptsDirectory
             // 
@@ -485,7 +485,6 @@
             // lstModFiles
             // 
             lstModFiles.FormattingEnabled = true;
-            lstModFiles.ItemHeight = 15;
             lstModFiles.Location = new Point(246, 28);
             lstModFiles.Name = "lstModFiles";
             lstModFiles.Size = new Size(261, 289);
@@ -515,7 +514,6 @@
             // lstModFolders
             // 
             lstModFolders.FormattingEnabled = true;
-            lstModFolders.ItemHeight = 15;
             lstModFolders.Location = new Point(12, 28);
             lstModFolders.Name = "lstModFolders";
             lstModFolders.Size = new Size(220, 289);
@@ -864,7 +862,7 @@
         private ToolStripMenuItem mnuOptModOverride;
         private ToolStripMenuItem mnuOptLaunchConsole;
         private ToolStripMenuItem mnuOptLaunchLaunchCheats;
-        private ToolStripMenuItem mnuOptLaunchRestart;
+        private ToolStripMenuItem mnuOptLaunchNoStartVideo;
         private StatusStrip stsStatusBar;
         private ToolStripStatusLabel stsStatusLabel;
         private Panel pnlLists;
